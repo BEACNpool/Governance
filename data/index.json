@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "DOGE methodology published (2026-02-09)",
     "Daily briefing generated (2026-02-09)",
     "Community summary generated (2026-02-09)",
     "Recipient/Entity leaderboard generated (2026-02-09)",
@@ -15,6 +16,12 @@
       "title": "Community",
       "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
       "items": [
+        {
+          "title": "Methodology \u2014 Cardano DOGE (HTML)",
+          "href": "reports/methodology-doge.html",
+          "kind": "html",
+          "note": "How we hunt waste/fraud signals (receipts-first). Not voting advice."
+        },
         {
           "title": "Daily Briefing \u2014 2026-02-09 (HTML)",
           "href": "reports/daily-briefing-2026-02-09.html",
