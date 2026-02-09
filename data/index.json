@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "Recipient/Entity leaderboard generated (2026-02-09)",
     "Unified Funding Index generated (2026-02-09)",
     "Intersect Grants waste radar (all cohorts) generated (2026-02-09)",
     "Intersect Grants Cohort 3 waste radar generated (2026-02-09)",
@@ -70,6 +71,17 @@
       "title": "Dashboard",
       "description": "Combined views that merge multiple funding mechanisms into one filterable index.",
       "items": [
+        {
+          "title": "Recipient/Entity Leaderboard \u2014 2026-02-09 (Markdown)",
+          "href": "reports/recipient-entity-leaderboard-2026-02-09.md",
+          "kind": "md",
+          "note": "Treasury recipient stake addresses + Intersect grant entities (v1)."
+        },
+        {
+          "title": "Recipient/Entity Leaderboard \u2014 2026-02-09 (CSV)",
+          "href": "reports/recipient-entity-leaderboard-2026-02-09.csv",
+          "kind": "csv"
+        },
         {
           "title": "Unified Funding Index \u2014 2026-02-09 (Markdown)",
           "href": "reports/unified-funding-index-2026-02-09.md",

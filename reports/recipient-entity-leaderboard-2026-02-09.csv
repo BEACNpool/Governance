@@ -1,0 +1,70 @@
+mechanism,entity,amount_ada,items,entity_key
+stake,stake1uxzc8pt7fgf0lc0x7eq6z7z6puhsxmzktna7dluahrj6g6g7lgq9r,351181507.0,42,stake:stake1uxzc8pt7fgf0lc0x7eq6z7z6puhsxmzktna7dluahrj6g6g7lgq9r
+stake,stake1uy5wxkqpezym2esqkgvw9yyqyd0rzuhkm206q6cddcxtqjgehj9ty,5000005.0,2,stake:stake1uy5wxkqpezym2esqkgvw9yyqyd0rzuhkm206q6cddcxtqjgehj9ty
+stake,stake1ux2x5cv4nlwptph8kxvnyw93pp2sp54dk54dpfp2ax7fkgg56dtn4,500000.0,1,stake:stake1ux2x5cv4nlwptph8kxvnyw93pp2sp54dk54dpfp2ax7fkgg56dtn4
+stake,stake1uxrh74lqhhxgzelfsn0wq5kcm4e5dmluprlcpg5mq30p5yq7q27p8,500000.0,1,stake:stake1uxrh74lqhhxgzelfsn0wq5kcm4e5dmluprlcpg5mq30p5yq7q27p8
+intersect,Summon Snapshot Voting on Interim Constitutional Committee,158000.0,1,intersect:Summon Snapshot Voting on Interim Constitutional Committee
+intersect,Proposal Discussion Forum,135000.0,1,intersect:Proposal Discussion Forum
+intersect,DRep Campaign Platform,130000.0,1,intersect:DRep Campaign Platform
+intersect,Constitutional Committee Portal,128500.0,1,intersect:Constitutional Committee Portal
+intersect,CIP-95 support for Cardano Transaction Library (CTL),106000.0,1,intersect:CIP-95 support for Cardano Transaction Library (CTL)
+intersect,GM Cardano - Governance Matters Cardano videos/podcast,106000.0,1,intersect:GM Cardano - Governance Matters Cardano videos/podcast
+intersect,Voting Tool for the Constitutional Convention,102500.0,1,intersect:Voting Tool for the Constitutional Convention
+intersect,Cardano Governance in a Nutshell - Mike Hornan & Summon Associations,100000.0,1,intersect:Cardano Governance in a Nutshell - Mike Hornan & Summon Associations
+intersect,Additional Governance features,90000.0,1,intersect:Additional Governance features
+intersect,Consensus 2024 Cardano Marketing,75000.0,1,intersect:Consensus 2024 Cardano Marketing
+intersect,Stable Coin,66000.0,1,intersect:Stable Coin
+intersect,Intersect Town Halls,55120.0,1,intersect:Intersect Town Halls
+intersect,Engaging young people into Cardano Governance,50000.0,1,intersect:Engaging young people into Cardano Governance
+intersect,"Making Cardano governance clear and accessible to everyone, Portuguese speaking community",45000.0,1,"intersect:Making Cardano governance clear and accessible to everyone, Portuguese speaking community"
+intersect,Membership NFT Platform,35000.0,1,intersect:Membership NFT Platform
+intersect,"Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.",34000.0,1,"intersect:Governance Education Through Infographics, Threads, and Tutorials. English and Spanish."
+intersect,Twitter Space,31600.0,1,intersect:Twitter Space
+intersect,Open Space,5300.0,1,intersect:Open Space
+intersect,Cardano Governance Minimum Attack Vector (MAV) Dashboard,4300.0,1,intersect:Cardano Governance Minimum Attack Vector (MAV) Dashboard
+intersect,Educational and Multimedia,0.0,1,intersect:Educational and Multimedia
+intersect,Inclusion and Accessibility,0.0,1,intersect:Inclusion and Accessibility
+intersect,Community Hubs,0.0,1,intersect:Community Hubs
+intersect,"Africa (Ghana, DRC & Kenya)",0.0,1,"intersect:Africa (Ghana, DRC & Kenya)"
+intersect,Europe,0.0,1,intersect:Europe
+intersect,Japan,0.0,1,intersect:Japan
+intersect,"LATAM (Brazil, Argentina, Colombia & Mexico)",0.0,1,"intersect:LATAM (Brazil, Argentina, Colombia & Mexico)"
+intersect,North America,0.0,1,intersect:North America
+intersect,Sri Lanka,0.0,1,intersect:Sri Lanka
+intersect,DRep Pioneer Program,0.0,1,intersect:DRep Pioneer Program
+intersect,DRep Program Stats,0.0,1,intersect:DRep Program Stats
+intersect,Phase 1 - Acceptance Criteria,0.0,1,intersect:Phase 1 - Acceptance Criteria
+intersect,Phase 2 - Acceptance Criteria,0.0,1,intersect:Phase 2 - Acceptance Criteria
+intersect,Local face-to-face events and meetups,0.0,1,intersect:Local face-to-face events and meetups
+intersect,"Goma, Democratic Republic of the Congo - 17th August 2024",0.0,1,"intersect:Goma, Democratic Republic of the Congo - 17th August 2024"
+intersect,"Ho Chi Minh City, Vietnam - 21st July 2024",0.0,1,"intersect:Ho Chi Minh City, Vietnam - 21st July 2024"
+intersect,"Illinois, USA - 28th June 2024",0.0,1,"intersect:Illinois, USA - 28th June 2024"
+intersect,"Puerto La Cruz, Venezuela - 14th September 2024",0.0,1,"intersect:Puerto La Cruz, Venezuela - 14th September 2024"
+intersect,"Tallinn, Estonia - 5th June 2024",0.0,1,"intersect:Tallinn, Estonia - 5th June 2024"
+intersect,"Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024",0.0,1,"intersect:Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024"
+intersect,AdaStat,0.0,1,intersect:AdaStat
+intersect,Gimbalabs,0.0,1,intersect:Gimbalabs
+intersect,Harmonic Labs,0.0,1,intersect:Harmonic Labs
+intersect,Mlabs,0.0,1,intersect:Mlabs
+intersect,NuFi,0.0,1,intersect:NuFi
+intersect,Xerberus Labs,0.0,1,intersect:Xerberus Labs
+intersect,dcSpark,0.0,1,intersect:dcSpark
+intersect,GERO,0.0,1,intersect:GERO
+intersect,Strica,0.0,1,intersect:Strica
+intersect,Tastenkunst,0.0,1,intersect:Tastenkunst
+intersect,POEditor,0.0,1,intersect:POEditor
+intersect,Translations of the Interim Constitution,0.0,1,intersect:Translations of the Interim Constitution
+intersect,Open Category,0.0,1,intersect:Open Category
+intersect,GovTool Governance Action Outcome,0.0,1,intersect:GovTool Governance Action Outcome
+intersect,"Caracas, Venezuela - 1st June 2024",0.0,1,"intersect:Caracas, Venezuela - 1st June 2024"
+intersect,"Cardano Blockchain Melbourne, Australia - 3rd May 2024",0.0,1,"intersect:Cardano Blockchain Melbourne, Australia - 3rd May 2024"
+intersect,"Clay Labs Digital - Lisbon, Portugal - 27th May 2024",0.0,1,"intersect:Clay Labs Digital - Lisbon, Portugal - 27th May 2024"
+intersect,"Curitiba, Brazil - 4th September 2024",0.0,1,"intersect:Curitiba, Brazil - 4th September 2024"
+intersect,"Paraguay, South America ,5th July 2024",0.0,1,"intersect:Paraguay, South America ,5th July 2024"
+intersect,"Remostart Limited, Lagos, Nigeria - 22nd June 2024",0.0,1,"intersect:Remostart Limited, Lagos, Nigeria - 22nd June 2024"
+intersect,"Rio de Janeiro, Brazil - July 24th to 26th",0.0,1,"intersect:Rio de Janeiro, Brazil - July 24th to 26th"
+intersect,Martin Lang,0.0,1,intersect:Martin Lang
+intersect,Miguel A Cabrera,0.0,1,intersect:Miguel A Cabrera
+intersect,Obsidian Systems,0.0,1,intersect:Obsidian Systems
+intersect,Satya Ranjan,0.0,1,intersect:Satya Ranjan
+intersect,SundaeSwap Labs,0.0,1,intersect:SundaeSwap Labs

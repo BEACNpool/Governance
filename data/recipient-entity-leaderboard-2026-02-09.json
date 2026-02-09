@@ -1,0 +1,1376 @@
+{
+  "generated_at": "2026-02-09T20:09:27Z",
+  "rows": [
+    {
+      "entity_key": "stake:stake1uxzc8pt7fgf0lc0x7eq6z7z6puhsxmzktna7dluahrj6g6g7lgq9r",
+      "amount_ada": 351181507.0,
+      "items": 42,
+      "sources": [
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b370,000,000 for Cardano Critical Integrations Budget",
+          "govtool": "https://gov.tools/governance_actions/f8393f1ff814d3d52336a97712361fed933d9ef9e8d0909e1d31536a549fd22f#0",
+          "anchor": "ipfs://bafkreiecqskxkmakkrzrs2xs2olh5jcwbuz5qr5gesp6merwcaydcaojiq",
+          "amount_ada": 70000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Loan \u20b35,000,000 to Expand Cardano's Global Listings",
+          "govtool": "https://gov.tools/governance_actions/03f671791fd97011f30e4d6b76c9a91f4f6bcfb60ee37e5399b9545bb3f2757a#0",
+          "anchor": "ipfs://bafkreidl43ghacdpczaims63glq5kepaa63d63cr5mrpznv56jdm7e2eny",
+          "amount_ada": 5000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "expired",
+          "title": "Withdraw \u20b31,150,000 for GovTool 12 months active maintenance and development",
+          "govtool": "https://gov.tools/governance_actions/d2db60c5307cb517c735e2d0138d2b6f10fc5b221d610fa187719bdc82af9a03#0",
+          "anchor": "ipfs://bafkreihju7a6zywpv3adaeeg4nnyrkewurng5csavsspmqsgikzg2suhry",
+          "amount_ada": 1150000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b399,600 for BloxBean Java Tools Maintenance and Enhancement",
+          "govtool": "https://gov.tools/governance_actions/2c7f900b7ff68f317a7b0e42231d4aed36227660baf2ee9a4be7e880eb977313#0",
+          "anchor": "ipfs://bafkreibelpp2qzjcpeizeobf57tmhl4q6kauutytdve3mqzzjxzp2jqjxm",
+          "amount_ada": 99600.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b35,885,000 for OSC Budget Proposal - Paid Open Source Model...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#11",
+          "anchor": "ipfs://bafkreiedjhlwerulq5qg5tku2qqremf2cf2dguxvktttnjddei3fxct37a",
+          "amount_ada": 5885000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b311,070,323 for TWEAG's Proposals for multiple core budget project...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#14",
+          "anchor": "ipfs://bafkreidlgy2mljdxjknsxzpy6im5xkgsw4ticvwqmgedecs53dzdqhgdlu",
+          "amount_ada": 11070323.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3700,000 for ZK Bridge administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#15",
+          "anchor": "ipfs://bafkreians5wdbxjgttbajinzfrhdxd7q7mzpfahsyyjntcq4xekts4qasu",
+          "amount_ada": 700000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b32,162,096 for Midgard - Optimistic Rollups administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#0",
+          "anchor": "ipfs://bafkreidjnukg5c7u5zlkxaciy4hkxfixvtquhx6uzlqpydvrxormfqpdm4",
+          "amount_ada": 2162096.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b396,817,080 for 2025 Input Output Engineering Core Development Proposal",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#1",
+          "anchor": "ipfs://bafkreigt5xy56qjxd7dl2s7u6jxec2cfxevynppvgnnjifc2wawr7md5ha",
+          "amount_ada": 96817080.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3583,000 for Eternl Maintenance administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#16",
+          "anchor": "ipfs://bafkreiechnwimuhwdwovwscljcsypzjlidrmktcbcssoovbgwgxkm4g4d4",
+          "amount_ada": 583000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "expired",
+          "title": "Withdraw \u20b33,000,000 for High-yield RWA Asset for Cardano: Tokenized Real Estate",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#30",
+          "anchor": "ipfs://bafkreidccjzvdy7np2uybq22w4n52cqu2qguoaws4o3j3wvu2rk4n27npq",
+          "amount_ada": 3000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3605,000 for A free Native Asset CDN for Cardano Developers",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#19",
+          "anchor": "ipfs://bafkreihd2hqcfvssop4aqxxqoch63ds6mkpapsfm7j7onyvemzayiby4ua",
+          "amount_ada": 605000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b36,000,000 for Unveiling the First Unified Global Events Marketing S...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#25",
+          "anchor": "ipfs://bafkreihhdmx6eumwipv4zlhlrbbkz6uj52y6xpzpjgwfnkzzzamtqgmq4u",
+          "amount_ada": 6000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b312,000,000 for Cardano Builder DAO administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#26",
+          "anchor": "ipfs://bafkreidlb2fusg7asmfcnugcrzmfkhk6sb32b4st5ieji2q3oxmbhm6sma",
+          "amount_ada": 12000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "expired",
+          "title": "Withdraw \u20b31,500,000 for Complement Catalyst: Extended Quadratic Funding---Zer...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#27",
+          "anchor": "ipfs://bafkreicek47fmmvljbc2bjosg23x7hj5h7ijg7on447oy5gfuii7opgm6y",
+          "amount_ada": 1500000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3592,780 for Beyond Minimum Viable Governance: Iteratively Improvin....",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#22",
+          "anchor": "ipfs://bafkreigltrp3abb6s667vrtnyspriii2j4wg25cieulbn26s3v36d4qsay",
+          "amount_ada": 592780.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b33,126,000 for Ecosystem Exchange Listing and Market Making service...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#28",
+          "anchor": "ipfs://bafkreidb56gwlzeuzav2xfubcbqa7txllbl2byiadnlxjdr2dgaqgb7z4m",
+          "amount_ada": 3126000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3889,500 for Cardano Ecosystem Pavilions at Exhibitions",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#29",
+          "anchor": "ipfs://bafkreicewinu7ogkkxho7ubwpi6q4iy2xqs2pv4lhvueyz6qe3rkc2icru",
+          "amount_ada": 889500.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3750,000 for Cardano Product Committee: Community-driven 2030 Carda...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#35",
+          "anchor": "ipfs://bafkreicjt5d4y7phbqwyhfkmtz75u2nck3is5cuywkcisnmtsuibdrm3li",
+          "amount_ada": 750000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b369,459,000 for Catalyst 2025 Proposal by Input Output: Advancing De...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#23",
+          "anchor": "ipfs://bafkreid2pq5icpp77nfvdvnb5ipy3fqs77tpnls4ngxy6semzkdq7d2z7y",
+          "amount_ada": 69459000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b31,300,000 for Blockfrost Platform community budget proposal",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#2",
+          "anchor": "ipfs://bafkreidgiirfod3axto3xf3nducsao5w4rp6vqrijeh5m6mqgdxotaafbq",
+          "amount_ada": 1300000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3424,800 for Hardware Wallets Maintenance administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#3",
+          "anchor": "ipfs://bafkreicmz5a6ylplflowjdj7vjzp6glt45k2r6mnhwlmzq7kjkl3fvuzeu",
+          "amount_ada": 424800.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3220,914 for Pallas: Sustaining Critical Rust Tooling for Cardano",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#4",
+          "anchor": "ipfs://bafkreigm5xreg7ezyedhowwecyy2qnue3bfhbw5dex5odmvunddeg5jsem",
+          "amount_ada": 220914.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3220,914 for UTxO RPC: Sustaining Cardano Blockchain Integration",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#5",
+          "anchor": "ipfs://bafkreibcranrq3y5eh7pcjuvq2tcmlapfw2pc7x3nazwp5lonx6docoayu",
+          "amount_ada": 220914.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3130,903 for Lucid Evolution Maintenance administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#6",
+          "anchor": "ipfs://bafkreigfhg7nn4pshyogcokcuo7ohpjpw6gaatnm74hum5vungrqwvpxs4",
+          "amount_ada": 130903.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b31,161,000 for zkFold ZK Rollup administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#7",
+          "anchor": "ipfs://bafkreigjofgwm4qtwn7r3e6nczaxo7jp4fmhzphozrpcuvnx5k2khlbtty",
+          "amount_ada": 1161000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3220,914 for Dolos: Sustaining a Lightweight Cardano Data Node",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#8",
+          "anchor": "ipfs://bafkreihqhuiuwdjyukw4ul5obxz656ndyz5najokjhdw7mbdscskyaalfu",
+          "amount_ada": 220914.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3300,000 for Ledger App Rewrite administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#9",
+          "anchor": "ipfs://bafkreibwg74hpx5vyyixzggxdkunrqy6kdkx2mpp57r6fknkqe7z263omm",
+          "amount_ada": 300000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3600,000 for Complete Web3 developer stack to make Cardano the smart...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#10",
+          "anchor": "ipfs://bafkreicc2dbqlrkqhahasq2qqho3lry2axt4adrfnamro43m56v5sib7hi",
+          "amount_ada": 600000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3578,571 for Gerolamo - Cardano node in typescript",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#12",
+          "anchor": "ipfs://bafkreig7hi75t33nvu5t6y4hqf26thdpwvwvqcuzo3o3ehccslrwtf6bwe",
+          "amount_ada": 578571.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3243,478 for MLabs Core Tool Maintenance & Enhancement: Plutarch",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#13",
+          "anchor": "ipfs://bafkreienjc55atyjxfy7ij2mthoud6m2um5snifhjvurflfujf4s2sa3le",
+          "amount_ada": 243478.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3657,692 for Scalus - DApps Development Platform",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#17",
+          "anchor": "ipfs://bafkreiceukwtpmes66twb3axkdmftpg3p5vyfolgcyhkentlbuilc274fq",
+          "amount_ada": 657692.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3266,667 for Cexplorer.io -- Developer-Focused Blockchain Explorer...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#18",
+          "anchor": "ipfs://bafkreicrrim5wicmsnrjpw7gp52jmebn7a2ly6j4eopjkvdsol6adyboqu",
+          "amount_ada": 266667.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3212,000 for AdaStat.net Cardano blockchain explorer",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#20",
+          "anchor": "ipfs://bafkreigivcba5jtrmzvr4ilvokyyzbryry63cz6ctow7tjmmkjxpvgfbsq",
+          "amount_ada": 212000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b315,750,000 for a MBO for the Cardano ecosystem: Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#21",
+          "anchor": "ipfs://bafkreidy6xsjjpdccodhiurbdcvtcf5tqzkyfgx3ruuhso2ijjuovycuny",
+          "amount_ada": 15750000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b36,000,000 for Cardano Summit 2025 and regional tech events",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#24",
+          "anchor": "ipfs://bafkreidcvqu57gic4bigicuk6ssiykrkrfzi7c3jlwgiyxuskggqnyvcim",
+          "amount_ada": 6000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b34,000,000 for Expanding Stablecoin / Cardano Native Asset Support...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#31",
+          "anchor": "ipfs://bafkreihki45xehzrcyk6e7onyjc3u4mjg3vbd72oi5wfg2h6blemtr65yq",
+          "amount_ada": 4000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b326,840,000 for Input Output Research (IOR): Cardano Vision - Wor...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#32",
+          "anchor": "ipfs://bafkreigq3zbxymon7of3x4jtn7zrzjk2merntcd54yhvmgsjsduq6h3zwa",
+          "amount_ada": 26840000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3199,911 for OpShin - Python Smart Contracts for Cardano",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#33",
+          "anchor": "ipfs://bafkreialtiknfumaxc23xjqxs2r4g5qjca3tikopmottieu5iq2sr77b3i",
+          "amount_ada": 199911.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3314,800 for PyCardano administered by Intersect",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#34",
+          "anchor": "ipfs://bafkreigrw7v6q2wcnbgjd22ev6eepitgaegtkkmhzwmsccfxmejkc3okbm",
+          "amount_ada": 314800.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b3104,347 for MLabs Research towards Tooling for Elliptical Curves...",
+          "govtool": "https://gov.tools/governance_actions/8ad3d454f3496a35cb0d07b0fd32f687f66338b7d60e787fc0a22939e5d8833e#36",
+          "anchor": "ipfs://bafkreig4bosl5dfpmtqguybf4yaffkwo5hcaxxy2k7wlbwdl57twojfk2i",
+          "amount_ada": 104347.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Withdraw \u20b345,217 for MLabs Core Tool Maintenance & Enhancement: Cardano.nix",
+          "govtool": "https://gov.tools/governance_actions/3cf29192a0ee1a77985054072edcdb566ac14707730637c4635d8fb6813cb4c9#0",
+          "anchor": "ipfs://bafkreihj3ddbz7c52l2s3klalsf4ux5xqkawktom5v5apfral37hs6kpki",
+          "amount_ada": 45217.0
+        }
+      ]
+    },
+    {
+      "entity_key": "stake:stake1uy5wxkqpezym2esqkgvw9yyqyd0rzuhkm206q6cddcxtqjgehj9ty",
+      "amount_ada": 5000005.0,
+      "items": 2,
+      "sources": [
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "expired",
+          "title": "Withdraw \u20b35M for Cardano's Global Listing Expansion - Powered by Snek",
+          "govtool": "https://gov.tools/governance_actions/1d6aea56e6a523b13e03ae30ff24ebf9852543b4f7d415c7e50f55f6baaa4e3d#0",
+          "anchor": "https://raw.githubusercontent.com/snekadmin/Public/refs/heads/main/data_final.jsonld",
+          "amount_ada": 5000000.0
+        },
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "expired",
+          "title": "Cardano Global Listing Expansion - Powered by Snek",
+          "govtool": "https://gov.tools/governance_actions/4ff43f1eab5252ef00ba6f1429dc23715e3899834f10c067e8065c8364d5559a#0",
+          "anchor": "https://raw.githubusercontent.com/snekadmin/Public/refs/heads/main/data.jsonld",
+          "amount_ada": 5.0
+        }
+      ]
+    },
+    {
+      "entity_key": "stake:stake1ux2x5cv4nlwptph8kxvnyw93pp2sp54dk54dpfp2ax7fkgg56dtn4",
+      "amount_ada": 500000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "active",
+          "title": "Cardano DeFi Liquidity Budget - Withdrawal 1",
+          "govtool": "https://gov.tools/governance_actions/4b10e5793208cb8f228756e02113227c91602248eac4d992681a0ee760b6c4e2#0",
+          "anchor": "https://raw.githubusercontent.com/theeldermillenial/2025-liquidity-budget/refs/heads/master/withdrawal-1/data.jsonld",
+          "amount_ada": 500000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "stake:stake1uxrh74lqhhxgzelfsn0wq5kcm4e5dmluprlcpg5mq30p5yq7q27p8",
+      "amount_ada": 500000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "CIP1694_TreasuryWithdrawal",
+          "status": "ratified",
+          "title": "Amaru Treasury Withdrawal 2025",
+          "govtool": "https://gov.tools/governance_actions/60ed6ab43c840ff888a8af30a1ed27b41e9f4a91a89822b2b63d1bfc52aeec45#0",
+          "anchor": "ipfs://bafkreifw3qs7brjn4tdvyprnh2r343oerbdghasp5ws6ro55frbpll3dta",
+          "amount_ada": 500000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Summon Snapshot Voting on Interim Constitutional Committee",
+      "amount_ada": 158000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Summon Snapshot Voting on Interim Constitutional Committee",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/summon-snapshot-voting-on-interim-constitutional-committee",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 158000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Proposal Discussion Forum",
+      "amount_ada": 135000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 2",
+          "title": "Proposal Discussion Forum",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-2/proposal-discussion-forum",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 135000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:DRep Campaign Platform",
+      "amount_ada": 130000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 2",
+          "title": "DRep Campaign Platform",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-2/drep-campaign-platform",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 130000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Constitutional Committee Portal",
+      "amount_ada": 128500.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 2",
+          "title": "Constitutional Committee Portal",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-2/constitutional-committee-portal",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 128500.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:CIP-95 support for Cardano Transaction Library (CTL)",
+      "amount_ada": 106000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "CIP-95 support for Cardano Transaction Library (CTL)",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cip-95-support-for-cardano-transaction-library-ctl",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 106000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:GM Cardano - Governance Matters Cardano videos/podcast",
+      "amount_ada": 106000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "GM Cardano - Governance Matters Cardano videos/podcast",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/gm-cardano-governance-matters-cardano-videos-podcast",
+          "flags": "",
+          "amount_ada": 106000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Voting Tool for the Constitutional Convention",
+      "amount_ada": 102500.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Voting Tool for the Constitutional Convention",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/voting-tool-for-the-constitutional-convention",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 102500.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Cardano Governance in a Nutshell - Mike Hornan & Summon Associations",
+      "amount_ada": 100000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Cardano Governance in a Nutshell - Mike Hornan & Summon Associations",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/cardano-governance-in-a-nutshell-mike-hornan-and-summon-associations",
+          "flags": "",
+          "amount_ada": 100000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Additional Governance features",
+      "amount_ada": 90000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Additional Governance features",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/additional-governance-features",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 90000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Consensus 2024 Cardano Marketing",
+      "amount_ada": 75000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Consensus 2024 Cardano Marketing",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/consensus-2024-cardano-marketing",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 75000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Stable Coin",
+      "amount_ada": 66000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Stable Coin",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/stable-coin",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 66000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Intersect Town Halls",
+      "amount_ada": 55120.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Intersect Town Halls",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/intersect-town-halls",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 55120.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Engaging young people into Cardano Governance",
+      "amount_ada": 50000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Engaging young people into Cardano Governance",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/engaging-young-people-into-cardano-governance",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 50000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Making Cardano governance clear and accessible to everyone, Portuguese speaking community",
+      "amount_ada": 45000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Making Cardano governance clear and accessible to everyone, Portuguese speaking community",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/making-cardano-governance-clear-and-accessible-to-everyone-portuguese-speaking-community",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 45000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Membership NFT Platform",
+      "amount_ada": 35000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Membership NFT Platform",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/membership-nft-platform",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 35000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.",
+      "amount_ada": 34000.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/governance-education-through-infographics-threads-and-tutorials.-english-and-spanish.",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 34000.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Twitter Space",
+      "amount_ada": 31600.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Twitter Space",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/twitter-space",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 31600.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Open Space",
+      "amount_ada": 5300.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Open Space",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/open-space",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 5300.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Cardano Governance Minimum Attack Vector (MAV) Dashboard",
+      "amount_ada": 4300.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Cardano Governance Minimum Attack Vector (MAV) Dashboard",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cardano-governance-minimum-attack-vector-mav-dashboard",
+          "flags": "NO_DELIVERABLE_LINKS",
+          "amount_ada": 4300.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Educational and Multimedia",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Educational and Multimedia",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Inclusion and Accessibility",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Inclusion and Accessibility",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Community Hubs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Community Hubs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Africa (Ghana, DRC & Kenya)",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Africa (Ghana, DRC & Kenya)",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/africa-ghana-drc-and-kenya",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Europe",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Europe",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/europe",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Japan",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Japan",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/japan",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:LATAM (Brazil, Argentina, Colombia & Mexico)",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "LATAM (Brazil, Argentina, Colombia & Mexico)",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/latam-brazil-argentina-colombia-and-mexico",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:North America",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "North America",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/north-america",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Sri Lanka",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Sri Lanka",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/sri-lanka",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:DRep Pioneer Program",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "DRep Pioneer Program",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:DRep Program Stats",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "DRep Program Stats",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/drep-program-stats",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Phase 1 - Acceptance Criteria",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Phase 1 - Acceptance Criteria",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-1-acceptance-criteria",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Phase 2 - Acceptance Criteria",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Phase 2 - Acceptance Criteria",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-2-acceptance-criteria",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Local face-to-face events and meetups",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Local face-to-face events and meetups",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Goma, Democratic Republic of the Congo - 17th August 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Goma, Democratic Republic of the Congo - 17th August 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/goma-democratic-republic-of-the-congo-17th-august-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Ho Chi Minh City, Vietnam - 21st July 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Ho Chi Minh City, Vietnam - 21st July 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/ho-chi-minh-city-vietnam-21st-july-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Illinois, USA - 28th June 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Illinois, USA - 28th June 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/illinois-usa-28th-june-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Puerto La Cruz, Venezuela - 14th September 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Puerto La Cruz, Venezuela - 14th September 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/puerto-la-cruz-venezuela-14th-september-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Tallinn, Estonia - 5th June 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Tallinn, Estonia - 5th June 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/tallinn-estonia-5th-june-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/territory-of-nyiragongo-democratic-republic-of-congo-29th-june-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:AdaStat",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "AdaStat",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/adastat",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Gimbalabs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Gimbalabs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/gimbalabs",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Harmonic Labs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Harmonic Labs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/harmonic-labs",
+          "flags": "MISSING_GRANT_VALUE;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Mlabs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Mlabs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/mlabs",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:NuFi",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "NuFi",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/nufi",
+          "flags": "MISSING_GRANT_VALUE;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Xerberus Labs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Xerberus Labs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/xerberus-labs",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:dcSpark",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "dcSpark",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/dcspark",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:GERO",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "GERO",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/gero",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Strica",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Strica",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/strica",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Tastenkunst",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Tastenkunst",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/tastenkunst",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:POEditor",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "POEditor",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/poeditor",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Translations of the Interim Constitution",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Translations of the Interim Constitution",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/translations-of-the-interim-constitution",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Open Category",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 3",
+          "title": "Open Category",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:GovTool Governance Action Outcome",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "GovTool Governance Action Outcome",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/govtool-governance-action-outcome",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Caracas, Venezuela - 1st June 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Caracas, Venezuela - 1st June 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/caracas-venezuela-1st-june-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Cardano Blockchain Melbourne, Australia - 3rd May 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Cardano Blockchain Melbourne, Australia - 3rd May 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/cardano-blockchain-melbourne-australia-3rd-may-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Clay Labs Digital - Lisbon, Portugal - 27th May 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Clay Labs Digital - Lisbon, Portugal - 27th May 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/clay-labs-digital-lisbon-portugal-27th-may-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Curitiba, Brazil - 4th September 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Curitiba, Brazil - 4th September 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/curitiba-brazil-4th-september-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Paraguay, South America ,5th July 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Paraguay, South America ,5th July 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/paraguay-south-america-5th-july-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Remostart Limited, Lagos, Nigeria - 22nd June 2024",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Remostart Limited, Lagos, Nigeria - 22nd June 2024",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/remostart-limited-lagos-nigeria-22nd-june-2024",
+          "flags": "MISSING_GRANT_VALUE;NO_REPORTING_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Rio de Janeiro, Brazil - July 24th to 26th",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 4",
+          "title": "Rio de Janeiro, Brazil - July 24th to 26th",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/rio-de-janeiro-brazil-july-24th-to-26th",
+          "flags": "MISSING_GRANT_VALUE;NO_DELIVERABLE_LINKS",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Martin Lang",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Martin Lang",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/martin-lang",
+          "flags": "MISSING_GRANT_VALUE",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Miguel A Cabrera",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Miguel A Cabrera",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/miguel-a-cabrera",
+          "flags": "MISSING_GRANT_VALUE",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Obsidian Systems",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Obsidian Systems",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/obsidian-systems",
+          "flags": "MISSING_GRANT_VALUE",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:Satya Ranjan",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "Satya Ranjan",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/satya-ranjan",
+          "flags": "MISSING_GRANT_VALUE",
+          "amount_ada": 0.0
+        }
+      ]
+    },
+    {
+      "entity_key": "intersect:SundaeSwap Labs",
+      "amount_ada": 0.0,
+      "items": 1,
+      "sources": [
+        {
+          "mechanism": "Intersect_Community_Grants",
+          "round": "Cohort 1",
+          "title": "SundaeSwap Labs",
+          "url": "https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/sundaeswap-labs",
+          "flags": "MISSING_GRANT_VALUE",
+          "amount_ada": 0.0
+        }
+      ]
+    }
+  ]
+}
