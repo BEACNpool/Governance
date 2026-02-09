@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACN Daily Briefing — 2026-02-09</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.45; max-width: 1000px; }
+    h1,h2,h3 { line-height: 1.2; }
+    .muted { opacity: .75; }
+    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; margin-left: 8px; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+    ol { padding-left: 20px; }
+    .warn { border-left: 4px solid #b45309; padding-left: 12px; }
+  </style>
+</head>
+<body>
+  <h1>BEACN Daily Governance Briefing — 2026-02-09 <span class="pill">AI summary + analysis</span></h1>
+  <div class="muted">Plain-language briefing with deep-dive homework embedded. Links included so anyone can verify.</div>
+
+  <div class="card warn">
+    <strong>Important:</strong> This is not an accusation list. We flag missing/weak public evidence; humans verify.
+  </div>
+
+  <div class="card">
+    <h2>TL;DR</h2>
+    <ul>
+      <li>There are <strong>4 active governance actions</strong> needing attention.</li>
+      <li>Top concerns today: (1) Plutus memory unit limit increase (parameter change), (2) DeFi Liquidity Budget — Withdrawal 1 (treasury withdrawal), (3) NCL 300M guardrail.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Top 3 things to look at today (deep homework)</h2>
+
+    <ol>
+      <li>
+        <h3>Increase Transaction and Block Memory Units (Part 1/2) — ParameterChange</h3>
+        <p><strong>Why:</strong> More Plutus capacity, but potentially higher worst-case validation/resource load.</p>
+        <p><strong>Receipts:</strong>
+          <a href="https://gov.tools/governance_actions/c21b00f90f18fce4003edf42b0b0d455126e01c946e80cc5341a9f9750caf795#0" target="_blank" rel="noopener">GovTool</a> ·
+          <a href="https://app.cgov.io/governance_actions/c21b00f90f18fce4003edf42b0b0d455126e01c946e80cc5341a9f9750caf795#0" target="_blank" rel="noopener">CGOV</a> ·
+          <a href="ipfs://bafkreifwx5z25x6bh5vcwgvzrajy7qlgisukglywjjduwfsrsnp752pqca">Anchor (IPFS)</a>
+        </p>
+        <p><strong>Homework:</strong></p>
+        <ul>
+          <li>Benchmarks for validation cost (CPU/RAM) under realistic mempool load.</li>
+          <li>Block propagation / fork-risk analysis if scripts become heavier.</li>
+          <li>Any DoS risk increase (“heavy but valid”).</li>
+          <li>What Part 2 changes and whether Part 1 is safe alone.</li>
+        </ul>
+        <p><strong>Recommendation (analysis):</strong> NEEDS MORE INFO → likely YES if evidence is strong.</p>
+      </li>
+
+      <li>
+        <h3>Cardano DeFi Liquidity Budget — Withdrawal 1 — TreasuryWithdrawal</h3>
+        <p><strong>Why:</strong> Direct treasury spend. Must have concrete deliverables and public outputs.</p>
+        <p><strong>Receipts:</strong>
+          <a href="https://gov.tools/governance_actions/4b10e5793208cb8f228756e02113227c91602248eac4d992681a0ee760b6c4e2#0" target="_blank" rel="noopener">GovTool</a> ·
+          <a href="https://app.cgov.io/governance_actions/4b10e5793208cb8f228756e02113227c91602248eac4d992681a0ee760b6c4e2#0" target="_blank" rel="noopener">CGOV</a> ·
+          <a href="https://raw.githubusercontent.com/theeldermillenial/2025-liquidity-budget/refs/heads/master/withdrawal-1/data.jsonld" target="_blank" rel="noopener">Anchor (data.jsonld)</a>
+        </p>
+        <p><strong>Money / recipient:</strong></p>
+        <ul>
+          <li>Amount (per anchor abstract): <strong>500,000 ADA</strong></li>
+          <li>Recipient (Koios withdrawal map): <code>stake1ux2x5cv4nlwptph8kxvnyw93pp2sp54dk54dpfp2ax7fkgg56dtn4</code></li>
+        </ul>
+        <p><strong>Homework:</strong></p>
+        <ul>
+          <li>What artifacts exist at the end of Withdrawal 1 (docs, repos, contracts, audits)?</li>
+          <li>Acceptance criteria and where outputs will be published.</li>
+          <li>Governance/custody model for the broader liquidity budget.</li>
+        </ul>
+        <p><strong>Recommendation (analysis):</strong> NEEDS MORE INFO unless deliverables are very concrete.</p>
+      </li>
+
+      <li>
+        <h3>Net Change Limit (NCL) 300M ADA for Epochs 613–713 — InfoAction</h3>
+        <p><strong>Why:</strong> A treasury guardrail that shapes future withdrawals.</p>
+        <p><strong>Receipts:</strong>
+          <a href="https://gov.tools/governance_actions/73a4eb2148781c37ef37c90a33a1d3d00511a8eefe9cdfaa1ea593b090f23f96#0" target="_blank" rel="noopener">GovTool</a> ·
+          <a href="https://app.cgov.io/governance_actions/73a4eb2148781c37ef37c90a33a1d3d00511a8eefe9cdfaa1ea593b090f23f96#0" target="_blank" rel="noopener">CGOV</a> ·
+          <a href="ipfs://bafkreid7tr5uotr4bp2jp54q7lbm5p5eldncuahprj53msy6kqgjscyrdu">Anchor (IPFS)</a>
+        </p>
+        <p><strong>Homework:</strong></p>
+        <ul>
+          <li>Why 300M ADA specifically (treasury size, inflows/outflows, planned budgets)?</li>
+          <li>Comparison to Catalyst + other programs.</li>
+          <li>How/when it can be revisited.</li>
+        </ul>
+        <p><strong>Recommendation (analysis):</strong> NEEDS MORE INFO; lean YES only if justification is solid.</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>All active actions (needs attention)</h2>
+    <ol>
+      <li>NCL 300M ADA (Info Action) — expires epoch 618</li>
+      <li>DeFi Liquidity Budget — Withdrawal 1 (TreasuryWithdrawal) — expires epoch 614</li>
+      <li>Increase Transaction + Block Memory Units (ParameterChange, part 1/2) — expires epoch 613</li>
+      <li>Name PV11 hard fork “van Rossem” (Info Action) — expires epoch 613</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Download / receipts</h2>
+    <ul>
+      <li><a href="daily-briefing-2026-02-09.md">This briefing (Markdown)</a></li>
+      <li><a href="treasury-withdrawals-2026-02-09.csv">TreasuryWithdrawals export (CSV)</a></li>
+      <li><a href="intersect-grants-waste-radar-2026-02-09.csv">Intersect Grants waste radar (CSV)</a></li>
+    </ul>
+  </div>
+
+  <div class="muted">Generated: 2026-02-09</div>
+</body>
+</html>
