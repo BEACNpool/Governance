@@ -173,7 +173,11 @@ def main():
 
     out.append("<ul>")
     out.append(f"<li><strong>Date:</strong> {today}</li>")
-    out.append(f"<li><strong>Intersect Grants flagged items:</strong> {total_flagged_intersect} (with stated ADA value: {total_flagged_intersect_with_amount}; sum of stated values: {total_flagged_intersect_amount:,} ADA)</li>")
+    out.append(
+        f"<li><strong>Intersect Grants flagged items:</strong> {total_flagged_intersect} "
+        f"(with stated ADA value: {total_flagged_intersect_with_amount}; <strong>missing/unclear value:</strong> {total_flagged_intersect - total_flagged_intersect_with_amount}; "
+        f"<strong>minimum provable ADA flagged:</strong> {total_flagged_intersect_amount:,} ADA)</li>"
+    )
     out.append(f"<li><strong>TreasuryWithdrawals flagged items:</strong> {len(treasury_flagged)} (these are mainly transparency/process signals like missing discussion refs)</li>")
     out.append("</ul>")
 
@@ -204,6 +208,7 @@ def main():
             out.append(f"<li><code>{esc(fl)}</code> — {n} items</li>")
         out.append("</ul>")
 
+    out.append("<p class='muted'><strong>About the number:</strong> the “minimum provable ADA flagged” total only sums items where the official page explicitly states a grant value in ADA. Items with missing/unclear values are still listed below, but excluded from the total until we can parse/confirm their amounts.</p>")
     out.append("<p class='muted'>Tip: if a project has real deliverables but isn’t linking them publicly, the fastest fix is to add links to the official page. We will re-check and clear flags.</p>")
     out.append("</div>")
 
