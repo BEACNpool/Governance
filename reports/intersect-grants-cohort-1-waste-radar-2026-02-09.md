@@ -1,0 +1,213 @@
+# Intersect Community Grants — Cohort 1 Waste Radar — 2026-02-09
+
+Evidence-first review queue (NOT accusations).
+Flags indicate missing public evidence links (deliverables/reporting/payment proof), so humans can verify.
+
+Source: https://intersect.gitbook.io/intersect-community-grants/cohort-1
+
+Total pages indexed: **15**
+
+## Flag summary
+
+- **MISSING_GRANT_VALUE**: 15
+- **NO_DELIVERABLE_LINKS**: 8
+- **NO_REPORTING_LINKS**: 2
+
+## Items (sorted by grant value, then flags)
+
+### AdaStat
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/adastat
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://drive.google.com/file/d/1xUn6EqP_fbaVIosgoycBHimB8aQIeOnG/view?usp=drive_link
+  - https://sancho.adastat.net/governances/38e700d9b6a6a7da1fdcc46cc7968f2dae11b2f5021a5c5732c5097fc30bce2c00
+  - https://sancho.adastat.net/governances/e635c3afdcea309099bd9a08c2890da6d20450ec8bc4a15500e0428c9142099500
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Gimbalabs
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/gimbalabs
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://drive.google.com/file/d/1YObwzlCOi5UCzZg-TJQ3vyN4-2LoffqB/view?usp=drive_link
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Harmonic Labs
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/harmonic-labs
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_REPORTING_LINKS**
+- External links:
+  - https://github.com/HarmonicLabs/plutus-machine
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+  - https://www.youtube.com/watch?v=JUa41k0uaA0
+
+### Mlabs
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/mlabs
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://drive.google.com/file/d/1PJlJZWDUVcWxYkmjg24XQw8rfl--Ng_g/view?usp=drive_link
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### NuFi
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/nufi
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_REPORTING_LINKS**
+- External links:
+  - https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip
+  - https://github.com/nufi-official/nufi?tab=readme-ov-file
+  - https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Xerberus Labs
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/xerberus-labs
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://docs.google.com/document/d/1ZTGsXRpLLG5o9Ikisibc-rT78EVBSxXr/edit?usp=drive_link&ouid=102295201310683679603&rtpof=true&sd=true
+  - https://drive.google.com/file/d/1lOR1hc6-wpt7Z2R8Hga-dIda5_Mr6Yel/view?usp=sharing
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### dcSpark
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/dcspark
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://drive.google.com/file/d/1Aplza-kPn69Yl_MwcadoSJbEVDnn3wxj/view?usp=drive_link
+  - https://drive.google.com/file/d/1eQDKig3vokgW1iQ8lgmUl3eGBa-pN-ro/view?usp=drive_link
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### GERO
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/gero
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://docs.google.com/document/d/1IV5c3aMFb9Eegc6TNYauwG6SdIdwZaBg/edit
+  - https://drive.google.com/file/d/1pbRAoGAEtmrZtTYH_NyVtxty6yh5MgfL/view
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Strica
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/strica
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://drive.google.com/file/d/18i3rQ9vyzAWn6d66cO_f3lrXvI3JU0aE/view?usp=sharing
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Tastenkunst
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/tastenkunst
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://chromewebstore.google.com/detail/eternl/kmhcihpebfmpgmihbkipmjlmmioameka
+  - https://docs.google.com/document/d/1GhDhJqiyJ3P9fOzX6WchUpgbxlZArUTC/edit?usp=sharing&ouid=116660932273282802074&rtpof=true&sd=true
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Martin Lang
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/martin-lang
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE**
+- External links:
+  - https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip
+  - https://docs.google.com/document/d/1NZ8vA8JxS369FjcB6Qb3MXGD5qBhWP24/edit?usp=drive_link&ouid=102295201310683679603&rtpof=true&sd=true
+  - https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+  - https://www.youtube.com/watch?v=jXzPyz6Vqtc
+
+### Miguel A Cabrera
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/miguel-a-cabrera
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE**
+- External links:
+  - https://drive.google.com/file/d/1qfa7CaSjsyL3_vM80JnFk_H1TtvvQRfk/view?usp=drive_link
+  - https://github.com/miguelaeh/cardanocli-js
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+  - https://www.npmjs.com/package/cardanocli-js
+
+### Obsidian Systems
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/obsidian-systems
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE**
+- External links:
+  - https://able-pool.io/document
+  - https://book.world.dev.cardano.org/adv-sanchonet.html
+  - https://book.world.dev.cardano.org/env-sanchonet.html
+  - https://drive.google.com/file/d/1qNDQz23wAUMkDI2Y43H5rqnKJs2BA_Xg/view?usp=drive_link
+  - https://drive.google.com/file/d/1sEGnLfoKAcvmYOhX5tZ6obBomU3p9Iu7/view
+  - https://github.com/input-output-hk/hydra/issues/1462
+  - https://github.com/input-output-hk/hydra/releases
+  - https://github.com/obsidiansystems/hydra-drep-incentives-poc
+  - https://sancho.network/
+  - https://sancho.network/tutorials/start-node/
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Satya Ranjan
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/satya-ranjan
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE**
+- External links:
+  - https://cardano-client.dev/docs/apis/governance-api
+  - https://docs.google.com/document/d/1aYBHv_rN6mp1yDA-uFLg-dBYrz0Ch9PL/edit
+  - https://github.com/bloxbean/cardano-client-lib
+  - https://github.com/bloxbean/cardano-client-lib/blob/master/quicktx/src/it/java/com/bloxbean/cardano/client/quicktx/GovernanceTxIT.java
+  - https://github.com/bloxbean/cardano-client-lib/releases
+  - https://github.com/bloxbean/yaci
+  - https://github.com/bloxbean/yaci/releases
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### SundaeSwap Labs
+
+- Cohort: 1
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/sundaeswap-labs
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE**
+- External links:
+  - https://docs.google.com/document/d/18xpD5-b-iLg4E1V_X0Xb7oH3ZKQY5u0Q/edit?usp=sharing&ouid=104648571819070702900&rtpof=true&sd=true
+  - https://github.com/cardano-foundation/CIPs/pull/556/files
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+  - https://youtu.be/X3XdQZx_TyU
+  - https://youtu.be/bBQMF6Dr6HY

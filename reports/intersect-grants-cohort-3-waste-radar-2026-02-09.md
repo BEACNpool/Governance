@@ -5,17 +5,19 @@ Flags indicate missing public evidence links (deliverables/reporting/payment pro
 
 Source: https://intersect.gitbook.io/intersect-community-grants/cohort-3
 
-Total pages indexed: **13**
+Total pages indexed: **16**
 
 ## Flag summary
 
-- **NO_DELIVERABLE_LINKS**: 11
-- **MISSING_GRANT_VALUE**: 2
+- **NO_DELIVERABLE_LINKS**: 14
+- **MISSING_GRANT_VALUE**: 5
+- **NO_REPORTING_LINKS**: 2
 
 ## Items (sorted by grant value, then flags)
 
 ### CIP-95 support for Cardano Transaction Library (CTL)
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cip-95-support-for-cardano-transaction-library-ctl
 - Grant value: **106,000 ADA**
 - Last updated: 1 year ago
@@ -28,6 +30,7 @@ Total pages indexed: **13**
 
 ### GM Cardano - Governance Matters Cardano videos/podcast
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/gm-cardano-governance-matters-cardano-videos-podcast
 - Grant value: **106,000 ADA**
 - Last updated: 1 year ago
@@ -47,6 +50,7 @@ Total pages indexed: **13**
 
 ### Cardano Governance in a Nutshell - Mike Hornan & Summon Associations
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/cardano-governance-in-a-nutshell-mike-hornan-and-summon-associations
 - Grant value: **100,000 ADA**
 - Last updated: 1 year ago
@@ -63,6 +67,7 @@ Total pages indexed: **13**
 
 ### Stable Coin
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/stable-coin
 - Grant value: **66,000 ADA**
 - Last updated: 12 months ago
@@ -74,6 +79,7 @@ Total pages indexed: **13**
 
 ### Intersect Town Halls
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/intersect-town-halls
 - Grant value: **55,120 ADA**
 - Last updated: 10 months ago
@@ -87,6 +93,7 @@ Total pages indexed: **13**
 
 ### Engaging young people into Cardano Governance
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/engaging-young-people-into-cardano-governance
 - Grant value: **50,000 ADA**
 - Last updated: 1 year ago
@@ -99,6 +106,7 @@ Total pages indexed: **13**
 
 ### Making Cardano governance clear and accessible to everyone, Portuguese speaking community
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/making-cardano-governance-clear-and-accessible-to-everyone-portuguese-speaking-community
 - Grant value: **45,000 ADA**
 - Last updated: 1 year ago
@@ -113,6 +121,7 @@ Total pages indexed: **13**
 
 ### Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/governance-education-through-infographics-threads-and-tutorials.-english-and-spanish.
 - Grant value: **34,000 ADA**
 - Last updated: 12 months ago
@@ -129,6 +138,7 @@ Total pages indexed: **13**
 
 ### Twitter Space
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/twitter-space
 - Grant value: **31,600 ADA**
 - Last updated: 1 year ago
@@ -140,6 +150,7 @@ Total pages indexed: **13**
 
 ### Open Space
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/open-space
 - Grant value: **5,300 ADA**
 - Last updated: 10 months ago
@@ -159,6 +170,7 @@ Total pages indexed: **13**
 
 ### Cardano Governance Minimum Attack Vector (MAV) Dashboard
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cardano-governance-minimum-attack-vector-mav-dashboard
 - Grant value: **4,300 ADA**
 - Last updated: 1 year ago
@@ -170,8 +182,29 @@ Total pages indexed: **13**
   - https://drive.google.com/file/d/1sB7nMNf4DYFKranEngaV6dbFl7gIzLDs/view?usp=sharing
   - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
 
+### Educational and Multimedia
+
+- Cohort: 3
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS, NO_REPORTING_LINKS**
+- External links:
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Inclusion and Accessibility
+
+- Cohort: 3
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS, NO_REPORTING_LINKS**
+- External links:
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
 ### POEditor
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/poeditor
 - Grant value: (missing on page)
 - Last updated: 1 year ago
@@ -183,6 +216,7 @@ Total pages indexed: **13**
 
 ### Translations of the Interim Constitution
 
+- Cohort: 3
 - URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/translations-of-the-interim-constitution
 - Grant value: (missing on page)
 - Last updated: 1 year ago
@@ -194,4 +228,15 @@ Total pages indexed: **13**
   - https://drive.google.com/file/d/1VHOVvV1uTRz1e_CQjAb8rj7Ob5UTzzeO/view?usp=drive_link
   - https://drive.google.com/file/d/1qqGpZ2SLxw_STaIL-Pe2ow7UntRHSQPo/view?usp=sharing
   - https://drive.google.com/file/d/1vuB-BApaMWIjRpHQcWuM1VMikNlMpjUm/view?usp=drive_link
+  - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE
+
+### Open Category
+
+- Cohort: 3
+- URL: https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category
+- Grant value: (missing on page)
+- Last updated: 1 year ago
+- Flags: **MISSING_GRANT_VALUE, NO_DELIVERABLE_LINKS**
+- External links:
+  - https://docs.google.com/presentation/d/1FlmTxdFGvNawgwFs9iDP4r_xdRM1Wl-6BLJ9ZWjeaO4/edit?usp=sharing
   - https://www.gitbook.com/?utm_source=content&utm_medium=trademark&utm_campaign=7IvOomm3j1VTewu5MKAE

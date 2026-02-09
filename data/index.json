@@ -1,6 +1,7 @@
 {
-  "generated_at": "2026-02-09T19:52:34Z",
+  "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "Intersect Grants waste radar (all cohorts) generated (2026-02-09)",
     "Intersect Grants Cohort 3 waste radar generated (2026-02-09)",
     "TreasuryWithdrawals report exported (46 actions indexed)",
     "Governance polling + briefings automated (every 4h + daily 08:00 local)"
@@ -27,10 +28,35 @@
       "description": "Evidence-first flags across funding mechanisms (missing deliverables/reporting/payment proof).",
       "items": [
         {
-          "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (Markdown)",
-          "href": "reports/intersect-grants-cohort-3-waste-radar-2026-02-09.md",
+          "title": "Intersect Grants \u2014 Waste Radar (All Cohorts) \u2014 2026-02-09 (Markdown)",
+          "href": "reports/intersect-grants-waste-radar-2026-02-09.md",
           "kind": "md",
           "note": "Auto-flag: missing public deliverable/reporting links. Not accusations."
+        },
+        {
+          "title": "Intersect Grants \u2014 Waste Radar (All Cohorts) \u2014 2026-02-09 (CSV)",
+          "href": "reports/intersect-grants-waste-radar-2026-02-09.csv",
+          "kind": "csv"
+        },
+        {
+          "title": "Intersect Grants \u2014 Cohort 1 Waste Radar \u2014 2026-02-09 (MD)",
+          "href": "reports/intersect-grants-cohort-1-waste-radar-2026-02-09.md",
+          "kind": "md"
+        },
+        {
+          "title": "Intersect Grants \u2014 Cohort 2 Waste Radar \u2014 2026-02-09 (MD)",
+          "href": "reports/intersect-grants-cohort-2-waste-radar-2026-02-09.md",
+          "kind": "md"
+        },
+        {
+          "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (MD)",
+          "href": "reports/intersect-grants-cohort-3-waste-radar-2026-02-09.md",
+          "kind": "md"
+        },
+        {
+          "title": "Intersect Grants \u2014 Cohort 4 Waste Radar \u2014 2026-02-09 (MD)",
+          "href": "reports/intersect-grants-cohort-4-waste-radar-2026-02-09.md",
+          "kind": "md"
         },
         {
           "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (CSV)",
