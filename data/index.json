@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "Community summary generated (2026-02-09)",
     "Recipient/Entity leaderboard generated (2026-02-09)",
     "Unified Funding Index generated (2026-02-09)",
     "Intersect Grants waste radar (all cohorts) generated (2026-02-09)",
@@ -92,6 +93,18 @@
           "title": "Unified Funding Index \u2014 2026-02-09 (CSV)",
           "href": "reports/unified-funding-index-2026-02-09.csv",
           "kind": "csv"
+        }
+      ]
+    },
+    {
+      "title": "Community",
+      "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
+      "items": [
+        {
+          "title": "Community Summary \u2014 2026-02-09 (HTML)",
+          "href": "reports/community-summary-2026-02-09.html",
+          "kind": "html",
+          "note": "Plain-language summary; links to raw reports."
         }
       ]
     }
