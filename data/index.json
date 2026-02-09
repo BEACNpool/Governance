@@ -1,6 +1,7 @@
 {
-  "generated_at": "2026-02-09T19:30:00Z",
+  "generated_at": "2026-02-09T19:52:34Z",
   "highlights": [
+    "Intersect Grants Cohort 3 waste radar generated (2026-02-09)",
     "TreasuryWithdrawals report exported (46 actions indexed)",
     "Governance polling + briefings automated (every 4h + daily 08:00 local)"
   ],
@@ -10,13 +11,30 @@
       "description": "CIP-1694 TreasuryWithdrawals and (soon) Catalyst/grants flows.",
       "items": [
         {
-          "title": "TreasuryWithdrawals — 2026-02-09 (Markdown)",
+          "title": "TreasuryWithdrawals \u2014 2026-02-09 (Markdown)",
           "href": "reports/treasury-withdrawals-2026-02-09.md",
           "kind": "md"
         },
         {
-          "title": "TreasuryWithdrawals — 2026-02-09 (CSV)",
+          "title": "TreasuryWithdrawals \u2014 2026-02-09 (CSV)",
           "href": "reports/treasury-withdrawals-2026-02-09.csv",
+          "kind": "csv"
+        }
+      ]
+    },
+    {
+      "title": "Waste Radar",
+      "description": "Evidence-first flags across funding mechanisms (missing deliverables/reporting/payment proof).",
+      "items": [
+        {
+          "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (Markdown)",
+          "href": "reports/intersect-grants-cohort-3-waste-radar-2026-02-09.md",
+          "kind": "md",
+          "note": "Auto-flag: missing public deliverable/reporting links. Not accusations."
+        },
+        {
+          "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (CSV)",
+          "href": "reports/intersect-grants-cohort-3-waste-radar-2026-02-09.csv",
           "kind": "csv"
         }
       ]
