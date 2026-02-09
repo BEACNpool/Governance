@@ -148,6 +148,66 @@ def main():
     out.append("</ul></div>")
 
     out.append("<div class='card'>")
+    out.append("<h2>Executive summary (digest first)</h2>")
+
+    # summary stats
+    from collections import Counter
+
+    # Intersect totals
+    intersect_flag_counts = Counter()
+    total_flagged_intersect = len(intersect_flagged)
+    total_flagged_intersect_with_amount = sum(1 for x in intersect_flagged if x.get('amount') is not None)
+    total_flagged_intersect_amount = sum((x.get('amount') or 0) for x in intersect_flagged if x.get('amount') is not None)
+
+    for it in intersect_flagged:
+        for fl in it.get('flags', []):
+            intersect_flag_counts[fl] += 1
+
+    # Treasury totals
+    treasury_flag_counts = Counter()
+    for it in treasury_flagged:
+        for fl in it.get('flags', []):
+            treasury_flag_counts[fl] += 1
+
+    out.append("<p><strong>Report scope:</strong> only items with evidence flags (missing deliverables/reporting/payment proof or weak transparency signals). This is <em>not</em> proof of fraud.</p>")
+
+    out.append("<ul>")
+    out.append(f"<li><strong>Date:</strong> {today}</li>")
+    out.append(f"<li><strong>Intersect Grants flagged items:</strong> {total_flagged_intersect} (with stated ADA value: {total_flagged_intersect_with_amount}; sum of stated values: {total_flagged_intersect_amount:,} ADA)</li>")
+    out.append(f"<li><strong>TreasuryWithdrawals flagged items:</strong> {len(treasury_flagged)} (these are mainly transparency/process signals like missing discussion refs)</li>")
+    out.append("</ul>")
+
+    # Top flagged by amount (Intersect)
+    top_by_amt = sorted([x for x in intersect_flagged if x.get('amount') is not None], key=lambda x: x['amount'], reverse=True)[:10]
+    if top_by_amt:
+        out.append("<h3>Top Intersect flagged items by ADA (quick review)</h3>")
+        out.append("<ol>")
+        for it in top_by_amt:
+            out.append("<li>")
+            out.append(f"<strong>{esc(it['title'])}</strong> — {it['amount']:,} ADA (Cohort {esc(it['cohort'] or '?')})<br/>")
+            out.append(f"<span class='muted'>Flags: {esc(', '.join(it.get('flags', [])))}</span><br/>")
+            out.append(f"<a href='{esc(it['url'])}' target='_blank' rel='noopener'>Source page</a>")
+            out.append("</li>")
+        out.append("</ol>")
+
+    # Flag distribution
+    out.append("<h3>Most common Intersect flags</h3>")
+    out.append("<ul>")
+    for fl, n in intersect_flag_counts.most_common(8):
+        out.append(f"<li><code>{esc(fl)}</code> — {n} items</li>")
+    out.append("</ul>")
+
+    if treasury_flag_counts:
+        out.append("<h3>Most common Treasury flags</h3>")
+        out.append("<ul>")
+        for fl, n in treasury_flag_counts.most_common(8):
+            out.append(f"<li><code>{esc(fl)}</code> — {n} items</li>")
+        out.append("</ul>")
+
+    out.append("<p class='muted'>Tip: if a project has real deliverables but isn’t linking them publicly, the fastest fix is to add links to the official page. We will re-check and clear flags.</p>")
+    out.append("</div>")
+
+    out.append("<div class='card'>")
     out.append("<h2>What made this list?</h2>")
     out.append("<p>We only include items with evidence flags (missing deliverables/reporting/value). If an item is not flagged, it may still be debated — but it is not the focus of this document.</p>")
     out.append("</div>")
