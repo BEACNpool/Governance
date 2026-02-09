@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "Daily briefing generated (2026-02-09)",
     "Community summary generated (2026-02-09)",
     "Recipient/Entity leaderboard generated (2026-02-09)",
     "Unified Funding Index generated (2026-02-09)",
@@ -14,6 +15,17 @@
       "title": "Community",
       "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
       "items": [
+        {
+          "title": "Daily Briefing \u2014 2026-02-09 (HTML)",
+          "href": "reports/daily-briefing-2026-02-09.html",
+          "kind": "html",
+          "note": "Single page: readable summary + Top 3 deep homework + receipts."
+        },
+        {
+          "title": "Daily Briefing \u2014 2026-02-09 (Markdown)",
+          "href": "reports/daily-briefing-2026-02-09.md",
+          "kind": "md"
+        },
         {
           "title": "Community Summary \u2014 2026-02-09 (HTML)",
           "href": "reports/community-summary-2026-02-09.html",
