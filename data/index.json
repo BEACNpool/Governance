@@ -11,12 +11,12 @@
       "items": [
         {
           "title": "TreasuryWithdrawals — 2026-02-09 (Markdown)",
-          "href": "../reports/treasury-withdrawals-2026-02-09.md",
+          "href": "reports/treasury-withdrawals-2026-02-09.md",
           "kind": "md"
         },
         {
           "title": "TreasuryWithdrawals — 2026-02-09 (CSV)",
-          "href": "../reports/treasury-withdrawals-2026-02-09.csv",
+          "href": "reports/treasury-withdrawals-2026-02-09.csv",
           "kind": "csv"
         }
       ]

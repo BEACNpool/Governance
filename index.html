@@ -35,7 +35,7 @@
 
 <script>
 async function loadIndex() {
-  const res = await fetch('../data/index.json', { cache: 'no-store' });
+  const res = await fetch('data/index.json', { cache: 'no-store' });
   if (!res.ok) throw new Error('Missing data/index.json');
   return res.json();
 }
