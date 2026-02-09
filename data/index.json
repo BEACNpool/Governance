@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-09T19:56:47Z",
   "highlights": [
+    "Waste deep dive generated (2026-02-09)",
     "DOGE methodology published (2026-02-09)",
     "Daily briefing generated (2026-02-09)",
     "Community summary generated (2026-02-09)",
@@ -61,6 +62,12 @@
       "title": "Waste Radar",
       "description": "Evidence-first flags across funding mechanisms (missing deliverables/reporting/payment proof).",
       "items": [
+        {
+          "title": "Waste Deep Dive \u2014 2026-02-09 (HTML)",
+          "href": "reports/waste-deep-dive-2026-02-09.html",
+          "kind": "html",
+          "note": "Focused review of flagged items (missing receipts). Not voting advice."
+        },
         {
           "title": "Intersect Grants \u2014 Waste Radar (All Cohorts) \u2014 2026-02-09 (Markdown)",
           "href": "reports/intersect-grants-waste-radar-2026-02-09.md",
