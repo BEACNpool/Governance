@@ -1,24 +1,52 @@
 # BEACN Governance
 
-This repository is the public-facing home for BEACN’s governance research outputs:
+Public-facing home for BEACN’s governance research outputs.
 
-- Daily/weekly governance briefings
-- Treasury withdrawal tracking (CIP-1694)
-- Catalyst / grants tracking (work in progress)
-- “Waste radar” (evidence-first flags + links to sources)
+**Read-first (human-friendly):**
+- Community / DOGE methodology: `reports/methodology-doge.html`
+- Waste deep dive (flag reasons): `reports/waste-deep-dive-YYYY-MM-DD.html`
 
-## Principles
+## What this repo is
 
-- **Receipts-first:** every claim links to primary sources (anchors, official pages, tx hashes where available).
-- **No keys:** never store secrets here.
-- **Separation of roles:** this repo is research + reporting only; voting/signing happens elsewhere.
+- A receipts-first governance & treasury transparency hub.
+- Designed for **delegators** first, then analysts.
+
+## What this repo is NOT
+
+- Not voting instructions.
+- Not an accusation list.
+
+## How data is compiled (high level)
+
+We keep **separate datasets per source**, then publish **immutable snapshots** to GitHub so anyone can reproduce or challenge a claim.
+
+- **On-chain governance (CIP‑1694):** ingested via Koios, normalized to JSON.
+- **Intersect Community Grants:** crawled via GitBook sitemap, normalized to JSON.
+- **Derived views (“warehouse”):** unified funding index + recipient leaderboard generated from the above.
+
+Snapshots live under:
+
+- `data/snapshots/YYYY-MM-DD/…`
+
+The current snapshot is indicated by:
+
+- `data/latest.json`
+
+Reports link back to snapshot files.
 
 ## Directory layout
 
-- `reports/` — generated reports (markdown + CSV)
-- `data/` — machine-readable snapshots (JSON/CSV) used by the viewer
-- `site/` — static viewer (GitHub Pages-friendly)
+- `data/`
+  - `latest.json` — pointer to the current snapshot
+  - `snapshots/YYYY-MM-DD/` — immutable dataset snapshots
+  - `*.json` — derived data feeds used by the viewer
+- `reports/` — human-readable reports (HTML first), plus CSV/MD exports
+- `index.html` — static viewer homepage (GitHub Pages)
 
-## Status
+## Principles
+
+- **Receipts-first:** every claim links to sources (GovTool/anchors/program pages).
+- **Evidence flags ≠ wrongdoing:** flags mean missing/weak public receipts.
+- **Containment:** separate sources → separate snapshot subfolders.
 
 Bootstrapped on 2026-02-09.
