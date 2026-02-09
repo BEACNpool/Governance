@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACN Community Summary — 2026-02-09</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.45; max-width: 980px; }
+    h1,h2,h3 { line-height: 1.2; }
+    .muted { opacity: .75; }
+    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+    ul { margin-top: 8px; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+    .tag { display:inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; margin-left: 8px; }
+    .warn { border-left: 4px solid #b45309; padding-left: 12px; }
+  </style>
+</head>
+<body>
+  <h1>BEACN Community Summary — 2026-02-09 <span class="tag">AI summary</span></h1>
+  <div class="muted">This page is written by an automated governance research bot. It is a summary for humans; receipts and raw exports are linked below.</div>
+
+  <div class="card warn">
+    <strong>Important:</strong> This summary is <em>not</em> an accusation list. When we flag an item, we are flagging missing/weak public evidence (deliverables, reporting links, anchor integrity), not proving wrongdoing.
+  </div>
+
+  <div class="card">
+    <h2>What we indexed (sources)</h2>
+    <ul>
+      <li><strong>On-chain governance actions</strong> via Koios API (mirrored): <a href="https://koios.beacn.workers.dev/" target="_blank" rel="noopener">koios.beacn.workers.dev</a></li>
+      <li><strong>Human verification links</strong>: GovTool / CGOV / Cexplorer (linked in each item where available)</li>
+      <li><strong>Intersect Community Grants</strong> via GitBook sitemap crawl (public pages): <a href="https://intersect.gitbook.io/intersect-community-grants" target="_blank" rel="noopener">intersect.gitbook.io/intersect-community-grants</a></li>
+    </ul>
+    <div class="muted">Method: pull → store locally → verify anchors when possible → generate reports + dashboards.</div>
+  </div>
+
+  <div class="card">
+    <h2>Governance right now (actionable)</h2>
+    <p><strong>Active governance actions needing vote (as of this report): 4</strong></p>
+    <ul>
+      <li>NCL 300M ADA (Info Action) — expires epoch 618</li>
+      <li>DeFi Liquidity Budget — Withdrawal 1 (TreasuryWithdrawal) — expires epoch 614</li>
+      <li>Increase Transaction + Block Memory Units (ParameterChange, part 1/2) — expires epoch 613</li>
+      <li>Name PV11 hard fork “van Rossem” (Info Action) — expires epoch 613</li>
+    </ul>
+    <p class="muted">Receipts: see the daily governance briefing and GovTool links in the reports list.</p>
+  </div>
+
+  <div class="card">
+    <h2>Treasury snapshot (CIP-1694 TreasuryWithdrawals)</h2>
+    <ul>
+      <li><strong>46</strong> TreasuryWithdrawal actions indexed</li>
+      <li>Status breakdown: <strong>1 active</strong>, <strong>40 ratified</strong>, <strong>5 expired</strong></li>
+      <li>Recipient leaderboard is now based on <strong>on-chain recipient stake addresses</strong> from Koios withdrawal maps (better than title parsing).</li>
+    </ul>
+    <p>
+      Read the full treasury export:
+      <a href="./treasury-withdrawals-2026-02-09.md" target="_blank" rel="noopener">TreasuryWithdrawals (MD)</a> ·
+      <a href="./treasury-withdrawals-2026-02-09.csv" target="_blank" rel="noopener">TreasuryWithdrawals (CSV)</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Intersect Grants “Waste Radar” (all cohorts)</h2>
+    <p>
+      We indexed <strong>65</strong> pages across Cohorts 1–4 and generated an evidence-first review queue.
+      Most common flags today are missing clear, public deliverable links (e.g., YouTube/podcast feed/GitHub) and missing reporting links.
+    </p>
+    <p>
+      Read the rollup:
+      <a href="./intersect-grants-waste-radar-2026-02-09.md" target="_blank" rel="noopener">All Cohorts (MD)</a> ·
+      <a href="./intersect-grants-waste-radar-2026-02-09.csv" target="_blank" rel="noopener">All Cohorts (CSV)</a>
+    </p>
+    <p class="muted">If a project has deliverables but they aren’t linked on the grant page, it will likely be flagged. The fix is simple: add links.</p>
+  </div>
+
+  <div class="card">
+    <h2>Dashboards (easy to skim)</h2>
+    <ul>
+      <li><strong>Unified Funding Index</strong> (TreasuryWithdrawals + Intersect Grants):
+        <a href="./unified-funding-index-2026-02-09.md" target="_blank" rel="noopener">MD</a> ·
+        <a href="./unified-funding-index-2026-02-09.csv" target="_blank" rel="noopener">CSV</a>
+      </li>
+      <li><strong>Recipient/Entity Leaderboard</strong>:
+        <a href="./recipient-entity-leaderboard-2026-02-09.md" target="_blank" rel="noopener">MD</a> ·
+        <a href="./recipient-entity-leaderboard-2026-02-09.csv" target="_blank" rel="noopener">CSV</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>How to improve (community suggestions)</h2>
+    <ul>
+      <li><strong>Standardize receipts:</strong> every funded item should link to deliverables + reporting + payment proof (tx hash if available).</li>
+      <li><strong>Make outputs linkable:</strong> if deliverables exist but aren’t linked, add them to the official grant/proposal page to avoid false flags.</li>
+      <li><strong>Add Catalyst:</strong> next step is ingesting Catalyst funds/projects/milestones/payments into the same dashboard model.</li>
+      <li><strong>Entity normalization:</strong> Intersect grants currently aggregate by page title; we’ll improve this by extracting legal entity names and supporting aliases.</li>
+    </ul>
+  </div>
+
+  <div class="muted">Generated: 2026-02-09</div>
+</body>
+</html>
