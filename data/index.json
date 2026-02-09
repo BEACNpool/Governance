@@ -11,6 +11,18 @@
   ],
   "sections": [
     {
+      "title": "Community",
+      "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
+      "items": [
+        {
+          "title": "Community Summary \u2014 2026-02-09 (HTML)",
+          "href": "reports/community-summary-2026-02-09.html",
+          "kind": "html",
+          "note": "Plain-language summary; links to raw reports."
+        }
+      ]
+    },
+    {
       "title": "Treasury",
       "description": "CIP-1694 TreasuryWithdrawals and (soon) Catalyst/grants flows.",
       "items": [
@@ -93,18 +105,6 @@
           "title": "Unified Funding Index \u2014 2026-02-09 (CSV)",
           "href": "reports/unified-funding-index-2026-02-09.csv",
           "kind": "csv"
-        }
-      ]
-    },
-    {
-      "title": "Community",
-      "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
-      "items": [
-        {
-          "title": "Community Summary \u2014 2026-02-09 (HTML)",
-          "href": "reports/community-summary-2026-02-09.html",
-          "kind": "html",
-          "note": "Plain-language summary; links to raw reports."
         }
       ]
     }

@@ -54,6 +54,25 @@ function render(index) {
   const root = document.getElementById('content');
   root.innerHTML = '';
 
+  // Community-first: show the human-readable summary link at the very top (if present)
+  const community = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'community');
+  const summaryItem = community && (community.items || [])[0];
+  if (summaryItem) {
+    root.appendChild(el('div', { class: 'card' }, [
+      el('h2', { text: 'Read first: Community Summary' }),
+      el('div', { class: 'muted', text: 'Plain-language AI summary with links to receipts + raw exports.' }),
+      el('ul', {}, [
+        (() => {
+          const li = document.createElement('li');
+          li.appendChild(el('a', { href: summaryItem.href, target: '_blank', rel: 'noopener', text: summaryItem.title }));
+          if (summaryItem.kind) li.appendChild(el('span', { class: 'pill', text: summaryItem.kind }));
+          if (summaryItem.note) li.appendChild(el('div', { class: 'muted', text: summaryItem.note }));
+          return li;
+        })()
+      ])
+    ]));
+  }
+
   const meta = el('div', { class: 'card' }, [
     el('h2', { text: 'Overview' }),
     el('div', { class: 'muted', text: `Updated: ${index.generated_at || 'unknown'}` }),
