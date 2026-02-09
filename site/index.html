@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACN Governance Reports</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.35; }
+    header { display:flex; gap:16px; align-items: baseline; flex-wrap: wrap; }
+    h1 { margin: 0; }
+    .muted { opacity: .75; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 16px; max-width: 1000px; }
+    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 10px; padding: 14px 16px; }
+    .card h2 { margin: 0 0 8px; font-size: 18px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); margin-left: 8px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BEACN Governance Reports</h1>
+    <div class="muted">Static index (auto-updated by the governance bot)</div>
+  </header>
+
+  <div class="grid" id="content">
+    <div class="card">
+      <h2>Loading…</h2>
+      <div class="muted">If this hangs, ensure <code>data/index.json</code> exists.</div>
+    </div>
+  </div>
+
+<script>
+async function loadIndex() {
+  const res = await fetch('../data/index.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Missing data/index.json');
+  return res.json();
+}
+
+function el(tag, attrs={}, children=[]) {
+  const n = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) {
+    if (k === 'text') n.textContent = v;
+    else n.setAttribute(k, v);
+  }
+  for (const c of children) n.appendChild(c);
+  return n;
+}
+
+function render(index) {
+  const root = document.getElementById('content');
+  root.innerHTML = '';
+
+  const meta = el('div', { class: 'card' }, [
+    el('h2', { text: 'Overview' }),
+    el('div', { class: 'muted', text: `Updated: ${index.generated_at || 'unknown'}` }),
+    el('ul', {}, (index.highlights || []).map(h => el('li', { text: h })))
+  ]);
+  root.appendChild(meta);
+
+  for (const section of (index.sections || [])) {
+    const items = (section.items || []).map(item => {
+      const li = document.createElement('li');
+      const a = el('a', { href: item.href, target: '_blank', rel: 'noopener', text: item.title });
+      li.appendChild(a);
+      if (item.kind) li.appendChild(el('span', { class: 'pill', text: item.kind }));
+      if (item.note) li.appendChild(el('div', { class: 'muted', text: item.note }));
+      return li;
+    });
+
+    root.appendChild(el('div', { class: 'card' }, [
+      el('h2', { text: section.title }),
+      el('div', { class: 'muted', text: section.description || '' }),
+      el('ul', {}, items)
+    ]));
+  }
+}
+
+loadIndex().then(render).catch(err => {
+  const root = document.getElementById('content');
+  root.innerHTML = '';
+  root.appendChild(el('div', { class: 'card' }, [
+    el('h2', { text: 'No index yet' }),
+    el('div', { class: 'muted', text: String(err) }),
+    el('div', { class: 'muted', text: 'Once generated, this page will list the latest reports and snapshots.' })
+  ]));
+});
+</script>
+</body>
+</html>

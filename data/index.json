@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-02-09T19:30:00Z",
+  "highlights": [
+    "TreasuryWithdrawals report exported (46 actions indexed)",
+    "Governance polling + briefings automated (every 4h + daily 08:00 local)"
+  ],
+  "sections": [
+    {
+      "title": "Treasury",
+      "description": "CIP-1694 TreasuryWithdrawals and (soon) Catalyst/grants flows.",
+      "items": [
+        {
+          "title": "TreasuryWithdrawals — 2026-02-09 (Markdown)",
+          "href": "../reports/treasury-withdrawals-2026-02-09.md",
+          "kind": "md"
+        },
+        {
+          "title": "TreasuryWithdrawals — 2026-02-09 (CSV)",
+          "href": "../reports/treasury-withdrawals-2026-02-09.csv",
+          "kind": "csv"
+        }
+      ]
+    }
+  ]
+}
