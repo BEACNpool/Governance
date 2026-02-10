@@ -13,6 +13,18 @@
   ],
   "sections": [
     {
+      "title": "Live",
+      "description": "Auto-updating governance vote dashboard (raw + processed JSON + HTML).",
+      "items": [
+        {
+          "title": "Live Votes Dashboard (auto-updates)",
+          "href": "reports/live-dashboard/index.html",
+          "kind": "html",
+          "note": "Sorted by deadline; links to raw JSON for proof."
+        }
+      ]
+    },
+    {
       "title": "Waste Radar",
       "description": "Evidence-first flags across funding mechanisms (missing deliverables/reporting/payment proof).",
       "items": [

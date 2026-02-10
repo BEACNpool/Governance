@@ -1,0 +1,55 @@
+name: Live Votes Dashboard (scheduled)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 6 hours
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-votes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build live votes (pull + process + dashboard)
+        env:
+          KOIOS_BASE: https://koios.beacn.workers.dev
+        run: |
+          python3 scripts/live_votes_pull_and_build.py
+
+      - name: Commit & push (if changed)
+        run: |
+          set -e
+          git config user.name "beacn-governance-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          # Only commit if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            # Best-effort: include epoch in commit message
+            EPOCH=$(python3 - <<'PY'
+import json
+from pathlib import Path
+p=sorted(Path('data/processed').glob('*.json'))[-1]
+print(json.loads(p.read_text()).get('epoch'))
+PY
+            )
+            git add -A
+            git commit -m "Auto-update: live votes from epoch ${EPOCH}"
+            git push
+          else
+            echo "No changes to commit."
+          fi
