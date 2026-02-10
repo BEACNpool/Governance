@@ -1,63 +1,16 @@
 {
-  "generated_at": "2026-02-09T19:56:47Z",
+  "generated_at": "2026-02-10T00:02:00Z",
   "highlights": [
     "Waste deep dive generated (2026-02-09)",
     "DOGE methodology published (2026-02-09)",
-    "Daily briefing generated (2026-02-09)",
     "Community summary generated (2026-02-09)",
     "Recipient/Entity leaderboard generated (2026-02-09)",
     "Unified Funding Index generated (2026-02-09)",
     "Intersect Grants waste radar (all cohorts) generated (2026-02-09)",
     "Intersect Grants Cohort 3 waste radar generated (2026-02-09)",
-    "TreasuryWithdrawals report exported (46 actions indexed)",
-    "Governance polling + briefings automated (every 4h + daily 08:00 local)"
+    "TreasuryWithdrawals report exported (46 actions indexed)"
   ],
   "sections": [
-    {
-      "title": "Community",
-      "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
-      "items": [
-        {
-          "title": "Methodology \u2014 Cardano DOGE (HTML)",
-          "href": "reports/methodology-doge.html",
-          "kind": "html",
-          "note": "How we hunt waste/fraud signals (receipts-first). Not voting advice."
-        },
-        {
-          "title": "Daily Briefing \u2014 2026-02-09 (HTML)",
-          "href": "reports/daily-briefing-2026-02-09.html",
-          "kind": "html",
-          "note": "Single page: readable summary + Top 3 deep homework + receipts."
-        },
-        {
-          "title": "Daily Briefing \u2014 2026-02-09 (Markdown)",
-          "href": "reports/daily-briefing-2026-02-09.md",
-          "kind": "md"
-        },
-        {
-          "title": "Community Summary \u2014 2026-02-09 (HTML)",
-          "href": "reports/community-summary-2026-02-09.html",
-          "kind": "html",
-          "note": "Plain-language summary; links to raw reports."
-        }
-      ]
-    },
-    {
-      "title": "Treasury",
-      "description": "CIP-1694 TreasuryWithdrawals and (soon) Catalyst/grants flows.",
-      "items": [
-        {
-          "title": "TreasuryWithdrawals \u2014 2026-02-09 (Markdown)",
-          "href": "reports/treasury-withdrawals-2026-02-09.md",
-          "kind": "md"
-        },
-        {
-          "title": "TreasuryWithdrawals \u2014 2026-02-09 (CSV)",
-          "href": "reports/treasury-withdrawals-2026-02-09.csv",
-          "kind": "csv"
-        }
-      ]
-    },
     {
       "title": "Waste Radar",
       "description": "Evidence-first flags across funding mechanisms (missing deliverables/reporting/payment proof).",
@@ -107,6 +60,24 @@
       ]
     },
     {
+      "title": "Community",
+      "description": "Easy-to-read AI summaries with links to receipts + raw exports.",
+      "items": [
+        {
+          "title": "Methodology \u2014 Cardano DOGE (HTML)",
+          "href": "reports/methodology-doge.html",
+          "kind": "html",
+          "note": "How we hunt waste/fraud signals (receipts-first). Not voting advice."
+        },
+        {
+          "title": "Community Summary \u2014 2026-02-09 (HTML)",
+          "href": "reports/community-summary-2026-02-09.html",
+          "kind": "html",
+          "note": "Plain-language summary; links to raw reports."
+        }
+      ]
+    },
+    {
       "title": "Dashboard",
       "description": "Combined views that merge multiple funding mechanisms into one filterable index.",
       "items": [
@@ -130,6 +101,22 @@
         {
           "title": "Unified Funding Index \u2014 2026-02-09 (CSV)",
           "href": "reports/unified-funding-index-2026-02-09.csv",
+          "kind": "csv"
+        }
+      ]
+    },
+    {
+      "title": "Treasury",
+      "description": "CIP-1694 TreasuryWithdrawals and (soon) Catalyst/grants flows.",
+      "items": [
+        {
+          "title": "TreasuryWithdrawals \u2014 2026-02-09 (Markdown)",
+          "href": "reports/treasury-withdrawals-2026-02-09.md",
+          "kind": "md"
+        },
+        {
+          "title": "TreasuryWithdrawals \u2014 2026-02-09 (CSV)",
+          "href": "reports/treasury-withdrawals-2026-02-09.csv",
           "kind": "csv"
         }
       ]

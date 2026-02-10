@@ -54,19 +54,19 @@ function render(index) {
   const root = document.getElementById('content');
   root.innerHTML = '';
 
-  // Community-first: show the human-readable summary link at the very top (if present)
-  const community = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'community');
-  const summaryItem = community && (community.items || [])[0];
-  if (summaryItem) {
+  // Read-first: show the Waste Deep Dive at the very top (if present)
+  const waste = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'waste radar');
+  const topWaste = waste && (waste.items || []).find(it => (it.title || '').toLowerCase().includes('waste deep dive'));
+  if (topWaste) {
     root.appendChild(el('div', { class: 'card' }, [
-      el('h2', { text: 'Read first: Community Summary' }),
-      el('div', { class: 'muted', text: 'Plain-language AI summary with links to receipts + raw exports.' }),
+      el('h2', { text: 'Read first: Waste Deep Dive' }),
+      el('div', { class: 'muted', text: 'Evidence-first review queue with flag reasons + receipts. Not voting advice.' }),
       el('ul', {}, [
         (() => {
           const li = document.createElement('li');
-          li.appendChild(el('a', { href: summaryItem.href, target: '_blank', rel: 'noopener', text: summaryItem.title }));
-          if (summaryItem.kind) li.appendChild(el('span', { class: 'pill', text: summaryItem.kind }));
-          if (summaryItem.note) li.appendChild(el('div', { class: 'muted', text: summaryItem.note }));
+          li.appendChild(el('a', { href: topWaste.href, target: '_blank', rel: 'noopener', text: topWaste.title }));
+          if (topWaste.kind) li.appendChild(el('span', { class: 'pill', text: topWaste.kind }));
+          if (topWaste.note) li.appendChild(el('div', { class: 'muted', text: topWaste.note }));
           return li;
         })()
       ])
