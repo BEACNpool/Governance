@@ -4,441 +4,467 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>BEACN Grants Ledger — 2026-02-09</title>
+<meta name="description" content="DOGE-style grants spend ledger. 65 items indexed, 0 ADA tracked."/>
+<link rel="stylesheet" href="../assets/beacn.css"/>
 <style>
-:root{color-scheme:light dark}
-body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px;line-height:1.5;max-width:1100px}
-h1,h2,h3{line-height:1.2}
-.muted{opacity:.75}
-.card{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;margin:14px 0}
-.warn{border-left:4px solid #b45309;padding-left:12px}
-a{text-decoration:none}a:hover{text-decoration:underline}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;font-size:.95em}
-table{border-collapse:collapse;width:100%}
-th,td{border-bottom:1px solid rgba(127,127,127,.25);padding:10px 8px;vertical-align:top}
-th{text-align:left}
-.num{text-align:right;white-space:nowrap}
-.pill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid rgba(127,127,127,.35);font-size:12px;margin-left:8px}
+  .ledger-row { transition: background .15s; }
+  .ledger-row:hover { background: var(--bg-hover); }
+  .ledger-row td { font-size: 13px; }
+  .links-cell a { display: block; font-size: 12px; word-break: break-all; margin: 2px 0; }
+  .links-cell a:hover { text-decoration: underline; }
 </style>
-</head><body>
-<h1>DOGE Grants Spend Ledger — 2026-02-09 <span class='pill'>AI-indexed</span></h1>
-<div class='muted'><strong>DOGE lens:</strong> public money demands public receipts. This page spotlights where ADA is allocated and whether the public can <em>directly verify</em> deliverables via links.</div>
-<div class='card warn'><strong>Read this before scrolling:</strong><ul>
-<li><strong>Fact-driven, not vibes.</strong> Amounts come from official program pages. If a page doesn’t state a value clearly, we mark it unknown and exclude it from totals.</li>
-<li><strong>Not voting advice.</strong> This is a transparency ledger to support public discussion and accountability.</li>
-<li><strong>Not an accusation list.</strong> Missing links = missing public receipts. The easiest way to clear scrutiny is to publish/attach deliverable + reporting links on the official page.</li>
-</ul></div>
-<div class='card'>
-<h2>Top-line totals (known values only)</h2>
-<div class='muted'>This is the ‘maximum savings ceiling’ for this page <em>only if</em> every listed item were wasteful (unlikely). The point is to quantify exposure and demand receipts, not to accuse.</div>
-<ul>
-<li><strong>Total items indexed:</strong> 65</li>
-<li><strong>Items with stated ADA value:</strong> 19 (unknown: 46)</li>
-<li><strong>Total ADA (known):</strong> 1,457,320 ADA</li>
-</ul>
+</head>
+<body>
+
+<nav class="top-bar">
+  <a href="../" class="brand">BEACN</a>
+  <a href="../">← Dashboard</a>
+  <a href="waste-deep-dive-2026-02-09.html">Waste Deep Dive</a>
+  <a href="methodology-doge.html">Methodology</a>
+  <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener">GitHub</a>
+</nav>
+
+<div class="report-page">
+
+<header class="report-header">
+  <div class="report-badge">📒 GRANTS LEDGER · 2026-02-09</div>
+  <h1>DOGE Grants Spend Ledger</h1>
+  <p class="report-sub">
+    Public money demands public receipts. This page spotlights where ADA is allocated
+    and whether the public can <em>directly verify</em> deliverables via links.
+  </p>
+</header>
+
+<div class="card warn">
+  <h2>⚠️ Read This Before Scrolling</h2>
+  <ul>
+    <li><strong>Fact-driven, not vibes.</strong> Amounts come from official program pages. If a page doesn't state a value, we mark it unknown and exclude from totals.</li>
+    <li><strong>Not voting advice.</strong> This is a transparency ledger to support public discussion and accountability.</li>
+    <li><strong>Not an accusation list.</strong> Missing links = missing public receipts. The easiest fix: publish/attach links on the official page.</li>
+  </ul>
 </div>
-<div class='card'>
-<h2>By cohort (known values)</h2>
-<table><thead><tr><th>Cohort</th><th class='num'>Items</th><th class='num'>Known values</th><th class='num'>Sum ADA</th></tr></thead><tbody>
-<tr><td>3</td><td class='num'>16</td><td class='num'>11</td><td class='num'>603,320</td></tr>
-<tr><td>4</td><td class='num'>31</td><td class='num'>5</td><td class='num'>460,500</td></tr>
-<tr><td>2</td><td class='num'>3</td><td class='num'>3</td><td class='num'>393,500</td></tr>
-<tr><td>1</td><td class='num'>15</td><td class='num'>0</td><td class='num'>0</td></tr>
-</tbody></table>
+<div class="card">
+  <h2>Top-Line Totals (Known Values Only)</h2>
+  <p class="muted">This is the scope of this ledger. Not every item is wasteful — the point is to quantify exposure and demand receipts.</p>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="s-val" style="color:var(--blue)">65</div><div class="s-label">Items indexed</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--ada-gold)">0</div><div class="s-label">With stated ADA</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--ada-gold)">0 ₳</div><div class="s-label">Total ADA (known)</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--amber)">65</div><div class="s-label">Value unknown</div></div>
+  </div>
 </div>
-<div class='card'>
-<h2>All indexed grants (sorted by ADA)</h2>
-<table><thead><tr><th>Program / Cohort</th><th>Grant</th><th class='num'>ADA</th><th>Direct receivable (links)</th></tr></thead><tbody>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Summon Snapshot Voting on Interim Constitutional Committee</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/summon-snapshot-voting-on-interim-constitutional-committee' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>158,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1bSFMvYhEGPOulyzQs1uKCBYZr09F4DuH/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1bSFMvYhEGPOulyzQs1uKCBYZr09F4DuH/view?usp=drive_link</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 2</td>
-<td><strong>Proposal Discussion Forum</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/proposal-discussion-forum' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>135,000</td>
-<td><ul><li><a href='https://docs.google.com/document/d/142ZSNq1DPkAOLt_a3SVtTfkBZn6SUnAH36726c3E8nI/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/142ZSNq1DPkAOLt_a3SVtTfkBZn6SUnAH36726c3E8nI/edit?usp=drive_link</a></li><li><a href='https://docs.google.com/document/d/1Ev6e_u0_3RGosBPmp0hSkhc8mCYbYU2d4-I5mbYzYdM/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/1Ev6e_u0_3RGosBPmp0hSkhc8mCYbYU2d4-I5mbYzYdM/edit?usp=drive_link</a></li><li><a href='https://docs.google.com/document/d/1lyoYGhW3qIt7cmx1YkwTVB_WDtDKZ0uPvwN8Hl_5qb8/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/1lyoYGhW3qIt7cmx1YkwTVB_WDtDKZ0uPvwN8Hl_5qb8/edit?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 2</td>
-<td><strong>DRep Campaign Platform</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/drep-campaign-platform' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>130,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/19j9z1UAfdG2NpxAqnPHrBLoulnOVfoLa/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/19j9z1UAfdG2NpxAqnPHrBLoulnOVfoLa/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1G0GsmkJm3Ew1USelYjXyfTCM2EPuBP1T/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1G0GsmkJm3Ew1USelYjXyfTCM2EPuBP1T/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1HGs1VaWCAJbu-_cIZ9ElA2rNMG84iAsE/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1HGs1VaWCAJbu-_cIZ9ElA2rNMG84iAsE/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 2</td>
-<td><strong>Constitutional Committee Portal</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/constitutional-committee-portal' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>128,500</td>
-<td><ul><li><a href='https://drive.google.com/file/d/192nEFZM1LzQsNAO4ij93pBjB4yEZYqt4/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/192nEFZM1LzQsNAO4ij93pBjB4yEZYqt4/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1OS7mYsDau_LRkVUl1wRrtWSEnRFpY7_E/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1OS7mYsDau_LRkVUl1wRrtWSEnRFpY7_E/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1PY8BM7u0nXthbS2-48Ygdw4U4ebADfPr/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PY8BM7u0nXthbS2-48Ygdw4U4ebADfPr/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>GM Cardano - Governance Matters Cardano videos/podcast</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/gm-cardano-governance-matters-cardano-videos-podcast' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>106,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1BdCFMbb6vFTLmvZzUACqXknQeeytQpKt/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1BdCFMbb6vFTLmvZzUACqXknQeeytQpKt/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1HCE5XX76EZ96ryS_5ZoP18d3-C0FXMgb/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1HCE5XX76EZ96ryS_5ZoP18d3-C0FXMgb/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1MmSBOPB9i5wjydtC27SqlcdpCiqr7tYD/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MmSBOPB9i5wjydtC27SqlcdpCiqr7tYD/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>CIP-95 support for Cardano Transaction Library (CTL)</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cip-95-support-for-cardano-transaction-library-ctl' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>106,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1-wKUytjk6u4ZIZWs2O4QXPLgTHJwR9R4/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1-wKUytjk6u4ZIZWs2O4QXPLgTHJwR9R4/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1GNBwYnG7K27dFeMQCPZU2gjKFEJ1cBy7/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1GNBwYnG7K27dFeMQCPZU2gjKFEJ1cBy7/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1dIvx1BDH1hx3B8TvZ-oAyAp50jR2JLVc/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1dIvx1BDH1hx3B8TvZ-oAyAp50jR2JLVc/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Voting Tool for the Constitutional Convention</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/voting-tool-for-the-constitutional-convention' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>102,500</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1F-W-eYIWw_6LCK_cqOHZy0Zsy1l0jXLY/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1F-W-eYIWw_6LCK_cqOHZy0Zsy1l0jXLY/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1N5xWU-3HwPRJgtfTrKsXErR0DNLsuoRb/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1N5xWU-3HwPRJgtfTrKsXErR0DNLsuoRb/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1fNDA9r2Z43FsK_X8xQJcOpvYp-ixxEdS/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1fNDA9r2Z43FsK_X8xQJcOpvYp-ixxEdS/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Cardano Governance in a Nutshell - Mike Hornan &amp; Summon Associations</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/cardano-governance-in-a-nutshell-mike-hornan-and-summon-associations' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>100,000</td>
-<td><ul><li><a href='https://able-pool.io/document' target='_blank' rel='noopener'>https://able-pool.io/document</a></li><li><a href='https://able-pool.io/voltaire' target='_blank' rel='noopener'>https://able-pool.io/voltaire</a></li><li><a href='https://drive.google.com/file/d/1DNc_wwX_OuPebwtUFPIFHWi3tVVNxQ-U/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1DNc_wwX_OuPebwtUFPIFHWi3tVVNxQ-U/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Additional Governance features</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/additional-governance-features' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>90,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1DzRwFEqQi1dnq--Q97r5k2IuGtfEZlqV/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1DzRwFEqQi1dnq--Q97r5k2IuGtfEZlqV/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1Ef3RJXeTo-w_DcSKdqJaMLfKMGFhsClc/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Ef3RJXeTo-w_DcSKdqJaMLfKMGFhsClc/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1LlslmkJ9wdXejD2rtvAzmywMZ9KElxFH/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1LlslmkJ9wdXejD2rtvAzmywMZ9KElxFH/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Consensus 2024 Cardano Marketing</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/consensus-2024-cardano-marketing' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>75,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/12lYeWyaG-cJP4Mbjvc-hot7mZ0w9GbVQ/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/12lYeWyaG-cJP4Mbjvc-hot7mZ0w9GbVQ/view</a></li><li><a href='https://drive.google.com/file/d/17G48Zq3sTR_UxMnEw7dMATtlo8m5056H/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/17G48Zq3sTR_UxMnEw7dMATtlo8m5056H/view</a></li><li><a href='https://drive.google.com/file/d/1Q8guYT1sXF8ruaAR6VeLP4ADoSTHV86M/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Q8guYT1sXF8ruaAR6VeLP4ADoSTHV86M/view</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Stable Coin</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/stable-coin' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>66,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1aqiUmD7UUQFqwe1HBtkWFB21TYqrRWLZ/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1aqiUmD7UUQFqwe1HBtkWFB21TYqrRWLZ/view?usp=drive_link</a></li><li><a href='https://www.appold.com/news/stablecoinreseach' target='_blank' rel='noopener'>https://www.appold.com/news/stablecoinreseach</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Intersect Town Halls</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/intersect-town-halls' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>55,120</td>
-<td><ul><li><a href='https://drive.google.com/file/d/19jpDfxwYCW6kRDIvpIWM-WYkUVGUo8TI/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/19jpDfxwYCW6kRDIvpIWM-WYkUVGUo8TI/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1L19scmLy80MkDek6DWUg39Tk2j33TpkM/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1L19scmLy80MkDek6DWUg39Tk2j33TpkM/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1N-FSc6-2n17XS_GfFN9Y6yNc037QpD6p/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1N-FSc6-2n17XS_GfFN9Y6yNc037QpD6p/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Engaging young people into Cardano Governance</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/engaging-young-people-into-cardano-governance' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>50,000</td>
-<td><ul><li><a href='https://docs.selfdriven.foundation/intersect-education-kit/fundamentals/the-learning-journey' target='_blank' rel='noopener'>https://docs.selfdriven.foundation/intersect-education-kit/fundamentals/the-learning-journey</a></li><li><a href='https://drive.google.com/file/d/1P_GliSSGNWwzVAmXb4879E7iJgnRXQBu/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1P_GliSSGNWwzVAmXb4879E7iJgnRXQBu/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1TAcIM5Q11YOcy_pzruKHBhzSE2cTh2We/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1TAcIM5Q11YOcy_pzruKHBhzSE2cTh2We/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Making Cardano governance clear and accessible to everyone, Portuguese speaking community</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/making-cardano-governance-clear-and-accessible-to-everyone-portuguese-speaking-community' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>45,000</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1U9ZWWSjk2mzc7GYSeQfS24Quumlem9nF/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1U9ZWWSjk2mzc7GYSeQfS24Quumlem9nF/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://drive.google.com/file/d/1MTvr5LaDYCRVyilba5EC2lI4f9cfGZGf/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MTvr5LaDYCRVyilba5EC2lI4f9cfGZGf/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1_0OWAWmcSw1Fp_PFsIDxtLiEHa8GIY5o/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_0OWAWmcSw1Fp_PFsIDxtLiEHa8GIY5o/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Membership NFT Platform</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/membership-nft-platform' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>35,000</td>
-<td><ul><li><a href='https://drive.google.com/file/d/18Fxk-zMkIuZ19Jr6oUnAoWvoBh2zzq1Q/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/18Fxk-zMkIuZ19Jr6oUnAoWvoBh2zzq1Q/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1Z8TYLzeDPLyYXntF_lgFyngbpQe8Ms2C/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Z8TYLzeDPLyYXntF_lgFyngbpQe8Ms2C/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1iHuxSnSanJUI3E7UnhtNAli5Px0774QF/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1iHuxSnSanJUI3E7UnhtNAli5Px0774QF/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/governance-education-through-infographics-threads-and-tutorials.-english-and-spanish.' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>34,000</td>
-<td><ul><li><a href='https://cardanospot.io/news/the-chang-hard-fork-and-ouroboros-journey-rCER5iTmKbJrwShD' target='_blank' rel='noopener'>https://cardanospot.io/news/the-chang-hard-fork-and-ouroboros-journey-rCER5iTmKbJrwShD</a></li><li><a href='https://drive.google.com/file/d/1EOFYWyPkRuuKEUYCyzdfqTqbE-a6J3un/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1EOFYWyPkRuuKEUYCyzdfqTqbE-a6J3un/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1REbtLQYGsE_IGz27rP89JcDYWX1nVx3l/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1REbtLQYGsE_IGz27rP89JcDYWX1nVx3l/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Twitter Space</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/twitter-space' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>31,600</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1_RCRgGka295mpyvpc1z8NX6mGY9CcSTo/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_RCRgGka295mpyvpc1z8NX6mGY9CcSTo/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1yOOu2eA-iKVnVxc-RAH7p7aNqGlYBWvv/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1yOOu2eA-iKVnVxc-RAH7p7aNqGlYBWvv/view?usp=sharing</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Open Space</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/open-space' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>5,300</td>
-<td><ul><li><a href='https://drive.google.com/file/d/14oqYVub2Ty7KVFEUIumM3sF9HCZodHD5/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/14oqYVub2Ty7KVFEUIumM3sF9HCZodHD5/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/150rjat_eSmwKc1T86mjzs4jjca2Fb7A_/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/150rjat_eSmwKc1T86mjzs4jjca2Fb7A_/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/18fNUMU8hrMl3dxmOy8ZHMjIFaTd2ZIdt/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/18fNUMU8hrMl3dxmOy8ZHMjIFaTd2ZIdt/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Cardano Governance Minimum Attack Vector (MAV) Dashboard</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cardano-governance-minimum-attack-vector-mav-dashboard' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>4,300</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1GEPbqbqv_-5CTuKqj6SSS8H_Ay6G1waM/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1GEPbqbqv_-5CTuKqj6SSS8H_Ay6G1waM/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1PbwC-lmJ_BACJWbOHqaDA_rsffL7pxac/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PbwC-lmJ_BACJWbOHqaDA_rsffL7pxac/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1lGGKJJeXuTTGrX5fu-YWRSP8W7gHjBW7/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1lGGKJJeXuTTGrX5fu-YWRSP8W7gHjBW7/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>dcSpark</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/dcspark' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1Aplza-kPn69Yl_MwcadoSJbEVDnn3wxj/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Aplza-kPn69Yl_MwcadoSJbEVDnn3wxj/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1eQDKig3vokgW1iQ8lgmUl3eGBa-pN-ro/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1eQDKig3vokgW1iQ8lgmUl3eGBa-pN-ro/view?usp=drive_link</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Xerberus Labs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/xerberus-labs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1ZTGsXRpLLG5o9Ikisibc-rT78EVBSxXr/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1ZTGsXRpLLG5o9Ikisibc-rT78EVBSxXr/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://drive.google.com/file/d/1lOR1hc6-wpt7Z2R8Hga-dIda5_Mr6Yel/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1lOR1hc6-wpt7Z2R8Hga-dIda5_Mr6Yel/view?usp=sharing</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Translations of the Interim Constitution</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/translations-of-the-interim-constitution' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1kbLN4j8_pEjRO1vMsH4nIJQqg42kDCc1/edit?usp=sharing&amp;ouid=104864166014399949050&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1kbLN4j8_pEjRO1vMsH4nIJQqg42kDCc1/edit?usp=sharing&amp;ouid=104864166014399949050&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://drive.google.com/file/d/1J6_qfQSVmSn4KyQ7iO2AVIBcBraIIxNi/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1J6_qfQSVmSn4KyQ7iO2AVIBcBraIIxNi/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1LCZk3MRwmmTx8iYKdz7jDkZiKPg7PoL4/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1LCZk3MRwmmTx8iYKdz7jDkZiKPg7PoL4/view?usp=sharing</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/territory-of-nyiragongo-democratic-republic-of-congo-29th-june-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://lu.ma/e9i3bncp' target='_blank' rel='noopener'>https://lu.ma/e9i3bncp</a></li><li><a href='https://updciongandintersectmboenglish.blogspot.com/2024/07/event-on-june-29-2024-in-nyiragongo.html' target='_blank' rel='noopener'>https://updciongandintersectmboenglish.blogspot.com/2024/07/event-on-june-29-2024-in-nyiragongo.html</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Tastenkunst</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/tastenkunst' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://chromewebstore.google.com/detail/eternl/kmhcihpebfmpgmihbkipmjlmmioameka' target='_blank' rel='noopener'>https://chromewebstore.google.com/detail/eternl/kmhcihpebfmpgmihbkipmjlmmioameka</a></li><li><a href='https://docs.google.com/document/d/1GhDhJqiyJ3P9fOzX6WchUpgbxlZArUTC/edit?usp=sharing&amp;ouid=116660932273282802074&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1GhDhJqiyJ3P9fOzX6WchUpgbxlZArUTC/edit?usp=sharing&amp;ouid=116660932273282802074&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Tallinn, Estonia - 5th June 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/tallinn-estonia-5th-june-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://internetnative.org/about' target='_blank' rel='noopener'>https://internetnative.org/about</a></li><li><a href='https://internetnative.org/fueling-business-growth-with-community-driven-work/' target='_blank' rel='noopener'>https://internetnative.org/fueling-business-growth-with-community-driven-work/</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>SundaeSwap Labs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/sundaeswap-labs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/18xpD5-b-iLg4E1V_X0Xb7oH3ZKQY5u0Q/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/18xpD5-b-iLg4E1V_X0Xb7oH3ZKQY5u0Q/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://github.com/cardano-foundation/CIPs/pull/556/files' target='_blank' rel='noopener'>https://github.com/cardano-foundation/CIPs/pull/556/files</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Strica</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/strica' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/18i3rQ9vyzAWn6d66cO_f3lrXvI3JU0aE/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/18i3rQ9vyzAWn6d66cO_f3lrXvI3JU0aE/view?usp=sharing</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Sri Lanka</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/sri-lanka' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Satya Ranjan</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/satya-ranjan' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://cardano-client.dev/docs/apis/governance-api' target='_blank' rel='noopener'>https://cardano-client.dev/docs/apis/governance-api</a></li><li><a href='https://docs.google.com/document/d/1aYBHv_rN6mp1yDA-uFLg-dBYrz0Ch9PL/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1aYBHv_rN6mp1yDA-uFLg-dBYrz0Ch9PL/edit</a></li><li><a href='https://github.com/bloxbean/cardano-client-lib' target='_blank' rel='noopener'>https://github.com/bloxbean/cardano-client-lib</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Rio de Janeiro, Brazil - July 24th to 26th</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/rio-de-janeiro-brazil-july-24th-to-26th' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1NReEAfDx4DmJmrZkcdUmOM1FfJKt_ldyTLern9UfqZA/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1NReEAfDx4DmJmrZkcdUmOM1FfJKt_ldyTLern9UfqZA/edit</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Remostart Limited, Lagos, Nigeria - 22nd June 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/remostart-limited-lagos-nigeria-22nd-june-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://lu.ma/mktxp09y' target='_blank' rel='noopener'>https://lu.ma/mktxp09y</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li><li><a href='https://www.publish0x.com/recap-of-the-cardano-intersect-local-meetup-lagos/a-resounding-success-recap-of-the-cardano-intersect-meetup-i-xzqdopz' target='_blank' rel='noopener'>https://www.publish0x.com/recap-of-the-cardano-intersect-local-meetup-lagos/a-resounding-success-recap-of-the-cardano-intersect-meetup-i-xzqdopz</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Puerto La Cruz, Venezuela - 14th September 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/puerto-la-cruz-venezuela-14th-september-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://blog.funintec.net/' target='_blank' rel='noopener'>https://blog.funintec.net/</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Phase 2 - Acceptance Criteria</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-2-acceptance-criteria' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Phase 1 - Acceptance Criteria</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-1-acceptance-criteria' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Paraguay, South America ,5th July 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/paraguay-south-america-5th-july-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/13xkKQMvGcdshhRjZc-Z8vDmQLqNhWhoGavjtwHsM3Fk/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/13xkKQMvGcdshhRjZc-Z8vDmQLqNhWhoGavjtwHsM3Fk/edit</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>POEditor</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/poeditor' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1MlN7r9yUc-BrRlsLpM9NnJzOhJD-E8fl/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MlN7r9yUc-BrRlsLpM9NnJzOhJD-E8fl/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1PfLmwDvBxiBQNN-h9_ry8WIDLeLYImlR/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PfLmwDvBxiBQNN-h9_ry8WIDLeLYImlR/view?usp=sharing</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Open Category</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/presentation/d/1FlmTxdFGvNawgwFs9iDP4r_xdRM1Wl-6BLJ9ZWjeaO4/edit?usp=sharing' target='_blank' rel='noopener'>https://docs.google.com/presentation/d/1FlmTxdFGvNawgwFs9iDP4r_xdRM1Wl-6BLJ9ZWjeaO4/edit?usp=sharing</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Obsidian Systems</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/obsidian-systems' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://able-pool.io/document' target='_blank' rel='noopener'>https://able-pool.io/document</a></li><li><a href='https://book.world.dev.cardano.org/adv-sanchonet.html' target='_blank' rel='noopener'>https://book.world.dev.cardano.org/adv-sanchonet.html</a></li><li><a href='https://book.world.dev.cardano.org/env-sanchonet.html' target='_blank' rel='noopener'>https://book.world.dev.cardano.org/env-sanchonet.html</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>NuFi</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/nufi' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip' target='_blank' rel='noopener'>https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip</a></li><li><a href='https://github.com/nufi-official/nufi?tab=readme-ov-file' target='_blank' rel='noopener'>https://github.com/nufi-official/nufi?tab=readme-ov-file</a></li><li><a href='https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet' target='_blank' rel='noopener'>https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>North America</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/north-america' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Mlabs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/mlabs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1PJlJZWDUVcWxYkmjg24XQw8rfl--Ng_g/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PJlJZWDUVcWxYkmjg24XQw8rfl--Ng_g/view?usp=drive_link</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Miguel A Cabrera</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/miguel-a-cabrera' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1qfa7CaSjsyL3_vM80JnFk_H1TtvvQRfk/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1qfa7CaSjsyL3_vM80JnFk_H1TtvvQRfk/view?usp=drive_link</a></li><li><a href='https://github.com/miguelaeh/cardanocli-js' target='_blank' rel='noopener'>https://github.com/miguelaeh/cardanocli-js</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Martin Lang</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/martin-lang' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip' target='_blank' rel='noopener'>https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip</a></li><li><a href='https://docs.google.com/document/d/1NZ8vA8JxS369FjcB6Qb3MXGD5qBhWP24/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1NZ8vA8JxS369FjcB6Qb3MXGD5qBhWP24/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet' target='_blank' rel='noopener'>https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Local face-to-face events and meetups</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>LATAM (Brazil, Argentina, Colombia &amp; Mexico)</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/latam-brazil-argentina-colombia-and-mexico' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Japan</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/japan' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Inclusion and Accessibility</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Illinois, USA - 28th June 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/illinois-usa-28th-june-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://forum.cardano.org/t/reflections-on-cardano-midwest-drep-workshop-intersect-meetup/133949' target='_blank' rel='noopener'>https://forum.cardano.org/t/reflections-on-cardano-midwest-drep-workshop-intersect-meetup/133949</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Ho Chi Minh City, Vietnam - 21st July 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/ho-chi-minh-city-vietnam-21st-july-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://forum.cardano.org/t/recap-intersect-meetup-ho-chi-minh-vietnam-21-7-2024/134367?u=hakochan' target='_blank' rel='noopener'>https://forum.cardano.org/t/recap-intersect-meetup-ho-chi-minh-vietnam-21-7-2024/134367?u=hakochan</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li><li><a href='https://www.google.com/maps/search/?api=1&amp;query=10.84166%2C%20106.78362' target='_blank' rel='noopener'>https://www.google.com/maps/search/?api=1&amp;query=10.84166%2C%20106.78362</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Harmonic Labs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/harmonic-labs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://github.com/HarmonicLabs/plutus-machine' target='_blank' rel='noopener'>https://github.com/HarmonicLabs/plutus-machine</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li><li><a href='https://www.youtube.com/watch?v=JUa41k0uaA0' target='_blank' rel='noopener'>https://www.youtube.com/watch?v=JUa41k0uaA0</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>GovTool Governance Action Outcome</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/govtool-governance-action-outcome' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1EhTfBroIUyx3Lcqqv8-bVFrHfJc6Es0J/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1EhTfBroIUyx3Lcqqv8-bVFrHfJc6Es0J/view?usp=sharing</a></li><li><a href='https://drive.google.com/file/d/1J5iWIaPoTV63FOQz85-pg2FrybjZgqUT/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1J5iWIaPoTV63FOQz85-pg2FrybjZgqUT/view?usp=drive_link</a></li><li><a href='https://drive.google.com/file/d/1iwAMeb2HkrnBqDnt2AAEm2VMA29WhvbF/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1iwAMeb2HkrnBqDnt2AAEm2VMA29WhvbF/view?usp=drive_link</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Goma, Democratic Republic of the Congo - 17th August 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/goma-democratic-republic-of-the-congo-17th-august-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://mwatsimulamo.blogspot.com/2024/08/intersect-meetup-in-town-of-goma.html' target='_blank' rel='noopener'>https://mwatsimulamo.blogspot.com/2024/08/intersect-meetup-in-town-of-goma.html</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>Gimbalabs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/gimbalabs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1YObwzlCOi5UCzZg-TJQ3vyN4-2LoffqB/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1YObwzlCOi5UCzZg-TJQ3vyN4-2LoffqB/view?usp=drive_link</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>GERO</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/gero' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1IV5c3aMFb9Eegc6TNYauwG6SdIdwZaBg/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1IV5c3aMFb9Eegc6TNYauwG6SdIdwZaBg/edit</a></li><li><a href='https://drive.google.com/file/d/1pbRAoGAEtmrZtTYH_NyVtxty6yh5MgfL/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/1pbRAoGAEtmrZtTYH_NyVtxty6yh5MgfL/view</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Europe</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/europe' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 3</td>
-<td><strong>Educational and Multimedia</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>DRep Program Stats</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/drep-program-stats' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>DRep Pioneer Program</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Curitiba, Brazil - 4th September 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/curitiba-brazil-4th-september-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://docs.google.com/document/d/1iz-msA5M7iWT8Wt-5oY90_9uSVFr-e4g/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1iz-msA5M7iWT8Wt-5oY90_9uSVFr-e4g/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Community Hubs</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Clay Labs Digital - Lisbon, Portugal - 27th May 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/clay-labs-digital-lisbon-portugal-27th-may-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://cointelegraph.com/press-releases/nfc-2024-in-lisbon-28-30-may-one-ticket-five-events' target='_blank' rel='noopener'>https://cointelegraph.com/press-releases/nfc-2024-in-lisbon-28-30-may-one-ticket-five-events</a></li><li><a href='https://docs.google.com/document/d/1crZnJ7jnCEHrf55doaiL8ZHnX-iZUFghx1lKOPGUsV0/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1crZnJ7jnCEHrf55doaiL8ZHnX-iZUFghx1lKOPGUsV0/edit</a></li><li><a href='https://lu.ma/lgyg6z67' target='_blank' rel='noopener'>https://lu.ma/lgyg6z67</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Cardano Blockchain Melbourne, Australia - 3rd May 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/cardano-blockchain-melbourne-australia-3rd-may-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://twitter.com/blockchain_pete/status/1787290052378366411' target='_blank' rel='noopener'>https://twitter.com/blockchain_pete/status/1787290052378366411</a></li><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li><li><a href='https://www.linkedin.com/in/peterhorsfall/' target='_blank' rel='noopener'>https://www.linkedin.com/in/peterhorsfall/</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Caracas, Venezuela - 1st June 2024</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/caracas-venezuela-1st-june-2024' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/163w9b6Y8X9jof38YZp4tjJGvIoWLELxi/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/163w9b6Y8X9jof38YZp4tjJGvIoWLELxi/view?usp=drive_link</a></li><li><a href='https://lu.ma/aa3yy1i5' target='_blank' rel='noopener'>https://lu.ma/aa3yy1i5</a></li><li><a href='https://www.funintec.net/intersect/' target='_blank' rel='noopener'>https://www.funintec.net/intersect/</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 4</td>
-<td><strong>Africa (Ghana, DRC &amp; Kenya)</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/africa-ghana-drc-and-kenya' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE</a></li></ul></td>
-</tr>
-<tr>
-<td>Intersect Community Grants — Cohort 1</td>
-<td><strong>AdaStat</strong><div class='muted'><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/adastat' target='_blank' rel='noopener'>source page</a></div></td>
-<td class='num'>?</td>
-<td><ul><li><a href='https://drive.google.com/file/d/1xUn6EqP_fbaVIosgoycBHimB8aQIeOnG/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1xUn6EqP_fbaVIosgoycBHimB8aQIeOnG/view?usp=drive_link</a></li><li><a href='https://sancho.adastat.net/governances/38e700d9b6a6a7da1fdcc46cc7968f2dae11b2f5021a5c5732c5097fc30bce2c00' target='_blank' rel='noopener'>https://sancho.adastat.net/governances/38e700d9b6a6a7da1fdcc46cc7968f2dae11b2f5021a5c5732c5097fc30bce2c00</a></li><li><a href='https://sancho.adastat.net/governances/e635c3afdcea309099bd9a08c2890da6d20450ec8bc4a15500e0428c9142099500' target='_blank' rel='noopener'>https://sancho.adastat.net/governances/e635c3afdcea309099bd9a08c2890da6d20450ec8bc4a15500e0428c9142099500</a></li></ul></td>
-</tr>
-</tbody></table>
+<div class="card"><h2>By Cohort (Known Values)</h2>
+<table><thead><tr><th>Cohort</th><th class="num">Items</th><th class="num">Known Values</th><th class="num">Sum ADA</th></tr></thead><tbody>
+<tr><td>4</td><td class="num">31</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>2</td><td class="num">3</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>3</td><td class="num">16</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>1</td><td class="num">15</td><td class="num">0</td><td class="num">0</td></tr>
+</tbody></table></div>
+<div class="card"><h2>All Indexed Grants (Sorted by ADA)</h2>
+<div style="overflow-x:auto">
+<table><thead><tr><th>Program / Cohort</th><th>Grant</th><th class="num">ADA</th><th>Direct Receivable (Links)</th></tr></thead><tbody>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>dcSpark</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/dcspark' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1Aplza-kPn69Yl_MwcadoSJbEVDnn3wxj/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Aplza-kPn69Yl_MwcadoSJbEVDnn3wxj/view?usp=drive…</a><a href='https://drive.google.com/file/d/1eQDKig3vokgW1iQ8lgmUl3eGBa-pN-ro/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1eQDKig3vokgW1iQ8lgmUl3eGBa-pN-ro/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Xerberus Labs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/xerberus-labs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1ZTGsXRpLLG5o9Ikisibc-rT78EVBSxXr/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1ZTGsXRpLLG5o9Ikisibc-rT78EVBSxXr/edit?usp=dr…</a><a href='https://drive.google.com/file/d/1lOR1hc6-wpt7Z2R8Hga-dIda5_Mr6Yel/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1lOR1hc6-wpt7Z2R8Hga-dIda5_Mr6Yel/view?usp=shari…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Voting Tool for the Constitutional Convention</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/voting-tool-for-the-constitutional-convention' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1F-W-eYIWw_6LCK_cqOHZy0Zsy1l0jXLY/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1F-W-eYIWw_6LCK_cqOHZy0Zsy1l0jXLY/view?usp=drive…</a><a href='https://drive.google.com/file/d/1N5xWU-3HwPRJgtfTrKsXErR0DNLsuoRb/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1N5xWU-3HwPRJgtfTrKsXErR0DNLsuoRb/view?usp=shari…</a><a href='https://drive.google.com/file/d/1fNDA9r2Z43FsK_X8xQJcOpvYp-ixxEdS/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1fNDA9r2Z43FsK_X8xQJcOpvYp-ixxEdS/view?usp=shari…</a><a href='https://drive.google.com/file/d/1kp-QarDuFKcB1fmYCGSFbrVfuRQ8kL3h/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1kp-QarDuFKcB1fmYCGSFbrVfuRQ8kL3h/view?usp=shari…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Twitter Space</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/twitter-space' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1_RCRgGka295mpyvpc1z8NX6mGY9CcSTo/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_RCRgGka295mpyvpc1z8NX6mGY9CcSTo/view?usp=shari…</a><a href='https://drive.google.com/file/d/1yOOu2eA-iKVnVxc-RAH7p7aNqGlYBWvv/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1yOOu2eA-iKVnVxc-RAH7p7aNqGlYBWvv/view?usp=shari…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Translations of the Interim Constitution</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/translations-of-the-interim-constitution' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1kbLN4j8_pEjRO1vMsH4nIJQqg42kDCc1/edit?usp=sharing&amp;ouid=104864166014399949050&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1kbLN4j8_pEjRO1vMsH4nIJQqg42kDCc1/edit?usp=sh…</a><a href='https://drive.google.com/file/d/1J6_qfQSVmSn4KyQ7iO2AVIBcBraIIxNi/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1J6_qfQSVmSn4KyQ7iO2AVIBcBraIIxNi/view?usp=shari…</a><a href='https://drive.google.com/file/d/1LCZk3MRwmmTx8iYKdz7jDkZiKPg7PoL4/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1LCZk3MRwmmTx8iYKdz7jDkZiKPg7PoL4/view?usp=shari…</a><a href='https://drive.google.com/file/d/1VHOVvV1uTRz1e_CQjAb8rj7Ob5UTzzeO/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1VHOVvV1uTRz1e_CQjAb8rj7Ob5UTzzeO/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Territory of Nyiragongo, Democratic Republic of Congo - 29th June 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/territory-of-nyiragongo-democratic-republic-of-congo-29th-june-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://lu.ma/e9i3bncp' target='_blank' rel='noopener'>https://lu.ma/e9i3bncp</a><a href='https://updciongandintersectmboenglish.blogspot.com/2024/07/event-on-june-29-2024-in-nyiragongo.html' target='_blank' rel='noopener'>https://updciongandintersectmboenglish.blogspot.com/2024/07/event-on-june-29-202…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Tastenkunst</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/tastenkunst' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://chromewebstore.google.com/detail/eternl/kmhcihpebfmpgmihbkipmjlmmioameka' target='_blank' rel='noopener'>https://chromewebstore.google.com/detail/eternl/kmhcihpebfmpgmihbkipmjlmmioameka</a><a href='https://docs.google.com/document/d/1GhDhJqiyJ3P9fOzX6WchUpgbxlZArUTC/edit?usp=sharing&amp;ouid=116660932273282802074&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1GhDhJqiyJ3P9fOzX6WchUpgbxlZArUTC/edit?usp=sh…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Tallinn, Estonia - 5th June 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/tallinn-estonia-5th-june-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://internetnative.org/about' target='_blank' rel='noopener'>https://internetnative.org/about</a><a href='https://internetnative.org/fueling-business-growth-with-community-driven-work/' target='_blank' rel='noopener'>https://internetnative.org/fueling-business-growth-with-community-driven-work/</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.intersectmbo.org/?ref=internetnative.org' target='_blank' rel='noopener'>https://www.intersectmbo.org/?ref=internetnative.org</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>SundaeSwap Labs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/sundaeswap-labs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/18xpD5-b-iLg4E1V_X0Xb7oH3ZKQY5u0Q/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/18xpD5-b-iLg4E1V_X0Xb7oH3ZKQY5u0Q/edit?usp=sh…</a><a href='https://github.com/cardano-foundation/CIPs/pull/556/files' target='_blank' rel='noopener'>https://github.com/cardano-foundation/CIPs/pull/556/files</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://youtu.be/X3XdQZx_TyU' target='_blank' rel='noopener'>https://youtu.be/X3XdQZx_TyU</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Summon Snapshot Voting on Interim Constitutional Committee</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/summon-snapshot-voting-on-interim-constitutional-committee' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1bSFMvYhEGPOulyzQs1uKCBYZr09F4DuH/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1bSFMvYhEGPOulyzQs1uKCBYZr09F4DuH/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Strica</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/strica' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/18i3rQ9vyzAWn6d66cO_f3lrXvI3JU0aE/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/18i3rQ9vyzAWn6d66cO_f3lrXvI3JU0aE/view?usp=shari…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Stable Coin</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/stable-coin' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1aqiUmD7UUQFqwe1HBtkWFB21TYqrRWLZ/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1aqiUmD7UUQFqwe1HBtkWFB21TYqrRWLZ/view?usp=drive…</a><a href='https://www.appold.com/news/stablecoinreseach' target='_blank' rel='noopener'>https://www.appold.com/news/stablecoinreseach</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Sri Lanka</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/sri-lanka' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Satya Ranjan</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/satya-ranjan' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://cardano-client.dev/docs/apis/governance-api' target='_blank' rel='noopener'>https://cardano-client.dev/docs/apis/governance-api</a><a href='https://docs.google.com/document/d/1aYBHv_rN6mp1yDA-uFLg-dBYrz0Ch9PL/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1aYBHv_rN6mp1yDA-uFLg-dBYrz0Ch9PL/edit</a><a href='https://github.com/bloxbean/cardano-client-lib' target='_blank' rel='noopener'>https://github.com/bloxbean/cardano-client-lib</a><a href='https://github.com/bloxbean/cardano-client-lib/blob/master/quicktx/src/it/java/com/bloxbean/cardano/client/quicktx/GovernanceTxIT.java' target='_blank' rel='noopener'>https://github.com/bloxbean/cardano-client-lib/blob/master/quicktx/src/it/java/c…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Rio de Janeiro, Brazil - July 24th to 26th</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/rio-de-janeiro-brazil-july-24th-to-26th' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1NReEAfDx4DmJmrZkcdUmOM1FfJKt_ldyTLern9UfqZA/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1NReEAfDx4DmJmrZkcdUmOM1FfJKt_ldyTLern9UfqZA/…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Remostart Limited, Lagos, Nigeria - 22nd June 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/remostart-limited-lagos-nigeria-22nd-june-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://lu.ma/mktxp09y' target='_blank' rel='noopener'>https://lu.ma/mktxp09y</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.publish0x.com/recap-of-the-cardano-intersect-local-meetup-lagos/a-resounding-success-recap-of-the-cardano-intersect-meetup-i-xzqdopz' target='_blank' rel='noopener'>https://www.publish0x.com/recap-of-the-cardano-intersect-local-meetup-lagos/a-re…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Puerto La Cruz, Venezuela - 14th September 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/puerto-la-cruz-venezuela-14th-september-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://blog.funintec.net/' target='_blank' rel='noopener'>https://blog.funintec.net/</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 2</td>
+<td><strong>Proposal Discussion Forum</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/proposal-discussion-forum' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/142ZSNq1DPkAOLt_a3SVtTfkBZn6SUnAH36726c3E8nI/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/142ZSNq1DPkAOLt_a3SVtTfkBZn6SUnAH36726c3E8nI/…</a><a href='https://docs.google.com/document/d/1Ev6e_u0_3RGosBPmp0hSkhc8mCYbYU2d4-I5mbYzYdM/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/1Ev6e_u0_3RGosBPmp0hSkhc8mCYbYU2d4-I5mbYzYdM/…</a><a href='https://docs.google.com/document/d/1lyoYGhW3qIt7cmx1YkwTVB_WDtDKZ0uPvwN8Hl_5qb8/edit?usp=drive_link' target='_blank' rel='noopener'>https://docs.google.com/document/d/1lyoYGhW3qIt7cmx1YkwTVB_WDtDKZ0uPvwN8Hl_5qb8/…</a><a href='https://drive.google.com/file/d/1_PtkVUkWb83k8UGk8BHUZRx7i_hWrCll/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_PtkVUkWb83k8UGk8BHUZRx7i_hWrCll/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Phase 2 - Acceptance Criteria</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-2-acceptance-criteria' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Phase 1 - Acceptance Criteria</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/phase-1-acceptance-criteria' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Paraguay, South America ,5th July 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/paraguay-south-america-5th-july-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/13xkKQMvGcdshhRjZc-Z8vDmQLqNhWhoGavjtwHsM3Fk/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/13xkKQMvGcdshhRjZc-Z8vDmQLqNhWhoGavjtwHsM3Fk/…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>POEditor</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/poeditor' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1MlN7r9yUc-BrRlsLpM9NnJzOhJD-E8fl/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MlN7r9yUc-BrRlsLpM9NnJzOhJD-E8fl/view?usp=shari…</a><a href='https://drive.google.com/file/d/1PfLmwDvBxiBQNN-h9_ry8WIDLeLYImlR/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PfLmwDvBxiBQNN-h9_ry8WIDLeLYImlR/view?usp=shari…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Open Space</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/open-space' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/14oqYVub2Ty7KVFEUIumM3sF9HCZodHD5/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/14oqYVub2Ty7KVFEUIumM3sF9HCZodHD5/view?usp=shari…</a><a href='https://drive.google.com/file/d/150rjat_eSmwKc1T86mjzs4jjca2Fb7A_/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/150rjat_eSmwKc1T86mjzs4jjca2Fb7A_/view?usp=drive…</a><a href='https://drive.google.com/file/d/18fNUMU8hrMl3dxmOy8ZHMjIFaTd2ZIdt/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/18fNUMU8hrMl3dxmOy8ZHMjIFaTd2ZIdt/view?usp=drive…</a><a href='https://drive.google.com/file/d/1C5XOW-buTskbRxV0dddFjzX2uUSOHuiQ/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1C5XOW-buTskbRxV0dddFjzX2uUSOHuiQ/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Open Category</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/presentation/d/1FlmTxdFGvNawgwFs9iDP4r_xdRM1Wl-6BLJ9ZWjeaO4/edit?usp=sharing' target='_blank' rel='noopener'>https://docs.google.com/presentation/d/1FlmTxdFGvNawgwFs9iDP4r_xdRM1Wl-6BLJ9ZWje…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Obsidian Systems</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/obsidian-systems' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://able-pool.io/document' target='_blank' rel='noopener'>https://able-pool.io/document</a><a href='https://book.world.dev.cardano.org/adv-sanchonet.html' target='_blank' rel='noopener'>https://book.world.dev.cardano.org/adv-sanchonet.html</a><a href='https://book.world.dev.cardano.org/env-sanchonet.html' target='_blank' rel='noopener'>https://book.world.dev.cardano.org/env-sanchonet.html</a><a href='https://drive.google.com/file/d/1qNDQz23wAUMkDI2Y43H5rqnKJs2BA_Xg/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1qNDQz23wAUMkDI2Y43H5rqnKJs2BA_Xg/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>NuFi</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/nufi' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip' target='_blank' rel='noopener'>https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip</a><a href='https://github.com/nufi-official/nufi?tab=readme-ov-file' target='_blank' rel='noopener'>https://github.com/nufi-official/nufi?tab=readme-ov-file</a><a href='https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet' target='_blank' rel='noopener'>https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>North America</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/north-america' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Mlabs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/mlabs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1PJlJZWDUVcWxYkmjg24XQw8rfl--Ng_g/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PJlJZWDUVcWxYkmjg24XQw8rfl--Ng_g/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Miguel A Cabrera</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/miguel-a-cabrera' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1qfa7CaSjsyL3_vM80JnFk_H1TtvvQRfk/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1qfa7CaSjsyL3_vM80JnFk_H1TtvvQRfk/view?usp=drive…</a><a href='https://github.com/miguelaeh/cardanocli-js' target='_blank' rel='noopener'>https://github.com/miguelaeh/cardanocli-js</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.npmjs.com/package/cardanocli-js' target='_blank' rel='noopener'>https://www.npmjs.com/package/cardanocli-js</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Membership NFT Platform</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/membership-nft-platform' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/18Fxk-zMkIuZ19Jr6oUnAoWvoBh2zzq1Q/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/18Fxk-zMkIuZ19Jr6oUnAoWvoBh2zzq1Q/view?usp=drive…</a><a href='https://drive.google.com/file/d/1Z8TYLzeDPLyYXntF_lgFyngbpQe8Ms2C/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Z8TYLzeDPLyYXntF_lgFyngbpQe8Ms2C/view?usp=shari…</a><a href='https://drive.google.com/file/d/1iHuxSnSanJUI3E7UnhtNAli5Px0774QF/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1iHuxSnSanJUI3E7UnhtNAli5Px0774QF/view?usp=drive…</a><a href='https://drive.google.com/file/d/1my7Bgzbpt5Mdqz12AwyM2KHUGQ3WzZKg/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1my7Bgzbpt5Mdqz12AwyM2KHUGQ3WzZKg/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Martin Lang</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/martin-lang' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip' target='_blank' rel='noopener'>https://assets.nu.fi/extension/sanchonet/nufi-cwe-sanchonet-latest.zip</a><a href='https://docs.google.com/document/d/1NZ8vA8JxS369FjcB6Qb3MXGD5qBhWP24/edit?usp=drive_link&amp;ouid=102295201310683679603&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1NZ8vA8JxS369FjcB6Qb3MXGD5qBhWP24/edit?usp=dr…</a><a href='https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet' target='_blank' rel='noopener'>https://nufi.gitbook.io/developer-docs/nufi-wallet/testnet</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Making Cardano governance clear and accessible to everyone, Portuguese speaking community</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/making-cardano-governance-clear-and-accessible-to-everyone-portuguese-speaking-community' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1U9ZWWSjk2mzc7GYSeQfS24Quumlem9nF/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1U9ZWWSjk2mzc7GYSeQfS24Quumlem9nF/edit?usp=sh…</a><a href='https://drive.google.com/file/d/1MTvr5LaDYCRVyilba5EC2lI4f9cfGZGf/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MTvr5LaDYCRVyilba5EC2lI4f9cfGZGf/view?usp=drive…</a><a href='https://drive.google.com/file/d/1_0OWAWmcSw1Fp_PFsIDxtLiEHa8GIY5o/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_0OWAWmcSw1Fp_PFsIDxtLiEHa8GIY5o/view?usp=drive…</a><a href='https://drive.google.com/file/d/1_nxsd6dn5-SL45JGk5QpKoiooL9oSqAf/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_nxsd6dn5-SL45JGk5QpKoiooL9oSqAf/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Local face-to-face events and meetups</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>LATAM (Brazil, Argentina, Colombia &amp; Mexico)</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/latam-brazil-argentina-colombia-and-mexico' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Japan</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/japan' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Intersect Town Halls</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility/intersect-town-halls' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/19jpDfxwYCW6kRDIvpIWM-WYkUVGUo8TI/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/19jpDfxwYCW6kRDIvpIWM-WYkUVGUo8TI/view?usp=shari…</a><a href='https://drive.google.com/file/d/1L19scmLy80MkDek6DWUg39Tk2j33TpkM/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1L19scmLy80MkDek6DWUg39Tk2j33TpkM/view?usp=shari…</a><a href='https://drive.google.com/file/d/1N-FSc6-2n17XS_GfFN9Y6yNc037QpD6p/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1N-FSc6-2n17XS_GfFN9Y6yNc037QpD6p/view?usp=shari…</a><a href='https://drive.google.com/file/d/1ruuAStKbFwIo_vS7QXI0JvFSBGGYpPz7/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1ruuAStKbFwIo_vS7QXI0JvFSBGGYpPz7/view?usp=shari…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Inclusion and Accessibility</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/inclusion-and-accessibility' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Illinois, USA - 28th June 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/illinois-usa-28th-june-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://forum.cardano.org/t/reflections-on-cardano-midwest-drep-workshop-intersect-meetup/133949' target='_blank' rel='noopener'>https://forum.cardano.org/t/reflections-on-cardano-midwest-drep-workshop-interse…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Ho Chi Minh City, Vietnam - 21st July 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/ho-chi-minh-city-vietnam-21st-july-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://forum.cardano.org/t/recap-intersect-meetup-ho-chi-minh-vietnam-21-7-2024/134367?u=hakochan' target='_blank' rel='noopener'>https://forum.cardano.org/t/recap-intersect-meetup-ho-chi-minh-vietnam-21-7-2024…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.google.com/maps/search/?api=1&amp;query=10.84166%2C%20106.78362' target='_blank' rel='noopener'>https://www.google.com/maps/search/?api=1&amp;query=10.84166%2C%20106.78362</a><a href='https://www.meetup.com/cardano-blockchain-ho-chi-minh-viet-nam/events/301773275/' target='_blank' rel='noopener'>https://www.meetup.com/cardano-blockchain-ho-chi-minh-viet-nam/events/301773275/</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Harmonic Labs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/harmonic-labs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://github.com/HarmonicLabs/plutus-machine' target='_blank' rel='noopener'>https://github.com/HarmonicLabs/plutus-machine</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.youtube.com/watch?v=JUa41k0uaA0' target='_blank' rel='noopener'>https://www.youtube.com/watch?v=JUa41k0uaA0</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Governance Education Through Infographics, Threads, and Tutorials. English and Spanish.</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/governance-education-through-infographics-threads-and-tutorials.-english-and-spanish.' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://cardanospot.io/news/the-chang-hard-fork-and-ouroboros-journey-rCER5iTmKbJrwShD' target='_blank' rel='noopener'>https://cardanospot.io/news/the-chang-hard-fork-and-ouroboros-journey-rCER5iTmKb…</a><a href='https://drive.google.com/file/d/1EOFYWyPkRuuKEUYCyzdfqTqbE-a6J3un/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1EOFYWyPkRuuKEUYCyzdfqTqbE-a6J3un/view?usp=shari…</a><a href='https://drive.google.com/file/d/1REbtLQYGsE_IGz27rP89JcDYWX1nVx3l/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1REbtLQYGsE_IGz27rP89JcDYWX1nVx3l/view?usp=drive…</a><a href='https://drive.google.com/file/d/1a6mzYbThGBeM5tpcTHYOlz_6h0AF78NH/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1a6mzYbThGBeM5tpcTHYOlz_6h0AF78NH/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>GovTool Governance Action Outcome</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/govtool-governance-action-outcome' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1EhTfBroIUyx3Lcqqv8-bVFrHfJc6Es0J/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1EhTfBroIUyx3Lcqqv8-bVFrHfJc6Es0J/view?usp=shari…</a><a href='https://drive.google.com/file/d/1J5iWIaPoTV63FOQz85-pg2FrybjZgqUT/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1J5iWIaPoTV63FOQz85-pg2FrybjZgqUT/view?usp=drive…</a><a href='https://drive.google.com/file/d/1iwAMeb2HkrnBqDnt2AAEm2VMA29WhvbF/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1iwAMeb2HkrnBqDnt2AAEm2VMA29WhvbF/view?usp=drive…</a><a href='https://drive.google.com/file/d/1neDfGfjYAxy9Ygt1dZ_hl0sXyfWRDWfP/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1neDfGfjYAxy9Ygt1dZ_hl0sXyfWRDWfP/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Goma, Democratic Republic of the Congo - 17th August 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/goma-democratic-republic-of-the-congo-17th-august-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://mwatsimulamo.blogspot.com/2024/08/intersect-meetup-in-town-of-goma.html' target='_blank' rel='noopener'>https://mwatsimulamo.blogspot.com/2024/08/intersect-meetup-in-town-of-goma.html</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>Gimbalabs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/gimbalabs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1YObwzlCOi5UCzZg-TJQ3vyN4-2LoffqB/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1YObwzlCOi5UCzZg-TJQ3vyN4-2LoffqB/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>GM Cardano - Governance Matters Cardano videos/podcast</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/gm-cardano-governance-matters-cardano-videos-podcast' target='_blank' rel='noopener'>source page</a></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1BdCFMbb6vFTLmvZzUACqXknQeeytQpKt/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1BdCFMbb6vFTLmvZzUACqXknQeeytQpKt/view?usp=drive…</a><a href='https://drive.google.com/file/d/1HCE5XX76EZ96ryS_5ZoP18d3-C0FXMgb/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1HCE5XX76EZ96ryS_5ZoP18d3-C0FXMgb/view?usp=drive…</a><a href='https://drive.google.com/file/d/1MmSBOPB9i5wjydtC27SqlcdpCiqr7tYD/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1MmSBOPB9i5wjydtC27SqlcdpCiqr7tYD/view?usp=shari…</a><a href='https://drive.google.com/file/d/1_HdDKqArhgloWniYfsCaL-nIbVofLMWY/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1_HdDKqArhgloWniYfsCaL-nIbVofLMWY/view?usp=shari…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>GERO</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-wallets/gero' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1IV5c3aMFb9Eegc6TNYauwG6SdIdwZaBg/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1IV5c3aMFb9Eegc6TNYauwG6SdIdwZaBg/edit</a><a href='https://drive.google.com/file/d/1pbRAoGAEtmrZtTYH_NyVtxty6yh5MgfL/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/1pbRAoGAEtmrZtTYH_NyVtxty6yh5MgfL/view</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Europe</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/europe' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Engaging young people into Cardano Governance</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/engaging-young-people-into-cardano-governance' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.selfdriven.foundation/intersect-education-kit/fundamentals/the-learning-journey' target='_blank' rel='noopener'>https://docs.selfdriven.foundation/intersect-education-kit/fundamentals/the-lear…</a><a href='https://drive.google.com/file/d/1P_GliSSGNWwzVAmXb4879E7iJgnRXQBu/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1P_GliSSGNWwzVAmXb4879E7iJgnRXQBu/view?usp=shari…</a><a href='https://drive.google.com/file/d/1TAcIM5Q11YOcy_pzruKHBhzSE2cTh2We/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1TAcIM5Q11YOcy_pzruKHBhzSE2cTh2We/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Educational and Multimedia</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>DRep Program Stats</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program/drep-program-stats' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>DRep Pioneer Program</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/drep-pioneer-program' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 2</td>
+<td><strong>DRep Campaign Platform</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/drep-campaign-platform' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/19j9z1UAfdG2NpxAqnPHrBLoulnOVfoLa/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/19j9z1UAfdG2NpxAqnPHrBLoulnOVfoLa/view?usp=shari…</a><a href='https://drive.google.com/file/d/1G0GsmkJm3Ew1USelYjXyfTCM2EPuBP1T/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1G0GsmkJm3Ew1USelYjXyfTCM2EPuBP1T/view?usp=shari…</a><a href='https://drive.google.com/file/d/1HGs1VaWCAJbu-_cIZ9ElA2rNMG84iAsE/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1HGs1VaWCAJbu-_cIZ9ElA2rNMG84iAsE/view?usp=drive…</a><a href='https://drive.google.com/file/d/1IlX8q6j5zSwUlOSBKTuL0f6bl7hv55Vg/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1IlX8q6j5zSwUlOSBKTuL0f6bl7hv55Vg/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Curitiba, Brazil - 4th September 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/curitiba-brazil-4th-september-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://docs.google.com/document/d/1iz-msA5M7iWT8Wt-5oY90_9uSVFr-e4g/edit?usp=sharing&amp;ouid=104648571819070702900&amp;rtpof=true&amp;sd=true' target='_blank' rel='noopener'>https://docs.google.com/document/d/1iz-msA5M7iWT8Wt-5oY90_9uSVFr-e4g/edit?usp=sh…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 2</td>
+<td><strong>Constitutional Committee Portal</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-2/constitutional-committee-portal' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/192nEFZM1LzQsNAO4ij93pBjB4yEZYqt4/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/192nEFZM1LzQsNAO4ij93pBjB4yEZYqt4/view?usp=shari…</a><a href='https://drive.google.com/file/d/1OS7mYsDau_LRkVUl1wRrtWSEnRFpY7_E/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1OS7mYsDau_LRkVUl1wRrtWSEnRFpY7_E/view?usp=drive…</a><a href='https://drive.google.com/file/d/1PY8BM7u0nXthbS2-48Ygdw4U4ebADfPr/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PY8BM7u0nXthbS2-48Ygdw4U4ebADfPr/view?usp=shari…</a><a href='https://drive.google.com/file/d/1RHHd2FNti3gsM53Ey-f4jDtCgi9N5q8B/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1RHHd2FNti3gsM53Ey-f4jDtCgi9N5q8B/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Consensus 2024 Cardano Marketing</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/consensus-2024-cardano-marketing' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/12lYeWyaG-cJP4Mbjvc-hot7mZ0w9GbVQ/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/12lYeWyaG-cJP4Mbjvc-hot7mZ0w9GbVQ/view</a><a href='https://drive.google.com/file/d/17G48Zq3sTR_UxMnEw7dMATtlo8m5056H/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/17G48Zq3sTR_UxMnEw7dMATtlo8m5056H/view</a><a href='https://drive.google.com/file/d/1Q8guYT1sXF8ruaAR6VeLP4ADoSTHV86M/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Q8guYT1sXF8ruaAR6VeLP4ADoSTHV86M/view</a><a href='https://drive.google.com/file/d/1dLxkUFRPHhkEYR4GkCNjLVVhr_jWkH-6/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1dLxkUFRPHhkEYR4GkCNjLVVhr_jWkH-6/view?usp=shari…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Community Hubs</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Clay Labs Digital - Lisbon, Portugal - 27th May 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/clay-labs-digital-lisbon-portugal-27th-may-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://cointelegraph.com/press-releases/nfc-2024-in-lisbon-28-30-may-one-ticket-five-events' target='_blank' rel='noopener'>https://cointelegraph.com/press-releases/nfc-2024-in-lisbon-28-30-may-one-ticket…</a><a href='https://docs.google.com/document/d/1crZnJ7jnCEHrf55doaiL8ZHnX-iZUFghx1lKOPGUsV0/edit' target='_blank' rel='noopener'>https://docs.google.com/document/d/1crZnJ7jnCEHrf55doaiL8ZHnX-iZUFghx1lKOPGUsV0/…</a><a href='https://lu.ma/lgyg6z67' target='_blank' rel='noopener'>https://lu.ma/lgyg6z67</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Cardano Governance in a Nutshell - Mike Hornan &amp; Summon Associations</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/educational-and-multimedia/cardano-governance-in-a-nutshell-mike-hornan-and-summon-associations' target='_blank' rel='noopener'>source page</a></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://able-pool.io/document' target='_blank' rel='noopener'>https://able-pool.io/document</a><a href='https://able-pool.io/voltaire' target='_blank' rel='noopener'>https://able-pool.io/voltaire</a><a href='https://drive.google.com/file/d/1DNc_wwX_OuPebwtUFPIFHWi3tVVNxQ-U/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1DNc_wwX_OuPebwtUFPIFHWi3tVVNxQ-U/view?usp=drive…</a><a href='https://drive.google.com/file/d/1EXb_nn1l1k9p_ReEqRmTBc10RKzAEjgB/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1EXb_nn1l1k9p_ReEqRmTBc10RKzAEjgB/view?usp=drive…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>Cardano Governance Minimum Attack Vector (MAV) Dashboard</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cardano-governance-minimum-attack-vector-mav-dashboard' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1GEPbqbqv_-5CTuKqj6SSS8H_Ay6G1waM/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1GEPbqbqv_-5CTuKqj6SSS8H_Ay6G1waM/view?usp=shari…</a><a href='https://drive.google.com/file/d/1PbwC-lmJ_BACJWbOHqaDA_rsffL7pxac/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1PbwC-lmJ_BACJWbOHqaDA_rsffL7pxac/view?usp=drive…</a><a href='https://drive.google.com/file/d/1lGGKJJeXuTTGrX5fu-YWRSP8W7gHjBW7/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1lGGKJJeXuTTGrX5fu-YWRSP8W7gHjBW7/view?usp=drive…</a><a href='https://drive.google.com/file/d/1sB7nMNf4DYFKranEngaV6dbFl7gIzLDs/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1sB7nMNf4DYFKranEngaV6dbFl7gIzLDs/view?usp=shari…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Cardano Blockchain Melbourne, Australia - 3rd May 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/cardano-blockchain-melbourne-australia-3rd-may-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://twitter.com/blockchain_pete/status/1787290052378366411' target='_blank' rel='noopener'>https://twitter.com/blockchain_pete/status/1787290052378366411</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a><a href='https://www.linkedin.com/in/peterhorsfall/' target='_blank' rel='noopener'>https://www.linkedin.com/in/peterhorsfall/</a><a href='https://www.linkedin.com/pulse/cardano-melbourne-build-network-governance-services-peter-horsfall-vuppe?trackingId=cVUD6i3YQ8C2zSiql%2BXrYQ%3D%3D&amp;lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3B4ojPm8sOQeaN9LiPt3QAOw%3D%3D' target='_blank' rel='noopener'>https://www.linkedin.com/pulse/cardano-melbourne-build-network-governance-servic…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Caracas, Venezuela - 1st June 2024</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/local-face-to-face-events-and-meetups/caracas-venezuela-1st-june-2024' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/163w9b6Y8X9jof38YZp4tjJGvIoWLELxi/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/163w9b6Y8X9jof38YZp4tjJGvIoWLELxi/view?usp=drive…</a><a href='https://lu.ma/aa3yy1i5' target='_blank' rel='noopener'>https://lu.ma/aa3yy1i5</a><a href='https://www.funintec.net/intersect/' target='_blank' rel='noopener'>https://www.funintec.net/intersect/</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 3</td>
+<td><strong>CIP-95 support for Cardano Transaction Library (CTL)</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-3/open-category/cip-95-support-for-cardano-transaction-library-ctl' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1-wKUytjk6u4ZIZWs2O4QXPLgTHJwR9R4/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1-wKUytjk6u4ZIZWs2O4QXPLgTHJwR9R4/view?usp=drive…</a><a href='https://drive.google.com/file/d/1GNBwYnG7K27dFeMQCPZU2gjKFEJ1cBy7/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1GNBwYnG7K27dFeMQCPZU2gjKFEJ1cBy7/view?usp=shari…</a><a href='https://drive.google.com/file/d/1dIvx1BDH1hx3B8TvZ-oAyAp50jR2JLVc/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1dIvx1BDH1hx3B8TvZ-oAyAp50jR2JLVc/view?usp=drive…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Africa (Ghana, DRC &amp; Kenya)</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/community-hubs/africa-ghana-drc-and-kenya' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_REPORTING_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 4</td>
+<td><strong>Additional Governance features</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-4/additional-governance-features' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1DzRwFEqQi1dnq--Q97r5k2IuGtfEZlqV/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1DzRwFEqQi1dnq--Q97r5k2IuGtfEZlqV/view?usp=shari…</a><a href='https://drive.google.com/file/d/1Ef3RJXeTo-w_DcSKdqJaMLfKMGFhsClc/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1Ef3RJXeTo-w_DcSKdqJaMLfKMGFhsClc/view?usp=shari…</a><a href='https://drive.google.com/file/d/1LlslmkJ9wdXejD2rtvAzmywMZ9KElxFH/view?usp=sharing' target='_blank' rel='noopener'>https://drive.google.com/file/d/1LlslmkJ9wdXejD2rtvAzmywMZ9KElxFH/view?usp=shari…</a><a href='https://drive.google.com/file/d/1tyj_Pj1I47EyGE4_iRl3rdP2QqAiRrSO/view' target='_blank' rel='noopener'>https://drive.google.com/file/d/1tyj_Pj1I47EyGE4_iRl3rdP2QqAiRrSO/view</a></div></td>
+</tr>
+<tr class="ledger-row">
+<td>Intersect — Cohort 1</td>
+<td><strong>AdaStat</strong><div class="muted" style="font-size:12px"><a href='https://intersect.gitbook.io/intersect-community-grants/cohort-1-governance-tooling/adastat' target='_blank' rel='noopener'>source page</a></div><div style="margin-top:4px"><span class="pill flag" style="font-size:9px;margin:1px">MISSING_GRANT_VALUE</span> <span class="pill flag" style="font-size:9px;margin:1px">NO_DELIVERABLE_LINKS</span></div></td>
+<td class="num"><span style="color:var(--amber)">unknown</span></td>
+<td><div class="links-cell"><a href='https://drive.google.com/file/d/1xUn6EqP_fbaVIosgoycBHimB8aQIeOnG/view?usp=drive_link' target='_blank' rel='noopener'>https://drive.google.com/file/d/1xUn6EqP_fbaVIosgoycBHimB8aQIeOnG/view?usp=drive…</a><a href='https://sancho.adastat.net/governances/38e700d9b6a6a7da1fdcc46cc7968f2dae11b2f5021a5c5732c5097fc30bce2c00' target='_blank' rel='noopener'>https://sancho.adastat.net/governances/38e700d9b6a6a7da1fdcc46cc7968f2dae11b2f50…</a><a href='https://sancho.adastat.net/governances/e635c3afdcea309099bd9a08c2890da6d20450ec8bc4a15500e0428c9142099500' target='_blank' rel='noopener'>https://sancho.adastat.net/governances/e635c3afdcea309099bd9a08c2890da6d20450ec8…</a><a href='https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7IvOomm3j1VTewu5MKAE' target='_blank' rel='noopener'>https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=7I…</a></div></td>
+</tr>
+</tbody></table></div></div>
+<div class="card ok">
+  <h2>How to Clear Scrutiny</h2>
+  <ul>
+    <li>Add public deliverable links (repo / site / video) to the official grant page.</li>
+    <li>Add reporting / closeout links (milestones, proof-of-work).</li>
+    <li>If we missed existing links, <a href="https://github.com/BEACNpool/Governance/issues" target="_blank" rel="noopener">open an issue</a>.</li>
+  </ul>
 </div>
-<div class='muted'>Generated: 2026-02-09</div>
-</body></html>
+<footer class="report-footer">
+  <p>Generated: 2026-02-09 · MIT License · <a href="https://github.com/BEACNpool/Governance">BEACN Governance</a> · Not voting advice</p>
+</footer>
+</div>
+</body>
+</html>

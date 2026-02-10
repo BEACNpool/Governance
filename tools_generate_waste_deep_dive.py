@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Generate a community-readable HTML report focused on potential waste signals.
 
+Uses the BEACN v2 design system (assets/beacn.css).
+
 This report is intentionally evidence-first:
 - It does NOT claim fraud.
 - It flags missing receipts (deliverables/reporting/payment proof) and weak transparency.
@@ -17,25 +19,196 @@ import csv
 import datetime as dt
 import html
 import json
+from collections import Counter
 from pathlib import Path
 
 FLAG_EXPLAIN = {
-    # Intersect grants
-    "NO_DELIVERABLE_LINKS": "No obvious public links to deliverables (e.g., YouTube/podcast feed/GitHub/website). This creates an accountability gap for delegators.",
-    "NO_REPORTING_LINKS": "No obvious links to reporting/closeout/final evidence. Without reporting receipts, it’s hard to verify work completed.",
-    "NO_EXTERNAL_LINKS": "No external links found at all. Even if work exists, the official page isn’t linking to it.",
-    "MISSING_GRANT_VALUE": "Grant value not clearly stated on the page. This makes totals/ROI harder to audit.",
-
-    # Governance
-    "🟡 NO_DISCUSSION": "No obvious public discussion links were detected in proposal references. That’s not proof of waste, but it’s a governance transparency smell.",
-    "🔴 NO_METADATA": "Anchor metadata missing/unresolvable. Without metadata, delegators can’t evaluate scope/deliverables.",
+    "NO_DELIVERABLE_LINKS": "No obvious public links to deliverables (repo / site / video / podcast feed). This creates an accountability gap for delegators.",
+    "NO_REPORTING_LINKS": "No obvious links to reporting / closeout / final evidence. Without reporting receipts, it's hard to verify work completed.",
+    "NO_EXTERNAL_LINKS": "No external links found at all. Even if work exists, the official page isn't linking to it.",
+    "MISSING_GRANT_VALUE": "Grant value not clearly stated on the page. This makes totals / ROI harder to audit.",
+    "🟡 NO_DISCUSSION": "No obvious public discussion links were detected in proposal references. Not proof of waste, but a governance transparency smell.",
+    "🔴 NO_METADATA": "Anchor metadata missing / unresolvable. Without metadata, delegators can't evaluate scope / deliverables.",
     "🔴 HASH_MISMATCH": "Anchor content hash mismatch vs on-chain hash. This is a serious integrity issue.",
 }
+
+
+def esc(s):
+    return html.escape(str(s)) if s else ""
+
+
+def flag_reason(fl):
+    return FLAG_EXPLAIN.get(fl, "Unknown flag — manual review required.")
 
 
 def read_csv(path: Path):
     with path.open("r", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def fmt_ada(val):
+    try:
+        return f"{float(val):,.0f}"
+    except (TypeError, ValueError):
+        return "unknown"
+
+
+# ══════════════════════════════════════════════════════
+# HTML builder using BEACN v2 design system
+# ══════════════════════════════════════════════════════
+
+def build_top_bar(today):
+    return f"""<nav class="top-bar">
+  <a href="../" class="brand">BEACN</a>
+  <a href="../">← Dashboard</a>
+  <a href="methodology-doge.html">Methodology</a>
+  <a href="grants-ledger-{today}.html">Grants Ledger</a>
+  <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener">GitHub</a>
+</nav>"""
+
+
+def build_header(today):
+    return f"""<header class="report-header">
+  <div class="report-badge">🔍 WASTE RADAR · {today}</div>
+  <h1>Waste / Weak-Evidence Deep Dive</h1>
+  <p class="report-sub">
+    Focused report: items that currently show weak public receipts or transparency gaps.
+    Every flag links to the source so anyone can verify.
+  </p>
+</header>"""
+
+
+def build_disclaimer():
+    return """<div class="card warn">
+  <h2>⚠️ Before You Scroll</h2>
+  <ul>
+    <li><strong>Not voting advice.</strong> This report is informational and evidence-first.</li>
+    <li><strong>Not proof of fraud.</strong> A flag means missing / weak receipts (deliverables / reporting / payment proof), not wrongdoing.</li>
+    <li><strong>DOGE lens:</strong> we aggressively hunt waste signals by demanding receipts and clear outcomes.</li>
+    <li><strong>Easy fix:</strong> if deliverables exist but aren't linked publicly, add them to clear the flag.</li>
+  </ul>
+</div>"""
+
+
+def build_summary(intersect_flagged, treasury_flagged, intersect_flag_counts, treasury_flag_counts):
+    total_int = len(intersect_flagged)
+    total_int_with_amt = sum(1 for x in intersect_flagged if x.get("amount") is not None)
+    total_int_amt = sum((x.get("amount") or 0) for x in intersect_flagged if x.get("amount") is not None)
+    total_trs = len(treasury_flagged)
+
+    out = []
+    out.append('<div class="card">')
+    out.append("<h2>Executive Summary</h2>")
+    out.append(f"<p><strong>Report scope:</strong> only items with evidence flags.</p>")
+
+    # Stat grid
+    out.append('<div class="stat-grid">')
+    out.append(f'<div class="stat-box"><div class="s-val" style="color:var(--red)">{total_int}</div><div class="s-label">Flagged grants</div></div>')
+    out.append(f'<div class="stat-box"><div class="s-val" style="color:var(--ada-gold)">{fmt_ada(total_int_amt)} ₳</div><div class="s-label">ADA at risk (known)</div></div>')
+    out.append(f'<div class="stat-box"><div class="s-val" style="color:var(--amber)">{total_trs}</div><div class="s-label">Treasury actions flagged</div></div>')
+    out.append(f'<div class="stat-box"><div class="s-val" style="color:var(--text-muted)">{total_int - total_int_with_amt}</div><div class="s-label">Missing grant values</div></div>')
+    out.append("</div>")
+
+    # Flag breakdown
+    if intersect_flag_counts:
+        out.append("<h3 style='margin-top:16px'>Intersect Grants — Flag Breakdown</h3>")
+        out.append("<table><thead><tr><th>Flag</th><th class='num'>Count</th></tr></thead><tbody>")
+        for fl, cnt in intersect_flag_counts.most_common():
+            out.append(f"<tr><td><code style='color:var(--red)'>{esc(fl)}</code></td><td class='num'>{cnt}</td></tr>")
+        out.append("</tbody></table>")
+
+    if treasury_flag_counts:
+        out.append("<h3 style='margin-top:16px'>Treasury Actions — Flag Breakdown</h3>")
+        out.append("<table><thead><tr><th>Flag</th><th class='num'>Count</th></tr></thead><tbody>")
+        for fl, cnt in treasury_flag_counts.most_common():
+            out.append(f"<tr><td><code style='color:var(--amber)'>{esc(fl)}</code></td><td class='num'>{cnt}</td></tr>")
+        out.append("</tbody></table>")
+
+    out.append("</div>")
+    return "\n".join(out)
+
+
+def build_intersect_section(intersect_flagged):
+    if not intersect_flagged:
+        return ""
+    out = []
+    out.append('<div class="card"><h2>Intersect Community Grants — Flagged Items</h2>')
+    out.append(f'<p class="muted">Sorted by flag severity. {len(intersect_flagged)} items with evidence gaps.</p></div>')
+
+    for i, it in enumerate(intersect_flagged, 1):
+        out.append(f'<div class="flag-item" style="animation-delay:{min(i*0.03, 0.5):.2f}s">')
+        out.append(f"<h3>{i}. {esc(it.get('title', 'Untitled'))}</h3>")
+        meta_parts = []
+        if it.get("cohort"):
+            meta_parts.append(f"Cohort: {esc(it['cohort'])}")
+        if it.get("last_updated"):
+            meta_parts.append(f"Last updated: {esc(it['last_updated'])}")
+        out.append(f'<div class="flag-meta">{" · ".join(meta_parts)}</div>')
+
+        if it.get("amount") is not None:
+            out.append(f'<div class="flag-amount">{fmt_ada(it["amount"])} ADA</div>')
+        else:
+            out.append('<div class="flag-amount" style="color:var(--amber)">(value missing/unclear)</div>')
+
+        if it.get("url"):
+            out.append(f"<p><strong>Source page:</strong> <a href='{esc(it['url'])}' target='_blank' rel='noopener'>{esc(it['url'])}</a></p>")
+
+        out.append('<ul class="flag-reasons">')
+        for fl in it.get("flags", []):
+            out.append(f"<li><code>{esc(fl)}</code> <span>{esc(flag_reason(fl))}</span></li>")
+        out.append("</ul>")
+
+        ext = it.get("external_links") or []
+        if ext:
+            out.append('<div class="ext-links"><strong>External links found:</strong>')
+            for link in ext[:6]:
+                out.append(f"<a href='{esc(link)}' target='_blank' rel='noopener'>{esc(link)}</a>")
+            out.append("</div>")
+
+        out.append("</div>")
+    return "\n".join(out)
+
+
+def build_treasury_section(treasury_flagged):
+    if not treasury_flagged:
+        return ""
+    out = []
+    out.append('<div class="card"><h2>Treasury Actions — Flagged Items</h2>')
+    out.append(f'<p class="muted">{len(treasury_flagged)} governance actions with evidence gaps.</p></div>')
+
+    for i, it in enumerate(treasury_flagged, 1):
+        out.append(f'<div class="flag-item" style="animation-delay:{min(i*0.03, 0.5):.2f}s">')
+        out.append(f"<h3>{i}. {esc(it.get('title', 'Untitled'))}</h3>")
+        meta_parts = []
+        if it.get("type"):
+            meta_parts.append(it["type"])
+        if it.get("status"):
+            meta_parts.append(f"Status: {it['status']}")
+        out.append(f'<div class="flag-meta">{" · ".join(meta_parts)}</div>')
+
+        if it.get("govtool"):
+            out.append(f"<p><strong>GovTool:</strong> <a href='{esc(it['govtool'])}' target='_blank' rel='noopener'>{esc(it['govtool'])}</a></p>")
+        if it.get("anchor"):
+            out.append(f"<p><strong>Anchor:</strong> <code>{esc(it['anchor'])}</code></p>")
+
+        out.append('<ul class="flag-reasons">')
+        for fl in it.get("flags", []):
+            out.append(f"<li><code>{esc(fl)}</code> <span>{esc(flag_reason(fl))}</span></li>")
+        out.append("</ul>")
+        out.append("</div>")
+    return "\n".join(out)
+
+
+def build_how_to_clear():
+    return """<div class="card ok">
+  <h2>How to Clear Flags (Fast)</h2>
+  <ul>
+    <li>Add public deliverable links (repo / site / video / podcast feed) to the official page.</li>
+    <li>Add reporting / closeout links (final report, milestones, proof-of-work).</li>
+    <li>For governance actions: ensure anchor metadata resolves and matches the on-chain hash.</li>
+    <li>If you've already done this and we missed it, <a href="https://github.com/BEACNpool/Governance/issues" target="_blank" rel="noopener">open an issue</a> and we'll re-check.</li>
+  </ul>
+</div>"""
 
 
 def main():
@@ -61,228 +234,95 @@ def main():
     intersect_items = json.loads(intersect_json.read_text(encoding="utf-8")).get("items", [])
     by_url = {it.get("url"): it for it in intersect_items if it.get("url")}
 
-    # Filter: focus on items with flags (waste signals)
+    # Build flagged lists
     intersect_flagged = []
-    for r in intersect_rows:
-        flags = (r.get("flags") or "").strip()
+    for row in intersect_rows:
+        flags_raw = row.get("flags", "")
+        flags = [f.strip() for f in flags_raw.split(",") if f.strip()] if flags_raw else []
         if not flags:
             continue
-        url = (r.get("url") or "").strip()
-        item = by_url.get(url, {})
-        intersect_flagged.append(
-            {
-                "cohort": (r.get("cohort") or "").strip(),
-                "title": (r.get("title") or "").strip(),
-                "amount": int(r.get("grant_value_ada") or 0) if (r.get("grant_value_ada") or "").strip().isdigit() else None,
-                "flags": [f for f in flags.split(";") if f],
-                "url": url,
-                "external_links": item.get("external_links", []),
-                "last_updated": (r.get("last_updated") or "").strip(),
-            }
-        )
+        url = row.get("url", "")
+        detail = by_url.get(url, {})
+        amt = None
+        if row.get("amount_ada"):
+            try:
+                amt = float(row["amount_ada"])
+            except (TypeError, ValueError):
+                pass
+        intersect_flagged.append({
+            "title": row.get("title", "Untitled"),
+            "cohort": row.get("cohort", ""),
+            "url": url,
+            "amount": amt,
+            "flags": flags,
+            "last_updated": detail.get("last_updated", ""),
+            "external_links": detail.get("external_links", []),
+        })
 
-    intersect_flagged.sort(key=lambda x: (x["amount"] or -1, len(x["flags"])), reverse=True)
-
-    # Treasury: focus on items with flags AND large stated amounts (signal)
     treasury_flagged = []
-    for r in treasury_rows:
-        flags = (r.get("flags") or "").strip()
+    for row in treasury_rows:
+        flags_raw = row.get("flags", "")
+        flags = [f.strip() for f in flags_raw.split(",") if f.strip()] if flags_raw else []
         if not flags:
             continue
-        title = (r.get("title") or "").strip()
-        status = (r.get("status") or "").strip()
-        govtool = (r.get("govtool_url") or "").strip()
-        anchor = (r.get("anchor_url") or "").strip()
-        treasury_flagged.append(
-            {
-                "title": title,
-                "status": status,
-                "flags": [f.strip() for f in flags.split(";") if f.strip()],
-                "govtool": govtool,
-                "anchor": anchor,
-            }
-        )
+        treasury_flagged.append({
+            "title": row.get("title", "Untitled"),
+            "type": row.get("type", ""),
+            "status": row.get("status", ""),
+            "govtool": row.get("govtool", ""),
+            "anchor": row.get("anchor_url", ""),
+            "flags": flags,
+        })
 
-    # Basic sort: active first, then anything else
-    def tkey(x):
-        st = x.get("status")
-        return (0 if st == "active" else 1, x.get("title", ""))
-
-    treasury_flagged.sort(key=tkey)
-
-    def esc(s):
-        return html.escape(s or "")
-
-    def flag_reason(flag):
-        return FLAG_EXPLAIN.get(flag) or FLAG_EXPLAIN.get(flag.strip()) or "Flag raised due to missing or weak public evidence links." 
-
-    # Build HTML
-    out = []
-    out.append("<!doctype html>")
-    out.append('<html lang="en">')
-    out.append("<head>")
-    out.append('<meta charset="utf-8"/>')
-    out.append('<meta name="viewport" content="width=device-width, initial-scale=1"/>')
-    out.append(f"<title>BEACN Waste Deep Dive — {today}</title>")
-    out.append("<style>")
-    out.append(":root{color-scheme:light dark}")
-    out.append("body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px;line-height:1.5;max-width:1020px}")
-    out.append("h1,h2,h3{line-height:1.2}")
-    out.append(".muted{opacity:.75}")
-    out.append(".card{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;margin:14px 0}")
-    out.append(".warn{border-left:4px solid #b45309;padding-left:12px}")
-    out.append("code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;font-size:.95em}")
-    out.append("a{text-decoration:none}a:hover{text-decoration:underline}")
-    out.append(".pill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid rgba(127,127,127,.35);font-size:12px;margin-left:8px}")
-    out.append("</style>")
-    out.append("</head>")
-    out.append("<body>")
-
-    out.append(f"<h1>Waste / Weak-Evidence Deep Dive — {today} <span class='pill'>AI analysis</span></h1>")
-    out.append("<div class='muted'>Focused report: items that currently show weak public receipts or transparency gaps. Links included so anyone can verify.</div>")
-
-    out.append("<div class='card warn'><strong>Important:</strong><ul>")
-    out.append("<li><strong>Not voting advice.</strong> This report is informational and evidence-first.</li>")
-    out.append("<li><strong>Not proof of fraud.</strong> A flag means missing/weak receipts (deliverables/reporting/payment proof), not wrongdoing.</li>")
-    out.append("<li><strong>DOGE lens:</strong> we aggressively hunt waste signals by demanding receipts and clear outcomes.</li>")
-    out.append("</ul></div>")
-
-    out.append("<div class='card'>")
-    out.append("<h2>Executive summary (digest first)</h2>")
-
-    # summary stats
-    from collections import Counter
-
-    # Intersect totals
+    # Stats
     intersect_flag_counts = Counter()
-    total_flagged_intersect = len(intersect_flagged)
-    total_flagged_intersect_with_amount = sum(1 for x in intersect_flagged if x.get('amount') is not None)
-    total_flagged_intersect_amount = sum((x.get('amount') or 0) for x in intersect_flagged if x.get('amount') is not None)
-
     for it in intersect_flagged:
-        for fl in it.get('flags', []):
+        for fl in it.get("flags", []):
             intersect_flag_counts[fl] += 1
 
-    # Treasury totals
     treasury_flag_counts = Counter()
     for it in treasury_flagged:
-        for fl in it.get('flags', []):
+        for fl in it.get("flags", []):
             treasury_flag_counts[fl] += 1
 
-    out.append("<p><strong>Report scope:</strong> only items with evidence flags (missing deliverables/reporting/payment proof or weak transparency signals). This is <em>not</em> proof of fraud.</p>")
+    # ── Build full HTML ──
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BEACN Waste Deep Dive — {today}</title>
+<meta name="description" content="Evidence-first review of flagged treasury items. Missing receipts ≠ fraud. {today}"/>
+<link rel="stylesheet" href="../assets/beacn.css"/>
+</head>
+<body>
 
-    out.append("<ul>")
-    out.append(f"<li><strong>Date:</strong> {today}</li>")
-    out.append(
-        f"<li><strong>Intersect Grants flagged items:</strong> {total_flagged_intersect} "
-        f"(with stated ADA value: {total_flagged_intersect_with_amount}; <strong>missing/unclear value:</strong> {total_flagged_intersect - total_flagged_intersect_with_amount}; "
-        f"<strong>minimum provable ADA flagged:</strong> {total_flagged_intersect_amount:,} ADA)</li>"
-    )
-    out.append(f"<li><strong>TreasuryWithdrawals flagged items:</strong> {len(treasury_flagged)} (these are mainly transparency/process signals like missing discussion refs)</li>")
-    out.append("</ul>")
+{build_top_bar(today)}
 
-    # Top flagged by amount (Intersect)
-    top_by_amt = sorted([x for x in intersect_flagged if x.get('amount') is not None], key=lambda x: x['amount'], reverse=True)[:10]
-    if top_by_amt:
-        out.append("<h3>Top Intersect flagged items by ADA (quick review)</h3>")
-        out.append("<ol>")
-        for it in top_by_amt:
-            out.append("<li>")
-            out.append(f"<strong>{esc(it['title'])}</strong> — {it['amount']:,} ADA (Cohort {esc(it['cohort'] or '?')})<br/>")
-            out.append(f"<span class='muted'>Flags: {esc(', '.join(it.get('flags', [])))}</span><br/>")
-            out.append(f"<a href='{esc(it['url'])}' target='_blank' rel='noopener'>Source page</a>")
-            out.append("</li>")
-        out.append("</ol>")
+<div class="report-page">
 
-    # Flag distribution
-    out.append("<h3>Most common Intersect flags</h3>")
-    out.append("<ul>")
-    for fl, n in intersect_flag_counts.most_common(8):
-        out.append(f"<li><code>{esc(fl)}</code> — {n} items</li>")
-    out.append("</ul>")
+{build_header(today)}
 
-    if treasury_flag_counts:
-        out.append("<h3>Most common Treasury flags</h3>")
-        out.append("<ul>")
-        for fl, n in treasury_flag_counts.most_common(8):
-            out.append(f"<li><code>{esc(fl)}</code> — {n} items</li>")
-        out.append("</ul>")
+{build_disclaimer()}
 
-    out.append("<p class='muted'><strong>About the number:</strong> the “minimum provable ADA flagged” total only sums items where the official page explicitly states a grant value in ADA. Items with missing/unclear values are still listed below, but excluded from the total until we can parse/confirm their amounts.</p>")
-    out.append("<p class='muted'>Tip: if a project has real deliverables but isn’t linking them publicly, the fastest fix is to add links to the official page. We will re-check and clear flags.</p>")
-    out.append("</div>")
+{build_summary(intersect_flagged, treasury_flagged, intersect_flag_counts, treasury_flag_counts)}
 
-    out.append("<div class='card'>")
-    out.append("<h2>What made this list?</h2>")
-    out.append("<p>We only include items with evidence flags (missing deliverables/reporting/value). If an item is not flagged, it may still be debated — but it is not the focus of this document.</p>")
-    out.append("</div>")
+{build_intersect_section(intersect_flagged)}
 
-    out.append("<div class='card'>")
-    out.append(f"<h2>Intersect Community Grants (flagged)</h2>")
-    out.append(f"<div class='muted'>Flagged items: {len(intersect_flagged)} (from all cohorts rollup)</div>")
-    out.append("<ol>")
-    for it in intersect_flagged[:80]:
-        out.append("<li>")
-        out.append(f"<h3>{esc(it['title'])}</h3>")
-        out.append(f"<div class='muted'>Cohort: {esc(it['cohort'] or '?')} | Last updated: {esc(it['last_updated'] or '?')}</div>")
-        if it.get("amount") is not None:
-            out.append(f"<p><strong>Grant value:</strong> {it['amount']:,} ADA</p>")
-        else:
-            out.append("<p><strong>Grant value:</strong> (missing/unclear)</p>")
-        out.append(f"<p><strong>Source page:</strong> <a href='{esc(it['url'])}' target='_blank' rel='noopener'>{esc(it['url'])}</a></p>")
+{build_treasury_section(treasury_flagged)}
 
-        out.append("<p><strong>Flags & reasons:</strong></p><ul>")
-        for fl in it.get("flags", []):
-            out.append(f"<li><code>{esc(fl)}</code> — {esc(flag_reason(fl))}</li>")
-        out.append("</ul>")
+{build_how_to_clear()}
 
-        links = it.get("external_links") or []
-        if links:
-            out.append("<p><strong>External links found:</strong></p><ul>")
-            for l in links[:10]:
-                out.append(f"<li><a href='{esc(l)}' target='_blank' rel='noopener'>{esc(l)}</a></li>")
-            out.append("</ul>")
-        else:
-            out.append("<p><strong>External links found:</strong> none</p>")
+<footer class="report-footer">
+  <p>Generated: {today} · MIT License · <a href="https://github.com/BEACNpool/Governance">BEACN Governance</a> · Not voting advice</p>
+</footer>
 
-        out.append("</li>")
-    out.append("</ol>")
-    out.append("</div>")
-
-    out.append("<div class='card'>")
-    out.append("<h2>TreasuryWithdrawals (flagged governance transparency)</h2>")
-    out.append(f"<div class='muted'>Flagged items: {len(treasury_flagged)} (flags are evidence/process signals, not proof of waste)</div>")
-    out.append("<ol>")
-    for it in treasury_flagged[:60]:
-        out.append("<li>")
-        out.append(f"<h3>{esc(it['title'])}</h3>")
-        out.append(f"<div class='muted'>Status: {esc(it['status'] or '?')}</div>")
-        if it.get("govtool"):
-            out.append(f"<p><strong>GovTool:</strong> <a href='{esc(it['govtool'])}' target='_blank' rel='noopener'>{esc(it['govtool'])}</a></p>")
-        if it.get("anchor"):
-            out.append(f"<p><strong>Anchor:</strong> {esc(it['anchor'])}</p>")
-        out.append("<p><strong>Flags & reasons:</strong></p><ul>")
-        for fl in it.get("flags", []):
-            out.append(f"<li><code>{esc(fl)}</code> — {esc(flag_reason(fl))}</li>")
-        out.append("</ul>")
-        out.append("</li>")
-    out.append("</ol>")
-    out.append("</div>")
-
-    out.append("<div class='card'>")
-    out.append("<h2>How to clear flags (fast)</h2>")
-    out.append("<ul>")
-    out.append("<li>Add public deliverable links (repo/site/video/podcast feed) to the official page.</li>")
-    out.append("<li>Add reporting/closeout links (final report, milestones, proof-of-work).</li>")
-    out.append("<li>For governance actions: ensure anchor metadata resolves and matches the on-chain hash.</li>")
-    out.append("</ul>")
-    out.append("</div>")
-
-    out.append(f"<div class='muted'>Generated: {today}</div>")
-    out.append("</body></html>")
+</div>
+</body>
+</html>"""
 
     out_path = reports / f"waste-deep-dive-{today}.html"
-    out_path.write_text("\n".join(out), encoding="utf-8")
+    out_path.write_text(page, encoding="utf-8")
     print(out_path)
 
 

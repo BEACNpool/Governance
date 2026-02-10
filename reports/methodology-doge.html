@@ -3,108 +3,222 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BEACN Cardano DOGE Methodology (Anti-Waste, Anti-Fraud)</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.5; max-width: 980px; }
-    h1,h2,h3 { line-height: 1.2; }
-    .muted { opacity: .75; }
-    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
-    .pill { display:inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; margin-left: 8px; }
-    .warn { border-left: 4px solid #b45309; padding-left: 12px; }
-    .ok { border-left: 4px solid #15803d; padding-left: 12px; }
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
-    ul { margin-top: 8px; }
-  </style>
+  <title>BEACN Cardano DOGE Methodology — Anti-Waste, Anti-Fraud</title>
+  <meta name="description" content="How BEACN hunts treasury waste and fraud signals. Receipts-first. Evidence-first. Not voting advice." />
+  <link rel="stylesheet" href="../assets/beacn.css" />
 </head>
 <body>
-  <h1>BEACN “Cardano DOGE” Methodology <span class="pill">anti‑waste / anti‑fraud</span></h1>
-  <div class="muted">How we audit treasury-related spending signals across Cardano programs, using receipts-first indexing.</div>
 
-  <div class="card warn">
-    <strong>Read this first:</strong>
-    <ul>
-      <li><strong>We do not tell anyone how to vote.</strong> We publish facts, links, and verification checklists.</li>
-      <li><strong>We do not accuse by default.</strong> A “flag” means <em>missing evidence</em> (missing deliverables/reporting/payment proof), not proof of wrongdoing.</li>
-      <li><strong>Fraud/waste hunting is evidence work.</strong> If the receipts are good, items get cleared. If receipts are missing, we escalate questions.</li>
-    </ul>
-  </div>
+  <!-- Top bar -->
+  <nav class="top-bar">
+    <a href="../" class="brand">BEACN</a>
+    <a href="../">← Dashboard</a>
+    <a href="waste-deep-dive-latest.html">Waste Deep Dive</a>
+    <a href="grants-ledger-latest.html">Grants Ledger</a>
+    <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener">GitHub</a>
+  </nav>
 
-  <div class="card">
-    <h2>Mission</h2>
-    <p>
-      Make it cheap and easy for average delegators to answer: <strong>Where did treasury-adjacent money go?</strong>
-      Who received it? What was promised? What was delivered? Where’s the proof?
-    </p>
-    <p class="muted">Think “DOGE” as a tone: relentless about receipts, skeptical of vague budgets, and focused on measurable outcomes.</p>
-  </div>
+  <div class="report-page">
 
-  <div class="card">
-    <h2>Data sources (separated to contain errors)</h2>
-    <ul>
-      <li><strong>On-chain governance (CIP‑1694)</strong> — governance actions, anchors, votes, and TreasuryWithdrawal recipient maps.
+    <!-- Header -->
+    <header class="report-header">
+      <div class="report-badge">🔍 Methodology</div>
+      <h1>"Cardano DOGE" Methodology</h1>
+      <p class="report-sub">
+        How we audit treasury-related spending signals across Cardano programs.
+        Receipts-first indexing. Open source. Not voting advice.
+      </p>
+    </header>
+
+    <!-- Read-first warning -->
+    <div class="card warn">
+      <h2>Read This First</h2>
+      <ul>
+        <li><strong>We do not tell anyone how to vote.</strong> We publish facts, links, and verification checklists.</li>
+        <li><strong>We do not accuse by default.</strong> A "flag" means <em>missing evidence</em> (deliverables / reporting / payment proof), not proof of wrongdoing.</li>
+        <li><strong>Fraud/waste hunting is evidence work.</strong> If the receipts are good, items get cleared. If receipts are missing, we escalate questions — publicly.</li>
+      </ul>
+    </div>
+
+    <!-- Mission -->
+    <div class="card">
+      <h2>Mission</h2>
+      <p>
+        Make it <strong>cheap and easy</strong> for average delegators to answer:
+      </p>
+      <div class="stat-grid" style="margin-top:16px">
+        <div class="stat-box">
+          <div class="s-val gold">Where?</div>
+          <div class="s-label">did treasury money go</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-val gold">Who?</div>
+          <div class="s-label">received it</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-val gold">What?</div>
+          <div class="s-label">was promised vs delivered</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-val gold">Proof?</div>
+          <div class="s-label">where's the evidence</div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:14px">
+        Think "DOGE" as a tone: relentless about receipts, skeptical of vague budgets, focused on measurable outcomes.
+      </p>
+    </div>
+
+    <!-- Data sources -->
+    <div class="card">
+      <h2>Data Sources (Separated to Contain Errors)</h2>
+      <p style="margin-bottom:14px">Each source lives in its own snapshot subfolder so a bug in one doesn't corrupt another.</p>
+
+      <div class="card info" style="margin:10px 0">
+        <h3>On-chain Governance (CIP-1694)</h3>
+        <p>Governance actions, anchors, votes, TreasuryWithdrawal recipient maps.</p>
         <ul>
-          <li>Primary ingestion: Koios API (mirrored): <a href="https://koios.beacn.workers.dev/" target="_blank" rel="noopener">koios.beacn.workers.dev</a></li>
-          <li>Human verification: GovTool / CGOV / explorers (linked per item)</li>
+          <li>Primary ingestion: Koios API (mirrored) — <a href="https://koios.beacn.workers.dev/" target="_blank" rel="noopener">koios.beacn.workers.dev</a></li>
+          <li>Human verification: <a href="https://gov.tools/" target="_blank" rel="noopener">GovTool</a> / <a href="https://app.cgov.io/" target="_blank" rel="noopener">CGOV</a> / explorers</li>
         </ul>
-      </li>
-      <li><strong>Intersect Community Grants</strong> — registry pages (cohorts) + public links.
+      </div>
+
+      <div class="card info" style="margin:10px 0">
+        <h3>Intersect Community Grants</h3>
+        <p>Registry pages crawled via GitBook sitemap. Each page checked for public links.</p>
         <ul>
-          <li>Ingested via GitBook sitemap crawl: <a href="https://intersect.gitbook.io/intersect-community-grants" target="_blank" rel="noopener">intersect.gitbook.io/intersect-community-grants</a></li>
+          <li>Registry: <a href="https://intersect.gitbook.io/intersect-community-grants" target="_blank" rel="noopener">intersect.gitbook.io/intersect-community-grants</a></li>
+          <li>We scan for: deliverable links, reporting links, stated grant value</li>
         </ul>
-      </li>
-      <li><strong>Project Catalyst</strong> — funds/projects/milestones/payments.
+      </div>
+
+      <div class="card info" style="margin:10px 0">
+        <h3>Project Catalyst (In Progress)</h3>
+        <p>Treasury-funded but tracked off-chain. Catalyst will be its own dataset.</p>
         <ul>
-          <li>Status: in progress; we will ingest from the most reproducible canonical dataset and publish the exact source once selected.</li>
+          <li>Will link to on-chain tx hashes only when explicit or high-confidence</li>
+          <li>No guessing without labeling uncertainty</li>
         </ul>
-      </li>
-    </ul>
-    <p class="muted">We keep separate databases per source, then generate unified dashboards from them. This contains corruption and makes disputes resolvable.</p>
-  </div>
+      </div>
+    </div>
 
-  <div class="card">
-    <h2>What we verify (receipts-first)</h2>
-    <ul>
-      <li><strong>Anchors:</strong> for governance actions, the anchor URL/IPFS and the on-chain hash should match the fetched content.</li>
-      <li><strong>Recipients + amounts:</strong> for TreasuryWithdrawals, we record the on-chain withdrawal map (recipient stake address + amount).</li>
-      <li><strong>Deliverables:</strong> public links to outputs (repos, docs, videos, audits). If outputs exist but are not linked, that is still a transparency failure.</li>
-      <li><strong>Reporting:</strong> closeout/final reports or evidence artifacts that show what was done.</li>
-      <li><strong>Payment proof (when available):</strong> tx hashes or official payment reports. If not available, we label the gap.</li>
-    </ul>
-  </div>
+    <!-- What flags mean -->
+    <div class="card">
+      <h2>What Flags Mean</h2>
+      <p style="margin-bottom:14px">Flags are <strong>evidence/process signals</strong>, not verdicts. Each maps to a clear, fixable gap.</p>
 
-  <div class="card">
-    <h2>How “waste radar” flags work</h2>
-    <p>Flags are intentionally conservative and evidence-based. Examples:</p>
-    <ul>
-      <li><code>NO_METADATA</code>, <code>HASH_MISMATCH</code> — the anchor evidence is missing or doesn’t match what’s on-chain.</li>
-      <li><code>NO_DELIVERABLE_LINKS</code> — there are no obvious public output links (YouTube/podcast feed/GitHub/website).</li>
-      <li><code>NO_REPORTING_LINKS</code> — no closeout/final report links.</li>
-      <li><code>HIGH_ADA_LOW_EVIDENCE</code> — large spend with vague proof.</li>
-    </ul>
-    <p class="ok"><strong>Clearing a flag</strong> is easy: add receipts. Link the deliverables. Link the reports. Link payment proof.</p>
-  </div>
+      <table>
+        <thead>
+          <tr><th>Flag Code</th><th>Meaning</th><th>How to Clear</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code style="color:var(--red)">NO_DELIVERABLE_LINKS</code></td>
+            <td>No obvious public links to deliverables (repo, site, video, podcast feed)</td>
+            <td>Add links on the official grant/proposal page</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--red)">NO_REPORTING_LINKS</code></td>
+            <td>No closeout, proof-of-work, or final report links</td>
+            <td>Publish a reporting/closeout page and link it</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--amber)">NO_EXTERNAL_LINKS</code></td>
+            <td>No external links found on the page at all</td>
+            <td>Add any relevant external links to the page</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--amber)">MISSING_GRANT_VALUE</code></td>
+            <td>ADA amount not clearly stated</td>
+            <td>State the grant value clearly on the page</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--amber)">🟡 NO_DISCUSSION</code></td>
+            <td>No public discussion links in governance action metadata</td>
+            <td>Add discussion forum link to anchor references</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--red)">🔴 NO_METADATA</code></td>
+            <td>Anchor metadata missing or unresolvable</td>
+            <td>Ensure anchor URL is live and content accessible</td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--red)">🔴 HASH_MISMATCH</code></td>
+            <td>Anchor content hash doesn't match on-chain hash</td>
+            <td>Re-publish with correct hash or explain discrepancy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="card">
-    <h2>Publishing cadence (why it’s not “daily hype”)</h2>
-    <ul>
-      <li><strong>Governance polling:</strong> frequent (deadlines move).</li>
-      <li><strong>Registry/program crawls:</strong> weekly (pages don’t change daily; reduces noise).</li>
-      <li><strong>Community outputs:</strong> weekly briefings + urgent alerts for deadlines.</li>
-    </ul>
-  </div>
+    <!-- How we process -->
+    <div class="card">
+      <h2>Processing Pipeline</h2>
+      <ol>
+        <li><strong>Ingest</strong> — Pull raw data from Koios / GitBook / (Catalyst API TBD)</li>
+        <li><strong>Normalize</strong> — Convert to standard JSON with consistent field names</li>
+        <li><strong>Flag</strong> — Run evidence checks (link detection, hash verification, value parsing)</li>
+        <li><strong>Snapshot</strong> — Write to <code>data/snapshots/YYYY-MM-DD/</code> (immutable)</li>
+        <li><strong>Derive</strong> — Generate unified index, leaderboard, waste radar from snapshots</li>
+        <li><strong>Report</strong> — Produce human-readable HTML/CSV/MD reports with source links</li>
+      </ol>
+    </div>
 
-  <div class="card">
-    <h2>How the community can help</h2>
-    <ul>
-      <li>Reply with missing receipts: deliverable links, final reports, tx hashes, audits.</li>
-      <li>Suggest better heuristics (what should count as proof).</li>
-      <li>Help map entity aliases (same org with different names across programs).</li>
-    </ul>
-  </div>
+    <!-- Reproducibility -->
+    <div class="card ok">
+      <h2>Reproducibility (for Anyone)</h2>
+      <p>Anyone can validate this work:</p>
+      <ol>
+        <li>Clone <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener">the repo</a></li>
+        <li>Load <code>data/latest.json</code> to find the current snapshot</li>
+        <li>Fetch the referenced snapshot JSON files</li>
+        <li>Recompute derived views independently (or compare against <code>warehouse/</code> outputs)</li>
+      </ol>
+      <p style="margin-top:10px">
+        <a href="https://github.com/BEACNpool/Governance/blob/main/data/VERIFY.md" target="_blank" rel="noopener">Full verification guide →</a> ·
+        <a href="https://github.com/BEACNpool/Governance/blob/main/data/SCHEMA.md" target="_blank" rel="noopener">Data schema →</a>
+      </p>
+    </div>
 
-  <div class="muted">Published by BEACN Governance. Updated: 2026-02-09.</div>
+    <!-- Safe framing -->
+    <div class="card">
+      <h2>"DOGE" Framing (Safe + Effective)</h2>
+      <p style="margin-bottom:12px">Language we use — and don't use:</p>
+
+      <div class="card ok" style="margin:8px 0">
+        <strong>✓ We say:</strong>
+        <ul>
+          <li>"Public money demands public receipts."</li>
+          <li>"Missing receipts is not proof of fraud, but it is a transparency failure."</li>
+          <li>"If deliverables exist, link them and we'll re-check."</li>
+        </ul>
+      </div>
+
+      <div class="card danger" style="margin:8px 0">
+        <strong>✗ We avoid:</strong>
+        <ul>
+          <li>"This is a scam" (without extremely strong proof)</li>
+          <li>Targeted personal attacks</li>
+          <li>Telling people how to vote</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="card">
+      <h2>Quick Links</h2>
+      <div class="stat-grid">
+        <div class="stat-box"><a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener" style="color:var(--text)">GitHub Repo</a></div>
+        <div class="stat-box"><a href="../" style="color:var(--text)">Dashboard</a></div>
+        <div class="stat-box"><a href="https://gov.tools/" target="_blank" rel="noopener" style="color:var(--text)">GovTool</a></div>
+        <div class="stat-box"><a href="https://koios.beacn.workers.dev/" target="_blank" rel="noopener" style="color:var(--text)">Koios Mirror</a></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="report-footer">
+      <p>MIT License · <a href="https://github.com/BEACNpool/Governance">BEACN Governance</a> · Evidence flags ≠ wrongdoing · Not voting advice</p>
+    </footer>
+  </div>
 </body>
 </html>

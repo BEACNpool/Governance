@@ -1,16 +1,9 @@
 #!/usr/bin/env python3
-"""Generate a community-readable Grants Ledger page.
+"""Generate a DOGE-style grants spend ledger (HTML + JSON).
 
-Goal: show *how much ADA is allocated* and *what the public can directly verify* (links).
-
-Current coverage:
-- Intersect Community Grants (GitBook registry)
-
-Future:
-- Catalyst (once canonical dataset is ingested)
+Uses BEACN v2 design system (assets/beacn.css).
 
 Inputs:
-- reports/intersect-grants-waste-radar-YYYY-MM-DD.csv
 - data/intersect-grants-waste-radar-YYYY-MM-DD.json
 
 Outputs:
@@ -18,21 +11,21 @@ Outputs:
 - data/grants-ledger-YYYY-MM-DD.json
 """
 
-import csv
 import datetime as dt
 import html
 import json
-from collections import defaultdict
 from pathlib import Path
 
 
-def read_csv(path: Path):
-    with path.open("r", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+def esc(s):
+    return html.escape(str(s)) if s else ""
 
 
-def esc(s: str) -> str:
-    return html.escape(s or "")
+def fmt_ada(val):
+    try:
+        return f"{float(val):,.0f}"
+    except (TypeError, ValueError):
+        return "unknown"
 
 
 def main():
@@ -41,188 +34,179 @@ def main():
     reports = root / "reports"
     data_dir = root / "data"
 
-    intersect_csv = reports / f"intersect-grants-waste-radar-{today}.csv"
-    intersect_json = data_dir / f"intersect-grants-waste-radar-{today}.json"
+    src = data_dir / f"intersect-grants-waste-radar-{today}.json"
+    if not src.exists():
+        raise SystemExit(f"Missing {src}")
 
-    if not intersect_csv.exists():
-        raise SystemExit(f"Missing {intersect_csv}")
-    if not intersect_json.exists():
-        raise SystemExit(f"Missing {intersect_json}")
+    raw = json.loads(src.read_text(encoding="utf-8"))
+    items = raw.get("items", [])
 
-    rows = read_csv(intersect_csv)
-    items = json.loads(intersect_json.read_text(encoding="utf-8")).get("items", [])
-    by_url = {it.get("url"): it for it in items if it.get("url")}
-
-    # Normalize
+    # Parse grants
     grants = []
-    for r in rows:
-        title = (r.get("title") or "").strip()
-        url = (r.get("url") or "").strip()
-        cohort = (r.get("cohort") or "").strip()
-        flags = (r.get("flags") or "").strip()
-        last_updated = (r.get("last_updated") or "").strip()
-        amt_raw = (r.get("grant_value_ada") or "").strip()
-        try:
-            amt = int(amt_raw) if amt_raw.isdigit() else None
-        except Exception:
-            amt = None
+    by_cohort = {}
+    for it in items:
+        amt = None
+        if it.get("grant_value"):
+            try:
+                amt = float(str(it["grant_value"]).replace(",", "").replace("₳", "").strip())
+            except (TypeError, ValueError):
+                pass
+        g = {
+            "title": it.get("title", "Untitled"),
+            "cohort": it.get("cohort", ""),
+            "url": it.get("url", ""),
+            "amount_ada": amt,
+            "flags": it.get("flags", []),
+            "external_links": it.get("external_links", []),
+        }
+        grants.append(g)
+        by_cohort.setdefault(g["cohort"], []).append(g)
 
-        external_links = (by_url.get(url) or {}).get("external_links", [])
-
-        grants.append(
-            {
-                "program": "Intersect Community Grants",
-                "cohort": cohort,
-                "title": title,
-                "amount_ada": amt,
-                "url": url,
-                "external_links": external_links,
-                "flags": [f for f in flags.split(";") if f],
-                "last_updated": last_updated,
-            }
-        )
-
-    # Stats
     with_amount = [g for g in grants if g["amount_ada"] is not None]
     total_ada = sum(g["amount_ada"] for g in with_amount)
-
-    by_cohort = defaultdict(list)
-    for g in grants:
-        by_cohort[g["cohort"] or "?"] .append(g)
 
     cohort_totals = []
     for c, lst in by_cohort.items():
         wa = [g for g in lst if g["amount_ada"] is not None]
-        cohort_totals.append(
-            {
-                "cohort": c,
-                "count": len(lst),
-                "with_amount": len(wa),
-                "sum_ada": sum(g["amount_ada"] for g in wa),
-            }
-        )
+        cohort_totals.append({
+            "cohort": c,
+            "count": len(lst),
+            "with_amount": len(wa),
+            "sum_ada": sum(g["amount_ada"] for g in wa),
+        })
     cohort_totals.sort(key=lambda x: x["sum_ada"], reverse=True)
 
-    # Sort main list by amount desc, then title
     grants.sort(key=lambda g: (g["amount_ada"] if g["amount_ada"] is not None else -1, g["title"]), reverse=True)
 
-    # Write JSON feed
+    # Write JSON
     out_json = data_dir / f"grants-ledger-{today}.json"
     out_json.write_text(
-        json.dumps(
-            {
-                "generated_at": dt.datetime.now(dt.timezone.utc)
-                .replace(microsecond=0)
-                .isoformat()
-                .replace("+00:00", "Z"),
-                "totals": {
-                    "items": len(grants),
-                    "items_with_amount": len(with_amount),
-                    "total_ada_known": total_ada,
-                },
-                "cohort_totals": cohort_totals,
-                "rows": grants,
-            },
-            indent=2,
-        )
-        + "\n",
+        json.dumps({
+            "generated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            "totals": {"items": len(grants), "items_with_amount": len(with_amount), "total_ada_known": total_ada},
+            "cohort_totals": cohort_totals,
+            "rows": grants,
+        }, indent=2) + "\n",
         encoding="utf-8",
     )
 
-    # HTML
+    # ── Build HTML ──
     out = []
-    out.append("<!doctype html>")
-    out.append('<html lang="en">')
-    out.append("<head>")
-    out.append('<meta charset="utf-8"/>')
-    out.append('<meta name="viewport" content="width=device-width, initial-scale=1"/>')
-    out.append(f"<title>BEACN Grants Ledger — {today}</title>")
-    out.append("<style>")
-    out.append(":root{color-scheme:light dark}")
-    out.append("body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px;line-height:1.5;max-width:1100px}")
-    out.append("h1,h2,h3{line-height:1.2}")
-    out.append(".muted{opacity:.75}")
-    out.append(".card{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;margin:14px 0}")
-    out.append(".warn{border-left:4px solid #b45309;padding-left:12px}")
-    out.append("a{text-decoration:none}a:hover{text-decoration:underline}")
-    out.append("code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;font-size:.95em}")
-    out.append("table{border-collapse:collapse;width:100%}")
-    out.append("th,td{border-bottom:1px solid rgba(127,127,127,.25);padding:10px 8px;vertical-align:top}")
-    out.append("th{text-align:left}")
-    out.append(".num{text-align:right;white-space:nowrap}")
-    out.append(".pill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid rgba(127,127,127,.35);font-size:12px;margin-left:8px}")
-    out.append("</style>")
-    out.append("</head><body>")
+    out.append(f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BEACN Grants Ledger — {today}</title>
+<meta name="description" content="DOGE-style grants spend ledger. {len(grants)} items indexed, {fmt_ada(total_ada)} ADA tracked."/>
+<link rel="stylesheet" href="../assets/beacn.css"/>
+<style>
+  .ledger-row {{ transition: background .15s; }}
+  .ledger-row:hover {{ background: var(--bg-hover); }}
+  .ledger-row td {{ font-size: 13px; }}
+  .links-cell a {{ display: block; font-size: 12px; word-break: break-all; margin: 2px 0; }}
+  .links-cell a:hover {{ text-decoration: underline; }}
+</style>
+</head>
+<body>
 
-    out.append(f"<h1>DOGE Grants Spend Ledger — {today} <span class='pill'>AI-indexed</span></h1>")
-    out.append("<div class='muted'><strong>DOGE lens:</strong> public money demands public receipts. This page spotlights where ADA is allocated and whether the public can <em>directly verify</em> deliverables via links.</div>")
+<nav class="top-bar">
+  <a href="../" class="brand">BEACN</a>
+  <a href="../">← Dashboard</a>
+  <a href="waste-deep-dive-{today}.html">Waste Deep Dive</a>
+  <a href="methodology-doge.html">Methodology</a>
+  <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener">GitHub</a>
+</nav>
 
-    out.append("<div class='card warn'><strong>Read this before scrolling:</strong><ul>")
-    out.append("<li><strong>Fact-driven, not vibes.</strong> Amounts come from official program pages. If a page doesn’t state a value clearly, we mark it unknown and exclude it from totals.</li>")
-    out.append("<li><strong>Not voting advice.</strong> This is a transparency ledger to support public discussion and accountability.</li>")
-    out.append("<li><strong>Not an accusation list.</strong> Missing links = missing public receipts. The easiest way to clear scrutiny is to publish/attach deliverable + reporting links on the official page.</li>")
-    out.append("</ul></div>")
+<div class="report-page">
 
-    out.append("<div class='card'>")
-    out.append("<h2>Top-line totals (known values only)</h2>")
-    out.append("<div class='muted'>This is the ‘maximum savings ceiling’ for this page <em>only if</em> every listed item were wasteful (unlikely). The point is to quantify exposure and demand receipts, not to accuse.</div>")
-    out.append("<ul>")
-    out.append(f"<li><strong>Total items indexed:</strong> {len(grants)}</li>")
-    out.append(f"<li><strong>Items with stated ADA value:</strong> {len(with_amount)} (unknown: {len(grants)-len(with_amount)})</li>")
-    out.append(f"<li><strong>Total ADA (known):</strong> {total_ada:,} ADA</li>")
-    out.append("</ul>")
-    out.append("</div>")
+<header class="report-header">
+  <div class="report-badge">📒 GRANTS LEDGER · {today}</div>
+  <h1>DOGE Grants Spend Ledger</h1>
+  <p class="report-sub">
+    Public money demands public receipts. This page spotlights where ADA is allocated
+    and whether the public can <em>directly verify</em> deliverables via links.
+  </p>
+</header>
 
-    out.append("<div class='card'>")
-    out.append("<h2>By cohort (known values)</h2>")
-    out.append("<table><thead><tr><th>Cohort</th><th class='num'>Items</th><th class='num'>Known values</th><th class='num'>Sum ADA</th></tr></thead><tbody>")
-    for c in cohort_totals:
-        out.append(
-            f"<tr><td>{esc(c['cohort'])}</td><td class='num'>{c['count']}</td><td class='num'>{c['with_amount']}</td><td class='num'>{c['sum_ada']:,}</td></tr>"
-        )
-    out.append("</tbody></table>")
-    out.append("</div>")
+<div class="card warn">
+  <h2>⚠️ Read This Before Scrolling</h2>
+  <ul>
+    <li><strong>Fact-driven, not vibes.</strong> Amounts come from official program pages. If a page doesn't state a value, we mark it unknown and exclude from totals.</li>
+    <li><strong>Not voting advice.</strong> This is a transparency ledger to support public discussion and accountability.</li>
+    <li><strong>Not an accusation list.</strong> Missing links = missing public receipts. The easiest fix: publish/attach links on the official page.</li>
+  </ul>
+</div>""")
 
-    out.append("<div class='card'>")
-    out.append("<h2>All indexed grants (sorted by ADA)</h2>")
-    out.append("<table><thead><tr><th>Program / Cohort</th><th>Grant</th><th class='num'>ADA</th><th>Direct receivable (links)</th></tr></thead><tbody>")
+    # Top-line stats
+    out.append(f"""<div class="card">
+  <h2>Top-Line Totals (Known Values Only)</h2>
+  <p class="muted">This is the scope of this ledger. Not every item is wasteful — the point is to quantify exposure and demand receipts.</p>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="s-val" style="color:var(--blue)">{len(grants)}</div><div class="s-label">Items indexed</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--ada-gold)">{len(with_amount)}</div><div class="s-label">With stated ADA</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--ada-gold)">{fmt_ada(total_ada)} ₳</div><div class="s-label">Total ADA (known)</div></div>
+    <div class="stat-box"><div class="s-val" style="color:var(--amber)">{len(grants) - len(with_amount)}</div><div class="s-label">Value unknown</div></div>
+  </div>
+</div>""")
 
+    # By cohort
+    out.append('<div class="card"><h2>By Cohort (Known Values)</h2>')
+    out.append('<table><thead><tr><th>Cohort</th><th class="num">Items</th><th class="num">Known Values</th><th class="num">Sum ADA</th></tr></thead><tbody>')
+    for ct in cohort_totals:
+        out.append(f'<tr><td>{esc(ct["cohort"])}</td><td class="num">{ct["count"]}</td><td class="num">{ct["with_amount"]}</td><td class="num">{fmt_ada(ct["sum_ada"])}</td></tr>')
+    out.append("</tbody></table></div>")
+
+    # Full table
+    out.append('<div class="card"><h2>All Indexed Grants (Sorted by ADA)</h2>')
+    out.append('<div style="overflow-x:auto">')
+    out.append('<table><thead><tr><th>Program / Cohort</th><th>Grant</th><th class="num">ADA</th><th>Direct Receivable (Links)</th></tr></thead><tbody>')
     for g in grants:
-        prog = f"{g['program']} — Cohort {g['cohort']}" if g.get("cohort") else g["program"]
-        amt = f"{g['amount_ada']:,}" if g.get("amount_ada") is not None else "?"
-
-        links = g.get("external_links") or []
-        # show up to 3 links
-        link_html = ""
-        if links:
-            shown = links[:3]
-            link_html = "<ul>" + "".join(
-                [f"<li><a href='{esc(l)}' target='_blank' rel='noopener'>{esc(l)}</a></li>" for l in shown]
-            ) + "</ul>"
+        amt_str = fmt_ada(g["amount_ada"]) if g["amount_ada"] is not None else '<span style="color:var(--amber)">unknown</span>'
+        links_html = ""
+        ext = g.get("external_links", [])
+        if ext:
+            links_html = '<div class="links-cell">'
+            for link in ext[:4]:
+                links_html += f"<a href='{esc(link)}' target='_blank' rel='noopener'>{esc(link[:80])}{'…' if len(link) > 80 else ''}</a>"
+            links_html += "</div>"
         else:
-            link_html = "<span class='muted'>(none found)</span>"
+            links_html = '<span class="muted" style="font-size:12px">No public links found</span>'
 
-        title = esc(g.get("title"))
-        src = esc(g.get("url"))
+        source_link = f"<a href='{esc(g['url'])}' target='_blank' rel='noopener'>source page</a>" if g.get("url") else ""
+        flag_pills = ""
+        if g.get("flags"):
+            flag_pills = " ".join(f'<span class="pill flag" style="font-size:9px;margin:1px">{esc(f)}</span>' for f in g["flags"][:3])
 
-        out.append("<tr>")
-        out.append(f"<td>{esc(prog)}</td>")
-        out.append(
-            f"<td><strong>{title}</strong><div class='muted'><a href='{src}' target='_blank' rel='noopener'>source page</a></div></td>"
-        )
-        out.append(f"<td class='num'>{amt}</td>")
-        out.append(f"<td>{link_html}</td>")
-        out.append("</tr>")
+        out.append(f"""<tr class="ledger-row">
+<td>Intersect — Cohort {esc(g["cohort"])}</td>
+<td><strong>{esc(g["title"])}</strong><div class="muted" style="font-size:12px">{source_link}</div>{f'<div style="margin-top:4px">{flag_pills}</div>' if flag_pills else ''}</td>
+<td class="num">{amt_str}</td>
+<td>{links_html}</td>
+</tr>""")
 
-    out.append("</tbody></table>")
-    out.append("</div>")
+    out.append("</tbody></table></div></div>")
 
-    out.append("<div class='muted'>Generated: {}</div>".format(today))
-    out.append("</body></html>")
+    # How to clear
+    out.append("""<div class="card ok">
+  <h2>How to Clear Scrutiny</h2>
+  <ul>
+    <li>Add public deliverable links (repo / site / video) to the official grant page.</li>
+    <li>Add reporting / closeout links (milestones, proof-of-work).</li>
+    <li>If we missed existing links, <a href="https://github.com/BEACNpool/Governance/issues" target="_blank" rel="noopener">open an issue</a>.</li>
+  </ul>
+</div>""")
 
-    out_html = reports / f"grants-ledger-{today}.html"
-    out_html.write_text("\n".join(out), encoding="utf-8")
-    print(out_html)
+    out.append(f"""<footer class="report-footer">
+  <p>Generated: {today} · MIT License · <a href="https://github.com/BEACNpool/Governance">BEACN Governance</a> · Not voting advice</p>
+</footer>
+</div>
+</body>
+</html>""")
+
+    out_path = reports / f"grants-ledger-{today}.html"
+    out_path.write_text("\n".join(out), encoding="utf-8")
+    print(out_path)
 
 
 if __name__ == "__main__":

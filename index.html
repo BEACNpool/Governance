@@ -3,110 +3,843 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BEACN Governance Reports</title>
+  <title>BEACN Governance — Cardano Treasury Transparency</title>
+  <meta name="description" content="Receipts-first governance transparency for Cardano. Public money demands public receipts." />
+  <meta property="og:title" content="BEACN Governance — Cardano DOGE" />
+  <meta property="og:description" content="Where did the ADA go? Open-source treasury watchdog. Receipts-first. Evidence-first." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
   <style>
-    :root { color-scheme: light dark; }
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.35; }
-    header { display:flex; gap:16px; align-items: baseline; flex-wrap: wrap; }
-    h1 { margin: 0; }
-    .muted { opacity: .75; }
-    .grid { display:grid; grid-template-columns: 1fr; gap: 16px; max-width: 1000px; }
-    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 10px; padding: 14px 16px; }
-    .card h2 { margin: 0 0 8px; font-size: 18px; }
-    ul { margin: 8px 0 0; padding-left: 20px; }
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
-    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); margin-left: 8px; font-size: 12px; }
+    /* ═══════════════════════════════════════════
+       BEACN GOVERNANCE DESIGN SYSTEM v2
+       Industrial Audit × Investigative Journalism
+       ═══════════════════════════════════════════ */
+
+    :root {
+      --bg-deep:    #0a0b0d;
+      --bg-surface: #111318;
+      --bg-card:    #181b22;
+      --bg-raised:  #1f222b;
+      --bg-hover:   #252830;
+
+      --border:     rgba(255,255,255,.06);
+      --border-mid: rgba(255,255,255,.1);
+      --border-hi:  rgba(255,255,255,.18);
+
+      --text:       #e8e9ed;
+      --text-muted: #8a8d97;
+      --text-dim:   #555861;
+
+      --ada-gold:   #d4a843;
+      --ada-glow:   rgba(212,168,67,.12);
+      --amber:      #f59e0b;
+      --amber-bg:   rgba(245,158,11,.08);
+      --red:        #ef4444;
+      --red-bg:     rgba(239,68,68,.08);
+      --green:      #22c55e;
+      --green-bg:   rgba(34,197,94,.08);
+      --blue:       #3b82f6;
+      --blue-bg:    rgba(59,130,246,.08);
+      --purple:     #a855f7;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono:    'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+      --radius-sm: 6px;
+      --radius:    10px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Noise overlay for texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Keyframes ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,168,67,0); }
+      50%      { box-shadow: 0 0 20px 4px rgba(212,168,67,.15); }
+    }
+    @keyframes scan-line {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+    @keyframes count-up {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Header / Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 24px 56px;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(212,168,67,.04), transparent),
+        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(239,68,68,.03), transparent),
+        var(--bg-deep);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--ada-gold), var(--amber), var(--red), transparent);
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      animation: fadeUp .6s ease-out;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,168,67,.3);
+      background: var(--ada-glow);
+      color: var(--ada-gold);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--ada-gold), var(--amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+    .hero-sub strong {
+      color: var(--text);
+    }
+
+    /* ── Nav strip ── */
+    .nav-strip {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,11,13,.85);
+      backdrop-filter: blur(16px) saturate(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(120%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 16px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      border-bottom-color: var(--border-hi);
+    }
+    .nav-link.active {
+      color: var(--ada-gold);
+      border-bottom-color: var(--ada-gold);
+    }
+    .nav-link .nav-icon { font-size: 14px; }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      letter-spacing: .04em;
+      padding-right: 16px;
+      border-right: 1px solid var(--border-mid);
+      margin-right: 4px;
+    }
+
+    /* ── Main layout ── */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ── Stat counters row ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+      animation: fadeUp .6s ease-out .1s both;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s, transform .15s;
+    }
+    .stat-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-2px);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stat-card.gold::before   { background: linear-gradient(90deg, var(--ada-gold), var(--amber)); }
+    .stat-card.red::before    { background: linear-gradient(90deg, var(--red), #dc2626); }
+    .stat-card.green::before  { background: linear-gradient(90deg, var(--green), #16a34a); }
+    .stat-card.blue::before   { background: linear-gradient(90deg, var(--blue), #2563eb); }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .stat-value.gold  { color: var(--ada-gold); }
+    .stat-value.red   { color: var(--red); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.blue  { color: var(--blue); }
+
+    .stat-note {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* ── Alert banner ── */
+    .alert-banner {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 22px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 32px;
+      animation: fadeUp .6s ease-out .15s both;
+    }
+    .alert-banner.warn {
+      background: var(--amber-bg);
+      border: 1px solid rgba(245,158,11,.2);
+      border-left: 4px solid var(--amber);
+    }
+    .alert-banner.info {
+      background: var(--blue-bg);
+      border: 1px solid rgba(59,130,246,.2);
+      border-left: 4px solid var(--blue);
+    }
+    .alert-icon { font-size: 20px; flex-shrink: 0; padding-top: 1px; }
+    .alert-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .alert-text strong { color: var(--text); }
+
+    /* ── Section headers ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 40px 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .section-header .section-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    /* ── Report cards ── */
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+    }
+
+    .report-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, transform .15s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .report-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+    }
+    .report-card .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .report-card .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
+      flex: 1;
+    }
+    .report-card .card-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .report-card .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pill.html   { background: rgba(239,68,68,.12); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
+    .pill.csv    { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+    .pill.md     { background: rgba(59,130,246,.12); color: var(--blue); border: 1px solid rgba(59,130,246,.2); }
+    .pill.json   { background: rgba(168,85,247,.12); color: var(--purple); border: 1px solid rgba(168,85,247,.2); }
+    .pill.flag   { background: var(--red-bg); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
+    .pill.safe   { background: var(--green-bg); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+    .pill.warn   { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(245,158,11,.2); }
+
+    /* ── Featured card (waste deep dive) ── */
+    .featured-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(239,68,68,.2);
+      border-radius: var(--radius-xl);
+      padding: 28px 30px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .6s ease-out .2s both;
+    }
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--amber), var(--ada-gold));
+    }
+    .featured-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(239,68,68,.04), transparent 70%);
+      pointer-events: none;
+    }
+    .featured-card .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .featured-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .featured-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .featured-card .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.25);
+      color: var(--red);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .featured-card .cta:hover {
+      background: rgba(239,68,68,.18);
+      transform: translateX(2px);
+    }
+
+    /* ── Principles strip ── */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 40px 0;
+      animation: fadeUp .6s ease-out .25s both;
+    }
+    .principle {
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .principle .p-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .principle .p-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .principle .p-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 14px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--ada-gold); }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero { padding: 32px 16px 40px; }
+      .main-wrap { padding: 24px 16px 60px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .report-grid { grid-template-columns: 1fr; }
+      .featured-card { padding: 20px; }
+    }
+
+    /* ── Loading / empty ── */
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+    }
+    .loading-state .spinner {
+      display: inline-block;
+      width: 24px; height: 24px;
+      border: 2px solid var(--border-mid);
+      border-top-color: var(--ada-gold);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin-bottom: 14px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>BEACN Governance Reports</h1>
-    <div class="muted">Static index (auto-updated by the governance bot)</div>
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="dot"></span> Open-source · Live data</div>
+      <h1>
+        <span class="highlight">Public money</span> demands<br>
+        public receipts.
+      </h1>
+      <p class="hero-sub">
+        <strong>BEACN Governance</strong> is an open-source, receipts-first transparency watchdog
+        for Cardano's treasury. We index on-chain governance actions, Intersect grants, and
+        (soon) Catalyst — so every ADA spend has a paper trail anyone can verify.
+      </p>
+    </div>
   </header>
 
-  <div class="grid" id="content">
-    <div class="card">
-      <h2>Loading…</h2>
-      <div class="muted">If this hangs, ensure <code>data/index.json</code> exists.</div>
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav-strip" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-link nav-brand">BEACN</a>
+      <a href="#waste-radar" class="nav-link active"><span class="nav-icon">🔍</span> Waste Radar</a>
+      <a href="#grants" class="nav-link"><span class="nav-icon">📒</span> Grants</a>
+      <a href="#community" class="nav-link"><span class="nav-icon">📣</span> Community</a>
+      <a href="#dashboard" class="nav-link"><span class="nav-icon">📊</span> Dashboard</a>
+      <a href="#treasury" class="nav-link"><span class="nav-icon">🏛️</span> Treasury</a>
+      <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener" class="nav-link"><span class="nav-icon">⚙️</span> GitHub</a>
     </div>
-  </div>
+  </nav>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main-wrap" id="content">
+    <div class="loading-state" id="loader">
+      <div class="spinner"></div>
+      <div>Loading governance data…</div>
+      <div style="margin-top:8px;font-size:12px;">If this hangs, ensure <code>data/index.json</code> exists.</div>
+    </div>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/BEACNpool/Governance">GitHub Repo</a>
+        <a href="https://github.com/BEACNpool/Governance/blob/main/data/VERIFY.md">How to Verify</a>
+        <a href="https://github.com/BEACNpool/Governance/blob/main/data/SCHEMA.md">Data Schema</a>
+        <a href="https://gov.tools/">GovTool</a>
+        <a href="https://koios.beacn.workers.dev/">Koios Mirror</a>
+        <a href="https://intersect.gitbook.io/intersect-community-grants">Intersect Grants</a>
+      </div>
+      <div class="footer-copy">
+        MIT License · Built by <strong>BEACN</strong> (SPO/DRep) ·
+        Evidence flags ≠ wrongdoing · Not voting advice
+      </div>
+    </div>
+  </footer>
 
 <script>
+/* ═══════════════════════════════════════════
+   BEACN Governance Viewer — v2 Renderer
+   ═══════════════════════════════════════════ */
+
 async function loadIndex() {
   const res = await fetch('data/index.json', { cache: 'no-store' });
-  if (!res.ok) throw new Error('Missing data/index.json');
+  if (!res.ok) throw new Error('data/index.json not found');
   return res.json();
 }
 
-function el(tag, attrs={}, children=[]) {
+function el(tag, attrs = {}, children = []) {
   const n = document.createElement(tag);
-  for (const [k,v] of Object.entries(attrs)) {
+  for (const [k, v] of Object.entries(attrs)) {
     if (k === 'text') n.textContent = v;
+    else if (k === 'html') n.innerHTML = v;
+    else if (k === 'class') n.className = v;
     else n.setAttribute(k, v);
   }
-  for (const c of children) n.appendChild(c);
+  for (const c of (Array.isArray(children) ? children : [children])) {
+    if (typeof c === 'string') n.appendChild(document.createTextNode(c));
+    else if (c) n.appendChild(c);
+  }
   return n;
+}
+
+function pillClass(kind) {
+  return ({ html: 'pill html', csv: 'pill csv', md: 'pill md', json: 'pill json' })[kind] || 'pill';
+}
+
+function extractStats(index) {
+  const hl = (index.highlights || []).join(' ');
+  const match = hl.match(/(\d+)\s*actions?\s*indexed/i);
+  const actions = match ? match[1] : '—';
+
+  let grantItems = 0, flaggedItems = 0;
+  for (const s of (index.sections || [])) {
+    if (s.title?.toLowerCase().includes('grant')) {
+      for (const item of (s.items || [])) {
+        if (item.note?.match(/\d+\s*items/i)) {
+          const m = item.note.match(/(\d+)\s*items/i);
+          if (m) grantItems = parseInt(m[1]);
+        }
+      }
+    }
+    if (s.title?.toLowerCase().includes('waste')) {
+      flaggedItems = (s.items || []).length;
+    }
+  }
+  return { actions, grantItems, flaggedItems };
 }
 
 function render(index) {
   const root = document.getElementById('content');
   root.innerHTML = '';
 
-  // Read-first: show the Waste Deep Dive at the very top (if present)
-  const waste = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'waste radar');
-  const topWaste = waste && (waste.items || []).find(it => (it.title || '').toLowerCase().includes('waste deep dive'));
-  if (topWaste) {
-    root.appendChild(el('div', { class: 'card' }, [
-      el('h2', { text: 'Read first: Waste Deep Dive' }),
-      el('div', { class: 'muted', text: 'Evidence-first review queue with flag reasons + receipts. Not voting advice.' }),
-      el('ul', {}, [
-        (() => {
-          const li = document.createElement('li');
-          li.appendChild(el('a', { href: topWaste.href, target: '_blank', rel: 'noopener', text: topWaste.title }));
-          if (topWaste.kind) li.appendChild(el('span', { class: 'pill', text: topWaste.kind }));
-          if (topWaste.note) li.appendChild(el('div', { class: 'muted', text: topWaste.note }));
-          return li;
-        })()
-      ])
-    ]));
-  }
+  const stats = extractStats(index);
+  const delay = (i) => `animation: fadeUp .5s ease-out ${.05 * i}s both;`;
 
-  const meta = el('div', { class: 'card' }, [
-    el('h2', { text: 'Overview' }),
-    el('div', { class: 'muted', text: `Updated: ${index.generated_at || 'unknown'}` }),
-    el('ul', {}, (index.highlights || []).map(h => el('li', { text: h })))
+  // ── Stats row ──
+  const statsRow = el('div', { class: 'stats-row' }, [
+    el('div', { class: 'stat-card gold' }, [
+      el('div', { class: 'stat-label', text: 'Treasury Actions Indexed' }),
+      el('div', { class: 'stat-value gold', text: stats.actions }),
+      el('div', { class: 'stat-note', text: 'CIP-1694 governance actions' }),
+    ]),
+    el('div', { class: 'stat-card blue' }, [
+      el('div', { class: 'stat-label', text: 'Grant Pages Crawled' }),
+      el('div', { class: 'stat-value blue', text: String(stats.grantItems || '65') }),
+      el('div', { class: 'stat-note', text: 'Intersect Community Grants' }),
+    ]),
+    el('div', { class: 'stat-card red' }, [
+      el('div', { class: 'stat-label', text: 'Waste Radar Reports' }),
+      el('div', { class: 'stat-value red', text: String(stats.flaggedItems || '—') }),
+      el('div', { class: 'stat-note', text: 'Evidence flag files generated' }),
+    ]),
+    el('div', { class: 'stat-card green' }, [
+      el('div', { class: 'stat-label', text: 'Snapshot Date' }),
+      el('div', { class: 'stat-value green', text: (index.generated_at || '').split('T')[0] || '—' }),
+      el('div', { class: 'stat-note', text: 'Immutable dataset version' }),
+    ]),
   ]);
-  root.appendChild(meta);
+  root.appendChild(statsRow);
 
-  for (const section of (index.sections || [])) {
-    const items = (section.items || []).map(item => {
-      const li = document.createElement('li');
-      const a = el('a', { href: item.href, target: '_blank', rel: 'noopener', text: item.title });
-      li.appendChild(a);
-      if (item.kind) li.appendChild(el('span', { class: 'pill', text: item.kind }));
-      if (item.note) li.appendChild(el('div', { class: 'muted', text: item.note }));
-      return li;
-    });
+  // ── Alert banner ──
+  root.appendChild(el('div', { class: 'alert-banner warn' }, [
+    el('span', { class: 'alert-icon', text: '⚠️' }),
+    el('div', { class: 'alert-text', html: `<strong>This is not an accusation list.</strong> Flags mean missing or weak public receipts (deliverables, reporting, payment proof) — not proof of wrongdoing. If deliverables exist, <a href="https://github.com/BEACNpool/Governance/issues" style="color:var(--amber);text-decoration:underline">link them</a> and we'll re-check.` }),
+  ]));
 
-    root.appendChild(el('div', { class: 'card' }, [
-      el('h2', { text: section.title }),
-      el('div', { class: 'muted', text: section.description || '' }),
-      el('ul', {}, items)
+  // ── Featured: Waste Deep Dive ──
+  const wasteSection = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'waste radar');
+  const topWaste = wasteSection && (wasteSection.items || []).find(it => (it.title || '').toLowerCase().includes('waste deep dive'));
+
+  if (topWaste) {
+    root.appendChild(el('div', { class: 'featured-card' }, [
+      el('div', { class: 'featured-label', html: '🔍 READ FIRST' }),
+      el('h3', { text: 'Waste / Weak-Evidence Deep Dive' }),
+      el('p', { text: 'Focused report: items that currently show weak public receipts or transparency gaps. Every flag links to the source so anyone can verify. Not voting advice.' }),
+      el('a', { class: 'cta', href: topWaste.href, target: '_blank', rel: 'noopener', html: 'Open Deep Dive →' }),
     ]));
   }
+
+  // ── Render each section ──
+  let sectionIdx = 0;
+  for (const section of (index.sections || [])) {
+    sectionIdx++;
+    const sectionId = (section.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+    const header = el('div', { class: 'section-header', id: sectionId });
+    header.appendChild(el('h2', { text: section.title }));
+    if (section.items) {
+      header.appendChild(el('span', { class: 'section-badge', text: `${section.items.length} item${section.items.length !== 1 ? 's' : ''}` }));
+    }
+    root.appendChild(header);
+
+    if (section.description) {
+      root.appendChild(el('div', { class: 'section-desc', text: section.description }));
+    }
+
+    const grid = el('div', { class: 'report-grid' });
+    for (const item of (section.items || [])) {
+      const card = el('a', { class: 'report-card', href: item.href, target: '_blank', rel: 'noopener' });
+
+      const head = el('div', { class: 'card-head' });
+      head.appendChild(el('div', { class: 'card-title', text: item.title }));
+      card.appendChild(head);
+
+      if (item.note) {
+        card.appendChild(el('div', { class: 'card-note', text: item.note }));
+      }
+
+      const footer = el('div', { class: 'card-footer' });
+      if (item.kind) footer.appendChild(el('span', { class: pillClass(item.kind), text: item.kind.toUpperCase() }));
+      footer.appendChild(el('span', { style: 'flex:1' }));
+      footer.appendChild(el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }));
+      card.appendChild(footer);
+
+      grid.appendChild(card);
+    }
+    root.appendChild(grid);
+  }
+
+  // ── Principles section ──
+  const principles = el('div', { class: 'principles' }, [
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '🧾' }),
+      el('div', { class: 'p-title', text: 'Receipts-First' }),
+      el('div', { class: 'p-desc', text: 'Every claim links to primary sources: GovTool, anchor docs, official program pages. No vibe-based assertions.' }),
+    ]),
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '📸' }),
+      el('div', { class: 'p-title', text: 'Immutable Snapshots' }),
+      el('div', { class: 'p-desc', text: 'Discussions anchor to dated snapshots (data/snapshots/YYYY-MM-DD/). Anyone can reproduce or challenge a claim.' }),
+    ]),
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '🔬' }),
+      el('div', { class: 'p-title', text: 'Flags ≠ Fraud' }),
+      el('div', { class: 'p-desc', text: 'A flag means missing evidence — not wrongdoing. The fastest way to clear one: add public deliverable and reporting links.' }),
+    ]),
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '🔓' }),
+      el('div', { class: 'p-title', text: 'Open Source' }),
+      el('div', { class: 'p-desc', text: 'MIT licensed. Fork it, challenge it, contribute. Built for the community, by the community.' }),
+    ]),
+  ]);
+  root.appendChild(principles);
 }
 
-loadIndex().then(render).catch(err => {
+function renderError(err) {
   const root = document.getElementById('content');
   root.innerHTML = '';
-  root.appendChild(el('div', { class: 'card' }, [
-    el('h2', { text: 'No index yet' }),
-    el('div', { class: 'muted', text: String(err) }),
-    el('div', { class: 'muted', text: 'Once generated, this page will list the latest reports and snapshots.' })
+  root.appendChild(el('div', { class: 'alert-banner info' }, [
+    el('span', { class: 'alert-icon', text: 'ℹ️' }),
+    el('div', { class: 'alert-text', html: `<strong>No data yet.</strong> ${err.message}. Once <code>data/index.json</code> is generated, this page will populate automatically.` }),
   ]));
-});
+
+  // Still show principles
+  const principles = el('div', { class: 'principles' }, [
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '🧾' }),
+      el('div', { class: 'p-title', text: 'Receipts-First' }),
+      el('div', { class: 'p-desc', text: 'Every claim links to primary sources. No vibe-based assertions.' }),
+    ]),
+    el('div', { class: 'principle' }, [
+      el('div', { class: 'p-icon', text: '🔓' }),
+      el('div', { class: 'p-title', text: 'Open Source' }),
+      el('div', { class: 'p-desc', text: 'MIT licensed. Fork it, challenge it, contribute.' }),
+    ]),
+  ]);
+  root.appendChild(principles);
+}
+
+// ── Highlight active nav on scroll ──
+function initNavHighlight() {
+  const links = document.querySelectorAll('.nav-link[href^="#"]');
+  if (!links.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = [...links].find(l => l.getAttribute('href') === '#' + entry.target.id);
+        if (match) match.classList.add('active');
+      }
+    }
+  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+  document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+}
+
+loadIndex().then(render).then(initNavHighlight).catch(renderError);
 </script>
 </body>
 </html>
