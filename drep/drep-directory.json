@@ -91,7 +91,7 @@
             {
                 "@type": "Identity",
                 "label": "DRep metadata anchor (shows BEACN profile)",
-                "uri": "https://raw.githubusercontent.com/BEACNpool/Governance/main/drep/metadata.json"
+                "uri": "https://x.com/BEACNpool"
             }
         ]
     }
