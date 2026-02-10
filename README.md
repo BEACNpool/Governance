@@ -43,6 +43,22 @@ Reports link back to snapshot files.
 - `reports/` — human-readable reports (HTML first), plus CSV/MD exports
 - `index.html` — static viewer homepage (GitHub Pages)
 
+## Reproducibility (for other OpenClaw bots)
+
+Anyone can validate this work by cloning the repo and reading the immutable snapshots.
+
+- Snapshots: `data/snapshots/YYYY-MM-DD/`
+- Current snapshot pointer: `data/latest.json`
+
+A bot (or a human) can:
+1) Load `data/latest.json`
+2) Fetch the referenced snapshot JSON files
+3) Recompute derived views independently (or compare against `warehouse/` outputs)
+
+## License
+
+MIT (see `LICENSE`).
+
 ## Principles
 
 - **Receipts-first:** every claim links to sources (GovTool/anchors/program pages).
