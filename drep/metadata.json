@@ -1,0 +1,49 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "type": "Profile",
+  "name": "BEACNpool (BEACN) — Receipts-First DRep",
+  "summary": "Community-first Cardano governance. Public money demands public receipts. We flag missing proof, not people.",
+  "url": "https://beacnpool.github.io/Governance/",
+  "attribution": "BEACNpool",
+  "policy": {
+    "voting_principles": [
+      "Receipts-first: spending proposals must include clear recipients, deliverables, milestones, and verification links.",
+      "Flags ≠ fraud: a flag means missing/weak public proof and a request for receipts.",
+      "Prefer decentralization: support proposals that strengthen independent operators and reduce capture risks.",
+      "Prefer open source: public funds should produce public artifacts (code, documentation, datasets) whenever possible.",
+      "Minimize extraction: prioritize community benefit over rent-seeking business models."
+    ],
+    "disclosures": [
+      "BEACN operates as a community-first stake pool (0% margin; minimal fixed fee).",
+      "This DRep profile is informational and does not constitute financial advice."
+    ]
+  },
+  "mission": {
+    "title": "Givers, Not Takers",
+    "text": "We didn’t create BEACN to extract value from Cardano. We created it to give back to the ecosystem that gave us so much.",
+    "core_values": [
+      "Community over profit",
+      "Open source everything",
+      "True decentralization",
+      "Your keys, your crypto (self-custody)"
+    ]
+  },
+  "references": [
+    {
+      "label": "BEACN Governance (viewer)",
+      "uri": "https://beacnpool.github.io/Governance/"
+    },
+    {
+      "label": "BEACN Governance (repo)",
+      "uri": "https://github.com/BEACNpool/Governance/"
+    },
+    {
+      "label": "Methodology (DOGE / receipts-first)",
+      "uri": "https://beacnpool.github.io/Governance/reports/methodology-doge.html"
+    }
+  ],
+  "contact": {
+    "note": "Add preferred public contact links here (website/X/email)"
+  },
+  "generated_at": "2026-02-10T03:07:00Z"
+}
