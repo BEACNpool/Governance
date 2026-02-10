@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-02-10T00:02:00Z",
   "highlights": [
+    "Grants ledger generated (2026-02-09)",
     "Waste deep dive generated (2026-02-09)",
     "DOGE methodology published (2026-02-09)",
     "Community summary generated (2026-02-09)",
@@ -56,6 +57,18 @@
           "title": "Intersect Grants \u2014 Cohort 3 Waste Radar \u2014 2026-02-09 (CSV)",
           "href": "reports/intersect-grants-cohort-3-waste-radar-2026-02-09.csv",
           "kind": "csv"
+        }
+      ]
+    },
+    {
+      "title": "Grants",
+      "description": "All grant-style funded projects indexed, sorted by ADA, with direct links to deliverables/evidence.",
+      "items": [
+        {
+          "title": "Grants Ledger \u2014 2026-02-09 (HTML)",
+          "href": "reports/grants-ledger-2026-02-09.html",
+          "kind": "html",
+          "note": "Shows ADA amounts + direct receivable links (when available)."
         }
       ]
     },
