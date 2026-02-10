@@ -1,0 +1,98 @@
+{
+  "@context": {
+    "@language": "en-us",
+    "CIP100": "https://github.com/cardano-foundation/CIPs/blob/master/CIP-0100/README.md#",
+    "CIP119": "https://github.com/cardano-foundation/CIPs/blob/master/CIP-0119/README.md#",
+    "hashAlgorithm": "CIP100:hashAlgorithm",
+    "body": {
+      "@id": "CIP119:body",
+      "@context": {
+        "references": {
+          "@id": "CIP119:references",
+          "@container": "@set",
+          "@context": {
+            "GovernanceMetadata": "CIP100:GovernanceMetadataReference",
+            "Identity": "CIP119:IdentityReference",
+            "Link": "CIP119:LinkReference",
+            "Other": "CIP100:OtherReference",
+            "label": "CIP100:reference-label",
+            "uri": "CIP100:reference-uri",
+            "referenceHash": {
+              "@id": "CIP119:referenceHash",
+              "@context": {
+                "hashDigest": "CIP119:hashDigest",
+                "hashAlgorithm": "CIP100:hashAlgorithm"
+              }
+            }
+          }
+        },
+        "paymentAddress": "CIP119:paymentAddress",
+        "givenName": "CIP119:givenName",
+        "image": {
+          "@id": "CIP119:image",
+          "@context": {
+            "ImageObject": "https://schema.org/ImageObject",
+            "contentUrl": "CIP119:contentUrl",
+            "sha256": "CIP119:sha256"
+          }
+        },
+        "objectives": "CIP119:objectives",
+        "motivations": "CIP119:motivations",
+        "qualifications": "CIP119:qualifications",
+        "doNotList": "CIP119:doNotList"
+      }
+    },
+    "authors": {
+      "@id": "CIP100:authors",
+      "@container": "@set",
+      "@context": {
+        "name": "http://xmlns.com/foaf/0.1/name",
+        "witness": {
+          "@id": "CIP100:witness",
+          "@context": {
+            "witnessAlgorithm": "CIP100:witnessAlgorithm",
+            "publicKey": "CIP100:publicKey",
+            "signature": "CIP100:signature"
+          }
+        }
+      }
+    }
+  },
+  "authors": [],
+  "hashAlgorithm": "blake2b-256",
+  "body": {
+    "doNotList": true,
+    "givenName": "BEACNpool",
+    "image": {
+      "@type": "ImageObject",
+      "contentUrl": "https://beacnpool.org/pfp.png",
+      "sha256": "2029733cacaf310ec0c6548a71a60a9bb78d5b45c600cdf759525f9aa35f60c4"
+    },
+    "motivations": "BEACN was built on a “Givers, Not Takers” philosophy: we didn’t create BEACN to extract value from Cardano—we created it to give back to the ecosystem that gave us so much. We run community-first operations (0% margin, minimal fixed fee) and build open-source tools for transparency. Becoming a DRep is a continuation of that mission: protect the treasury, encourage accountability, and help delegators make informed decisions with evidence, not vibes.",
+    "objectives": "Public money demands public receipts. As a DRep, BEACNpool will push for measurable outcomes, transparent spending, and reproducible evidence. We support proposals that strengthen decentralization, open-source infrastructure, and community benefit. For treasury spending, we expect clear recipients, deliverables, milestones, timelines, and verification links. We use a “flags ≠ fraud” standard: flags indicate missing/weak public proof and a request for receipts—not accusations.",
+    "paymentAddress": "addr1q97us97nvjjqn5t0lj6xufg523z7kx8tt0nf0nl20xlz6rk4xeumycg4kpk9hrv5m9ngv3ky4w47lgpv7uatysw6rtkqk3l4mq",
+    "qualifications": "Independent Cardano SPO with community-first operations (0% margin; minimal fixed fee).\nOpen-source governance transparency tooling and reproducible datasets (BEACN Governance / “Cardano DOGE” receipts-first approach).\nFocus areas: treasury accountability, proposal evidence quality, deliverable verification, and decentralization risk reduction.\nTechnical capability to audit metadata/anchors, maintain public dashboards, and publish verifiable snapshots for community review.",
+    "references": [
+      {
+        "@type": "Link",
+        "label": "BEACN Governance dashboard",
+        "uri": "https://beacnpool.github.io/Governance/"
+      },
+      {
+        "@type": "Link",
+        "label": "Methodology (receipts-first / flags ≠ fraud)",
+        "uri": "https://beacnpool.github.io/Governance/reports/methodology-doge.html"
+      },
+      {
+        "@type": "Link",
+        "label": "GitHub repo (open source + verification)",
+        "uri": "https://github.com/BEACNpool/Governance/"
+      },
+      {
+        "@type": "Identity",
+        "label": "DRep metadata anchor (shows BEACN profile)",
+        "uri": "https://x.com/BEACNpool"
+      }
+    ]
+  }
+}
