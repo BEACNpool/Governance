@@ -582,9 +582,8 @@
         public receipts.
       </h1>
       <p class="hero-sub">
-        <strong>BEACN Governance</strong> is an open-source, receipts-first transparency watchdog
-        for Cardano's treasury. We index on-chain governance actions, Intersect grants, and
-        (soon) Catalyst — so every ADA spend has a paper trail anyone can verify.
+        <strong>BEACN Governance</strong> publishes receipts-first, source-linked governance and treasury research.
+        Everything here is verifiable via primary sources (GovTool, anchors, and program pages).
       </p>
     </div>
   </header>
@@ -598,6 +597,7 @@
       <a href="#community" class="nav-link"><span class="nav-icon">📣</span> Community</a>
       <a href="#dashboard" class="nav-link"><span class="nav-icon">📊</span> Dashboard</a>
       <a href="#treasury" class="nav-link"><span class="nav-icon">🏛️</span> Treasury</a>
+      <a href="#drep-votes" class="nav-link"><span class="nav-icon">🗳️</span> DRep Votes</a>
       <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener" class="nav-link"><span class="nav-icon">⚙️</span> GitHub</a>
     </div>
   </nav>
@@ -716,8 +716,46 @@ function render(index) {
   // ── Alert banner ──
   root.appendChild(el('div', { class: 'alert-banner warn' }, [
     el('span', { class: 'alert-icon', text: '⚠️' }),
-    el('div', { class: 'alert-text', html: `<strong>This is not an accusation list.</strong> Flags mean missing or weak public receipts (deliverables, reporting, payment proof) — not proof of wrongdoing. If deliverables exist, <a href="https://github.com/BEACNpool/Governance/issues" style="color:var(--amber);text-decoration:underline">link them</a> and we'll re-check.` }),
+    el('div', { class: 'alert-text', html: `<strong>Flags ≠ fraud.</strong> Flags indicate missing/weak public receipts (deliverables, reporting, payment proof) — not proof of wrongdoing. If you have receipts, <a href="https://github.com/BEACNpool/Governance/issues" style="color:var(--amber);text-decoration:underline">link them</a> for re-check.` }),
   ]));
+
+  // ── DRep voting ──
+  const drepHeader = el('div', { class: 'section-header', id: 'drep-votes' });
+  drepHeader.appendChild(el('h2', { text: 'DRep voting' }));
+  drepHeader.appendChild(el('span', { class: 'section-badge', text: 'receipts + rationales' }));
+  root.appendChild(drepHeader);
+  root.appendChild(el('div', { class: 'section-desc', text: 'Human-readable vote rationales with vote transaction hashes and anchor URLs.' }));
+
+  const drepGrid = el('div', { class: 'report-grid' }, [
+    (() => {
+      const card = el('a', { class: 'report-card', href: 'drep/votes/reader.html', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [
+        el('div', { class: 'card-title', text: 'Vote rationale reader' })
+      ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'Browse each vote rationale and the associated receipts.' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [
+        el('span', { class: 'pill html', text: 'HTML' }),
+        el('span', { style: 'flex:1' }),
+        el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }),
+      ]));
+      return card;
+    })(),
+    (() => {
+      const card = el('a', { class: 'report-card', href: 'drep/votes/2026-02-10/', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [
+        el('div', { class: 'card-title', text: 'Vote receipts (2026-02-10)' })
+      ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'Markdown + JSON-LD files for this voting session.' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [
+        el('span', { class: 'pill md', text: 'MD' }),
+        el('span', { class: 'pill json', text: 'JSON' }),
+        el('span', { style: 'flex:1' }),
+        el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }),
+      ]));
+      return card;
+    })(),
+  ]);
+  root.appendChild(drepGrid);
 
   // ── Featured: Waste Deep Dive ──
   const wasteSection = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'waste radar');
@@ -772,31 +810,8 @@ function render(index) {
     root.appendChild(grid);
   }
 
-  // ── Principles section ──
-  const principles = el('div', { class: 'principles' }, [
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '🧾' }),
-      el('div', { class: 'p-title', text: 'Receipts-First' }),
-      el('div', { class: 'p-desc', text: 'Every claim links to primary sources: GovTool, anchor docs, official program pages. No vibe-based assertions.' }),
-    ]),
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '📸' }),
-      el('div', { class: 'p-title', text: 'Immutable Snapshots' }),
-      el('div', { class: 'p-desc', text: 'Discussions anchor to dated snapshots (data/snapshots/YYYY-MM-DD/). Anyone can reproduce or challenge a claim.' }),
-    ]),
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '🔬' }),
-      el('div', { class: 'p-title', text: 'Flags ≠ Fraud' }),
-      el('div', { class: 'p-desc', text: 'A flag means missing evidence — not wrongdoing. The fastest way to clear one: add public deliverable and reporting links.' }),
-    ]),
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '🔓' }),
-      el('div', { class: 'p-title', text: 'Open Source' }),
-      el('div', { class: 'p-desc', text: 'MIT licensed. Fork it, challenge it, contribute. Built for the community, by the community.' }),
-    ]),
-  ]);
-  root.appendChild(principles);
 }
+
 
 function renderError(err) {
   const root = document.getElementById('content');
@@ -806,21 +821,8 @@ function renderError(err) {
     el('div', { class: 'alert-text', html: `<strong>No data yet.</strong> ${err.message}. Once <code>data/index.json</code> is generated, this page will populate automatically.` }),
   ]));
 
-  // Still show principles
-  const principles = el('div', { class: 'principles' }, [
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '🧾' }),
-      el('div', { class: 'p-title', text: 'Receipts-First' }),
-      el('div', { class: 'p-desc', text: 'Every claim links to primary sources. No vibe-based assertions.' }),
-    ]),
-    el('div', { class: 'principle' }, [
-      el('div', { class: 'p-icon', text: '🔓' }),
-      el('div', { class: 'p-title', text: 'Open Source' }),
-      el('div', { class: 'p-desc', text: 'MIT licensed. Fork it, challenge it, contribute.' }),
-    ]),
-  ]);
-  root.appendChild(principles);
 }
+
 
 // ── Highlight active nav on scroll ──
 function initNavHighlight() {
