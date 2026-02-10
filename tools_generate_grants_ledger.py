@@ -154,16 +154,18 @@ def main():
     out.append("</style>")
     out.append("</head><body>")
 
-    out.append(f"<h1>Grants Ledger — {today} <span class='pill'>AI-indexed</span></h1>")
-    out.append("<div class='muted'>This page aggregates registry-style grant listings and highlights what the public can directly verify (links). It is not voting advice.</div>")
+    out.append(f"<h1>DOGE Grants Spend Ledger — {today} <span class='pill'>AI-indexed</span></h1>")
+    out.append("<div class='muted'><strong>DOGE lens:</strong> public money demands public receipts. This page spotlights where ADA is allocated and whether the public can <em>directly verify</em> deliverables via links.</div>")
 
-    out.append("<div class='card warn'><strong>Important:</strong><ul>")
-    out.append("<li>This ledger is about <strong>transparency</strong>: how much ADA is listed + where the receipts are.</li>")
-    out.append("<li>Unknown amounts are excluded from totals until confirmed (we don’t guess).</li>")
+    out.append("<div class='card warn'><strong>Read this before scrolling:</strong><ul>")
+    out.append("<li><strong>Fact-driven, not vibes.</strong> Amounts come from official program pages. If a page doesn’t state a value clearly, we mark it unknown and exclude it from totals.</li>")
+    out.append("<li><strong>Not voting advice.</strong> This is a transparency ledger to support public discussion and accountability.</li>")
+    out.append("<li><strong>Not an accusation list.</strong> Missing links = missing public receipts. The easiest way to clear scrutiny is to publish/attach deliverable + reporting links on the official page.</li>")
     out.append("</ul></div>")
 
     out.append("<div class='card'>")
     out.append("<h2>Top-line totals (known values only)</h2>")
+    out.append("<div class='muted'>This is the ‘maximum savings ceiling’ for this page <em>only if</em> every listed item were wasteful (unlikely). The point is to quantify exposure and demand receipts, not to accuse.</div>")
     out.append("<ul>")
     out.append(f"<li><strong>Total items indexed:</strong> {len(grants)}</li>")
     out.append(f"<li><strong>Items with stated ADA value:</strong> {len(with_amount)} (unknown: {len(grants)-len(with_amount)})</li>")
