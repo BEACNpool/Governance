@@ -1,0 +1,57 @@
+{
+  "date": "2026-02-10",
+  "count": 5,
+  "items": [
+    {
+      "govActionId": "gov_action13pzmlsmmktmfareqpl3gzj9nm63ugwvmp3y7urkjhd8rf89tn6ms9hgdjz",
+      "actionType": "Info Action",
+      "vote": "YES",
+      "voteTxHash": "caa489290601008f7891d551ff3d795f00cef97e75834b421d8e01e66d10903c",
+      "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreiaz3xje72qu2go4umydvkhv6xmm6hjkhgbnreqi2s3ixydjguzkju",
+      "title": "YES — Name Protocol Version 11 hard fork: van Rossem",
+      "voterName": "BEACNpool",
+      "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n"
+    },
+    {
+      "govActionId": "gov_action1cgdsp7g0rr7wgqp7maptpvx525fxuqwfgm5qe3f5r20ew5x2772s2z23tt",
+      "actionType": "Protocol Parameter Change",
+      "vote": "YES",
+      "voteTxHash": "418f8a355a67516d5a7a685f40d8e2ff38bbd99d3139e21f9203f15a4f4e0862",
+      "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreicrb4esd47a2epounxg2v7ihzsvavrm5kjca2eco3uru3slqvjg2m",
+      "title": "YES — Increase Transaction and Block Memory Units (Part 1 of 2)",
+      "voterName": "BEACNpool",
+      "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n"
+    },
+    {
+      "govActionId": "gov_action1fvgw27fjpr9c7g582mszzyez0jgkqgjgatzdnyngrg8wwc9kcn3qrgch3v",
+      "actionType": "Treasury Withdrawal",
+      "vote": "ABSTAIN",
+      "voteTxHash": "3f96cb9ada65e36ac6986b0636c6944eb915a4faf03cd87c11d4495d7891dd69",
+      "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreidhk42a2feh73d3e64zsixnr2wrv277vh5huchvdu6mhh4ayn7t4a",
+      "title": "ABSTAIN — Cardano DeFi Liquidity Budget - Withdrawal 1 (₳500,000)",
+      "voterName": "BEACNpool",
+      "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n"
+    },
+    {
+      "govActionId": "gov_action1mldvtys6ketjg87wtpvr6cd77kdrd8sp62a8sxgadhmxx2s8lh7s3fau5y",
+      "actionType": "Protocol Parameter Change",
+      "vote": "ABSTAIN",
+      "voteTxHash": "5886e33fc15dbf9200ee88c7fab61c718e14bf14faada6dfa881ac7fa01e57fa",
+      "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreiht3xim64dya3nniia6v63nmdfd2fljm3rqlconhobymldhc3dzg4",
+      "title": "ABSTAIN — Reduce minimum Constitutional Committee size (committeeMinSize) from 7 to 5",
+      "voterName": "BEACNpool",
+      "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n"
+    },
+    {
+      "govActionId": "gov_action1wwjwkg2g0qwr0mehey9r8gwn6qz3r28wl6wdl2s75kfmpy8j87tqqtft92",
+      "actionType": "Info Action",
+      "vote": "YES",
+      "voteTxHash": "bd2924110b0c2114e329528cdb5d00a0f42efa6dfddd9e740ffaff150a83bcde",
+      "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreifmvtlxhaerzh4cuphzlmpd4x5lgc2bqe3czt3a4vm6jyv67lsulq",
+      "title": "YES — Net Change Limit of 300 Million ADA for Epochs 613–713",
+      "voterName": "BEACNpool",
+      "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n"
+    }
+  ],
+  "folder": "drep/votes/2026-02-10/json"
+}

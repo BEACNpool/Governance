@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "govActionId": "https://github.com/cardano-foundation/CIPs/blob/master/CIP-0100/README.md#reference-uri",
+    "vote": "https://schema.org/actionStatus",
+    "voteTxHash": "https://schema.org/identifier",
+    "anchorUrl": "https://schema.org/url",
+    "voterId": "https://schema.org/identifier",
+    "title": "https://schema.org/name",
+    "rationale": "https://schema.org/text",
+    "actionType": "https://schema.org/additionalType",
+    "timestamp": "https://schema.org/dateCreated"
+  },
+  "title": "YES — Name Protocol Version 11 hard fork: van Rossem",
+  "govActionId": "gov_action13pzmlsmmktmfareqpl3gzj9nm63ugwvmp3y7urkjhd8rf89tn6ms9hgdjz",
+  "actionType": "Info Action",
+  "vote": "YES",
+  "voteTxHash": "caa489290601008f7891d551ff3d795f00cef97e75834b421d8e01e66d10903c",
+  "anchorUrl": "https://ipfs.blockfrost.dev/ipfs/bafkreiaz3xje72qu2go4umydvkhv6xmm6hjkhgbnreqi2s3ixydjguzkju",
+  "voterName": "BEACNpool",
+  "voterId": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n",
+  "rationale": "(as submitted)\n\nI’m voting YES because this is a low-risk, non-monetary commemorative naming decision that appropriately honors a meaningful Cardano community contributor and continues an established network tradition.\n\nWhy YES\n\n- Appropriate for an Info Action: This proposal does not change protocol parameters or treasury flows; it’s a community-facing naming decision with minimal operational risk.\n- Continuity with Cardano tradition: Cardano has consistently named eras/hard forks to recognize key figures and respected community members (e.g., Vasil, Chang, Plomin). “van Rossem” fits that precedent.\n- Genuine community impact: The rationale credibly documents Max van Rossem’s contributions across governance and community building—constitution work, CC election working group leadership, Dutch DRep collective participation, and ecosystem projects (e.g., AdaMoments).\n- Positive cultural signal: Recognizing service and constructive leadership reinforces the values Cardano wants to promote: civic contribution, governance stewardship, and community cohesion.\n\nBottom line: This is a respectful memorial naming aligned with precedent and carries essentially no technical downside, so YES.",
+  "sourceMd": "drep/votes/2026-02-10/gov_action13pzmlsmmktmfareqpl3gzj9nm63ugwvmp3y7urkjhd8rf89tn6ms9hgdjz-yes.md"
+}

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACNpool DRep Vote Rationale Reader</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: #121a27;
+      --muted: #9fb0c7;
+      --text: #e8eef8;
+      --accent: #7aa7ff;
+      --ok: #43d19e;
+      --warn: #ffcc66;
+      --bad: #ff6b6b;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    body { margin:0; font-family: var(--sans); background: var(--bg); color: var(--text); }
+    header { padding: 20px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    h1 { margin: 0 0 6px 0; font-size: 18px; }
+    .sub { color: var(--muted); font-size: 13px; }
+    main { display: grid; grid-template-columns: 340px 1fr; gap: 14px; padding: 14px; }
+    @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+
+    .card { background: var(--panel); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; }
+    .card h2 { font-size: 14px; margin: 0; padding: 12px 12px 10px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .list { padding: 8px; }
+    .item { padding: 10px 10px; border-radius: 10px; cursor: pointer; border: 1px solid transparent; }
+    .item:hover { border-color: rgba(122,167,255,.35); background: rgba(122,167,255,.06); }
+    .item.active { border-color: rgba(122,167,255,.75); background: rgba(122,167,255,.10); }
+    .title { font-size: 13px; line-height: 1.2; margin-bottom: 6px; }
+    .meta { font-size: 12px; color: var(--muted); display:flex; gap:10px; flex-wrap: wrap; }
+    .pill { font-family: var(--mono); font-size: 11px; padding: 2px 6px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); color: var(--muted); }
+    .vote-YES { color: var(--ok); border-color: rgba(67,209,158,.35); }
+    .vote-ABSTAIN { color: var(--warn); border-color: rgba(255,204,102,.35); }
+    .vote-NO { color: var(--bad); border-color: rgba(255,107,107,.35); }
+
+    .detail { padding: 12px; }
+    .grid { display:grid; grid-template-columns: 150px 1fr; gap: 8px 12px; align-items: start; }
+    .k { color: var(--muted); font-size: 12px; }
+    .v { font-family: var(--mono); font-size: 12px; overflow-wrap:anywhere; }
+    .v a { color: var(--accent); text-decoration: none; }
+    .v a:hover { text-decoration: underline; }
+
+    .section { margin-top: 12px; }
+    .section h3 { margin: 0 0 8px 0; font-size: 13px; }
+    pre { margin: 0; padding: 12px; background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; white-space: pre-wrap; overflow-wrap:anywhere; line-height: 1.35; font-size: 12px; }
+
+    .statusline { display:flex; gap: 10px; flex-wrap:wrap; margin-top: 10px; }
+    .status { font-size: 12px; color: var(--muted); }
+    .status strong { color: var(--text); }
+    .status.bad strong { color: var(--bad); }
+    .status.ok strong { color: var(--ok); }
+
+    footer { padding: 14px 18px; color: var(--muted); font-size: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+    code { font-family: var(--mono); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BEACNpool DRep Vote Rationale Reader</h1>
+    <div class="sub">
+      Static viewer for vote rationale JSON-LD receipts in this repo. Validates basic formatting (IDs/hashes/URLs) and links to GovTool/IPFS.
+    </div>
+  </header>
+
+  <main>
+    <section class="card" id="left">
+      <h2>Votes</h2>
+      <div class="list" id="list">Loading…</div>
+    </section>
+
+    <section class="card" id="right">
+      <h2>Details</h2>
+      <div class="detail" id="detail">Select a vote on the left.</div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      Data source: <code>drep/votes/2026-02-10/json/index.json</code> (edit the loader in this file to point at other dates).
+    </div>
+  </footer>
+
+<script>
+const INDEX_URL = './2026-02-10/json/index.json';
+
+function isHex(str, n) {
+  return typeof str === 'string' && str.length === n && /^[0-9a-f]+$/i.test(str);
+}
+function isUrl(str) {
+  try { new URL(str); return true; } catch { return false; }
+}
+function shortHex(h) {
+  if (!h || typeof h !== 'string') return '';
+  return h.slice(0,8) + '…' + h.slice(-8);
+}
+
+function validateItem(it) {
+  const problems = [];
+  if (!it.govActionId || !String(it.govActionId).startsWith('gov_action1')) problems.push('govActionId missing/invalid');
+  if (!['YES','NO','ABSTAIN'].includes(it.vote)) problems.push('vote missing/invalid');
+  if (!isHex(it.voteTxHash || '', 64)) problems.push('voteTxHash not 64-hex');
+  if (it.anchorUrl && !isUrl(it.anchorUrl)) problems.push('anchorUrl invalid URL');
+  if (it.voterId && !String(it.voterId).startsWith('drep1')) problems.push('voterId unexpected');
+  return problems;
+}
+
+function renderList(items) {
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+
+  items.forEach((it, idx) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.idx = idx;
+
+    const problems = validateItem(it);
+
+    div.innerHTML = `
+      <div class="title">${escapeHtml(it.title || it.govActionId || 'vote')}</div>
+      <div class="meta">
+        <span class="pill vote-${escapeHtml(it.vote)}">${escapeHtml(it.vote)}</span>
+        <span class="pill">${escapeHtml(it.actionType || '')}</span>
+        <span class="pill">tx ${escapeHtml(shortHex(it.voteTxHash || ''))}</span>
+        ${problems.length ? `<span class="pill" style="color: var(--bad); border-color: rgba(255,107,107,.35)">⚠ ${problems.length} issue(s)</span>` : `<span class="pill" style="color: var(--ok); border-color: rgba(67,209,158,.35)">OK</span>`}
+      </div>
+    `;
+
+    div.addEventListener('click', () => select(idx));
+    list.appendChild(div);
+  });
+}
+
+async function select(idx) {
+  document.querySelectorAll('.item').forEach(el => el.classList.remove('active'));
+  const active = document.querySelector(`.item[data-idx="${idx}"]`);
+  if (active) active.classList.add('active');
+
+  const it = window.__items[idx];
+  const detail = document.getElementById('detail');
+  detail.innerHTML = 'Loading…';
+
+  // Load full JSON-LD file by convention
+  const filename = `${it.govActionId}-${it.vote.toLowerCase()}.jsonld`;
+  const url = `./2026-02-10/json/${filename}`;
+
+  let full;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    full = await res.json();
+  } catch (e) {
+    detail.innerHTML = `<div class="status bad">Could not load ${escapeHtml(url)}: ${escapeHtml(String(e))}</div>`;
+    return;
+  }
+
+  const problems = validateItem(full);
+
+  const govtoolUrl = `https://gov.tools/governance_actions/${encodeURIComponent(full.govActionId)}`;
+
+  detail.innerHTML = `
+    <div class="grid">
+      <div class="k">Vote</div><div class="v"><span class="pill vote-${escapeHtml(full.vote)}">${escapeHtml(full.vote)}</span></div>
+      <div class="k">Action type</div><div class="v">${escapeHtml(full.actionType || '')}</div>
+      <div class="k">Governance Action ID</div><div class="v"><a href="${govtoolUrl}" target="_blank" rel="noreferrer">${escapeHtml(full.govActionId)}</a></div>
+      <div class="k">Vote tx hash</div><div class="v">${escapeHtml(full.voteTxHash)} (search: <a href="https://gov.tools/" target="_blank" rel="noreferrer">GovTool</a>)</div>
+      <div class="k">Anchor URL</div><div class="v">${full.anchorUrl ? `<a href="${escapeAttr(full.anchorUrl)}" target="_blank" rel="noreferrer">${escapeHtml(full.anchorUrl)}</a>` : ''}</div>
+      <div class="k">Voter</div><div class="v">${escapeHtml(full.voterName || '')}<br/><span style="color:var(--muted)">${escapeHtml(full.voterId || '')}</span></div>
+      <div class="k">Source</div><div class="v">${escapeHtml(full.sourceMd || '')}</div>
+    </div>
+
+    <div class="statusline">
+      ${problems.length ? `<div class="status bad"><strong>Validation:</strong> ${escapeHtml(problems.join('; '))}</div>` : `<div class="status ok"><strong>Validation:</strong> OK (basic format checks)</div>`}
+      <div class="status"><strong>Note:</strong> Full on-chain verification requires an external chain indexer/explorer; this viewer links out.</div>
+    </div>
+
+    <div class="section">
+      <h3>Rationale</h3>
+      <pre>${escapeHtml(full.rationale || '')}</pre>
+    </div>
+
+    <div class="section">
+      <h3>Raw JSON-LD</h3>
+      <pre>${escapeHtml(JSON.stringify(full, null, 2))}</pre>
+    </div>
+  `;
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escapeAttr(s) { return escapeHtml(s); }
+
+(async function init(){
+  const list = document.getElementById('list');
+  try {
+    const res = await fetch(INDEX_URL, { cache: 'no-store' });
+    const idx = await res.json();
+    window.__items = idx.items || [];
+    if (!window.__items.length) {
+      list.textContent = 'No votes found.';
+      return;
+    }
+    renderList(window.__items);
+    select(0);
+  } catch (e) {
+    list.innerHTML = `<div class="status bad">Failed to load ${escapeHtml(INDEX_URL)}: ${escapeHtml(String(e))}</div>`;
+  }
+})();
+</script>
+</body>
+</html>
