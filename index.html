@@ -598,6 +598,7 @@
       <a href="#dashboard" class="nav-link"><span class="nav-icon">📊</span> Dashboard</a>
       <a href="#treasury" class="nav-link"><span class="nav-icon">🏛️</span> Treasury</a>
       <a href="#drep-votes" class="nav-link"><span class="nav-icon">🗳️</span> DRep Votes</a>
+      <a href="#treasury-intel" class="nav-link"><span class="nav-icon">🏦</span> Treasury Intel</a>
       <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener" class="nav-link"><span class="nav-icon">⚙️</span> GitHub</a>
     </div>
   </nav>
@@ -756,6 +757,30 @@ function render(index) {
     })(),
   ]);
   root.appendChild(drepGrid);
+
+  // ── Treasury intelligence ──
+  const tiHeader = el('div', { class: 'section-header', id: 'treasury-intel' });
+  tiHeader.appendChild(el('h2', { text: 'Treasury intelligence' }));
+  tiHeader.appendChild(el('span', { class: 'section-badge', text: 'prototype' }));
+  root.appendChild(tiHeader);
+  root.appendChild(el('div', { class: 'section-desc', text: 'A voter-oriented summary of treasury balance, income, proposed spend, and NCL headroom. Simplified model; receipts linked.' }));
+
+  const tiGrid = el('div', { class: 'report-grid' }, [
+    (() => {
+      const card = el('a', { class: 'report-card', href: 'treasury-intelligence.html', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [
+        el('div', { class: 'card-title', text: 'Treasury Intelligence' })
+      ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'The few numbers that make treasury votes auditable: balance, income, spend, and guardrails.' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [
+        el('span', { class: 'pill html', text: 'HTML' }),
+        el('span', { style: 'flex:1' }),
+        el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }),
+      ]));
+      return card;
+    })(),
+  ]);
+  root.appendChild(tiGrid);
 
   // ── Featured: Waste Deep Dive ──
   const wasteSection = (index.sections || []).find(s => (s.title || '').toLowerCase() === 'waste radar');

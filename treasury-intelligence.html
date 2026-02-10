@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACN Treasury Intelligence</title>
+  <meta name="description" content="Treasury Intelligence: receipts-first, voter-oriented summary of Cardano treasury balance, income, proposed spend, and NCL headroom." />
+  <style>
+    :root {
+      --bg:#0a0b0d;
+      --panel:#111318;
+      --card:#181b22;
+      --border:rgba(255,255,255,.08);
+      --text:#e8e9ed;
+      --muted:#8a8d97;
+      --dim:#555861;
+      --blue:#3b82f6;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --red:#ef4444;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --r:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55}
+    header{padding:22px 16px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0a0b0d, #0a0b0d)}
+    .wrap{max-width:1100px;margin:0 auto}
+    h1{margin:0 0 6px 0;font-size:18px;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:13px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    .pill{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:4px 10px;border-radius:999px}
+    a{color:#7aa7ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    main{padding:18px 16px 60px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+    .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:6px}
+    .value{font-family:var(--mono);font-size:24px;font-weight:800}
+    .note{color:var(--dim);font-size:12px;margin-top:6px}
+
+    .callout{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.22);border-left:4px solid var(--blue);border-radius:var(--r);padding:14px 14px;margin:14px 0;color:var(--muted);font-size:13px}
+
+    .section{margin-top:16px}
+    .section h2{margin:0 0 10px 0;font-size:14px;font-weight:800;letter-spacing:.02em}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;font-size:12px}
+    th{color:var(--muted);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+    td.num{text-align:right;font-family:var(--mono)}
+    .badge{font-family:var(--mono);font-size:10px;border:1px solid rgba(255,255,255,.12);padding:2px 8px;border-radius:999px;color:var(--muted)}
+
+    footer{border-top:1px solid var(--border);padding:16px;color:var(--dim);font-size:12px}
+    code{font-family:var(--mono)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>BEACN Treasury Intelligence</h1>
+    <div class="sub">Voter-oriented treasury summary. Numbers here are a simplified model — use linked receipts for decisions.</div>
+    <div class="row">
+      <span class="pill" id="snapshot">Snapshot: 2026-02-09</span>
+      <span class="pill">Not voting advice</span>
+      <span class="pill"><a href="./index.html">← Back to BEACN Governance</a></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="callout">
+      Think of the Cardano Treasury like a <strong>community checking account</strong>: it has a balance, gets deposits, and governance votes authorize spending.
+      This page focuses on the few numbers that make treasury votes auditable.
+    </div>
+
+    <div class="grid" id="stats"></div>
+
+    <div class="section">
+      <h2>Known / proposed spending items (example index)</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th class="num">Amount (ADA)</th>
+              <th>Status</th>
+              <th>Flags</th>
+            </tr>
+          </thead>
+          <tbody id="spendRows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Receipts</h2>
+      <div class="card" style="color:var(--muted);font-size:13px;">
+        - Governance dashboard: <a href="https://beacnpool.github.io/Governance/" target="_blank" rel="noreferrer">beacnpool.github.io/Governance</a><br>
+        - Vote rationales (receipts): <a href="https://beacnpool.github.io/Governance/drep/votes/reader.html" target="_blank" rel="noreferrer">DRep vote reader</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Built by BEACNpool. Model constants are intentionally explicit in page source for audit. Improve with PRs: <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noreferrer">github.com/BEACNpool/Governance</a>
+  </div>
+</footer>
+
+<script>
+// Constants (pulled from the prototype component; keep explicit for audit)
+const SNAPSHOT = '2026-02-09';
+const ADA_PRICE_USD = 0.28;
+const TREASURY_BALANCE = 1_800_000_000;
+const TREASURY_INCOME_PER_YEAR = 365_000_000;
+const NCL_2026_PROPOSED = { amount: 300_000_000, start_epoch: 613, end_epoch: 713 };
+const SPENDING_ITEMS = [
+  { label: '2025 Budget (Intersect, 39 proposals)', amount: 275_269_340, status: 'ratified', flags: 0, url: '' },
+  { label: 'DeFi Liquidity Budget', amount: 50_000_000, status: 'ratified', flags: 0, url: '' },
+  { label: 'Pentad Infrastructure (IOG+EMURGO+CF+Midnight+Intersect)', amount: 70_000_000, status: 'proposed', flags: 0, url: '' },
+  { label: 'DeFi Liquidity — Withdrawal 1', amount: 500_000, status: 'active', flags: 1, url: 'https://gov.tools/governance_actions/4b10e5793208cb8f228756e02113227c91602248eac4d992681a0ee760b6c4e2#0' },
+  { label: 'Tempo.Vote — Mobile Governance', amount: 150_000, status: 'ratified', flags: 1, url: '' },
+  { label: 'PRAGMA — Amaru Node Dev', amount: 8_500_000, status: 'ratified', flags: 0, url: '' },
+];
+const TOTAL_PROPOSED_SPENDING = SPENDING_ITEMS.reduce((s,i)=>s+i.amount,0);
+
+function fmtAda(n) {
+  if (n == null) return '—';
+  if (Math.abs(n) >= 1e9) return (n/1e9).toFixed(1) + 'B';
+  if (Math.abs(n) >= 1e6) return (n/1e6).toFixed(0) + 'M';
+  if (Math.abs(n) >= 1e3) return (n/1e3).toFixed(0) + 'K';
+  return String(n);
+}
+
+document.getElementById('snapshot').textContent = `Snapshot: ${SNAPSHOT}`;
+
+const nclHeadroom = NCL_2026_PROPOSED.amount - TOTAL_PROPOSED_SPENDING;
+const spendToIncome = Math.round((TOTAL_PROPOSED_SPENDING / TREASURY_INCOME_PER_YEAR) * 100);
+
+const stats = [
+  { label: 'Treasury balance', value: `₳ ${fmtAda(TREASURY_BALANCE)}`, note: 'Approx current treasury balance', color: '--blue' },
+  { label: 'Annual income (est.)', value: `₳ ${fmtAda(TREASURY_INCOME_PER_YEAR)}`, note: 'Treasury inflow per year (declining)', color: '--green' },
+  { label: 'Proposed spend (indexed)', value: `₳ ${fmtAda(TOTAL_PROPOSED_SPENDING)}`, note: `${SPENDING_ITEMS.length} items in this example list`, color: spendToIncome>100 ? '--red' : '--amber' },
+  { label: 'NCL headroom (vs proposed)', value: `₳ ${fmtAda(nclHeadroom)}`, note: `NCL=${fmtAda(NCL_2026_PROPOSED.amount)} for epochs ${NCL_2026_PROPOSED.start_epoch}–${NCL_2026_PROPOSED.end_epoch}`, color: nclHeadroom>=0 ? '--green' : '--red' },
+];
+
+const statsEl = document.getElementById('stats');
+stats.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="label">${s.label}</div>
+    <div class="value" style="color: var(${s.color});">${s.value}</div>
+    <div class="note">${s.note}</div>
+  `;
+  statsEl.appendChild(card);
+});
+
+const tbody = document.getElementById('spendRows');
+SPENDING_ITEMS
+  .slice()
+  .sort((a,b)=>b.amount-a.amount)
+  .forEach(it => {
+    const tr = document.createElement('tr');
+    const name = it.url ? `<a href="${it.url}" target="_blank" rel="noreferrer">${it.label}</a>` : it.label;
+    tr.innerHTML = `
+      <td>${name}</td>
+      <td class="num">${it.amount.toLocaleString()}</td>
+      <td><span class="badge">${it.status}</span></td>
+      <td>${it.flags ? `<span class="badge" style="border-color: rgba(239,68,68,.4); color: var(--red);">🚩 ${it.flags}</span>` : '<span class="badge" style="border-color: rgba(34,197,94,.3); color: var(--green);">✓</span>'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+// Total row
+const totalTr = document.createElement('tr');
+totalTr.innerHTML = `
+  <td style="font-weight:800">TOTAL</td>
+  <td class="num" style="font-weight:800">${TOTAL_PROPOSED_SPENDING.toLocaleString()}</td>
+  <td colspan="2"></td>
+`;
+tbody.appendChild(totalTr);
+</script>
+</body>
+</html>
