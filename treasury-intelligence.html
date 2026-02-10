@@ -95,6 +95,13 @@
     </div>
 
     <div class="section">
+      <h2>Flag rationales (why an item is flagged)</h2>
+      <div class="card" style="color:var(--muted);font-size:13px;" id="flagRationales">
+        Loading…
+      </div>
+    </div>
+
+    <div class="section">
       <h2>Receipts</h2>
       <div class="card" style="color:var(--muted);font-size:13px;">
         - Governance dashboard: <a href="https://beacnpool.github.io/Governance/" target="_blank" rel="noreferrer">beacnpool.github.io/Governance</a><br>
@@ -166,14 +173,54 @@ SPENDING_ITEMS
   .forEach(it => {
     const tr = document.createElement('tr');
     const name = it.url ? `<a href="${it.url}" target="_blank" rel="noreferrer">${it.label}</a>` : it.label;
+    const flagCell = it.flags
+      ? `<span class="badge" style="border-color: rgba(239,68,68,.4); color: var(--red);">🚩 ${it.flags}</span>`
+      : '<span class="badge" style="border-color: rgba(34,197,94,.3); color: var(--green);">✓</span>';
+
     tr.innerHTML = `
       <td>${name}</td>
       <td class="num">${it.amount.toLocaleString()}</td>
       <td><span class="badge">${it.status}</span></td>
-      <td>${it.flags ? `<span class="badge" style="border-color: rgba(239,68,68,.4); color: var(--red);">🚩 ${it.flags}</span>` : '<span class="badge" style="border-color: rgba(34,197,94,.3); color: var(--green);">✓</span>'}</td>
+      <td>${flagCell}</td>
     `;
     tbody.appendChild(tr);
   });
+
+// Flag rationales
+const flagged = SPENDING_ITEMS.filter(i => i.flags && i.flags > 0);
+const fr = document.getElementById('flagRationales');
+if (!flagged.length) {
+  fr.textContent = 'No flags in this snapshot.';
+} else {
+  const ul = document.createElement('ul');
+  ul.style.margin = '0';
+  ul.style.paddingLeft = '18px';
+  ul.style.lineHeight = '1.6';
+
+  flagged.forEach(it => {
+    const li = document.createElement('li');
+    li.style.margin = '6px 0';
+
+    // Keep these rationales factual and scoped.
+    let rationale = 'Flag indicates missing/weak public receipts or verification links in this index entry.';
+    let links = '';
+
+    if (it.label.toLowerCase().includes('defi liquidity') && it.label.toLowerCase().includes('withdrawal 1')) {
+      rationale = 'Treasury withdrawal is flagged pending clearer public receipts for key execution details (accountable parties/signers, receiving script/payment address clarity, and milestone acceptance criteria).';
+      links = ` (see BEACNpool vote rationale: <a href="https://beacnpool.github.io/Governance/drep/votes/2026-02-10/gov_action1fvgw27fjpr9c7g582mszzyez0jgkqgjgatzdnyngrg8wwc9kcn3qrgch3v-abstain.md" target="_blank" rel="noreferrer">receipt</a>)`;
+    }
+
+    if (it.label.toLowerCase().includes('tempo.vote')) {
+      rationale = 'Flag indicates this index entry needs stronger public verification links (deliverables/reporting/payment evidence) to be easily auditable.';
+    }
+
+    li.innerHTML = `<strong>${it.label}</strong>: ${rationale}${links}`;
+    ul.appendChild(li);
+  });
+
+  fr.innerHTML = '';
+  fr.appendChild(ul);
+}
 
 // Total row
 const totalTr = document.createElement('tr');
