@@ -1,0 +1,14 @@
+{
+  "date": "2026-02-10",
+  "purpose": "Delegate BEACN pool reward account governance voting power to BEACNpool DRep",
+  "stakeAddress": "stake1uxnz8f4sayzqrqmukgdz6rruw9pu74qsuxgeg59q9dmcf6gjm22rk",
+  "poolIdBech32": "pool18pnja3z8vfkw3sj578xetj3ujhyp2vmljezjg5es290awqmzq7g",
+  "drepIdBech32": "drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n",
+  "drepKeyHashHex": "a533a6cfc4f4e6eb2b8e59325b3d7a3f77796a79a777421531a5fc08",
+  "fundingTx": "2b3813be1ddfafee021661f1a524328281ea68f065a49a8bd8f2fe8e27ee25f1",
+  "submittedTx": "c556285a598ab3ccf46011738b6dba9f8c15bcec3d1b62646e2804354547c130",
+  "verification": {
+    "queryMethod": "cardano-cli conway query stake-address-info --mainnet --address <stakeAddress>",
+    "expectedVoteDelegation": "keyHash-a533a6cfc4f4e6eb2b8e59325b3d7a3f77796a79a777421531a5fc08"
+  }
+}
