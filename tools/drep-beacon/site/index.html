@@ -101,21 +101,20 @@
         <input id="koiosBase" value="https://koios.beacn.workers.dev" />
         <div class="hint">Default uses BEACN’s Cloudflare worker. You can switch to <code>https://api.koios.rest/api/v1</code>.</div>
 
-        <label for="proposalId">Governance action (proposal_id)</label>
-        <input id="proposalId" placeholder="gov_action1…" />
-
         <div class="row two">
+          <div>
+            <label for="preset">Quick pick (choose a governance action)</label>
+            <select id="preset">
+              <option value="">Loading proposals…</option>
+            </select>
+          </div>
           <div>
             <label for="topN">Top N DReps (by latest voting power)</label>
             <input id="topN" type="number" min="5" max="500" value="50" />
           </div>
-          <div>
-            <label for="preset">Quick pick</label>
-            <select id="preset">
-              <option value="">Load active proposals…</option>
-            </select>
-          </div>
         </div>
+
+        <div class="hint">No typing required: pick an action from the list. (Advanced users can still share links with <code>?proposal_id=…</code>.)</div>
 
         <div class="btns">
           <button id="run" class="primary">Run report</button>
@@ -133,6 +132,7 @@
       <section class="card">
         <h2>Results</h2>
         <div id="summary" class="status"></div>
+        <div id="actionDetails" class="hint" style="margin-top:10px"></div>
         <div style="overflow:auto; margin-top:10px">
           <table id="table" aria-label="DRep participation table">
             <thead>

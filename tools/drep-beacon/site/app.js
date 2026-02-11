@@ -15,6 +15,7 @@ function qs() {
 
 function setStatus(msg) { $('runStatus').textContent = msg || ''; }
 function setSummary(msg) { $('summary').textContent = msg || ''; }
+function setDetails(html) { $('actionDetails').innerHTML = html || ''; }
 
 function normalizeBase(u) {
   return (u || '').trim().replace(/\/+$/,'');
@@ -70,16 +71,27 @@ function download(filename, text) {
 async function loadPresets() {
   const base = normalizeBase($('koiosBase').value);
   const preset = $('preset');
-  preset.innerHTML = '<option value="">Loading active proposals…</option>';
+  preset.innerHTML = '<option value="">Loading proposals…</option>';
   try {
-    const list = await jget(base, 'proposal_list', { limit: '30' });
-    // Keep only active-ish (Koios includes status). If absent, show all.
+    const list = await jget(base, 'proposal_list', { limit: '60' });
     const rows = Array.isArray(list) ? list : [];
-    preset.innerHTML = '<option value="">Pick a recent proposal…</option>';
+    window.__proposalsById = {};
+
+    preset.innerHTML = '<option value="">Select a governance action…</option>';
+
     for (const r of rows) {
       const pid = r.proposal_id;
       if (!pid) continue;
-      const label = `${(r.proposal_type||'').padEnd(15)} | ${(r.status||'').padEnd(8)} | ${String(pid).slice(0,28)}…`;
+      window.__proposalsById[String(pid)] = r;
+
+      const type = r.proposal_type || 'UnknownType';
+      const ep = (r.proposed_epoch !== undefined && r.proposed_epoch !== null) ? `e${r.proposed_epoch}` : '';
+      const ttl = (r.meta_json && (r.meta_json.title || r.meta_json.body?.title)) || r.meta_comment || r.proposal_description || '';
+      const t = String(ttl).replace(/\s+/g,' ').trim();
+      const short = t ? (t.length > 72 ? t.slice(0,72) + '…' : t) : '';
+
+      const label = `${type}${ep ? ' · ' + ep : ''}${short ? ' · ' + short : ''}`;
+
       const opt = document.createElement('option');
       opt.value = pid;
       opt.textContent = label;
@@ -92,17 +104,18 @@ async function loadPresets() {
 
 async function run() {
   const base = normalizeBase($('koiosBase').value);
-  const proposal_id = $('proposalId').value.trim();
+  const proposal_id = $('preset').value || '';
   const top = Number($('topN').value || 50);
 
   if (!proposal_id) {
-    setStatus('Provide a proposal_id (gov_action…).');
+    setStatus('Pick a governance action from “Quick pick”.');
     return;
   }
 
   $('run').disabled = true;
   setStatus('Fetching Koios data…');
   setSummary('');
+  setDetails('');
 
   try {
     // 1) voting summary (optional, but nice for context)
@@ -176,6 +189,56 @@ async function run() {
     }
     setSummary(bits.join(' · '));
 
+    // Action detail panel (human-friendly)
+    const pr = (window.__proposalsById || {})[proposal_id];
+    const govTool = `https://gov.tools/governance_actions/${proposal_id}`;
+
+    let title = '';
+    let abstract = '';
+    if (pr && pr.meta_json) {
+      const body = pr.meta_json.body || pr.meta_json;
+      title = body.title || pr.meta_json.title || '';
+      abstract = body.abstract || pr.meta_json.abstract || '';
+    }
+    const desc = (pr && pr.proposal_description) ? String(pr.proposal_description) : '';
+
+    // BEACN track record (local repo static index)
+    let beacnLine = '';
+    try {
+      const idxUrl = new URL('../../../drep/votes/2026-02-10/json/index.json', location.href);
+      const idx = await fetch(idxUrl.toString(), { headers: { 'Accept': 'application/json' }});
+      if (idx.ok) {
+        const j = await idx.json();
+        const item = (j.items || []).find(x => x.govActionId === proposal_id);
+        if (item) {
+          const reader = new URL('../../../drep/votes/reader.html', location.href);
+          beacnLine = `BEACN vote: <span class="pill ok">${item.vote}</span> · <a href="${reader.toString()}" target="_blank" rel="noopener">receipt</a>`;
+        } else {
+          beacnLine = `BEACN vote: <span class="pill bad">no receipt published (yet)</span>`;
+        }
+      }
+    } catch (_) {
+      // ignore
+    }
+
+    const parts = [];
+    if (title) parts.push(`<div><b>Title:</b> ${escapeHtml(title)}</div>`);
+    if (abstract) parts.push(`<div style="margin-top:6px"><b>Abstract:</b> ${escapeHtml(String(abstract).slice(0,420))}${String(abstract).length>420?'…':''}</div>`);
+    else if (desc) parts.push(`<div style="margin-top:6px"><b>Summary:</b> ${escapeHtml(String(desc).slice(0,420))}${String(desc).length>420?'…':''}</div>`);
+
+    let meta = '';
+    if (pr) {
+      const type = pr.proposal_type || '';
+      const pe = (pr.proposed_epoch !== undefined && pr.proposed_epoch !== null) ? pr.proposed_epoch : '';
+      const exp = pr.expiration || pr.expiration_epoch || pr.expired_epoch || '';
+      meta = `<div style="margin-top:6px"><b>Type:</b> ${escapeHtml(type)}${pe!==''?` · <b>Proposed epoch:</b> ${pe}`:''}${exp!==''?` · <b>Expiration:</b> ${escapeHtml(String(exp))}`:''}</div>`;
+    }
+
+    const links = `<div style="margin-top:8px"><a href="${govTool}" target="_blank" rel="noopener">Open in GovTool</a></div>`;
+    const beacn = beacnLine ? `<div style="margin-top:8px">${beacnLine}</div>` : '';
+
+    setDetails(parts.join('') + meta + links + beacn);
+
     // Render table
     const tbody = $('table').querySelector('tbody');
     tbody.innerHTML = '';
@@ -215,6 +278,15 @@ function copyShareLink() {
   setStatus('Share link copied to clipboard.');
 }
 
+function escapeHtml(s){
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+
 function downloadCsv() {
   const rows = window.__lastRows || [];
   if (!rows.length) { setStatus('Run a report first.'); return; }
@@ -225,7 +297,6 @@ function downloadCsv() {
 
 (function init(){
   const p = qs();
-  $('proposalId').value = p.proposal_id;
   $('topN').value = p.top;
   $('koiosBase').value = p.koios_base;
 
@@ -233,15 +304,23 @@ function downloadCsv() {
   $('copyLink').addEventListener('click', copyShareLink);
   $('downloadCsv').addEventListener('click', downloadCsv);
 
-  $('preset').addEventListener('change', (ev) => {
-    const v = ev.target.value;
-    if (v) $('proposalId').value = v;
+  $('preset').addEventListener('change', () => {
+    // auto-run on selection to reduce friction
+    if ($('preset').value) run();
   });
 
-  $('koiosBase').addEventListener('change', loadPresets);
+  $('koiosBase').addEventListener('change', async () => {
+    await loadPresets();
+    setDetails('');
+    setSummary('');
+    setStatus('');
+  });
 
-  loadPresets();
-
-  // auto-run if proposal_id present
-  if (p.proposal_id) run();
+  // load presets, then apply proposal_id from URL (no typing)
+  loadPresets().then(() => {
+    if (p.proposal_id) {
+      $('preset').value = p.proposal_id;
+      if ($('preset').value) run();
+    }
+  });
 })();
