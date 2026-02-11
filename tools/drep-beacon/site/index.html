@@ -89,15 +89,15 @@
   <main class="wrap">
     <div class="grid">
       <section class="card">
-        <h2>Query</h2>
+        <h2>Step 1 — Choose a governance action</h2>
 
         <details style="margin:10px 0 6px">
-          <summary style="cursor:pointer; font-weight:700; color: var(--text)">Guide: how to use this beacon (and how to remix it)</summary>
+          <summary style="cursor:pointer; font-weight:800; color: var(--text)">New here? Quick guide (2 steps)</summary>
           <div class="hint" style="margin-top:8px">
-            <div style="margin:8px 0"><b>1) Pick a Koios base</b>: leave the default to use BEACN’s Cloudflare worker, or switch to public Koios if you want to compare.</div>
-            <div style="margin:8px 0"><b>2) Pick a governance action</b>: use the dropdown to grab a recent <span class="mono">proposal_id</span> (gov_action…), or paste one from GovTool.</div>
-            <div style="margin:8px 0"><b>3) Choose Top N</b>: start with 50 for a quick scan; use 200+ to see broader participation.</div>
-            <div style="margin:8px 0"><b>4) Share & reproduce</b>: use “Copy share link” so anyone can re-run the exact same query (same inputs, same receipts).</div>
+            <div style="margin:8px 0"><b>Step 1</b>: Choose a governance action from <b>Quick pick</b> (it loads recent actions automatically).</div>
+            <div style="margin:8px 0"><b>Step 2</b>: (Optional) Paste a <b>DRep ID</b> to see how that DRep voted, and/or resolve their <b>self-declared metadata</b> using a free Blockfrost key.</div>
+            <div style="margin:8px 0"><b>Top N</b>: start with 50 for a quick scan; increase to 200+ to include smaller DReps in the table.</div>
+            <div style="margin:8px 0"><b>Share & reproduce</b>: use “Copy share link” so anyone can re-run the exact same query (same inputs, same receipts).</div>
 
             <div style="margin:10px 0 6px"><b>Positive “outside the box” ideas</b>:</div>
             <ul style="margin:0 0 8px 18px; color: var(--muted)">
@@ -128,13 +128,14 @@
           </div>
         </div>
 
-        <div class="hint">No typing required: pick an action from the list. (Advanced users can still share links with <code>?proposal_id=…</code>.)</div>
+        <div class="hint">Pick an action from the list. The results update when you run a report. (Advanced: share links with <code>?proposal_id=…</code>.)</div>
 
         <div class="btns">
           <button id="run" class="primary">Run report</button>
           <button id="copyLink">Copy share link</button>
           <button id="downloadCsv">Download CSV</button>
         </div>
+        <div class="hint"><b>Tip:</b> If the page looks idle, check the status bar at the top (it will say what’s loading).</div>
 
         <div class="hint">
           This tool is read-only. “NO_VOTE_RECORDED” means Koios returned no DRep vote record at query time — not an accusation.
@@ -144,11 +145,11 @@
       </section>
 
       <section class="card">
-        <h2>Results</h2>
+        <h2>Step 2 — Check a DRep (vote + metadata)</h2>
         <div id="summary" class="status"></div>
 
         <div class="hint" style="margin-top:10px">
-          <b>How did your DRep vote?</b> Paste a DRep id to highlight their vote in the table.
+          <b>How did a specific DRep vote?</b> Paste a DRep id (drep1…) and we’ll show their vote for the selected action.
           <div class="row two" style="margin-top:8px">
             <div>
               <input id="focusDrep" placeholder="drep1…" />
@@ -161,16 +162,20 @@
         </div>
 
         <div class="hint" style="margin-top:12px">
-          <b>Want more details on a DRep?</b> Resolve <i>self-declared public metadata</i> (not identity verification).
+          <b>Want more details on a DRep?</b> Resolve <i>self-declared public metadata</i>.
+          <div class="status" style="margin-top:6px">
+            Requires a <b>Blockfrost Project ID</b> (free to create):
+            <a href="https://blockfrost.io/" target="_blank" rel="noopener">blockfrost.io</a>
+          </div>
           <div class="row" style="margin-top:8px">
             <div>
               <label for="metaDrepId">DRep ID</label>
               <input id="metaDrepId" placeholder="drep1…" />
             </div>
             <div>
-              <label for="blockfrostKey">Blockfrost Project ID (mainnet)</label>
+              <label for="blockfrostKey">Blockfrost Project ID (required for metadata)</label>
               <input id="blockfrostKey" type="password" placeholder="mainnet…" />
-              <div class="hint">Security: this key is used only in your browser memory and is never stored in the URL or local storage.</div>
+              <div class="hint">Security: this key is used only in your browser memory and is never stored in the URL or local storage. (This is not BEACN collecting keys — it’s your browser talking to Blockfrost.)</div>
             </div>
           </div>
           <div class="btns">
@@ -204,6 +209,6 @@
     </div>
   </main>
 
-  <script type="module" src="app.js?v=2026-02-11-3"></script>
+  <script type="module" src="app.js?v=2026-02-11-4"></script>
 </body>
 </html>
