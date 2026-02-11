@@ -328,6 +328,10 @@ async function applyFocusDrep(){
   clearFocus();
   const did = ($('focusDrep')?.value || '').trim();
   if (!did) { $('focusResult').textContent = ''; return; }
+  if (!did.startsWith('drep1') || did.length < 58) {
+    $('focusResult').textContent = 'That DRep id looks truncated/invalid. It should start with drep1… and be the full bech32 string.';
+    return;
+  }
 
   const tbody = $('table')?.querySelector('tbody');
   if (!tbody) return;
