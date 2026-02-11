@@ -36,7 +36,8 @@
     @media (min-width: 520px){ .row.two{grid-template-columns:1fr 1fr} }
 
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{cursor:pointer;border-radius:12px;border:1px solid var(--border);padding:10px 12px;background:#101522;color:var(--text);font-weight:650}
+    button{cursor:pointer;border-radius:12px;border:1px solid var(--border);padding:12px 14px;background:#101522;color:var(--text);font-weight:750}
+    .btns button{flex:1; min-width: 190px}
     button.primary{border-color:rgba(212,168,67,.35);background:rgba(212,168,67,.12)}
     button:disabled{opacity:.55;cursor:not-allowed}
 
@@ -178,6 +179,7 @@
               <div class="hint">Security: this key is used only in your browser memory and is never stored in the URL or local storage. (This is not BEACN collecting keys — it’s your browser talking to Blockfrost.)</div>
             </div>
           </div>
+          <div class="hint" style="margin-top:8px"><b>Submit:</b> tap “Resolve metadata” below.</div>
           <div class="btns">
             <button id="resolveMeta" class="primary">Resolve metadata</button>
             <button id="clearMeta">Clear</button>
@@ -209,6 +211,6 @@
     </div>
   </main>
 
-  <script type="module" src="app.js?v=2026-02-11-4"></script>
+  <script type="module" src="app.js?v=2026-02-11-5"></script>
 </body>
 </html>
