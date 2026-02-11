@@ -48,11 +48,16 @@
 .pill.loading{position:relative;padding-left:30px}
 .pill.loading::before{content:'';position:absolute;left:10px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color: rgba(212,168,67,.9);animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Make the two “always visible” indicators louder */
+#globalStatus{font-size:16px;font-weight:900;letter-spacing:.3px}
+#epochTimer{font-size:16px;font-weight:900;letter-spacing:.3px;border-color:rgba(212,168,67,.45);background:rgba(212,168,67,.10)}
     .pill.ok{border-color:rgba(34,197,94,.35);color:#bff0d0;background:rgba(34,197,94,.08)}
     .pill.bad{border-color:rgba(239,68,68,.35);color:#ffd0d0;background:rgba(239,68,68,.08)}
 
     table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
     th,td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+    tr.focus{outline:2px solid rgba(212,168,67,.55);outline-offset:-2px;background:rgba(212,168,67,.06)}
     th{color:var(--muted);text-align:left;font-weight:700}
     td.r{text-align:right}
     .vote-yes{color:#bff0d0}
@@ -77,7 +82,7 @@
       </div>
     </div>
     <div class="wrap" style="margin-top:10px">
-      <div id="globalStatus" class="pill" style="width:100%">Ready.</div>
+      <div id="globalStatus" class="pill loading" style="width:100%">Loading…</div>
     </div>
   </header>
 
@@ -141,6 +146,18 @@
       <section class="card">
         <h2>Results</h2>
         <div id="summary" class="status"></div>
+        <div class="hint" style="margin-top:10px">
+          <b>How did your DRep vote?</b> Paste a DRep id to highlight their vote in the table.
+          <div class="row two" style="margin-top:8px">
+            <div>
+              <input id="focusDrep" placeholder="drep1…" />
+            </div>
+            <div>
+              <button id="applyDrep">Highlight DRep</button>
+            </div>
+          </div>
+          <div id="focusResult" class="status" style="margin-top:6px"></div>
+        </div>
         <div id="actionDetails" class="hint" style="margin-top:10px"></div>
         <div style="overflow:auto; margin-top:10px">
           <table id="table" aria-label="DRep participation table">

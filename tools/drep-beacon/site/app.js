@@ -237,7 +237,7 @@ async function run() {
 
     if (!receiptFound) {
       if (beacnOnChainVote) {
-        beacnLine = `BEACN vote (on-chain): <span class="pill ok">${escapeHtml(beacnOnChainVote)}</span> · <span class="pill bad">receipt missing in repo</span>`;
+        beacnLine = `BEACN vote: <span class="pill ok">${escapeHtml(beacnOnChainVote)}</span>`;
       } else {
         beacnLine = `BEACN vote: <span class="pill bad">no vote record found</span>`;
       }
@@ -266,6 +266,7 @@ async function run() {
     tbody.innerHTML = '';
     for (const r of ranked) {
       const tr = document.createElement('tr');
+      tr.dataset.drepId = r.drep_id;
       tr.innerHTML = `
         <td class="r">${r.rank}</td>
         <td><code>${r.drep_id}</code></td>
@@ -311,6 +312,29 @@ function escapeHtml(s){
     .replaceAll("'",'&#39;');
 }
 
+function clearFocus(){
+  const tbody = $('table')?.querySelector('tbody');
+  if (!tbody) return;
+  tbody.querySelectorAll('tr.focus').forEach(tr => tr.classList.remove('focus'));
+}
+
+function applyFocusDrep(){
+  clearFocus();
+  const did = ($('focusDrep')?.value || '').trim();
+  if (!did) { $('focusResult').textContent = ''; return; }
+  const tbody = $('table')?.querySelector('tbody');
+  if (!tbody) return;
+  const tr = tbody.querySelector(`tr[data-drep-id="${CSS.escape(did)}"]`);
+  if (!tr) {
+    $('focusResult').textContent = 'No row for that DRep in the current Top N. Increase Top N or choose a different action.';
+    return;
+  }
+  tr.classList.add('focus');
+  const voteCell = tr.querySelector('td:last-child');
+  $('focusResult').textContent = `Vote for ${did}: ${voteCell ? voteCell.textContent : ''}`;
+  tr.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
 function downloadCsv() {
   const rows = window.__lastRows || [];
   if (!rows.length) { setStatus('Run a report first.'); return; }
@@ -327,6 +351,8 @@ function downloadCsv() {
   $('run').addEventListener('click', run);
   $('copyLink').addEventListener('click', copyShareLink);
   $('downloadCsv').addEventListener('click', downloadCsv);
+  $('applyDrep').addEventListener('click', applyFocusDrep);
+  $('focusDrep').addEventListener('keydown', (e) => { if (e.key === 'Enter') applyFocusDrep(); });
 
   $('preset').addEventListener('change', () => {
     // auto-run on selection to reduce friction
