@@ -44,7 +44,10 @@
     .hint code{font-family:var(--mono);color:#cfd3db}
 
     .status{font-family:var(--mono);font-size:12px;color:var(--muted)}
-    .pill{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid var(--border);font-family:var(--mono);font-size:12px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-family:var(--mono);font-size:12px}
+.pill.loading{position:relative;padding-left:30px}
+.pill.loading::before{content:'';position:absolute;left:10px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color: rgba(212,168,67,.9);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
     .pill.ok{border-color:rgba(34,197,94,.35);color:#bff0d0;background:rgba(34,197,94,.08)}
     .pill.bad{border-color:rgba(239,68,68,.35);color:#ffd0d0;background:rgba(239,68,68,.08)}
 
@@ -68,7 +71,13 @@
         <h1>BEACN DRep Beacon — Participation Explorer</h1>
         <div class="tag">receipts-first • reproducible • Koios-backed</div>
       </div>
-      <div class="tag">Tip: share links with <span class="mono">?proposal_id=…&top=50</span></div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+        <div id="epochTimer" class="pill">Epoch: …</div>
+        <div class="tag">Share links: <span class="mono">?proposal_id=…&top=50</span></div>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:10px">
+      <div id="globalStatus" class="pill" style="width:100%">Ready.</div>
     </div>
   </header>
 
@@ -155,6 +164,6 @@
     </div>
   </main>
 
-  <script src="app.js?v=2026-02-11-1"></script>
+  <script type="module" src="app.js?v=2026-02-11-2"></script>
 </body>
 </html>

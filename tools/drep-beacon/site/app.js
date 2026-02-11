@@ -2,6 +2,8 @@
    Philosophy: receipts-first, reproducible, forkable.
 */
 
+import { startEpochTimer } from './epoch.js';
+
 const $ = (id) => document.getElementById(id);
 
 function qs() {
@@ -16,6 +18,12 @@ function qs() {
 function setStatus(msg) { $('runStatus').textContent = msg || ''; }
 function setSummary(msg) { $('summary').textContent = msg || ''; }
 function setDetails(html) { $('actionDetails').innerHTML = html || ''; }
+function setGlobal(msg, loading=false){
+  const el = $('globalStatus');
+  if (!el) return;
+  el.textContent = msg || '';
+  el.classList.toggle('loading', !!loading);
+}
 
 function normalizeBase(u) {
   return (u || '').trim().replace(/\/+$/,'');
@@ -72,6 +80,7 @@ async function loadPresets() {
   const base = normalizeBase($('koiosBase').value);
   const preset = $('preset');
   preset.innerHTML = '<option value="">Loading proposals…</option>';
+  setGlobal('Loading proposals from Koios…', true);
   try {
     const list = await jget(base, 'proposal_list', { limit: '60' });
     const rows = Array.isArray(list) ? list : [];
@@ -97,8 +106,10 @@ async function loadPresets() {
       opt.textContent = label;
       preset.appendChild(opt);
     }
+    setGlobal(`Loaded ${rows.length} proposals. Pick one to run.`, false);
   } catch (e) {
     preset.innerHTML = '<option value="">(Could not load proposals — check Koios base)</option>';
+    setGlobal('Failed to load proposals. Check Koios base / network.', false);
   }
 }
 
@@ -114,6 +125,7 @@ async function run() {
 
   $('run').disabled = true;
   setStatus('Fetching Koios data…');
+  setGlobal('Running report…', true);
   setSummary('');
   setDetails('');
 
@@ -202,23 +214,33 @@ async function run() {
     }
     const desc = (pr && pr.proposal_description) ? String(pr.proposal_description) : '';
 
-    // BEACN track record (local repo static index)
+    // BEACN track record
+    const BEACN_DREP_ID = 'drep1y2jn8fk0cn6wd6et3evnykea0glhw7t20xnhwss4xxjlczq29343n';
+    const beacnOnChainVote = choices.get(BEACN_DREP_ID) || null;
+
     let beacnLine = '';
+    let receiptFound = false;
     try {
+      // TODO: replace with a rolling index (drep/votes/index.json). For now, use the published daily index.
       const idxUrl = new URL('../../../drep/votes/2026-02-10/json/index.json', location.href);
       const idx = await fetch(idxUrl.toString(), { headers: { 'Accept': 'application/json' }});
       if (idx.ok) {
         const j = await idx.json();
         const item = (j.items || []).find(x => x.govActionId === proposal_id);
         if (item) {
+          receiptFound = true;
           const reader = new URL('../../../drep/votes/reader.html', location.href);
           beacnLine = `BEACN vote: <span class="pill ok">${item.vote}</span> · <a href="${reader.toString()}" target="_blank" rel="noopener">receipt</a>`;
-        } else {
-          beacnLine = `BEACN vote: <span class="pill bad">no receipt published (yet)</span>`;
         }
       }
-    } catch (_) {
-      // ignore
+    } catch (_) {}
+
+    if (!receiptFound) {
+      if (beacnOnChainVote) {
+        beacnLine = `BEACN vote (on-chain): <span class="pill ok">${escapeHtml(beacnOnChainVote)}</span> · <span class="pill bad">receipt missing in repo</span>`;
+      } else {
+        beacnLine = `BEACN vote: <span class="pill bad">no vote record found</span>`;
+      }
     }
 
     const parts = [];
@@ -257,6 +279,7 @@ async function run() {
     window.__lastRows = ranked;
 
     setStatus('Done.');
+    setGlobal('Done.', false);
 
     // update URL (shareable)
     const u = new URL(location.href);
@@ -267,6 +290,7 @@ async function run() {
 
   } catch (e) {
     setStatus('Error: ' + (e?.message || String(e)));
+    setGlobal('Error running report. See details below.', false);
   } finally {
     $('run').disabled = false;
   }
@@ -316,11 +340,19 @@ function downloadCsv() {
     setStatus('');
   });
 
+  // Epoch timer (best-effort)
+  startEpochTimer({
+    base: normalizeBase($('koiosBase').value),
+    setText: (t) => { const el = $('epochTimer'); if (el) el.textContent = t; },
+  });
+
   // load presets, then apply proposal_id from URL (no typing)
   loadPresets().then(() => {
     if (p.proposal_id) {
       $('preset').value = p.proposal_id;
       if ($('preset').value) run();
+    } else {
+      setGlobal('Ready. Pick a governance action.', false);
     }
   });
 })();
