@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEACN DRep Beacon — Participation Explorer</title>
+  <meta name="description" content="Forkable, receipts-first explorer for DRep voting participation on Cardano governance actions (Koios-backed)." />
+  <style>
+    :root{
+      --bg:#0a0b0d; --card:#151821; --card2:#1b1f2a; --border:rgba(255,255,255,.08);
+      --text:#e8e9ed; --muted:#9aa0aa; --gold:#d4a843; --red:#ef4444; --green:#22c55e; --blue:#3b82f6;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --r:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45}
+    a{color:#b9d2ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{padding:22px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,11,13,.92);backdrop-filter: blur(10px);z-index:5}
+    .wrap{max-width:1100px;margin:0 auto}
+    .title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    h1{margin:0;font-size:18px;letter-spacing:.2px}
+    .tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+    main{padding:16px}
+    .grid{display:grid;grid-template-columns: 1fr; gap:12px}
+    @media (min-width: 960px){ .grid{grid-template-columns: 420px 1fr; align-items:start} }
+
+    .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r);padding:14px}
+    .card h2{margin:0 0 10px;font-size:14px;color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+
+    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    input, select{width:100%;padding:10px 10px;border-radius:10px;border:1px solid var(--border);background:#0f1218;color:var(--text);font-family:var(--mono)}
+    .row{display:grid;grid-template-columns:1fr; gap:10px}
+    @media (min-width: 520px){ .row.two{grid-template-columns:1fr 1fr} }
+
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{cursor:pointer;border-radius:12px;border:1px solid var(--border);padding:10px 12px;background:#101522;color:var(--text);font-weight:650}
+    button.primary{border-color:rgba(212,168,67,.35);background:rgba(212,168,67,.12)}
+    button:disabled{opacity:.55;cursor:not-allowed}
+
+    .hint{font-size:12px;color:var(--muted);margin-top:10px}
+    .hint code{font-family:var(--mono);color:#cfd3db}
+
+    .status{font-family:var(--mono);font-size:12px;color:var(--muted)}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid var(--border);font-family:var(--mono);font-size:12px}
+    .pill.ok{border-color:rgba(34,197,94,.35);color:#bff0d0;background:rgba(34,197,94,.08)}
+    .pill.bad{border-color:rgba(239,68,68,.35);color:#ffd0d0;background:rgba(239,68,68,.08)}
+
+    table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+    th,td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+    th{color:var(--muted);text-align:left;font-weight:700}
+    td.r{text-align:right}
+    .vote-yes{color:#bff0d0}
+    .vote-no{color:#ffd0d0}
+    .vote-abstain{color:#cfe1ff}
+    .vote-none{color:#d7dbe3}
+
+    .footer{margin-top:14px;font-size:12px;color:var(--muted)}
+    .mono{font-family:var(--mono)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap title">
+      <div>
+        <h1>BEACN DRep Beacon — Participation Explorer</h1>
+        <div class="tag">receipts-first • reproducible • Koios-backed</div>
+      </div>
+      <div class="tag">Tip: share links with <span class="mono">?proposal_id=…&top=50</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <section class="card">
+        <h2>Query</h2>
+
+        <details style="margin:10px 0 6px">
+          <summary style="cursor:pointer; font-weight:700; color: var(--text)">Guide: how to use this beacon (and how to remix it)</summary>
+          <div class="hint" style="margin-top:8px">
+            <div style="margin:8px 0"><b>1) Pick a Koios base</b>: leave the default to use BEACN’s Cloudflare worker, or switch to public Koios if you want to compare.</div>
+            <div style="margin:8px 0"><b>2) Pick a governance action</b>: use the dropdown to grab a recent <span class="mono">proposal_id</span> (gov_action…), or paste one from GovTool.</div>
+            <div style="margin:8px 0"><b>3) Choose Top N</b>: start with 50 for a quick scan; use 200+ to see broader participation.</div>
+            <div style="margin:8px 0"><b>4) Share & reproduce</b>: use “Copy share link” so anyone can re-run the exact same query (same inputs, same receipts).</div>
+
+            <div style="margin:10px 0 6px"><b>Positive “outside the box” ideas</b>:</div>
+            <ul style="margin:0 0 8px 18px; color: var(--muted)">
+              <li><b>Time-series participation</b>: run the same Top N across multiple actions and track how participation changes.</li>
+              <li><b>Compare infrastructures</b>: swap Koios base URLs and see if results differ (good for reliability audits).</li>
+              <li><b>Build new dashboards</b>: export CSV and make charts (e.g., “% of top-100 voting power active per action”).</li>
+              <li><b>Accountability with receipts</b>: write neutral reports using “NO_VOTE_RECORDED” (avoid accusations; cite the query inputs).</li>
+            </ul>
+
+            <div style="margin-top:8px"><b>What “NO_VOTE_RECORDED” means</b>: Koios returned no DRep vote record for that DRep on that action <i>at query time</i>. It’s a reproducible data point, not a verdict.</div>
+          </div>
+        </details>
+
+        <label for="koiosBase">Koios base URL</label>
+        <input id="koiosBase" value="https://koios.beacn.workers.dev" />
+        <div class="hint">Default uses BEACN’s Cloudflare worker. You can switch to <code>https://api.koios.rest/api/v1</code>.</div>
+
+        <label for="proposalId">Governance action (proposal_id)</label>
+        <input id="proposalId" placeholder="gov_action1…" />
+
+        <div class="row two">
+          <div>
+            <label for="topN">Top N DReps (by latest voting power)</label>
+            <input id="topN" type="number" min="5" max="500" value="50" />
+          </div>
+          <div>
+            <label for="preset">Quick pick</label>
+            <select id="preset">
+              <option value="">Load active proposals…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button id="run" class="primary">Run report</button>
+          <button id="copyLink">Copy share link</button>
+          <button id="downloadCsv">Download CSV</button>
+        </div>
+
+        <div class="hint">
+          This tool is read-only. “NO_VOTE_RECORDED” means Koios returned no DRep vote record at query time — not an accusation.
+        </div>
+
+        <div id="runStatus" class="status" style="margin-top:12px"></div>
+      </section>
+
+      <section class="card">
+        <h2>Results</h2>
+        <div id="summary" class="status"></div>
+        <div style="overflow:auto; margin-top:10px">
+          <table id="table" aria-label="DRep participation table">
+            <thead>
+              <tr>
+                <th style="width:52px">#</th>
+                <th>DRep</th>
+                <th class="r" style="width:150px">Voting power</th>
+                <th style="width:150px">Vote</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="footer">
+          <div>Endpoints used: <span class="mono">/proposal_list</span>, <span class="mono">/proposal_votes</span>, <span class="mono">/proposal_voting_summary</span>, <span class="mono">/drep_list</span>, <span class="mono">/drep_history</span></div>
+          <div style="margin-top:6px">Built to encourage experimentation: swap Koios base, test different actions, export CSV, and remix into new dashboards.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
