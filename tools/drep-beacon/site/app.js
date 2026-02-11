@@ -148,6 +148,10 @@ async function run() {
       const choice = v.vote || v.vote_choice || 'VOTED';
       choices.set(String(v.voter_id), String(choice));
     }
+    // Save for “How did your DRep vote?” lookups even if not in Top N
+    window.__lastProposalId = proposal_id;
+    window.__lastKoiosBase = base;
+    window.__choices = Object.fromEntries(choices.entries());
 
     // 3) DRep list (registered)
     const drepList = await jget(base, 'drep_list');
@@ -278,6 +282,8 @@ async function run() {
 
     // cache for CSV download
     window.__lastRows = ranked;
+    // Changing action invalidates any previous focus result.
+    if ($('focusResult')) $('focusResult').textContent = '';
 
     setStatus('Done.');
     setGlobal('Done.', false);
@@ -318,21 +324,59 @@ function clearFocus(){
   tbody.querySelectorAll('tr.focus').forEach(tr => tr.classList.remove('focus'));
 }
 
-function applyFocusDrep(){
+async function applyFocusDrep(){
   clearFocus();
   const did = ($('focusDrep')?.value || '').trim();
   if (!did) { $('focusResult').textContent = ''; return; }
+
   const tbody = $('table')?.querySelector('tbody');
   if (!tbody) return;
+
+  // 1) If the DRep is in the current Top N table, highlight the row.
   const tr = tbody.querySelector(`tr[data-drep-id="${CSS.escape(did)}"]`);
-  if (!tr) {
-    $('focusResult').textContent = 'No row for that DRep in the current Top N. Increase Top N or choose a different action.';
+  if (tr) {
+    tr.classList.add('focus');
+    const voteCell = tr.querySelector('td:last-child');
+    $('focusResult').textContent = `Vote for ${did}: ${voteCell ? voteCell.textContent : ''}`;
+    tr.scrollIntoView({behavior:'smooth', block:'center'});
     return;
   }
-  tr.classList.add('focus');
-  const voteCell = tr.querySelector('td:last-child');
-  $('focusResult').textContent = `Vote for ${did}: ${voteCell ? voteCell.textContent : ''}`;
-  tr.scrollIntoView({behavior:'smooth', block:'center'});
+
+  // 2) Otherwise, do a direct lookup from the proposal’s full vote records.
+  // This works even if the DRep isn’t in the Top N by voting power.
+  const proposalId = window.__lastProposalId;
+  const base = window.__lastKoiosBase || normalizeBase($('koiosBase').value);
+
+  if (!proposalId) {
+    $('focusResult').textContent = 'Run a report first (select an action), then paste a DRep id.';
+    return;
+  }
+
+  let choices = window.__choices || null;
+  if (!choices) {
+    try {
+      setGlobal('Looking up that DRep’s vote…', true);
+      const votes = await jget(base, 'proposal_votes', { _proposal_id: proposalId });
+      choices = {};
+      for (const v of (Array.isArray(votes) ? votes : [])) {
+        if (v.voter_role !== 'DRep') continue;
+        if (!v.voter_id) continue;
+        const choice = v.vote || v.vote_choice || 'VOTED';
+        choices[String(v.voter_id)] = String(choice);
+      }
+      window.__choices = choices;
+    } catch (e) {
+      $('focusResult').textContent = 'Could not fetch vote records for lookup.';
+      setGlobal('Ready.', false);
+      return;
+    } finally {
+      setGlobal('Ready.', false);
+    }
+  }
+
+  const vote = choices[did] || 'NO_VOTE_RECORDED';
+  $('focusResult').textContent = `Vote for ${did} (for this action): ${vote}`;
+  $('focusResult').scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function downloadCsv() {
