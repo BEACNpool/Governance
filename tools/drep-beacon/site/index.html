@@ -146,6 +146,7 @@
       <section class="card">
         <h2>Results</h2>
         <div id="summary" class="status"></div>
+
         <div class="hint" style="margin-top:10px">
           <b>How did your DRep vote?</b> Paste a DRep id to highlight their vote in the table.
           <div class="row two" style="margin-top:8px">
@@ -158,6 +159,28 @@
           </div>
           <div id="focusResult" class="status" style="margin-top:6px"></div>
         </div>
+
+        <div class="hint" style="margin-top:12px">
+          <b>Want more details on a DRep?</b> Resolve <i>self-declared public metadata</i> (not identity verification).
+          <div class="row" style="margin-top:8px">
+            <div>
+              <label for="metaDrepId">DRep ID</label>
+              <input id="metaDrepId" placeholder="drep1…" />
+            </div>
+            <div>
+              <label for="blockfrostKey">Blockfrost Project ID (mainnet)</label>
+              <input id="blockfrostKey" type="password" placeholder="mainnet…" />
+              <div class="hint">Security: this key is used only in your browser memory and is never stored in the URL or local storage.</div>
+            </div>
+          </div>
+          <div class="btns">
+            <button id="resolveMeta" class="primary">Resolve metadata</button>
+            <button id="clearMeta">Clear</button>
+          </div>
+          <div id="metaStatus" class="status" style="margin-top:8px"></div>
+          <div id="metaOut" class="hint" style="margin-top:8px"></div>
+        </div>
+
         <div id="actionDetails" class="hint" style="margin-top:10px"></div>
         <div style="overflow:auto; margin-top:10px">
           <table id="table" aria-label="DRep participation table">
@@ -181,6 +204,6 @@
     </div>
   </main>
 
-  <script type="module" src="app.js?v=2026-02-11-2"></script>
+  <script type="module" src="app.js?v=2026-02-11-3"></script>
 </body>
 </html>

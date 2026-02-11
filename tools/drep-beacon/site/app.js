@@ -25,6 +25,16 @@ function setGlobal(msg, loading=false){
   el.classList.toggle('loading', !!loading);
 }
 
+function setMetaStatus(msg){
+  const el = $('metaStatus');
+  if (el) el.textContent = msg || '';
+}
+
+function setMetaOut(html){
+  const el = $('metaOut');
+  if (el) el.innerHTML = html || '';
+}
+
 function normalizeBase(u) {
   return (u || '').trim().replace(/\/+$/,'');
 }
@@ -318,6 +328,119 @@ function escapeHtml(s){
     .replaceAll("'",'&#39;');
 }
 
+function unval(x){
+  if (x && typeof x === 'object' && '@value' in x) return x['@value'];
+  return x;
+}
+
+function extractJsonldSummary(j){
+  const body = (j && typeof j === 'object') ? (j.body || {}) : {};
+  const name = unval(body.givenName || body.name || body.displayName || body.title) || null;
+  const objectives = unval(body.objectives) || '';
+  const motivations = unval(body.motivations) || '';
+  const qualifications = unval(body.qualifications) || '';
+
+  const refsRaw = body.references;
+  const refs = [];
+  if (Array.isArray(refsRaw)) {
+    for (const r of refsRaw) {
+      const label = unval(r.label) || '';
+      const uri = unval(r.uri) || '';
+      if (uri) refs.push({ label, uri });
+    }
+  }
+
+  return { name, objectives, motivations, qualifications, refs };
+}
+
+async function resolveDrepMetadata(){
+  const drepId = ($('metaDrepId')?.value || '').trim();
+  const key = ($('blockfrostKey')?.value || '').trim();
+
+  setMetaOut('');
+  if (!drepId.startsWith('drep1') || drepId.length < 58) {
+    setMetaStatus('Enter a full DRep id (drep1…).');
+    return;
+  }
+  if (!key.startsWith('mainnet')) {
+    setMetaStatus('Enter a Blockfrost mainnet Project ID (starts with mainnet…).');
+    return;
+  }
+
+  setMetaStatus('Querying Blockfrost…');
+  setGlobal('Resolving DRep metadata…', true);
+
+  const base = 'https://cardano-mainnet.blockfrost.io/api/v0';
+  try {
+    const metaResp = await fetch(`${base}/governance/dreps/${encodeURIComponent(drepId)}/metadata`, {
+      headers: { 'project_id': key, 'Accept': 'application/json' },
+    });
+    if (!metaResp.ok) throw new Error(`Blockfrost metadata HTTP ${metaResp.status}`);
+    const meta = await metaResp.json();
+
+    const url = meta.url || null;
+    const hash = meta.hash || null;
+
+    // Optional: voting power snapshot
+    let drepInfo = null;
+    try {
+      const infoResp = await fetch(`${base}/governance/dreps/${encodeURIComponent(drepId)}`, {
+        headers: { 'project_id': key, 'Accept': 'application/json' },
+      });
+      if (infoResp.ok) drepInfo = await infoResp.json();
+    } catch (_) {}
+
+    if (!url) {
+      setMetaStatus('No metadata URL published for this DRep.');
+      setMetaOut(`<div><b>DRep:</b> <code>${escapeHtml(drepId)}</code></div>`);
+      return;
+    }
+
+    setMetaStatus('Fetching metadata JSON-LD…');
+    const j = await (await fetch(url, { headers: { 'Accept': 'application/json' }})).json();
+    const s = extractJsonldSummary(j);
+
+    const lines = [];
+    lines.push(`<div><b>DRep:</b> <code>${escapeHtml(drepId)}</code></div>`);
+    if (s.name) lines.push(`<div style="margin-top:6px"><b>Name (self-declared):</b> ${escapeHtml(s.name)}</div>`);
+
+    if (drepInfo && drepInfo.amount) {
+      const ada = (Number(drepInfo.amount)||0)/1_000_000;
+      lines.push(`<div style="margin-top:6px"><b>Voting power (Blockfrost):</b> ${ada.toLocaleString(undefined,{maximumFractionDigits:0})} ADA</div>`);
+    }
+
+    lines.push(`<div style="margin-top:6px"><b>Metadata URL:</b> <a href="${escapeHtml(url)}" target="_blank" rel="noopener">open</a></div>`);
+    if (hash) lines.push(`<div style="margin-top:6px"><b>Metadata hash:</b> <code>${escapeHtml(hash)}</code></div>`);
+
+    const blurb = (txt) => escapeHtml(String(txt).replace(/\s+/g,' ').trim()).slice(0, 420);
+    if (s.objectives) lines.push(`<div style="margin-top:10px"><b>Objectives:</b> ${blurb(s.objectives)}${String(s.objectives).length>420?'…':''}</div>`);
+    if (s.motivations) lines.push(`<div style="margin-top:10px"><b>Motivations:</b> ${blurb(s.motivations)}${String(s.motivations).length>420?'…':''}</div>`);
+
+    if (s.refs && s.refs.length) {
+      lines.push('<div style="margin-top:10px"><b>Links:</b><ul style="margin:6px 0 0 18px">' +
+        s.refs.slice(0,8).map(r => `<li>${escapeHtml(r.label || 'link')}: <a href="${escapeHtml(r.uri)}" target="_blank" rel="noopener">${escapeHtml(r.uri)}</a></li>`).join('') +
+        '</ul></div>');
+    }
+
+    lines.push('<div style="margin-top:10px" class="status">Note: this panel displays <b>self-declared public metadata</b> published by the DRep; it does not verify real-world identity.</div>');
+
+    setMetaOut(lines.join(''));
+    setMetaStatus('Done.');
+
+  } catch (e) {
+    setMetaStatus('Error: ' + (e?.message || String(e)));
+  } finally {
+    setGlobal('Ready.', false);
+  }
+}
+
+function clearMeta(){
+  if ($('metaDrepId')) $('metaDrepId').value = '';
+  if ($('blockfrostKey')) $('blockfrostKey').value = '';
+  setMetaStatus('');
+  setMetaOut('');
+}
+
 function clearFocus(){
   const tbody = $('table')?.querySelector('tbody');
   if (!tbody) return;
@@ -401,6 +524,11 @@ function downloadCsv() {
   $('downloadCsv').addEventListener('click', downloadCsv);
   $('applyDrep').addEventListener('click', applyFocusDrep);
   $('focusDrep').addEventListener('keydown', (e) => { if (e.key === 'Enter') applyFocusDrep(); });
+
+  $('resolveMeta').addEventListener('click', resolveDrepMetadata);
+  $('clearMeta').addEventListener('click', clearMeta);
+  $('metaDrepId').addEventListener('keydown', (e) => { if (e.key === 'Enter') resolveDrepMetadata(); });
+  $('blockfrostKey').addEventListener('keydown', (e) => { if (e.key === 'Enter') resolveDrepMetadata(); });
 
   $('preset').addEventListener('change', () => {
     // auto-run on selection to reduce friction
