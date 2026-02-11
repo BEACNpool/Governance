@@ -36,34 +36,34 @@ We keep **separate datasets per source**, then publish **immutable snapshots** s
 | **Intersect Community Grants** | GitBook sitemap crawl | Deliverable links, reporting links, grant values |
 | **Project Catalyst** *(coming)* | Catalyst API (TBD) | Funds, projects, milestones, payment tx hashes |
 
-## Architecture
+## Repository Structure
+
+Start here (newcomers): `docs/README.md`
 
 ```
-data/
-├── latest.json                         # → current snapshot pointer
-├── snapshots/
-│   └── YYYY-MM-DD/
-│       ├── gov-actions/proposals.json  # CIP-1694 governance actions
-│       ├── intersect-grants/waste_radar.json
-│       └── warehouse/                  # Derived views
-│           ├── unified_funding_index.json
-│           └── recipient_entity_leaderboard.json
-├── index.json                          # Dashboard feed
-└── *.json                              # Other data feeds
+index.html                              # GitHub Pages home (renders from data/index.json)
+treasury-intelligence.html              # Treasury summary (static)
 
-reports/                                # Human-readable outputs
-├── methodology-doge.html               # How we audit
-├── waste-deep-dive-YYYY-MM-DD.html     # Flagged items deep dive
-├── grants-ledger-YYYY-MM-DD.html       # Grants spend ledger
-├── community-summary-YYYY-MM-DD.html   # Plain-language summary
-├── daily-briefing-YYYY-MM-DD.html      # Daily governance briefing
-└── *.csv / *.md                        # Machine-readable exports
+assets/                                 # Shared design system
 
-assets/
-└── beacn.css                           # Shared design system (v2)
+reports/                                # Human-readable outputs (HTML/CSV/MD)
+  README.md
 
-tools_generate_*.py                     # Report generators
-index.html                              # Dashboard (GitHub Pages)
+data/                                   # Machine-readable datasets + receipts
+  README.md
+  index.json                             # Homepage feed
+  latest.json                            # Pointer to latest snapshot
+  snapshots/YYYY-MM-DD/                  # Immutable, dated receipts
+  raw-votes/                             # Raw vote pulls (epoch keyed)
+  processed/                             # Normalized/processed outputs
+
+drep/                                   # BEACNpool DRep metadata + receipts
+  BEACNpool.jsonld                       # Exact GovTool export (byte-for-byte)
+  votes/                                 # Rationale reader + vote receipts
+
+scripts/                                # Automation for live vote pulls/builds
+
+prototypes/                             # Prototype UI components (not canonical)
 ```
 
 ## What "Flags" Mean
