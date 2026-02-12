@@ -5,197 +5,703 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BEACN DRep Beacon — Participation Explorer</title>
   <meta name="description" content="Forkable, receipts-first explorer for DRep voting participation on Cardano governance actions (Koios-backed)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0a0b0d; --card:#151821; --card2:#1b1f2a; --border:rgba(255,255,255,.08);
-      --text:#e8e9ed; --muted:#9aa0aa; --gold:#d4a843; --red:#ef4444; --green:#22c55e; --blue:#3b82f6;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      --r:14px;
+    :root {
+      --bg: #07090e;
+      --bg-subtle: #0c1019;
+      --surface: rgba(14, 18, 30, 0.7);
+      --surface-raised: rgba(20, 26, 42, 0.85);
+      --surface-hover: rgba(26, 34, 56, 0.9);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(212, 178, 80, 0.18);
+      --text: #eaecf2;
+      --text-secondary: #8892a8;
+      --text-dim: #5c6580;
+      --gold: #d4b250;
+      --gold-muted: rgba(212, 178, 80, 0.12);
+      --gold-glow: rgba(212, 178, 80, 0.06);
+      --teal: #38d9c4;
+      --teal-muted: rgba(56, 217, 196, 0.1);
+      --red: #f0544c;
+      --green: #3dd68c;
+      --blue: #5e9fff;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --sans: 'Outfit', system-ui, -apple-system, sans-serif;
+      --r: 16px;
+      --r-lg: 24px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2);
+      --shadow-lg: 0 8px 48px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45}
-    a{color:#b9d2ff;text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{padding:22px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,11,13,.92);backdrop-filter: blur(10px);z-index:5}
-    .wrap{max-width:1100px;margin:0 auto}
-    .title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    h1{margin:0;font-size:18px;letter-spacing:.2px}
-    .tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
-    main{padding:16px}
-    .grid{display:grid;grid-template-columns: 1fr; gap:12px}
-    @media (min-width: 960px){ .grid{grid-template-columns: 420px 1fr; align-items:start} }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r);padding:14px}
-    .card h2{margin:0 0 10px;font-size:14px;color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+    html { scroll-behavior: smooth; }
 
-    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
-    input, select{width:100%;padding:10px 10px;border-radius:10px;border:1px solid var(--border);background:#0f1218;color:var(--text);font-family:var(--mono)}
-    .row{display:grid;grid-template-columns:1fr; gap:10px}
-    @media (min-width: 520px){ .row.two{grid-template-columns:1fr 1fr} }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{cursor:pointer;border-radius:12px;border:1px solid var(--border);padding:12px 14px;background:#101522;color:var(--text);font-weight:750}
-    .btns button{flex:1; min-width: 190px}
-    button.primary{border-color:rgba(212,168,67,.35);background:rgba(212,168,67,.12)}
-    button:disabled{opacity:.55;cursor:not-allowed}
+    /* ── Ambient background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -40%; left: -20%;
+      width: 80vw; height: 80vw;
+      background: radial-gradient(ellipse, rgba(212, 178, 80, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%; right: -15%;
+      width: 70vw; height: 70vw;
+      background: radial-gradient(ellipse, rgba(56, 217, 196, 0.02) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-    .hint{font-size:12px;color:var(--muted);margin-top:10px}
-    .hint code{font-family:var(--mono);color:#cfd3db}
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #6eeadb; text-decoration: none; }
 
-    .status{font-family:var(--mono);font-size:12px;color:var(--muted)}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);font-family:var(--mono);font-size:12px}
-.pill.loading{position:relative;padding-left:30px}
-.pill.loading::before{content:'';position:absolute;left:10px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color: rgba(212,168,67,.9);animation:spin .9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.82);
+      backdrop-filter: blur(20px) saturate(1.3);
+      -webkit-backdrop-filter: blur(20px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      animation: slideDown 0.5s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-/* Make the two “always visible” indicators louder */
-#globalStatus{font-size:16px;font-weight:900;letter-spacing:.3px}
-#epochTimer{font-size:16px;font-weight:900;letter-spacing:.3px;border-color:rgba(212,168,67,.45);background:rgba(212,168,67,.10)}
-    .pill.ok{border-color:rgba(34,197,94,.35);color:#bff0d0;background:rgba(34,197,94,.08)}
-    .pill.bad{border-color:rgba(239,68,68,.35);color:#ffd0d0;background:rgba(239,68,68,.08)}
+    .wrap { max-width: 1200px; margin: 0 auto; }
 
-    table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
-    th,td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:top}
-    tr.focus{outline:2px solid rgba(212,168,67,.55);outline-offset:-2px;background:rgba(212,168,67,.06)}
-    th{color:var(--muted);text-align:left;font-weight:700}
-    td.r{text-align:right}
-    .vote-yes{color:#bff0d0}
-    .vote-no{color:#ffd0d0}
-    .vote-abstain{color:#cfe1ff}
-    .vote-none{color:#d7dbe3}
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 16px 0;
+    }
 
-    .footer{margin-top:14px;font-size:12px;color:var(--muted)}
-    .mono{font-family:var(--mono)}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold) 0%, #c49a2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: #0a0b0d;
+      letter-spacing: -1px;
+      box-shadow: 0 2px 12px rgba(212, 178, 80, 0.25);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .tagline {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .header-status {
+      padding: 12px 16px;
+      margin: 0 0 12px;
+      border-radius: var(--r);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Pills / Badges ── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--surface);
+      transition: all 0.3s;
+    }
+    .pill.loading {
+      position: relative;
+      padding-left: 32px;
+    }
+    .pill.loading::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin-top: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      border-top-color: var(--gold);
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .pill.ok {
+      border-color: rgba(61, 214, 140, 0.3);
+      color: #a8f0c8;
+      background: rgba(61, 214, 140, 0.08);
+    }
+    .pill.bad {
+      border-color: rgba(240, 84, 76, 0.3);
+      color: #ffbcb8;
+      background: rgba(240, 84, 76, 0.08);
+    }
+
+    #globalStatus {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      width: 100%;
+    }
+    #epochTimer {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-color: var(--border-accent);
+      background: var(--gold-muted);
+      color: var(--gold);
+    }
+
+    /* ── Main Layout ── */
+    main {
+      padding: 24px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 1020px) {
+      .grid { grid-template-columns: 440px 1fr; align-items: start; }
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .step-badge.step-1 {
+      background: linear-gradient(135deg, var(--gold-muted), rgba(212, 178, 80, 0.2));
+      color: var(--gold);
+      border: 1px solid rgba(212, 178, 80, 0.25);
+    }
+    .step-badge.step-2 {
+      background: linear-gradient(135deg, var(--teal-muted), rgba(56, 217, 196, 0.18));
+      color: var(--teal);
+      border: 1px solid rgba(56, 217, 196, 0.22);
+    }
+
+    .card h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.1px;
+    }
+
+    .card h2 .sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    /* ── Form Elements ── */
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin: 16px 0 8px;
+      letter-spacing: 0.3px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(7, 9, 14, 0.6);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.25s;
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: rgba(212, 178, 80, 0.4);
+      box-shadow: 0 0 0 3px rgba(212, 178, 80, 0.08), 0 0 20px rgba(212, 178, 80, 0.04);
+      background: rgba(10, 12, 20, 0.8);
+    }
+    input::placeholder { color: var(--text-dim); }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235c6580' d='M6 8.5L1 3.5h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 520px) { .row.two { grid-template-columns: 1fr 1fr; } }
+
+    /* ── Buttons ── */
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+    button {
+      cursor: pointer;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      background: var(--surface-raised);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    button::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    button:hover:not(:disabled) {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btns button { flex: 1; min-width: 150px; }
+
+    button.primary {
+      border-color: rgba(212, 178, 80, 0.35);
+      background: linear-gradient(180deg, rgba(212, 178, 80, 0.16) 0%, rgba(212, 178, 80, 0.08) 100%);
+      color: var(--gold);
+    }
+    button.primary:hover:not(:disabled) {
+      border-color: rgba(212, 178, 80, 0.5);
+      background: linear-gradient(180deg, rgba(212, 178, 80, 0.22) 0%, rgba(212, 178, 80, 0.12) 100%);
+      box-shadow: 0 4px 20px rgba(212, 178, 80, 0.1);
+    }
+
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ── Hints & Status ── */
+    .hint {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+    .hint code {
+      font-family: var(--mono);
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.04);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .hint b { color: var(--text-secondary); font-weight: 600; }
+
+    .status {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Details / Collapsible ── */
+    details {
+      margin: 12px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    details[open] {
+      border-color: rgba(212, 178, 80, 0.12);
+      background: rgba(212, 178, 80, 0.02);
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      padding: 12px 16px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before {
+      content: '▸';
+      display: inline-block;
+      transition: transform 0.2s;
+      color: var(--gold);
+      font-size: 11px;
+    }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { background: rgba(255,255,255,0.02); }
+    details > div { padding: 0 16px 16px; }
+
+    /* ── Divider ── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* ── Table ── */
+    .table-wrapper {
+      overflow: auto;
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      background: rgba(7, 9, 14, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    th, td {
+      padding: 12px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      color: var(--text-dim);
+      text-align: left;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(14, 18, 30, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    td { transition: background 0.2s; }
+    tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    td.r { text-align: right; }
+
+    tr.focus {
+      outline: 2px solid rgba(212, 178, 80, 0.45);
+      outline-offset: -2px;
+      background: rgba(212, 178, 80, 0.05);
+    }
+    tr.focus td { background: rgba(212, 178, 80, 0.04); }
+
+    .vote-yes { color: #7cf0b0; }
+    .vote-no { color: #ffaca8; }
+    .vote-abstain { color: #a8ccff; }
+    .vote-none { color: var(--text-dim); }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .mono { font-family: var(--mono); }
+
+    .footer .endpoints {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .footer .endpoint-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 0 14px; }
+      .header-inner { padding: 14px 0; }
+      h1 { font-size: 17px; }
+      .brand-icon { width: 34px; height: 34px; font-size: 15px; border-radius: 10px; }
+      main { padding: 16px 14px 40px; }
+      .card { padding: 18px; border-radius: 18px; }
+      .btns button { min-width: 120px; font-size: 12px; padding: 11px 14px; }
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+
+    /* ── Selection ── */
+    ::selection {
+      background: rgba(212, 178, 80, 0.25);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap title">
-      <div>
-        <h1>BEACN DRep Beacon — Participation Explorer</h1>
-        <div class="tag">receipts-first • reproducible • Koios-backed</div>
+    <div class="wrap header-inner">
+      <div class="brand">
+        <div class="brand-icon">B</div>
+        <div>
+          <h1>DRep Beacon</h1>
+          <div class="tagline">receipts-first · reproducible · Koios-backed</div>
+        </div>
       </div>
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end">
+      <div class="header-meta">
         <div id="epochTimer" class="pill">Epoch: …</div>
-        <div class="tag">Share links: <span class="mono">?proposal_id=…&top=50</span></div>
+        <div class="tagline" style="text-align:right">Share links: <span class="mono">?proposal_id=…&amp;top=50</span></div>
       </div>
     </div>
-    <div class="wrap" style="margin-top:10px">
+    <div class="wrap header-status">
       <div id="globalStatus" class="pill loading" style="width:100%">Loading…</div>
     </div>
   </header>
 
   <main class="wrap">
     <div class="grid">
-      <section class="card">
-        <h2>Step 1 — Choose a governance action</h2>
 
-        <details style="margin:10px 0 6px">
-          <summary style="cursor:pointer; font-weight:800; color: var(--text)">New here? Quick guide (2 steps)</summary>
+      <!-- ═══ STEP 1 ═══ -->
+      <section class="card">
+        <div class="card-header">
+          <div class="step-badge step-1">1</div>
+          <h2>
+            Choose a Governance Action
+            <span class="sub">Select &amp; run a report</span>
+          </h2>
+        </div>
+
+        <details>
+          <summary>New here? Quick guide</summary>
           <div class="hint" style="margin-top:8px">
             <div style="margin:8px 0"><b>Step 1</b>: Choose a governance action from <b>Quick pick</b> (it loads recent actions automatically).</div>
             <div style="margin:8px 0"><b>Step 2</b>: (Optional) Paste a <b>DRep ID</b> to see how that DRep voted, and/or resolve their <b>self-declared metadata</b> using a free Blockfrost key.</div>
             <div style="margin:8px 0"><b>Top N</b>: start with 50 for a quick scan; increase to 200+ to include smaller DReps in the table.</div>
-            <div style="margin:8px 0"><b>Share & reproduce</b>: use “Copy share link” so anyone can re-run the exact same query (same inputs, same receipts).</div>
+            <div style="margin:8px 0"><b>Share &amp; reproduce</b>: use "Copy share link" so anyone can re-run the exact same query (same inputs, same receipts).</div>
 
-            <div style="margin:10px 0 6px"><b>Positive “outside the box” ideas</b>:</div>
-            <ul style="margin:0 0 8px 18px; color: var(--muted)">
+            <div style="margin:12px 0 6px"><b>Ideas for power users:</b></div>
+            <ul style="margin:0 0 8px 18px; color: var(--text-dim)">
               <li><b>Time-series participation</b>: run the same Top N across multiple actions and track how participation changes.</li>
               <li><b>Compare infrastructures</b>: swap Koios base URLs and see if results differ (good for reliability audits).</li>
-              <li><b>Build new dashboards</b>: export CSV and make charts (e.g., “% of top-100 voting power active per action”).</li>
-              <li><b>Accountability with receipts</b>: write neutral reports using “NO_VOTE_RECORDED” (avoid accusations; cite the query inputs).</li>
+              <li><b>Build new dashboards</b>: export CSV and make charts (e.g., "% of top-100 voting power active per action").</li>
+              <li><b>Accountability with receipts</b>: write neutral reports using "NO_VOTE_RECORDED" (avoid accusations; cite the query inputs).</li>
             </ul>
 
-            <div style="margin-top:8px"><b>What “NO_VOTE_RECORDED” means</b>: Koios returned no DRep vote record for that DRep on that action <i>at query time</i>. It’s a reproducible data point, not a verdict.</div>
+            <div style="margin-top:10px"><b>What "NO_VOTE_RECORDED" means</b>: Koios returned no DRep vote record for that DRep on that action <i>at query time</i>. It's a reproducible data point, not a verdict.</div>
           </div>
         </details>
 
-        <label for="koiosBase">Koios base URL</label>
+        <label for="koiosBase">Koios Base URL</label>
         <input id="koiosBase" value="https://koios.beacn.workers.dev" />
-        <div class="hint">Default uses BEACN’s Cloudflare worker. You can switch to <code>https://api.koios.rest/api/v1</code>.</div>
+        <div class="hint">Default uses BEACN's Cloudflare worker. You can switch to <code>https://api.koios.rest/api/v1</code>.</div>
 
         <div class="row two">
           <div>
-            <label for="preset">Quick pick (choose a governance action)</label>
+            <label for="preset">Quick Pick</label>
             <select id="preset">
               <option value="">Loading proposals…</option>
             </select>
           </div>
           <div>
-            <label for="topN">Top N DReps (by latest voting power)</label>
+            <label for="topN">Top N DReps</label>
             <input id="topN" type="number" min="5" max="500" value="50" />
           </div>
         </div>
 
-        <div class="hint">Pick an action from the list. The results update when you run a report. (Advanced: share links with <code>?proposal_id=…</code>.)</div>
+        <div class="hint">Pick an action from the list. Results update when you run a report. Advanced: share links with <code>?proposal_id=…</code></div>
 
         <div class="btns">
-          <button id="run" class="primary">Run report</button>
-          <button id="copyLink">Copy share link</button>
-          <button id="downloadCsv">Download CSV</button>
-        </div>
-        <div class="hint"><b>Tip:</b> If the page looks idle, check the status bar at the top (it will say what’s loading).</div>
-
-        <div class="hint">
-          This tool is read-only. “NO_VOTE_RECORDED” means Koios returned no DRep vote record at query time — not an accusation.
+          <button id="run" class="primary">⚡ Run Report</button>
+          <button id="copyLink">🔗 Share Link</button>
+          <button id="downloadCsv">📥 CSV</button>
         </div>
 
-        <div id="runStatus" class="status" style="margin-top:12px"></div>
+        <div class="hint" style="margin-top:14px; padding:10px 14px; background: rgba(255,255,255,0.02); border-radius:10px; border: 1px solid var(--border);">
+          This tool is <b>read-only</b>. "NO_VOTE_RECORDED" means Koios returned no DRep vote record at query time — not an accusation.
+        </div>
+
+        <div id="runStatus" class="status" style="margin-top:14px"></div>
       </section>
 
+      <!-- ═══ STEP 2 ═══ -->
       <section class="card">
-        <h2>Step 2 — Check a DRep (vote + metadata)</h2>
+        <div class="card-header">
+          <div class="step-badge step-2">2</div>
+          <h2>
+            Inspect a DRep
+            <span class="sub">Vote lookup &amp; metadata</span>
+          </h2>
+        </div>
+
         <div id="summary" class="status"></div>
 
-        <div class="hint" style="margin-top:10px">
-          <b>How did a specific DRep vote?</b> Paste a DRep id (drep1…) and we’ll show their vote for the selected action.
-          <div class="row two" style="margin-top:8px">
+        <!-- Highlight DRep subsection -->
+        <div style="margin-top:12px; padding:14px; border-radius:var(--r); background: rgba(255,255,255,0.015); border: 1px solid var(--border);">
+          <div class="hint" style="margin:0"><b>How did a specific DRep vote?</b> Paste a DRep id to check.</div>
+          <div class="row two" style="margin-top:10px">
             <div>
               <input id="focusDrep" placeholder="drep1…" />
             </div>
             <div>
-              <button id="applyDrep">Highlight DRep</button>
+              <button id="applyDrep" style="width:100%; margin-top:0">🔍 Highlight DRep</button>
             </div>
           </div>
-          <div id="focusResult" class="status" style="margin-top:6px"></div>
+          <div id="focusResult" class="status" style="margin-top:8px"></div>
         </div>
 
-        <div class="hint" style="margin-top:12px">
-          <b>Want more details on a DRep?</b> Resolve <i>self-declared public metadata</i>.
-          <div class="status" style="margin-top:6px">
-            Requires a <b>Blockfrost Project ID</b> (free to create):
-            <a href="https://blockfrost.io/" target="_blank" rel="noopener">blockfrost.io</a>
+        <div class="section-divider"></div>
+
+        <!-- Metadata subsection -->
+        <div style="padding:14px; border-radius:var(--r); background: rgba(255,255,255,0.015); border: 1px solid var(--border);">
+          <div class="hint" style="margin:0">
+            <b>Resolve self-declared metadata</b> — requires a 
+            <a href="https://blockfrost.io/" target="_blank" rel="noopener">Blockfrost</a> Project ID (free).
           </div>
-          <div class="row" style="margin-top:8px">
+          <div class="row" style="margin-top:10px">
             <div>
               <label for="metaDrepId">DRep ID</label>
               <input id="metaDrepId" placeholder="drep1…" />
             </div>
             <div>
-              <label for="blockfrostKey">Blockfrost Project ID (required for metadata)</label>
+              <label for="blockfrostKey">Blockfrost Project ID</label>
               <input id="blockfrostKey" type="password" placeholder="mainnet…" />
-              <div class="hint">Security: this key is used only in your browser memory and is never stored in the URL or local storage. (This is not BEACN collecting keys — it’s your browser talking to Blockfrost.)</div>
+              <div class="hint">Your key stays in browser memory — never stored in URL or local storage.</div>
             </div>
           </div>
-          <div class="hint" style="margin-top:8px"><b>Submit:</b> tap “Resolve metadata” below.</div>
           <div class="btns">
-            <button id="resolveMeta" class="primary">Resolve metadata</button>
+            <button id="resolveMeta" class="primary">Resolve Metadata</button>
             <button id="clearMeta">Clear</button>
           </div>
-          <div id="metaStatus" class="status" style="margin-top:8px"></div>
-          <div id="metaOut" class="hint" style="margin-top:8px"></div>
+          <div id="metaStatus" class="status" style="margin-top:10px"></div>
+          <div id="metaOut" class="hint" style="margin-top:10px"></div>
         </div>
 
-        <div id="actionDetails" class="hint" style="margin-top:10px"></div>
-        <div style="overflow:auto; margin-top:10px">
+        <div id="actionDetails" class="hint" style="margin-top:14px"></div>
+
+        <!-- Results Table -->
+        <div class="table-wrapper">
           <table id="table" aria-label="DRep participation table">
             <thead>
               <tr>
                 <th style="width:52px">#</th>
                 <th>DRep</th>
-                <th class="r" style="width:150px">Voting power</th>
+                <th class="r" style="width:150px">Voting Power</th>
                 <th style="width:150px">Vote</th>
               </tr>
             </thead>
@@ -204,8 +710,15 @@
         </div>
 
         <div class="footer">
-          <div>Endpoints used: <span class="mono">/proposal_list</span>, <span class="mono">/proposal_votes</span>, <span class="mono">/proposal_voting_summary</span>, <span class="mono">/drep_list</span>, <span class="mono">/drep_history</span></div>
-          <div style="margin-top:6px">Built to encourage experimentation: swap Koios base, test different actions, export CSV, and remix into new dashboards.</div>
+          <div>Endpoints used:</div>
+          <div class="endpoints">
+            <span class="endpoint-tag">/proposal_list</span>
+            <span class="endpoint-tag">/proposal_votes</span>
+            <span class="endpoint-tag">/proposal_voting_summary</span>
+            <span class="endpoint-tag">/drep_list</span>
+            <span class="endpoint-tag">/drep_history</span>
+          </div>
+          <div style="margin-top:10px">Built to encourage experimentation: swap Koios base, test different actions, export CSV, and remix into new dashboards.</div>
         </div>
       </section>
     </div>
