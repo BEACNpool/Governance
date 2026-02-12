@@ -595,7 +595,7 @@
       <a href="#start" class="nav-link nav-brand">BEACN</a>
       <a href="#start" class="nav-link active"><span class="nav-icon">✨</span> Start here</a>
       <a href="#tools" class="nav-link"><span class="nav-icon">🧰</span> Tools</a>
-      <a href="#library" class="nav-link"><span class="nav-icon">📚</span> Library</a>
+      <a href="#data" class="nav-link"><span class="nav-icon">📑</span> Key reports</a>
       <a href="https://github.com/BEACNpool/Governance" target="_blank" rel="noopener" class="nav-link"><span class="nav-icon">⚙️</span> GitHub</a>
     </div>
   </nav>
@@ -763,14 +763,51 @@ function render(index) {
   ]);
   root.appendChild(toolsGrid);
 
-  // ── Library ──
-  const libHeader = el('div', { class: 'section-header', id: 'library' });
-  libHeader.appendChild(el('h2', { text: 'Library' }));
-  libHeader.appendChild(el('span', { class: 'section-badge', text: 'everything else' }));
-  root.appendChild(libHeader);
-  root.appendChild(el('div', { class: 'section-desc', html: `All reports, exports, and older snapshots live in the library. <a href="library.html" style="color:var(--ada-gold);text-decoration:underline">Open the full library →</a>` }));
+  // ── Key reports (curated) ──
+  const dataHeader = el('div', { class: 'section-header', id: 'data' });
+  dataHeader.appendChild(el('h2', { text: 'Key reports' }));
+  dataHeader.appendChild(el('span', { class: 'section-badge', text: 'curated' }));
+  root.appendChild(dataHeader);
+  root.appendChild(el('div', { class: 'section-desc', text: 'A small, non-redundant set of “best” artifacts. For now: HTML first; raw exports live inside the report pages.' }));
 
-  // Keep this page intentionally minimal.
+  const grantsLedger = findItem('Grants', it => (it.title || '').toLowerCase().includes('grants ledger') && (it.kind||'').toLowerCase()==='html');
+  const unifiedIndex = findItem('Dashboard', it => (it.title || '').toLowerCase().includes('unified funding index') && (it.kind||'').toLowerCase()==='md');
+  const treasuryWithdrawals = findItem('Treasury', it => (it.title || '').toLowerCase().includes('treasurywithdrawals') && (it.kind||'').toLowerCase()==='md');
+  const methodology = findItem('Community', it => (it.title || '').toLowerCase().includes('methodology'));
+
+  const keyGrid = el('div', { class: 'report-grid' }, [
+    (() => {
+      const card = el('a', { class: 'report-card', href: (grantsLedger && grantsLedger.href) || 'reports/grants-ledger-2026-02-09.html', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [ el('div', { class: 'card-title', text: 'Grants Ledger' }) ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'Single index of grant-style funding with links to evidence/deliverables (when available).' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [ el('span', { class: 'pill html', text: 'HTML' }), el('span', { style: 'flex:1' }), el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }) ]));
+      return card;
+    })(),
+    (() => {
+      const card = el('a', { class: 'report-card', href: (treasuryWithdrawals && treasuryWithdrawals.href) || 'reports/treasury-withdrawals-2026-02-09.md', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [ el('div', { class: 'card-title', text: 'TreasuryWithdrawals export' }) ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'Receipts-first export of CIP-1694 Treasury Withdrawal actions (MD/CSV available).' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [ el('span', { class: 'pill md', text: 'MD' }), el('span', { style: 'flex:1' }), el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }) ]));
+      return card;
+    })(),
+    (() => {
+      const card = el('a', { class: 'report-card', href: (unifiedIndex && unifiedIndex.href) || 'reports/unified-funding-index-2026-02-09.md', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [ el('div', { class: 'card-title', text: 'Unified Funding Index' }) ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'Combined view across funding mechanisms (TreasuryWithdrawals + Intersect Grants; Catalyst later).' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [ el('span', { class: 'pill md', text: 'MD' }), el('span', { style: 'flex:1' }), el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }) ]));
+      return card;
+    })(),
+    (() => {
+      const card = el('a', { class: 'report-card', href: (methodology && methodology.href) || 'reports/methodology-doge.html', target: '_blank', rel: 'noopener' });
+      card.appendChild(el('div', { class: 'card-head' }, [ el('div', { class: 'card-title', text: 'Methodology (Cardano DOGE)' }) ]));
+      card.appendChild(el('div', { class: 'card-note', text: 'How BEACN flags missing/weak receipts. Flags ≠ wrongdoing.' }));
+      card.appendChild(el('div', { class: 'card-footer' }, [ el('span', { class: 'pill html', text: 'HTML' }), el('span', { style: 'flex:1' }), el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }) ]));
+      return card;
+    })(),
+  ]);
+  root.appendChild(keyGrid);
+
+  // Keep this page intentionally curated.
 
   let sectionIdx = 0;
   for (const section of (index.sections || [])) {
