@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Single Stake Pools Calculator (BEACN)</title>
+  <link rel="stylesheet" href="style.css?v=2026-02-12" />
+</head>
+<body>
+  <header class="wrap">
+    <h1>Single Stake Pools Calculator</h1>
+    <p class="sub">
+      A private, receipts-first calculator to estimate how many pools look like <b>single-operator, single-pool</b> (SPP) candidates
+      after excluding likely multi-pool clusters.
+    </p>
+    <div class="note">
+      <b>Important:</b> This tool flags <i>operational link signals</i> (reward account reuse, shared relays, shared owners, shared metadata URL).
+      It does <b>not</b> assert identity, and it can produce false positives (managed services, shared infrastructure, templated metadata).
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Step 1 — Load pool data</h2>
+      <div class="row">
+        <label>
+          Koios base URL
+          <input id="koiosBase" type="url" value="https://koios.beacn.workers.dev" />
+        </label>
+        <button id="btnLoad">Load / Refresh</button>
+      </div>
+      <div class="row">
+        <div id="status" class="status">Idle.</div>
+      </div>
+      <div class="row">
+        <div class="progress">
+          <div id="progressBar" class="bar" style="width:0%"></div>
+        </div>
+      </div>
+      <details>
+        <summary>What data is fetched?</summary>
+        <ul>
+          <li><code>GET /pool_list</code> (paged) to get all pool ids</li>
+          <li><code>POST /pool_info</code> (batched) to get reward address, owners, relays, metadata URL/hash, and basic stats</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>Step 2 — Exclusion flags</h2>
+      <div class="grid">
+        <label class="check">
+          <input id="flagRewardAddr" type="checkbox" checked />
+          Exclude if reward account is used by 2+ pools (strong signal)
+        </label>
+
+        <label class="check">
+          <input id="flagOwners" type="checkbox" checked />
+          Exclude if an owner key appears in 2+ pools (strong signal)
+        </label>
+
+        <label class="check">
+          <input id="flagRelays" type="checkbox" />
+          Exclude if a relay endpoint is shared by 2+ pools (medium signal)
+        </label>
+
+        <label class="check">
+          <input id="flagMetaUrl" type="checkbox" />
+          Exclude if metadata URL is shared by 2+ pools (soft/medium signal)
+        </label>
+      </div>
+
+      <div class="row">
+        <label>
+          Min cluster size to exclude
+          <input id="minCluster" type="number" min="2" value="2" />
+        </label>
+
+        <label>
+          Show
+          <select id="viewMode">
+            <option value="candidates">Only SPP candidates</option>
+            <option value="excluded">Only excluded pools</option>
+            <option value="all">All pools</option>
+          </select>
+        </label>
+
+        <button id="btnRecompute">Recompute</button>
+      </div>
+
+      <div class="kpi">
+        <div>
+          <div class="k">Total pools loaded</div>
+          <div id="kpiTotal" class="v">—</div>
+        </div>
+        <div>
+          <div class="k">SPP candidates</div>
+          <div id="kpiCandidates" class="v">—</div>
+        </div>
+        <div>
+          <div class="k">Excluded</div>
+          <div id="kpiExcluded" class="v">—</div>
+        </div>
+      </div>
+
+      <details>
+        <summary>Notes on methodology</summary>
+        <ul>
+          <li>“Exclude” means: a pool matched at least one enabled flag whose cluster size is ≥ Min cluster size.</li>
+          <li>Reward account and owners are the strongest signals (on-chain / receipts-grade).</li>
+          <li>Relays and metadata URL can reflect shared hosting or templated setups; keep them optional.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>Results</h2>
+      <div class="row">
+        <input id="search" type="search" placeholder="Filter by ticker/name/pool id/reward addr…" />
+        <button id="btnExport">Export CSV (current view)</button>
+      </div>
+      <div id="tableWrap" class="tableWrap"></div>
+    </section>
+
+    <footer class="foot">
+      Built for BEACN ops. Receipts-first. Not for harassment.
+    </footer>
+  </main>
+
+  <script src="app.js?v=2026-02-12"></script>
+</body>
+</html>
