@@ -808,46 +808,6 @@ function render(index) {
   root.appendChild(keyGrid);
 
   // Keep this page intentionally curated.
-
-  let sectionIdx = 0;
-  for (const section of (index.sections || [])) {
-    sectionIdx++;
-    const sectionId = (section.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-    const header = el('div', { class: 'section-header', id: sectionId });
-    header.appendChild(el('h2', { text: section.title }));
-    if (section.items) {
-      header.appendChild(el('span', { class: 'section-badge', text: `${section.items.length} item${section.items.length !== 1 ? 's' : ''}` }));
-    }
-    root.appendChild(header);
-
-    if (section.description) {
-      root.appendChild(el('div', { class: 'section-desc', text: section.description }));
-    }
-
-    const grid = el('div', { class: 'report-grid' });
-    for (const item of (section.items || [])) {
-      const card = el('a', { class: 'report-card', href: item.href, target: '_blank', rel: 'noopener' });
-
-      const head = el('div', { class: 'card-head' });
-      head.appendChild(el('div', { class: 'card-title', text: item.title }));
-      card.appendChild(head);
-
-      if (item.note) {
-        card.appendChild(el('div', { class: 'card-note', text: item.note }));
-      }
-
-      const footer = el('div', { class: 'card-footer' });
-      if (item.kind) footer.appendChild(el('span', { class: pillClass(item.kind), text: item.kind.toUpperCase() }));
-      footer.appendChild(el('span', { style: 'flex:1' }));
-      footer.appendChild(el('span', { style: 'color:var(--text-dim);font-size:12px;', text: '→' }));
-      card.appendChild(footer);
-
-      grid.appendChild(card);
-    }
-    root.appendChild(grid);
-  }
-
 }
 
 
