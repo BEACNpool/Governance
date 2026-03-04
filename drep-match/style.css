@@ -48,6 +48,11 @@ button:hover{border-color:#3a4a66}
 .btnPill.ok{border-color:rgba(126,231,135,.35)}
 .btnPill.bad{border-color:rgba(255,107,107,.4)}
 .btnPill.warn{border-color:rgba(241,196,15,.35)}
-.btnPill.sel{outline:2px solid rgba(126,231,135,.25)}
+.btnPill.sel{outline:none}
+.btnPill.ok.sel{background:rgba(126,231,135,.12);border-color:var(--accent)}
+.btnPill.bad.sel{background:rgba(255,107,107,.12);border-color:var(--bad)}
+.btnPill.warn.sel{background:rgba(241,196,15,.12);border-color:var(--warn)}
+.btnStart{display:inline-flex;justify-content:center;align-items:center;width:100%;padding:14px 14px;border-radius:12px;border:1px solid rgba(126,231,135,.55);background:linear-gradient(180deg, rgba(18,38,58,.9), rgba(11,18,32,.9));color:var(--text);font-weight:800;letter-spacing:.2px;cursor:pointer;box-shadow:0 0 0 1px rgba(126,231,135,.08), 0 0 28px 2px rgba(126,231,135,.10)}
+.btnStart:hover{border-color:rgba(126,231,135,.85)}
 .hr{height:1px;background:var(--line);opacity:.9;margin:12px 0}
 .hidden{display:none}

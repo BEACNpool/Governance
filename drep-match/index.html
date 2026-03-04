@@ -10,64 +10,68 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="row" style="align-items:center;">
-        <div style="flex:1; min-width:240px;">
-          <h1>DRep Compass <span class="badge">prototype</span></h1>
-          <p class="sub">Receipts-first DRep matching + accountability. No vibes — just actions, votes, and proof.</p>
+      <h1>DRep Compass</h1>
+      <p class="sub">Answer 10 questions based on real governance actions. Get matched to a DRep who votes like you.</p>
+      <button id="btnStart" class="btnStart">Find Your DRep</button>
+
+      <div class="kpi" style="margin-top:12px;">
+        <div class="card" style="margin:0;">
+          <div class="k">Based on</div>
+          <div class="v">10 real governance actions</div>
+          <div class="small">Receipts-first prompts</div>
         </div>
-        <div class="status" id="statusBanner">Loading dataset…</div>
-      </div>
-
-      <div class="note" style="margin-top:10px;">
-        <strong>Concentration risk:</strong> Alignment isn’t the only risk: concentration is. If too many delegators pile into one DRep, a single change of mind (or influence) can swing a huge share of the vote.
-        A healthier system has many smaller, independent DReps — harder to capture, harder to shift all at once.
-      </div>
-
-      <div class="card" style="margin-top:12px;">
-        <div class="row">
-          <label style="min-width:260px; flex:2;">
-            DRep lookup (bypass the quiz)
-            <input id="search" placeholder="Paste a DRep ID or type a name…" autocomplete="off" />
-          </label>
-          <button id="btnLookup">Lookup</button>
-          <div class="status" id="lookupStatus">Tip: You can still take the quiz to find better matches.</div>
+        <div class="card" style="margin:0;">
+          <div class="k">DReps must</div>
+          <div class="v">Vote on all 20 recent actions</div>
+          <div class="small">Perfect participation</div>
+        </div>
+        <div class="card" style="margin:0;">
+          <div class="k">Matching</div>
+          <div class="v">On-chain votes</div>
+          <div class="small">Not vibes</div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="row">
-          <div style="flex:1; min-width:260px;">
-            <h2 style="margin:0 0 6px;">Flow</h2>
-            <div class="small">Load → Quiz → Matches → Deep dive</div>
-            <div class="progress" style="margin-top:10px;"><div class="bar" id="progBar" style="width:10%"></div></div>
-          </div>
-          <div class="btnRow">
-            <button class="btnPill" id="goQuiz">Phase 1 — Quiz</button>
-            <button class="btnPill" id="goMatches">Phase 2 — Matches</button>
-            <button class="btnPill" id="goProfile">Phase 3 — Deep dive</button>
-          </div>
-        </div>
+      <details style="margin-top:12px;" class="small">
+        <summary style="cursor:pointer; color: var(--muted);">Data status</summary>
+        <div class="status" id="statusBanner" style="margin-top:8px;">Loading dataset…</div>
+      </details>
+
+      <div class="small" style="margin-top:10px;">
+        Already know your DRep? <a href="#lookup" id="jumpLookup">Look them up directly →</a>
       </div>
     </header>
 
     <!-- Phase 1 -->
-    <section class="card" id="phaseQuiz">
-      <h2>Phase 1 — What matters to you?</h2>
-      <p class="small">Answer 5–7 prompts based on real governance actions (or mock prompts until the dataset is populated). We’ll compare your answers to DRep voting records.</p>
+    <section class="card hidden" id="phaseQuiz">
+      <h2>What matters to you?</h2>
+      <p class="small">One question at a time. We’ll compare your answers to on-chain DRep votes.</p>
       <div id="quizWrap" style="margin-top:10px;"></div>
-      <div class="hr"></div>
+      <div class="row" style="margin-top:10px;">
+        <div class="status" id="quizStatus">Progress: 0/0</div>
+      </div>
+    </section>
+
+    <!-- Lookup (bypass) -->
+    <section class="card hidden" id="lookup">
+      <h2>DRep lookup (bypass the quiz)</h2>
       <div class="row">
-        <div class="status" id="quizStatus">Answer at least 3 questions to score matches.</div>
-        <button id="btnScore">Score matches</button>
+        <label style="min-width:260px; flex:2;">
+          DRep ID or name
+          <input id="search" placeholder="Paste a DRep ID or type a name…" autocomplete="off" />
+        </label>
+        <button id="btnLookup">Lookup</button>
+        <div class="status" id="lookupStatus">Tip: Take the quiz to find better matches.</div>
       </div>
     </section>
 
     <!-- Phase 2 -->
     <section class="card hidden" id="phaseMatches">
-      <h2>Phase 2 — Your matches</h2>
+      <h2>Your matches</h2>
       <div class="kpi" id="kpi"></div>
       <div id="matchesWrap" style="margin-top:10px;"></div>
-      <p class="small">Recommendation rule: BEACN only recommends DReps with a <strong>perfect voting record</strong> across the most recent ${PERFECT_LAST_N} indexed actions (they can still be searchable/viewable).</p>
+      <div class="note" id="concentrationNote" style="margin-top:10px;" class="hidden"></div>
+      <p class="small">Recommendation rule: BEACN only recommends DReps with a <strong>perfect voting record</strong> across the most recent <strong>20</strong> indexed actions, and only if they match your answers exactly.</p>
     </section>
 
     <!-- Phase 3 -->
@@ -100,6 +104,8 @@ const state = {
   quiz: new Map(), // actionId -> YES|NO|ABSTAIN
   selectedDrepId: null,
   usingMock: false,
+  quizItems: [],
+  currentQuestion: 0,
 };
 
 function $(id){ return document.getElementById(id); }
@@ -108,8 +114,7 @@ function esc(s){ return (s ?? '').toString().replace(/[&<>\"']/g, c => ({'&':'&a
 function setPhase(which){
   const phases = ['phaseQuiz','phaseMatches','phaseProfile'];
   for(const p of phases) $(p).classList.toggle('hidden', p !== which);
-  const w = which==='phaseQuiz'? '20%': which==='phaseMatches'? '65%':'100%';
-  $('progBar').style.width = w;
+  // lookup section is visible once user opts in.
 }
 
 function badgeVote(v){
@@ -294,42 +299,56 @@ function pickQuizActions(){
   return picked;
 }
 
+function renderSingleQuestion(a, idx, total){
+  const sel = state.quiz.get(a.id);
+  const mk = (v) => `btnPill ${v==='YES'?'ok':v==='NO'?'bad':'warn'} ${sel===v?'sel':''}`;
+  const pct = total ? Math.round(((idx)/total)*100) : 0;
+
+  return `
+    <div class="progress" style="margin-bottom:10px;"><div class="bar" style="width:${pct}%"></div></div>
+    <div class="small">Question ${idx+1} of ${total} · <span class="badge">${esc(a.type || 'action')}</span></div>
+    <div style="margin-top:8px; font-weight:800; font-size:16px;">${esc(a.title || a.id)}</div>
+
+    <div class="btnRow" style="margin-top:12px;">
+      <button data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
+      <button data-aid="${esc(a.id)}" data-v="NO" class="${mk('NO')}">No</button>
+      <button data-aid="${esc(a.id)}" data-v="ABSTAIN" class="${mk('ABSTAIN')}">Abstain</button>
+    </div>
+
+    <div class="row" style="margin-top:10px; align-items:center;">
+      <button class="btnPill" data-details="${esc(a.id)}">Details</button>
+      <a class="small" href="${esc(a.url || '#')}" target="_blank" rel="noreferrer">Explorer</a>
+      <div style="flex:1"></div>
+      <div class="small" style="color: var(--muted);">${esc(dimensionForAction(a).reason)}</div>
+    </div>
+
+    <div class="note hidden" id="details_${esc(a.id)}" style="margin-top:10px;">
+      <div class="small"><strong>Summary</strong></div>
+      <div class="small">${esc((a.abstract||'').toString().slice(0, 900) || 'No summary available yet. Use Explorer for full details.')}${(a.abstract && a.abstract.toString().length>900)?'…':''}</div>
+    </div>
+  `;
+}
+
 function renderQuiz(){
   const wrap = $('quizWrap');
-  const items = pickQuizActions();
+  const items = state.quizItems.length ? state.quizItems : (state.quizItems = pickQuizActions());
+  const idx = Math.min(state.currentQuestion, Math.max(0, items.length-1));
+  const a = items[idx];
 
-  wrap.innerHTML = items.map((a, idx) => {
-    const sel = state.quiz.get(a.id);
-    const mk = (v) => `btnPill ${v==='YES'?'ok':v==='NO'?'bad':'warn'} ${sel===v?'sel':''}`;
-    return `
-      <div class="card" style="margin:10px 0;">
-        ${(() => { const d = dimensionForAction(a); const dim = DIMENSIONS[d.key] || {label:d.key, why:''}; return `
-          <div class="small">Question ${idx+1} of ${items.length} · <span class="badge">${esc(a.type || 'action')}</span> · <span class="badge">${esc(dim.label)}</span> · <span class="badge">Weight ${d.weight.toFixed(1)}</span></div>
-          <div style="margin-top:6px; font-weight:700;">${esc(a.title || a.id)}</div>
-          <div class="small" style="margin-top:6px;">Why this question: ${esc(d.reason)}</div>
-        `; })()}
-        <div class="small" style="margin-top:6px;">How would you vote?</div>
-        <div class="btnRow" style="margin-top:8px;">
-          <button data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
-          <button data-aid="${esc(a.id)}" data-v="NO" class="${mk('NO')}">No</button>
-          <button data-aid="${esc(a.id)}" data-v="ABSTAIN" class="${mk('ABSTAIN')}">Abstain</button>
-          <button class="btnPill" data-details="${esc(a.id)}" style="margin-left:auto">Details</button>
-          <a class="small" href="${esc(a.url || '#')}" target="_blank" rel="noreferrer">Explorer</a>
-        </div>
-        <div class="note hidden" id="details_${esc(a.id)}" style="margin-top:10px;">
-          <div class="small"><strong>Summary</strong></div>
-          <div class="small">${esc((a.abstract||'').toString().slice(0, 700) || 'No summary available yet. Use Explorer link for full details.')}${(a.abstract && a.abstract.toString().length>700)?'…':''}</div>
-        </div>
-      </div>
-    `;
-  }).join('');
+  $('quizStatus').textContent = `Progress: ${state.quiz.size}/${items.length}`;
+  wrap.innerHTML = a ? renderSingleQuestion(a, idx, items.length) : `<div class="note">No quiz items available.</div>`;
 
   wrap.querySelectorAll('button[data-aid]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.quiz.set(btn.dataset.aid, btn.dataset.v);
-      const answered = state.quiz.size;
-      $('quizStatus').textContent = answered < 3 ? `Answered ${answered}. Answer at least 3 questions to score matches.` : `Answered ${answered}. Ready to score.`;
-      renderQuiz();
+      state.currentQuestion += 1;
+
+      if(state.currentQuestion >= items.length){
+        setPhase('phaseMatches');
+        renderMatches();
+      } else {
+        renderQuiz();
+      }
     });
   });
 
@@ -413,7 +432,8 @@ function renderMatches(){
   eligible.sort((a,b) => b.alignment - a.alignment);
 
   // Recommendation rule: only show 100% alignment matches.
-  const recommended = eligible.filter(x => x.alignment === 1);
+  // (Allow a tiny float tolerance since alignment is weighted.)
+  const recommended = eligible.filter(x => Math.abs(1 - x.alignment) < 1e-9);
 
   const top = recommended[0] || eligible[0];
   const avgCov = eligible.length ? (eligible.reduce((p,c)=>p+c.coverage,0)/eligible.length) : 0;
@@ -586,13 +606,17 @@ function renderProfile(){
 }
 
 function wireUI(){
-  $('goQuiz').addEventListener('click', () => setPhase('phaseQuiz'));
-  $('goMatches').addEventListener('click', () => setPhase('phaseMatches'));
-  $('goProfile').addEventListener('click', () => setPhase('phaseProfile'));
+  $('btnStart').addEventListener('click', () => {
+    state.quizItems = pickQuizActions();
+    state.currentQuestion = 0;
+    state.quiz = new Map();
+    $('lookup').classList.remove('hidden');
+    setPhase('phaseQuiz');
+    renderQuiz();
+  });
 
-  $('btnScore').addEventListener('click', () => {
-    setPhase('phaseMatches');
-    renderMatches();
+  $('jumpLookup').addEventListener('click', () => {
+    $('lookup').classList.remove('hidden');
   });
 
   $('btnLookup').addEventListener('click', () => {
@@ -614,7 +638,7 @@ function wireUI(){
 (async function init(){
   wireUI();
   await loadData();
-  renderQuiz();
+  // landing state: nothing shown until user clicks Start.
   setPhase('phaseQuiz');
 })();
 </script>
