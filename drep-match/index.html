@@ -67,7 +67,7 @@
       <h2>Phase 2 — Your matches</h2>
       <div class="kpi" id="kpi"></div>
       <div id="matchesWrap" style="margin-top:10px;"></div>
-      <p class="small">Recommendation rule: DReps with low participation/coverage are excluded from recommendations (but still searchable).</p>
+      <p class="small">Recommendation rule: BEACN only recommends DReps with a <strong>perfect voting record</strong> across the most recent ${PERFECT_LAST_N} indexed actions (they can still be searchable/viewable).</p>
     </section>
 
     <!-- Phase 3 -->
@@ -84,14 +84,17 @@
 
 <script>
 const DATA_BASE = 'public-data/latest';
-const COVERAGE_MIN = 0.80; // exclude from recommendations if below this
+// Recommendation rule (BEACN stance): only recommend DReps with a perfect voting record
+// across the most recent N indexed actions.
+const PERFECT_LAST_N = 20;
 
 const state = {
   manifest: null,
   actions: [],
   dreps: [],
   votes: [],
-  voteByDrep: new Map(),
+  voteByDrep: new Map(), // drepId -> Map(actionId -> vote row)
+  voteCountByAction: new Map(),
   actionById: new Map(),
   drepById: new Map(),
   quiz: new Map(), // actionId -> YES|NO|ABSTAIN
@@ -127,9 +130,13 @@ function buildIndexes(){
   state.drepById = new Map(state.dreps.map(d => [d.id, d]));
 
   state.voteByDrep = new Map();
+  state.voteCountByAction = new Map();
+
   for(const v of state.votes){
     if(!state.voteByDrep.has(v.drep_id)) state.voteByDrep.set(v.drep_id, new Map());
-    state.voteByDrep.get(v.drep_id).set(v.gov_action_id, v.vote);
+    state.voteByDrep.get(v.drep_id).set(v.gov_action_id, v);
+
+    state.voteCountByAction.set(v.gov_action_id, (state.voteCountByAction.get(v.gov_action_id) || 0) + 1);
   }
 }
 
@@ -196,10 +203,44 @@ async function loadData(){
   }
 }
 
+function actionSortKey(a){
+  const votes = state.voteCountByAction.get(a.id) || 0;
+  const t = a.created_time || 0;
+  return {votes, t};
+}
+
 function pickQuizActions(){
-  // v0: choose first 6 actions (later: choose high-signal diverse actions).
-  const n = Math.min(6, state.actions.length);
-  return state.actions.slice(0, n);
+  // Pick high-signal actions: prefer actions with lots of DRep votes (better coverage)
+  // and try to diversify by action type.
+  const actions = [...state.actions].sort((a,b) => {
+    const ka = actionSortKey(a), kb = actionSortKey(b);
+    if(kb.votes !== ka.votes) return kb.votes - ka.votes;
+    return (kb.t||0) - (ka.t||0);
+  });
+
+  const target = Math.min(7, Math.max(5, actions.length));
+  const picked = [];
+  const seenTypes = new Set();
+
+  // First pass: one per type.
+  for(const a of actions){
+    const ty = a.type || 'other';
+    if(seenTypes.has(ty)) continue;
+    picked.push(a);
+    seenTypes.add(ty);
+    if(picked.length >= target) break;
+  }
+
+  // Fill remaining with best coverage.
+  if(picked.length < target){
+    for(const a of actions){
+      if(picked.some(x => x.id === a.id)) continue;
+      picked.push(a);
+      if(picked.length >= target) break;
+    }
+  }
+
+  return picked;
 }
 
 function renderQuiz(){
@@ -234,6 +275,21 @@ function renderQuiz(){
   });
 }
 
+function recentActionIds(n){
+  const acts = [...state.actions].sort((a,b) => (b.created_time||0) - (a.created_time||0));
+  return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
+}
+
+function hasPerfectRecentRecord(drepId){
+  const votes = state.voteByDrep.get(drepId) || new Map();
+  const ids = recentActionIds(PERFECT_LAST_N);
+  if(!ids.length) return false;
+  for(const aid of ids){
+    if(!votes.has(aid)) return false;
+  }
+  return true;
+}
+
 function scoreDrep(drepId){
   const votes = state.voteByDrep.get(drepId) || new Map();
   const answeredIds = [...state.quiz.keys()];
@@ -245,7 +301,8 @@ function scoreDrep(drepId){
 
   for(const aid of answeredIds){
     const userV = state.quiz.get(aid);
-    const drepV = votes.get(aid);
+    const row = votes.get(aid);
+    const drepV = row ? row.vote : null;
     if(drepV){
       covered++;
       if(drepV === userV){
@@ -259,7 +316,8 @@ function scoreDrep(drepId){
 
   const alignment = covered ? (match/covered) : 0;
   const coverage = total ? (covered/total) : 0;
-  return {alignment, coverage, covered, total, examplesAgree, examplesDiff};
+  const perfectRecent = hasPerfectRecentRecord(drepId);
+  return {alignment, coverage, covered, total, perfectRecent, examplesAgree, examplesDiff};
 }
 
 function renderMatches(){
@@ -275,7 +333,7 @@ function renderMatches(){
     return {drep:d, ...s};
   });
 
-  const eligible = scored.filter(x => x.coverage >= COVERAGE_MIN);
+  const eligible = scored.filter(x => x.perfectRecent);
   eligible.sort((a,b) => b.alignment - a.alignment);
 
   const top = eligible[0];
@@ -285,7 +343,7 @@ function renderMatches(){
     <div class="card" style="margin:0;">
       <div class="k">DReps scored</div>
       <div class="v">${state.dreps.length}</div>
-      <div class="small">Eligible (≥ ${(COVERAGE_MIN*100).toFixed(0)}% coverage): ${eligible.length}</div>
+      <div class="small">Eligible (perfect last ${PERFECT_LAST_N} actions): ${eligible.length}</div>
     </div>
     <div class="card" style="margin:0;">
       <div class="k">Top match</div>
@@ -307,13 +365,13 @@ function renderMatches(){
 
   wrap.innerHTML = eligible.slice(0, 20).map(x => {
     const name = x.drep.name || x.drep.display || x.drep.id;
-    const covBadge = x.coverage >= 0.8 ? '<span class="badge ok">High Coverage</span>' : '<span class="badge warn">Medium Coverage</span>';
+    const perfectBadge = '<span class="badge ok">Perfect Record</span>';
     return `
       <div class="card" style="margin:10px 0;">
         <div class="row">
           <div style="flex:2; min-width:240px;">
             <div style="font-weight:800;">${esc(name)} <span class="badge mono">${esc(x.drep.id)}</span></div>
-            <div class="small" style="margin-top:4px;">Alignment: <span class="badge ok">${Math.round(x.alignment*100)}%</span> · Coverage: ${Math.round(x.coverage*100)}% (${x.covered}/${x.total}) · ${covBadge}</div>
+            <div class="small" style="margin-top:4px;">Alignment: <span class="badge ok">${Math.round(x.alignment*100)}%</span> · Coverage on your answers: ${Math.round(x.coverage*100)}% (${x.covered}/${x.total}) · ${perfectBadge}</div>
           </div>
           <div class="btnRow">
             <button class="btnPill" data-open="${esc(x.drep.id)}">Deep dive</button>
@@ -378,13 +436,15 @@ function renderProfile(){
 
   const votes = state.voteByDrep.get(d.id) || new Map();
   const rows = state.actions.map(a => {
-    const v = votes.get(a.id);
+    const row = votes.get(a.id);
     return {
       id: a.id,
       title: a.title || a.id,
       type: a.type || 'action',
       url: a.url || '#',
-      vote: v || null,
+      vote: row ? row.vote : null,
+      vote_anchor_url: row ? row.anchor_url : null,
+      vote_anchor_hash: row ? row.anchor_hash : null,
       user: state.quiz.get(a.id) || null,
     };
   });
@@ -410,19 +470,23 @@ function renderProfile(){
             <th>Governance action</th>
             <th style="width:120px;">DRep vote</th>
             <th style="width:140px;">Your answer</th>
-            <th style="width:120px;">Receipt</th>
+            <th style="width:180px;">Receipts</th>
           </tr>
         </thead>
         <tbody>
-          ${rows.map(r => `
-            <tr>
-              <td><span class="badge">${esc(r.type)}</span></td>
-              <td>${esc(r.title)}<div class="small mono">${esc(r.id)}</div></td>
-              <td>${badgeVote(r.vote)}</td>
-              <td>${badgeVote(r.user)}</td>
-              <td><a href="${esc(r.url)}" target="_blank" rel="noreferrer">View</a></td>
-            </tr>
-          `).join('')}
+          ${rows.map(r => {
+            const view = `<a href="${esc(r.url)}" target="_blank" rel="noreferrer">Action</a>`;
+            const rationale = r.vote_anchor_url ? ` · <a href="${esc(r.vote_anchor_url)}" target="_blank" rel="noreferrer">Rationale</a>` : '';
+            return `
+              <tr>
+                <td><span class="badge">${esc(r.type)}</span></td>
+                <td>${esc(r.title)}<div class="small mono">${esc(r.id)}</div></td>
+                <td>${badgeVote(r.vote)}</td>
+                <td>${badgeVote(r.user)}</td>
+                <td>${view}${rationale}</td>
+              </tr>
+            `;
+          }).join('')}
         </tbody>
       </table>
     </div>

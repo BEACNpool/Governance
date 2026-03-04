@@ -140,7 +140,7 @@ Unlike SPO selection, there is no performance/uptime requirement tied to delegat
 
 ### Trust modifiers
 
-**Eligibility rule for recommendations (v0):** DReps with missing/low participation are **excluded** from the recommended list (they can still be viewable/searchable).
+**Eligibility rule for recommendations (v0):** BEACN only recommends DReps with a **perfect voting record** across the most recent **20** indexed actions. (They can still be viewable/searchable.)
 
 Penalize:
 - stale activity
