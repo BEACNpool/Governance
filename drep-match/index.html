@@ -219,29 +219,70 @@ function actionSortKey(a){
   return {votes, t};
 }
 
+const DIMENSIONS = {
+  // What we can reasonably explain on a public site (v0).
+  treasury_spend: {
+    label: 'Treasury spending discipline',
+    defaultWeight: 1.0,
+    why: 'How strict you are about spending public ADA (ROI, audits, milestones, scope).'
+  },
+  protocol_risk: {
+    label: 'Protocol change risk tolerance',
+    defaultWeight: 1.0,
+    why: 'How conservative vs aggressive you are about changing protocol parameters or technical limits.'
+  },
+  governance_process: {
+    label: 'Governance process / standards',
+    defaultWeight: 0.8,
+    why: 'Whether you prefer stricter process requirements (more info, more review) vs faster iteration.'
+  },
+  info_signal: {
+    label: 'Signaling posture',
+    defaultWeight: 0.4,
+    why: 'How you treat informational/signal actions that aren’t direct spending or protocol changes.'
+  },
+};
+
+function dimensionForAction(a){
+  const t = (a.type || '').toLowerCase();
+  if(t.includes('treasury')) return {key:'treasury_spend', weight: 1.0, reason: 'Represents your stance on treasury withdrawals and spending discipline.'};
+  if(t.includes('parameter')) return {key:'protocol_risk', weight: 1.0, reason: 'Represents your risk tolerance for protocol parameter changes.'};
+  if(t.includes('hardfork') || t.includes('hard_fork')) return {key:'protocol_risk', weight: 0.9, reason: 'Represents your posture on major technical upgrades.'};
+  if(t.includes('info')) return {key:'info_signal', weight: 0.4, reason: 'Represents your posture on informational/signaling actions.'};
+  return {key:'governance_process', weight: 0.7, reason: 'Represents your preference for governance process and standards.'};
+}
+
+function shouldExcludeFromQuiz(a){
+  // User guidance: constitution/committee changes often require deep document study.
+  const t = (a.type || '').toLowerCase();
+  if(t.includes('constitution') || t.includes('committee')) return true;
+  return false;
+}
+
 function pickQuizActions(){
-  // Pick high-signal actions: prefer actions with lots of DRep votes (better coverage)
-  // and try to diversify by action type.
-  const actions = [...state.actions].sort((a,b) => {
-    const ka = actionSortKey(a), kb = actionSortKey(b);
-    if(kb.votes !== ka.votes) return kb.votes - ka.votes;
-    return (kb.t||0) - (ka.t||0);
-  });
+  // Pick high-signal actions with lots of votes (coverage), diversify by dimension,
+  // and avoid prompts that require deep external research (constitution/committee).
+  const actions = [...state.actions]
+    .filter(a => a && a.id)
+    .filter(a => !shouldExcludeFromQuiz(a))
+    .sort((a,b) => {
+      const ka = actionSortKey(a), kb = actionSortKey(b);
+      if(kb.votes !== ka.votes) return kb.votes - ka.votes;
+      return (kb.t||0) - (ka.t||0);
+    });
 
   const target = Math.min(7, Math.max(5, actions.length));
   const picked = [];
-  const seenTypes = new Set();
+  const seenDim = new Set();
 
-  // First pass: one per type.
   for(const a of actions){
-    const ty = a.type || 'other';
-    if(seenTypes.has(ty)) continue;
+    const dim = dimensionForAction(a).key;
+    if(seenDim.has(dim)) continue;
     picked.push(a);
-    seenTypes.add(ty);
+    seenDim.add(dim);
     if(picked.length >= target) break;
   }
 
-  // Fill remaining with best coverage.
   if(picked.length < target){
     for(const a of actions){
       if(picked.some(x => x.id === a.id)) continue;
@@ -262,8 +303,11 @@ function renderQuiz(){
     const mk = (v) => `btnPill ${v==='YES'?'ok':v==='NO'?'bad':'warn'} ${sel===v?'sel':''}`;
     return `
       <div class="card" style="margin:10px 0;">
-        <div class="small">Question ${idx+1} of ${items.length} · <span class="badge">${esc(a.type || 'action')}</span></div>
-        <div style="margin-top:6px; font-weight:700;">${esc(a.title || a.id)}</div>
+        ${(() => { const d = dimensionForAction(a); const dim = DIMENSIONS[d.key] || {label:d.key, why:''}; return `
+          <div class="small">Question ${idx+1} of ${items.length} · <span class="badge">${esc(a.type || 'action')}</span> · <span class="badge">${esc(dim.label)}</span> · <span class="badge">Weight ${d.weight.toFixed(1)}</span></div>
+          <div style="margin-top:6px; font-weight:700;">${esc(a.title || a.id)}</div>
+          <div class="small" style="margin-top:6px;">Why this question: ${esc(d.reason)}</div>
+        `; })()}
         <div class="small" style="margin-top:6px;">How would you vote?</div>
         <div class="btnRow" style="margin-top:8px;">
           <button data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
@@ -320,17 +364,25 @@ function scoreDrep(drepId){
   const total = answeredIds.length;
   let covered = 0;
   let match = 0;
+  let weightCovered = 0;
+  let weightMatch = 0;
   const examplesAgree = [];
   const examplesDiff = [];
 
   for(const aid of answeredIds){
     const userV = state.quiz.get(aid);
+    const a = state.actionById.get(aid);
+    const dim = dimensionForAction(a || {});
+    const w = dim.weight || 1.0;
+
     const row = votes.get(aid);
     const drepV = row ? row.vote : null;
     if(drepV){
       covered++;
+      weightCovered += w;
       if(drepV === userV){
         match++;
+        weightMatch += w;
         if(examplesAgree.length<3) examplesAgree.push(aid);
       } else {
         if(examplesDiff.length<3) examplesDiff.push(aid);
@@ -338,7 +390,7 @@ function scoreDrep(drepId){
     }
   }
 
-  const alignment = covered ? (match/covered) : 0;
+  const alignment = weightCovered ? (weightMatch/weightCovered) : 0;
   const coverage = total ? (covered/total) : 0;
   const perfectRecent = hasPerfectRecentRecord(drepId);
   return {alignment, coverage, covered, total, perfectRecent, examplesAgree, examplesDiff};

@@ -80,6 +80,16 @@ Fields (minimum):
 
 ## Taxonomy (v0)
 
+## Quiz question selection + weights (v0+)
+
+We treat quiz prompts as **signals** for a small set of recurring governance tradeoffs ("dimensions"). Each prompt has:
+- `dimension` (what it represents)
+- `weight` (how much it should influence matching)
+- `why_this_matters` (plain language explanation)
+
+We will also explicitly **exclude** action types that require deep external study beyond a lightweight public site (e.g., constitution/committee texts) unless we can provide sufficient context in-app.
+
+
 Every governance action gets:
 - `category` (one primary)
 - `tags` (0..n)
