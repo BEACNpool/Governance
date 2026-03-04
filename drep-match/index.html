@@ -106,6 +106,7 @@ const state = {
   usingMock: false,
   quizItems: [],
   currentQuestion: 0,
+  candidates: new Set(), // candidate drep ids during adaptive quiz
 };
 
 function $(id){ return document.getElementById(id); }
@@ -264,36 +265,87 @@ function shouldExcludeFromQuiz(a){
   return false;
 }
 
-function pickQuizActions(){
-  // Pick high-signal actions with lots of votes (coverage), diversify by dimension,
-  // and avoid prompts that require deep external research (constitution/committee).
-  const actions = [...state.actions]
+function recentActions(n){
+  return [...state.actions].sort((a,b) => (b.created_time||0) - (a.created_time||0)).slice(0, Math.min(n, state.actions.length));
+}
+
+function voteOf(drepId, actionId){
+  const m = state.voteByDrep.get(drepId);
+  const row = m ? m.get(actionId) : null;
+  return row ? row.vote : null;
+}
+
+function perfectRecentDreps(){
+  const ids = recentActionIds(PERFECT_LAST_N);
+  const out = [];
+  for(const [drepId, m] of state.voteByDrep.entries()){
+    let ok = true;
+    for(const aid of ids){
+      if(!m.has(aid)) { ok = false; break; }
+    }
+    if(ok) out.push(drepId);
+  }
+  return out;
+}
+
+function bestNextQuestionActionId(askedSet, candidateIds){
+  // Choose a question that (a) isn't asked yet, (b) candidates all have votes for,
+  // and (c) best splits candidates (entropy-ish) so we learn quickly.
+  const pool = recentActions(Math.max(30, PERFECT_LAST_N))
     .filter(a => a && a.id)
-    .filter(a => !shouldExcludeFromQuiz(a))
-    .sort((a,b) => {
-      const ka = actionSortKey(a), kb = actionSortKey(b);
-      if(kb.votes !== ka.votes) return kb.votes - ka.votes;
-      return (kb.t||0) - (ka.t||0);
-    });
+    .filter(a => !askedSet.has(a.id))
+    .filter(a => !shouldExcludeFromQuiz(a));
 
-  const target = Math.min(7, Math.max(5, actions.length));
-  const picked = [];
-  const seenDim = new Set();
+  let best = null;
+  let bestScore = -1;
 
-  for(const a of actions){
-    const dim = dimensionForAction(a).key;
-    if(seenDim.has(dim)) continue;
-    picked.push(a);
-    seenDim.add(dim);
-    if(picked.length >= target) break;
+  for(const a of pool){
+    const counts = {YES:0, NO:0, ABSTAIN:0};
+    let allHave = true;
+    for(const d of candidateIds){
+      const v = voteOf(d, a.id);
+      if(!v){ allHave = false; break; }
+      counts[v] = (counts[v]||0) + 1;
+    }
+    if(!allHave) continue;
+
+    // Score: prefer questions that aren't unanimous and have good balance.
+    const total = candidateIds.length || 1;
+    const p = [counts.YES, counts.NO, counts.ABSTAIN].map(x => x/total).filter(x => x>0);
+    const entropy = p.reduce((acc,pi)=>acc - pi*Math.log2(pi), 0);
+
+    // small bonus for high overall network vote counts (coverage)
+    const cov = state.voteCountByAction.get(a.id) || 0;
+    const score = entropy + Math.min(1, cov/500) * 0.15;
+
+    if(score > bestScore){ bestScore = score; best = a.id; }
   }
 
-  if(picked.length < target){
-    for(const a of actions){
-      if(picked.some(x => x.id === a.id)) continue;
-      picked.push(a);
-      if(picked.length >= target) break;
-    }
+  // Fallback: first recent action not asked/excluded.
+  if(!best && pool.length) best = pool[0].id;
+  return best;
+}
+
+function pickQuizActions(){
+  // Adaptive quiz: pick 10 questions from the recent action pool so perfect-last-20
+  // candidates have votes and 100% matching is actually achievable.
+  const target = 10;
+  const candidates = perfectRecentDreps();
+  state.candidates = new Set(candidates);
+
+  const asked = new Set();
+  const picked = [];
+
+  // If we have no candidates, return an empty quiz.
+  if(!candidates.length) return [];
+
+  while(picked.length < target){
+    const nextId = bestNextQuestionActionId(asked, [...state.candidates]);
+    if(!nextId) break;
+    asked.add(nextId);
+    const a = state.actionById.get(nextId);
+    if(a) picked.push(a);
+    else break;
   }
 
   return picked;
@@ -340,9 +392,26 @@ function renderQuiz(){
 
   wrap.querySelectorAll('button[data-aid]').forEach(btn => {
     btn.addEventListener('click', () => {
-      state.quiz.set(btn.dataset.aid, btn.dataset.v);
-      state.currentQuestion += 1;
+      const aid = btn.dataset.aid;
+      const ans = btn.dataset.v;
+      state.quiz.set(aid, ans);
 
+      // Adaptive filtering: keep only candidates that voted the same way.
+      const next = new Set();
+      for(const d of state.candidates){
+        const dv = voteOf(d, aid);
+        if(dv === ans) next.add(d);
+      }
+      state.candidates = next;
+
+      // If we eliminated everyone, stop early and show the "no match" banner.
+      if(state.candidates.size === 0){
+        setPhase('phaseMatches');
+        renderMatches();
+        return;
+      }
+
+      state.currentQuestion += 1;
       if(state.currentQuestion >= items.length){
         setPhase('phaseMatches');
         renderMatches();
@@ -417,98 +486,79 @@ function scoreDrep(drepId){
 
 function renderMatches(){
   const answered = state.quiz.size;
-  if(answered < 3){
-    setPhase('phaseQuiz');
-    $('quizStatus').textContent = `Answered ${answered}. Answer at least 3 questions to score matches.`;
-    return;
-  }
 
-  const scored = state.dreps.map(d => {
-    const s = scoreDrep(d.id);
-    return {drep:d, ...s};
-  });
-
-  const eligible = scored.filter(x => x.perfectRecent);
-  eligible.sort((a,b) => b.alignment - a.alignment);
-
-  // Recommendation rule: only show 100% alignment matches.
-  // (Allow a tiny float tolerance since alignment is weighted.)
-  const recommended = eligible.filter(x => Math.abs(1 - x.alignment) < 1e-9);
-
-  const top = recommended[0] || eligible[0];
-  const avgCov = eligible.length ? (eligible.reduce((p,c)=>p+c.coverage,0)/eligible.length) : 0;
+  // In adaptive mode, "recommended" means: survived the quiz filters.
+  const recommendedIds = [...state.candidates];
 
   $('kpi').innerHTML = `
     <div class="card" style="margin:0;">
-      <div class="k">DReps scored</div>
-      <div class="v">${state.dreps.length}</div>
-      <div class="small">Eligible (perfect last ${PERFECT_LAST_N} actions): ${eligible.length}</div>
+      <div class="k">Based on</div>
+      <div class="v">${answered} answers</div>
+      <div class="small">Real on-chain votes</div>
     </div>
     <div class="card" style="margin:0;">
-      <div class="k">Top match</div>
-      <div class="v">${top ? Math.round(top.alignment*100)+'%' : '—'}</div>
-      <div class="small">Recommended = 100% alignment + perfect last ${PERFECT_LAST_N}</div>
+      <div class="k">Eligibility</div>
+      <div class="v">Perfect last 20</div>
+      <div class="small">Required to be recommended</div>
     </div>
     <div class="card" style="margin:0;">
-      <div class="k">Avg coverage (eligible)</div>
-      <div class="v">${eligible.length ? Math.round(avgCov*100)+'%' : '—'}</div>
-      <div class="small">Coverage = DRep voted on your answered prompts</div>
+      <div class="k">100% matches</div>
+      <div class="v">${recommendedIds.length}</div>
+      <div class="small">Exact vote alignment</div>
     </div>
   `;
 
   const wrap = $('matchesWrap');
-  if(!eligible.length){
-    wrap.innerHTML = `<div class="note">No eligible DReps yet. This usually means there aren’t enough indexed actions or votes to evaluate “perfect last ${PERFECT_LAST_N}” participation.</div>`;
-    return;
-  }
-
-  if(!recommended.length){
+  if(recommendedIds.length === 0){
     wrap.innerHTML = `
       <div class="note">
         No 100% matches found.
         <div class="small" style="margin-top:6px;">
-          BEACN’s stance is strict: we only recommend DReps who (1) voted on the last ${PERFECT_LAST_N} actions and (2) match your answers exactly.
-          If nobody qualifies, the honest move is: either adjust your answers, or consider becoming a DRep with a perfect record.
+          That’s not a bug — it means none of the DReps with a perfect last-20 record voted the way you did on at least one of these prompts.
+          If you won’t compromise (fair), the honest recommendation is: consider becoming a DRep and keep a perfect record.
         </div>
       </div>
     `;
     return;
   }
 
-  wrap.innerHTML = recommended.slice(0, 20).map(x => {
-    const name = x.drep.name || x.drep.display || x.drep.id;
-    const perfectBadge = '<span class="badge ok">Perfect Record</span>';
+  // Render recommended DReps.
+  const cards = recommendedIds.slice(0, 20).map(drepId => {
+    const d = state.drepById.get(drepId) || {id:drepId};
+    const name = d.name || d.display || d.id;
+
+    // Build agree examples from answered questions.
+    const examples = [];
+    for(const [aid, ans] of state.quiz.entries()){
+      const a = state.actionById.get(aid);
+      const dv = voteOf(drepId, aid);
+      if(dv === ans) examples.push(aid);
+      if(examples.length >= 5) break;
+    }
+
     return `
       <div class="card" style="margin:10px 0;">
         <div class="row">
           <div style="flex:2; min-width:240px;">
-            <div style="font-weight:800;">${esc(name)} <span class="badge mono">${esc(x.drep.id)}</span></div>
-            <div class="small" style="margin-top:4px;">Alignment: <span class="badge ok">${Math.round(x.alignment*100)}%</span> · Coverage on your answers: ${Math.round(x.coverage*100)}% (${x.covered}/${x.total}) · ${perfectBadge}</div>
+            <div style="font-weight:800;">${esc(name)} <span class="badge mono">${esc(d.id)}</span> <span class="badge ok">Perfect Record</span></div>
+            <div class="small" style="margin-top:4px;">100% match on your ${answered} answers</div>
           </div>
           <div class="btnRow">
-            <button class="btnPill" data-open="${esc(x.drep.id)}">Deep dive</button>
+            <button class="btnPill" data-open="${esc(d.id)}">Deep dive</button>
           </div>
         </div>
-
-        <div class="grid" style="margin-top:10px;">
-          <div class="note">
-            <div class="small"><strong>Why you match</strong></div>
-            ${x.examplesAgree.length ? x.examplesAgree.map(aid => {
-              const a = state.actionById.get(aid);
-              return `<div class="small">• ${esc(a?.title||aid)} (${badgeVote(state.quiz.get(aid))} vs ${badgeVote((state.voteByDrep.get(x.drep.id)||new Map()).get(aid))})</div>`;
-            }).join('') : `<div class="small">No matching examples yet.</div>`}
-          </div>
-          <div class="note">
-            <div class="small"><strong>Where you differ</strong></div>
-            ${x.examplesDiff.length ? x.examplesDiff.map(aid => {
-              const a = state.actionById.get(aid);
-              return `<div class="small">• ${esc(a?.title||aid)} (${badgeVote(state.quiz.get(aid))} vs ${badgeVote((state.voteByDrep.get(x.drep.id)||new Map()).get(aid))})</div>`;
-            }).join('') : `<div class="small">No disagreements found on covered prompts.</div>`}
-          </div>
+        <div class="note" style="margin-top:10px;">
+          <div class="small"><strong>Proof (examples)</strong></div>
+          ${examples.map(aid => {
+            const a = state.actionById.get(aid);
+            return `<div class="small">• ${esc(a?.title||aid)} (${badgeVote(state.quiz.get(aid))})</div>`;
+          }).join('')}
         </div>
       </div>
     `;
   }).join('');
+
+  wrap.innerHTML = cards;
 
   wrap.querySelectorAll('button[data-open]').forEach(btn => {
     btn.addEventListener('click', () => openProfile(btn.dataset.open));
