@@ -190,7 +190,17 @@ async function loadData(){
       return;
     }
 
-    state.actions = await fetchJson(`${DATA_BASE}/actions.json`);
+    const rawActions = await fetchJson(`${DATA_BASE}/actions.json`);
+    // Defensive dedupe: pipeline should dedupe, but don’t trust it.
+    const seen = new Set();
+    state.actions = [];
+    for(const a of rawActions){
+      if(!a || !a.id) continue;
+      if(seen.has(a.id)) continue;
+      seen.add(a.id);
+      state.actions.push(a);
+    }
+
     state.dreps = await fetchJson(`${DATA_BASE}/dreps.json`);
     state.votes = await fetchJson(`${DATA_BASE}/votes.json`);
     buildIndexes();
@@ -259,7 +269,12 @@ function renderQuiz(){
           <button data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
           <button data-aid="${esc(a.id)}" data-v="NO" class="${mk('NO')}">No</button>
           <button data-aid="${esc(a.id)}" data-v="ABSTAIN" class="${mk('ABSTAIN')}">Abstain</button>
-          <a class="small" style="margin-left:auto" href="${esc(a.url || '#')}" target="_blank" rel="noreferrer">View action</a>
+          <button class="btnPill" data-details="${esc(a.id)}" style="margin-left:auto">Details</button>
+          <a class="small" href="${esc(a.url || '#')}" target="_blank" rel="noreferrer">Explorer</a>
+        </div>
+        <div class="note hidden" id="details_${esc(a.id)}" style="margin-top:10px;">
+          <div class="small"><strong>Summary</strong></div>
+          <div class="small">${esc((a.abstract||'').toString().slice(0, 700) || 'No summary available yet. Use Explorer link for full details.')}${(a.abstract && a.abstract.toString().length>700)?'…':''}</div>
         </div>
       </div>
     `;
@@ -271,6 +286,15 @@ function renderQuiz(){
       const answered = state.quiz.size;
       $('quizStatus').textContent = answered < 3 ? `Answered ${answered}. Answer at least 3 questions to score matches.` : `Answered ${answered}. Ready to score.`;
       renderQuiz();
+    });
+  });
+
+  wrap.querySelectorAll('button[data-details]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.details;
+      const el = document.getElementById(`details_${id}`);
+      if(!el) return;
+      el.classList.toggle('hidden');
     });
   });
 }
@@ -336,7 +360,10 @@ function renderMatches(){
   const eligible = scored.filter(x => x.perfectRecent);
   eligible.sort((a,b) => b.alignment - a.alignment);
 
-  const top = eligible[0];
+  // Recommendation rule: only show 100% alignment matches.
+  const recommended = eligible.filter(x => x.alignment === 1);
+
+  const top = recommended[0] || eligible[0];
   const avgCov = eligible.length ? (eligible.reduce((p,c)=>p+c.coverage,0)/eligible.length) : 0;
 
   $('kpi').innerHTML = `
@@ -348,7 +375,7 @@ function renderMatches(){
     <div class="card" style="margin:0;">
       <div class="k">Top match</div>
       <div class="v">${top ? Math.round(top.alignment*100)+'%' : '—'}</div>
-      <div class="small">Compared on ${answered} answered actions</div>
+      <div class="small">Recommended = 100% alignment + perfect last ${PERFECT_LAST_N}</div>
     </div>
     <div class="card" style="margin:0;">
       <div class="k">Avg coverage (eligible)</div>
@@ -359,11 +386,24 @@ function renderMatches(){
 
   const wrap = $('matchesWrap');
   if(!eligible.length){
-    wrap.innerHTML = `<div class="note">No eligible DReps yet. This usually means the dataset is sparse or your answered prompts don’t have enough vote coverage. (Mock mode: lower COVERAGE_MIN in code if you want.)</div>`;
+    wrap.innerHTML = `<div class="note">No eligible DReps yet. This usually means there aren’t enough indexed actions or votes to evaluate “perfect last ${PERFECT_LAST_N}” participation.</div>`;
     return;
   }
 
-  wrap.innerHTML = eligible.slice(0, 20).map(x => {
+  if(!recommended.length){
+    wrap.innerHTML = `
+      <div class="note">
+        No 100% matches found.
+        <div class="small" style="margin-top:6px;">
+          BEACN’s stance is strict: we only recommend DReps who (1) voted on the last ${PERFECT_LAST_N} actions and (2) match your answers exactly.
+          If nobody qualifies, the honest move is: either adjust your answers, or consider becoming a DRep with a perfect record.
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  wrap.innerHTML = recommended.slice(0, 20).map(x => {
     const name = x.drep.name || x.drep.display || x.drep.id;
     const perfectBadge = '<span class="badge ok">Perfect Record</span>';
     return `

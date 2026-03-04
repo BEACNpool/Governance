@@ -1,17 +1,17 @@
 {
   "counts": {
-    "actions": 50,
+    "actions": 89,
     "dreps": 1566,
-    "votes": 9123
+    "votes": 16640
   },
   "files": [
     "actions.json",
     "dreps.json",
     "votes.json"
   ],
-  "generated_at": "2026-03-04T19:33:39+00:00",
+  "generated_at": "2026-03-04T19:45:02+00:00",
   "source": {
-    "action_limit": 50,
+    "action_limit": 120,
     "koios_base": "https://koios.beacn.workers.dev",
     "vote_limit": 5000
   },

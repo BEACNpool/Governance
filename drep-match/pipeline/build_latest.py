@@ -65,19 +65,25 @@ def as_action(row: dict[str, Any]) -> dict[str, Any]:
     pid = row.get("proposal_id")
     meta = row.get("meta_json") or {}
     title = None
+    body = {}
     try:
-        title = meta.get("body", {}).get("title")
+        body = meta.get("body", {}) or {}
     except Exception:
-        title = None
+        body = {}
+
+    title = body.get("title")
 
     # Fallback titles that are still meaningful.
     if not title:
         title = f"{row.get('proposal_type', 'GovernanceAction')} {pid}"
 
+    abstract = body.get("abstract")
+
     return {
         "id": pid,
         "type": row.get("proposal_type"),
         "title": title,
+        "abstract": abstract,
         "created_time": row.get("block_time"),
         "url": f"https://explorer.cardano.org/governance-action/{pid}" if pid else None,
         "anchor_url": row.get("meta_url"),
@@ -114,7 +120,15 @@ def ingest() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str,
         params={"limit": ACTION_LIMIT, "order": "block_time.desc"},
         timeout=120,
     )
-    actions = [as_action(p) for p in proposals if p.get("proposal_id")]
+    # Koios can return duplicate rows for the same proposal_id; dedupe.
+    seen: set[str] = set()
+    actions: list[dict[str, Any]] = []
+    for p in proposals:
+        pid = p.get("proposal_id")
+        if not pid or pid in seen:
+            continue
+        seen.add(pid)
+        actions.append(as_action(p))
 
     # DReps (active list; name resolution is a later enhancement)
     # Koios/PostgREST commonly caps responses around 1000 rows; paginate explicitly.
