@@ -21,6 +21,7 @@ label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:13
 input,select{padding:10px;border-radius:10px;border:1px solid var(--line);background:#0b1220;color:var(--text)}
 button{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#12263a;color:var(--text);cursor:pointer}
 button:hover{border-color:#3a4a66}
+button:disabled{opacity:.45;cursor:not-allowed}
 .status{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#0b1220;color:var(--muted);font-size:13px;flex:1}
 .progress{height:10px;border-radius:999px;background:#0b1220;border:1px solid var(--line);overflow:hidden;flex:1;min-width:260px}
 .bar{height:100%;background:linear-gradient(90deg,var(--accent),#2dd4bf)}

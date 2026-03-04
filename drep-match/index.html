@@ -351,20 +351,32 @@ function pickQuizActions(){
   return picked;
 }
 
-function renderSingleQuestion(a, idx, total){
+function renderSingleQuestion(a, idx, total, counts){
   const sel = state.quiz.get(a.id);
   const mk = (v) => `btnPill ${v==='YES'?'ok':v==='NO'?'bad':'warn'} ${sel===v?'sel':''}`;
   const pct = total ? Math.round(((idx)/total)*100) : 0;
+
+  const cYes = counts?.YES || 0;
+  const cNo = counts?.NO || 0;
+  const cAbs = counts?.ABSTAIN || 0;
+
+  // If an option has 0 support among currently-eligible (perfect-record) DReps,
+  // disable it so users don’t accidentally force a 0-match outcome.
+  const disYes = cYes === 0 ? 'disabled' : '';
+  const disNo = cNo === 0 ? 'disabled' : '';
+  const disAbs = cAbs === 0 ? 'disabled' : '';
 
   return `
     <div class="progress" style="margin-bottom:10px;"><div class="bar" style="width:${pct}%"></div></div>
     <div class="small">Question ${idx+1} of ${total} · <span class="badge">${esc(a.type || 'action')}</span></div>
     <div style="margin-top:8px; font-weight:800; font-size:16px;">${esc(a.title || a.id)}</div>
 
+    <div class="small" style="margin-top:8px;">Perfect-record DReps who voted: Yes ${cYes} · No ${cNo} · Abstain ${cAbs}</div>
+
     <div class="btnRow" style="margin-top:12px;">
-      <button data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
-      <button data-aid="${esc(a.id)}" data-v="NO" class="${mk('NO')}">No</button>
-      <button data-aid="${esc(a.id)}" data-v="ABSTAIN" class="${mk('ABSTAIN')}">Abstain</button>
+      <button ${disYes} data-aid="${esc(a.id)}" data-v="YES" class="${mk('YES')}">Yes</button>
+      <button ${disNo} data-aid="${esc(a.id)}" data-v="NO" class="${mk('NO')}">No</button>
+      <button ${disAbs} data-aid="${esc(a.id)}" data-v="ABSTAIN" class="${mk('ABSTAIN')}">Abstain</button>
     </div>
 
     <div class="row" style="margin-top:10px; align-items:center;">
@@ -387,8 +399,18 @@ function renderQuiz(){
   const idx = Math.min(state.currentQuestion, Math.max(0, items.length-1));
   const a = items[idx];
 
-  $('quizStatus').textContent = `Progress: ${state.quiz.size}/${items.length}`;
-  wrap.innerHTML = a ? renderSingleQuestion(a, idx, items.length) : `<div class="note">No quiz items available.</div>`;
+  $('quizStatus').textContent = `Progress: ${state.quiz.size}/${items.length} · Remaining perfect-record matches: ${state.candidates.size}`;
+
+  // Count how remaining candidates voted on this action (to avoid dead-end choices).
+  const counts = {YES:0, NO:0, ABSTAIN:0};
+  if(a){
+    for(const d of state.candidates){
+      const v = voteOf(d, a.id);
+      if(v) counts[v] = (counts[v]||0) + 1;
+    }
+  }
+
+  wrap.innerHTML = a ? renderSingleQuestion(a, idx, items.length, counts) : `<div class="note">No quiz items available.</div>`;
 
   wrap.querySelectorAll('button[data-aid]').forEach(btn => {
     btn.addEventListener('click', () => {
