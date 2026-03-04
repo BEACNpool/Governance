@@ -286,7 +286,7 @@ function voteOf(drepId, actionId){
 }
 
 function perfectRecentDreps(){
-  const ids = recentEligibleActionIds(PERFECT_LAST_N);
+  const ids = recentActionIds(PERFECT_LAST_N);
   const out = [];
   for(const [drepId, m] of state.voteByDrep.entries()){
     let ok = true;
@@ -301,8 +301,11 @@ function perfectRecentDreps(){
 function bestNextQuestionActionId(askedSet, candidateIds){
   // Choose a question that (a) isn't asked yet, (b) candidates all have votes for,
   // and (c) best splits candidates (entropy-ish) so we learn quickly.
-  const pool = recentActions(Math.max(30, PERFECT_LAST_N))
-    .filter(a => a && a.id)
+  // Restrict quiz prompts to the same recent window we use for "active voter" eligibility.
+  // This guarantees every qualifying DRep has a vote for each prompt.
+  const poolIds = new Set(recentActionIds(PERFECT_LAST_N));
+  const pool = [...state.actions]
+    .filter(a => a && a.id && poolIds.has(a.id))
     .filter(a => !askedSet.has(a.id))
     .filter(a => !shouldExcludeFromQuiz(a));
 
@@ -337,8 +340,8 @@ function bestNextQuestionActionId(askedSet, candidateIds){
 }
 
 function pickQuizActions(){
-  // Adaptive quiz: pick 10 questions from the recent action pool so perfect-last-20
-  // candidates have votes and 100% matching is actually achievable.
+  // Adaptive quiz: pick up to 10 questions from the recent action pool so "active voters"
+  // (perfect last-N) candidates have votes and 100% matching is achievable.
   const target = 10;
   const candidates = perfectRecentDreps();
   state.candidates = new Set(candidates);
@@ -349,7 +352,10 @@ function pickQuizActions(){
   // If we have no candidates, return an empty quiz.
   if(!candidates.length) return [];
 
-  while(picked.length < target){
+  const maxPossible = [...state.actions].filter(a => a && a.id && recentActionIds(PERFECT_LAST_N).includes(a.id) && !shouldExcludeFromQuiz(a)).length;
+  const finalTarget = Math.min(target, Math.max(3, maxPossible));
+
+  while(picked.length < finalTarget){
     const nextId = bestNextQuestionActionId(asked, [...state.candidates]);
     if(!nextId) break;
     asked.add(nextId);
@@ -463,23 +469,18 @@ function renderQuiz(){
   });
 }
 
-function recentEligibleActionIds(n){
+function recentActionIds(n){
+  // The "active voter" eligibility window is based on the literal last N governance actions,
+  // regardless of type.
   const acts = [...state.actions]
     .filter(a => a && a.id)
-    .filter(a => !shouldExcludeFromQuiz(a))
     .sort((a,b) => (b.created_time||0) - (a.created_time||0));
-  return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
-}
-
-function recentActionIds(n){
-  // Back-compat helper (all actions). Prefer recentEligibleActionIds for matching rules.
-  const acts = [...state.actions].sort((a,b) => (b.created_time||0) - (a.created_time||0));
   return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
 }
 
 function hasPerfectRecentRecord(drepId){
   const votes = state.voteByDrep.get(drepId) || new Map();
-  const ids = recentEligibleActionIds(PERFECT_LAST_N);
+  const ids = recentActionIds(PERFECT_LAST_N);
   if(!ids.length) return false;
   for(const aid of ids){
     if(!votes.has(aid)) return false;
