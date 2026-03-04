@@ -286,7 +286,7 @@ function voteOf(drepId, actionId){
 }
 
 function perfectRecentDreps(){
-  const ids = recentActionIds(PERFECT_LAST_N);
+  const ids = recentEligibleActionIds(PERFECT_LAST_N);
   const out = [];
   for(const [drepId, m] of state.voteByDrep.entries()){
     let ok = true;
@@ -463,14 +463,23 @@ function renderQuiz(){
   });
 }
 
+function recentEligibleActionIds(n){
+  const acts = [...state.actions]
+    .filter(a => a && a.id)
+    .filter(a => !shouldExcludeFromQuiz(a))
+    .sort((a,b) => (b.created_time||0) - (a.created_time||0));
+  return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
+}
+
 function recentActionIds(n){
+  // Back-compat helper (all actions). Prefer recentEligibleActionIds for matching rules.
   const acts = [...state.actions].sort((a,b) => (b.created_time||0) - (a.created_time||0));
   return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
 }
 
 function hasPerfectRecentRecord(drepId){
   const votes = state.voteByDrep.get(drepId) || new Map();
-  const ids = recentActionIds(PERFECT_LAST_N);
+  const ids = recentEligibleActionIds(PERFECT_LAST_N);
   if(!ids.length) return false;
   for(const aid of ids){
     if(!votes.has(aid)) return false;
