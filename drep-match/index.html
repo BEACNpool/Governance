@@ -11,8 +11,9 @@
   <div class="wrap">
     <header>
       <h1>DRep Compass</h1>
-      <p class="sub">Answer 10 questions based on real governance actions. Get matched to a DRep who votes like you.</p>
+      <p class="sub">Answer 10 questions based on real governance actions. Watch, in real time, how the perfect-record DReps split (Yes/No/Abstain) and how your choices narrow the field.</p>
       <button id="btnStart" class="btnStart">Find Your DRep</button>
+      <div class="status" id="qualStatus" style="margin-top:10px;">Qualifying DReps (perfect last 10 actions): —</div>
 
       <div class="kpi" style="margin-top:12px;">
         <div class="card" style="margin:0;">
@@ -212,10 +213,19 @@ async function loadData(){
     buildIndexes();
 
     setStatus(`Last updated: ${state.manifest.generated_at} | ${state.dreps.length} DReps | ${state.actions.length} actions | ${state.votes.length} votes`);
+
+    // Show baseline qualification count before user answers anything.
+    const q = perfectRecentDreps().length;
+    const el = document.getElementById('qualStatus');
+    if(el) el.textContent = `Qualifying DReps (perfect last ${PERFECT_LAST_N} actions): ${q}`;
+
   }catch(e){
     applyMockData();
     buildIndexes();
     setStatus(`Failed to load dataset (using mock data): ${e.message}`);
+
+    const el = document.getElementById('qualStatus');
+    if(el) el.textContent = `Qualifying DReps (perfect last ${PERFECT_LAST_N} actions): ${perfectRecentDreps().length}`;
   }
 }
 
