@@ -22,7 +22,7 @@
         </div>
         <div class="card" style="margin:0;">
           <div class="k">DReps must</div>
-          <div class="v">Vote on all 20 recent actions</div>
+          <div class="v">Vote on all 10 recent actions</div>
           <div class="small">Perfect participation</div>
         </div>
         <div class="card" style="margin:0;">
@@ -90,7 +90,7 @@
 const DATA_BASE = 'public-data/latest';
 // Recommendation rule (BEACN stance): only recommend DReps with a perfect voting record
 // across the most recent N indexed actions.
-const PERFECT_LAST_N = 20;
+const PERFECT_LAST_N = 10;
 
 const state = {
   manifest: null,
@@ -514,7 +514,7 @@ function renderMatches(){
       <div class="note">
         No 100% matches found.
         <div class="small" style="margin-top:6px;">
-          That’s not a bug — it means none of the DReps with a perfect last-20 record voted the way you did on at least one of these prompts.
+          That’s not a bug — it means none of the DReps with a perfect last-10 record voted the way you did on at least one of these prompts.
           If you won’t compromise (fair), the honest recommendation is: consider becoming a DRep and keep a perfect record.
         </div>
       </div>
