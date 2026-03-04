@@ -23,7 +23,7 @@
         </div>
         <div class="card" style="margin:0;">
           <div class="k">DReps must</div>
-          <div class="v">Vote on all 10 recent actions</div>
+          <div class="v">Vote on 9 of last 10</div>
           <div class="small">Perfect participation</div>
         </div>
         <div class="card" style="margin:0;">
@@ -89,9 +89,10 @@
 
 <script>
 const DATA_BASE = 'public-data/latest';
-// Recommendation rule (BEACN stance): only recommend DReps with a perfect voting record
-// across the most recent N indexed actions.
-const PERFECT_LAST_N = 10;
+// Active-voter eligibility window is the most recent N governance actions.
+const ACTIVE_LAST_N = 10;
+// Qualifier: must have voted on at least this many of the last N actions.
+const ACTIVE_MIN_VOTED = 9;
 
 const state = {
   manifest: null,
@@ -215,9 +216,10 @@ async function loadData(){
     setStatus(`Last updated: ${state.manifest.generated_at} | ${state.dreps.length} DReps | ${state.actions.length} actions | ${state.votes.length} votes`);
 
     // Show baseline qualification count before user answers anything.
-    const q = perfectRecentDreps().length;
+    const a = activeVoters().length;
+    const p = perfectVoters().length;
     const el = document.getElementById('qualStatus');
-    if(el) el.textContent = `Qualifying DReps (perfect last ${PERFECT_LAST_N} actions): ${q}`;
+    if(el) el.textContent = `Active voters (≥ ${ACTIVE_MIN_VOTED}/${ACTIVE_LAST_N}): ${a} · Gold standard (${ACTIVE_LAST_N}/${ACTIVE_LAST_N}): ${p}`;
 
   }catch(e){
     applyMockData();
@@ -225,7 +227,7 @@ async function loadData(){
     setStatus(`Failed to load dataset (using mock data): ${e.message}`);
 
     const el = document.getElementById('qualStatus');
-    if(el) el.textContent = `Qualifying DReps (perfect last ${PERFECT_LAST_N} actions): ${perfectRecentDreps().length}`;
+    if(el) el.textContent = `Active voters (≥ ${ACTIVE_MIN_VOTED}/${ACTIVE_LAST_N}): ${activeVoters().length} · Gold standard (${ACTIVE_LAST_N}/${ACTIVE_LAST_N}): ${perfectVoters().length}`;
   }
 }
 
@@ -285,15 +287,18 @@ function voteOf(drepId, actionId){
   return row ? row.vote : null;
 }
 
-function perfectRecentDreps(){
-  const ids = recentActionIds(PERFECT_LAST_N);
+function activeVoters(){
   const out = [];
-  for(const [drepId, m] of state.voteByDrep.entries()){
-    let ok = true;
-    for(const aid of ids){
-      if(!m.has(aid)) { ok = false; break; }
-    }
-    if(ok) out.push(drepId);
+  for(const drepId of state.voteByDrep.keys()){
+    if(isActiveVoter(drepId)) out.push(drepId);
+  }
+  return out;
+}
+
+function perfectVoters(){
+  const out = [];
+  for(const drepId of state.voteByDrep.keys()){
+    if(isPerfectVoter(drepId)) out.push(drepId);
   }
   return out;
 }
@@ -303,7 +308,7 @@ function bestNextQuestionActionId(askedSet, candidateIds){
   // and (c) best splits candidates (entropy-ish) so we learn quickly.
   // Restrict quiz prompts to the same recent window we use for "active voter" eligibility.
   // This guarantees every qualifying DRep has a vote for each prompt.
-  const poolIds = new Set(recentActionIds(PERFECT_LAST_N));
+  const poolIds = new Set(recentActionIds(ACTIVE_LAST_N));
   const pool = [...state.actions]
     .filter(a => a && a.id && poolIds.has(a.id))
     .filter(a => !askedSet.has(a.id))
@@ -343,7 +348,7 @@ function pickQuizActions(){
   // Adaptive quiz: pick up to 10 questions from the recent action pool so "active voters"
   // (perfect last-N) candidates have votes and 100% matching is achievable.
   const target = 10;
-  const candidates = perfectRecentDreps();
+  const candidates = activeVoters();
   state.candidates = new Set(candidates);
 
   const asked = new Set();
@@ -352,7 +357,7 @@ function pickQuizActions(){
   // If we have no candidates, return an empty quiz.
   if(!candidates.length) return [];
 
-  const maxPossible = [...state.actions].filter(a => a && a.id && recentActionIds(PERFECT_LAST_N).includes(a.id) && !shouldExcludeFromQuiz(a)).length;
+  const maxPossible = [...state.actions].filter(a => a && a.id && recentActionIds(ACTIVE_LAST_N).includes(a.id) && !shouldExcludeFromQuiz(a)).length;
   const finalTarget = Math.min(target, Math.max(3, maxPossible));
 
   while(picked.length < finalTarget){
@@ -478,9 +483,31 @@ function recentActionIds(n){
   return acts.slice(0, Math.min(n, acts.length)).map(a => a.id);
 }
 
+function participationCount(drepId, actionIds){
+  const m = state.voteByDrep.get(drepId) || new Map();
+  let c = 0;
+  for(const aid of actionIds){
+    if(m.has(aid)) c += 1;
+  }
+  return c;
+}
+
+function isActiveVoter(drepId){
+  const ids = recentActionIds(ACTIVE_LAST_N);
+  if(!ids.length) return false;
+  return participationCount(drepId, ids) >= ACTIVE_MIN_VOTED;
+}
+
+function isPerfectVoter(drepId){
+  const ids = recentActionIds(ACTIVE_LAST_N);
+  if(!ids.length) return false;
+  return participationCount(drepId, ids) === ids.length;
+}
+
 function hasPerfectRecentRecord(drepId){
+  // Back-compat; prefer isActiveVoter / isPerfectVoter.
   const votes = state.voteByDrep.get(drepId) || new Map();
-  const ids = recentActionIds(PERFECT_LAST_N);
+  const ids = recentActionIds(ACTIVE_LAST_N);
   if(!ids.length) return false;
   for(const aid of ids){
     if(!votes.has(aid)) return false;
@@ -540,8 +567,8 @@ function renderMatches(){
     </div>
     <div class="card" style="margin:0;">
       <div class="k">Eligibility</div>
-      <div class="v">Perfect last 10</div>
-      <div class="small">Required to be recommended</div>
+      <div class="v">Active (≥ ${ACTIVE_MIN_VOTED}/${ACTIVE_LAST_N})</div>
+      <div class="small">Gold badge for ${ACTIVE_LAST_N}/${ACTIVE_LAST_N}</div>
     </div>
     <div class="card" style="margin:0;">
       <div class="k">100% matches</div>
@@ -556,7 +583,7 @@ function renderMatches(){
       <div class="note">
         No 100% matches found.
         <div class="small" style="margin-top:6px;">
-          That’s not a bug — it means none of the DReps with a perfect last-10 record voted the way you did on at least one of these prompts.
+          That’s not a bug — it means none of the qualifying active voters (≥ 9/10 participation) voted the way you did on at least one of these prompts.
           If you won’t compromise (fair), the honest recommendation is: consider becoming a DRep and keep a perfect record.
         </div>
       </div>
@@ -578,12 +605,16 @@ function renderMatches(){
       if(examples.length >= 5) break;
     }
 
+    const voted = participationCount(d.id, recentActionIds(ACTIVE_LAST_N));
+    const activeBadge = `<span class="badge ${voted>=ACTIVE_LAST_N?'ok':'warn'}">${voted}/${ACTIVE_LAST_N}</span>`;
+    const goldBadge = voted>=ACTIVE_LAST_N ? ' <span class="badge ok">Gold 10/10</span>' : '';
+
     return `
       <div class="card" style="margin:10px 0;">
         <div class="row">
           <div style="flex:2; min-width:240px;">
-            <div style="font-weight:800;">${esc(name)} <span class="badge mono">${esc(d.id)}</span> <span class="badge ok">Perfect Record</span></div>
-            <div class="small" style="margin-top:4px;">100% match on your ${answered} answers</div>
+            <div style="font-weight:800;">${esc(name)} <span class="badge mono">${esc(d.id)}</span> ${activeBadge}${goldBadge}</div>
+            <div class="small" style="margin-top:4px;">100% match on your ${answered} answers (within active voters)</div>
           </div>
           <div class="btnRow">
             <button class="btnPill" data-open="${esc(d.id)}">Deep dive</button>
