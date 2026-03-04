@@ -103,6 +103,9 @@ v0 classifier approach:
 
 ## Preference Model
 
+### Quiz design requirement (non-negotiable)
+Quiz and calibration questions must be **explicitly tied to governance action types** and the kinds of tradeoffs delegators will repeatedly face. The goal is not personality typing; it’s to generate a preference model that can be validated against real vote history ("proof" via linked actions).
+
 Represent both user and DRep as a vector over categories + a few cross-cutting traits.
 
 ### DRep features (derived)
@@ -132,9 +135,14 @@ Weighted similarity between user vector and DRep vector:
 - weight categories equally by default
 - optionally reweight by the user’s “care more about X” slider (later)
 
+### Explicit non-signal: delegation size
+Unlike SPO selection, there is no performance/uptime requirement tied to delegation size. **We do not use delegation size as a positive or negative signal** for recommendations in v0; alignment + participation + receipts are what matter.
+
 ### Trust modifiers
+
+**Eligibility rule for recommendations (v0):** DReps with missing/low participation are **excluded** from the recommended list (they can still be viewable/searchable).
+
 Penalize:
-- low participation
 - stale activity
 
 Boost:
