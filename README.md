@@ -1,5 +1,11 @@
 # 🔍 BEACN Governance
 
+## 🌐 GitHub Pages
+- Dashboard: https://beacnpool.github.io/Governance/
+- Treasury Intelligence: https://beacnpool.github.io/Governance/treasury-intelligence.html
+- DRep Match: https://beacnpool.github.io/Governance/drep-match/
+- Reports index (latest summary): https://beacnpool.github.io/Governance/reports/community-summary-latest.html
+
 > **Public money demands public receipts.**
 
 Open-source, receipts-first transparency watchdog for Cardano's treasury.
