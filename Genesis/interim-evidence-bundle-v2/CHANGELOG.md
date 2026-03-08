@@ -12,6 +12,11 @@
 - Label source: community-verified address registry (forum.cardano.org)
 - This is the first FACT-grade founder-to-exchange receipt in this investigation
 
+- **EMURGO Shelley ingress confirmed (FACT):**
+  - tx `48695c1092d0e465a3d32ee9fb5b799c8d93a725e76a45badf01af7a2446389e`
+  - first observed Shelley ingress at epoch 208 in bounded hop-5 recovery pass
+  - initial bounded Shelley window (epochs 208–230): 24 rows, 0 payment/stake label hits
+
 ### Expanded trace coverage
 
 - IOG traced edges expanded from 8,593 (epochs 208–230) to ~1.1 million edges

@@ -8,3 +8,4 @@
 | Founder seed confirmation for IOG/CF/EMURGO | FACT | `confirmed_seeds_founders.csv` | 3 rows with `validation_status=CONFIRMED` | VERIFIED |
 | CF/EMURGO ingress-negative in current bounded pass | UNKNOWN / bounded status | `README.md` section 6 | Bounded-pass status statement only (no inactivity claim) | VERIFIED (bounded claim) |
 | IOG 208-230 structured window stats (8,593 / 4,481 / 5,372) | FACT (dataset-level) | `iog_208_230_summary.json` | keys: `iog_208_230_rows`, `unique_stake_credentials`, `unique_dest_addresses` | VERIFIED |
+| EMURGO Shelley ingress confirmed at epoch 208 (bounded hop-5 recovery pass) | FACT | `receipts_pack.csv`, `emurgo_hop5_summary.json` | `receipt_type=FIRST_SHELLEY_INGRESS`, tx `48695c1092d0e465a3d32ee9fb5b799c8d93a725e76a45badf01af7a2446389e`; summary `shelley_edges=24, first_shelley_epoch=208` | VERIFIED |

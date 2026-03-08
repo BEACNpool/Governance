@@ -65,12 +65,19 @@ Execution constraints in this phase:
    - 14,099.8 ADA to behaviorally exchange-class address (2,521 tx / 1,489 counterparties / 26.5M ADA throughput)
    - Specific exchange identity remains unconfirmed
 
+### EMURGO evidence update (bounded pass)
+
+- **FACT:** EMURGO Shelley ingress confirmed at epoch **208** via tx `48695c1092d0e465a3d32ee9fb5b799c8d93a725e76a45badf01af7a2446389e`
+- Bounded Shelley-window rows (epochs 208–230): **24**
+- Label hits in that window: **0 payment / 0 stake**
+- External attribution for this window remains **UNKNOWN** in the current bounded pass
+
 ### UNKNOWN
 
 1. Purpose of IOG Binance deposits (sell/listing/vendor/custody/treasury ops not provable on-chain)
 2. Beneficial ownership after exchange ingress
 3. Full CF Byron→Shelley bridge not yet observed in current bounded pass
-4. Full EMURGO Byron→Shelley bridge not yet observed in current bounded pass
+4. EMURGO external attribution beyond ingress remains unresolved in the current bounded Shelley window
 5. Large unlabeled portions of founder-linked flows remain unresolved
 
 ## 4) Confirmed founder seed receipts
