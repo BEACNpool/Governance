@@ -1,4 +1,4 @@
-# Interim Evidence Bundle v1 — Founder Seed Confirmation + IOG Shelley Window
+# Interim Evidence Bundle v1 (v2 Candidate) — Founder Seed Confirmation + IOG Shelley Window
 
 **Subtitle:** Best-effort, evidence-first tracing update for genesis ADA accountability research
 
@@ -15,8 +15,9 @@ No “final destination” claims are made here; all destinations referenced in 
 This phase relied on:
 
 * Cardano `db-sync` receipts from relay-side tracing
-* a founder seed registry in `confirmed_seeds_founders.csv`
+* founder seed registry in `confirmed_seeds_founders.csv`
 * bounded Shelley-window exports from the traced founder graph
+* relay-side label joins against indexed label tables
 
 Evidence is classified using the following standard:
 
@@ -31,67 +32,93 @@ Execution constraints in this phase:
 * persistent root attribution via `address_root`
 * high-value-first expansion, with lower-value edges deferred for later review
 
-## 3) Confirmed founder seed receipts
+## 3) Headline findings (current)
 
-The founder seed registry included in this bundle is:
+### FACT
+
+1. **IOG → Binance confirmed CEX deposits (epoch 27 / 2018-02-06): total 7,921,587 ADA**
+   - tx `893a195a124cb10a33105974e47b10402dd39ee4791579e18577578eb6f84f25` (5,878,892 ADA)
+   - tx `753ff5403e23c15abba5a6aa6597b078e1fffedd4a80e769b199c918e8bbde81` (2,042,695 ADA)
+   - Match type: direct payment-address match to Binance-labeled Byron address
+
+2. **IOG Shelley ingress confirmed at epoch 208**
+   - tx `f3e68848e3099b7b4d2e199354dce21a596d256d25af1bb21c80ca958b1cb1d2`
+
+### STRONG INFERENCE
+
+1. **EMURGO branch reached exchange-class Byron infrastructure**
+   - tx `caa4f573f1f2c1cd98c51f2bad2c8ef8f69a69689e03ee3e48467e173836b9bf`
+   - 14,099.8 ADA to behaviorally exchange-class address (2,521 tx / 1,489 counterparties / 26.5M ADA throughput)
+   - Specific exchange identity remains unconfirmed
+
+### UNKNOWN
+
+1. Purpose of IOG Binance deposits (sell/listing/vendor/custody/treasury ops not provable on-chain)
+2. Beneficial ownership after exchange ingress
+3. Full CF Byron→Shelley bridge not yet observed in current bounded pass
+4. Full EMURGO Byron→Shelley bridge not yet observed in current bounded pass
+5. Large unlabeled portions of founder-linked flows remain unresolved
+
+## 4) Confirmed founder seed receipts
+
+The founder seed registry included in this bundle:
 
 * `confirmed_seeds_founders.csv`
 
 This file contains 3 founder roots marked `CONFIRMED`, including candidate seed transaction hash, block, epoch, and timestamp fields derived from `db-sync` receipts.
 
-## 4) IOG Shelley ingress fact
-
-**FACT:** A Shelley-era ingress was observed on the IOG founder-linked tracing branch at epoch **208** via transaction:
-
-`f3e68848e3099b7b4d2e199354dce21a596d256d25af1bb21c80ca958b1cb1d2`
-
-A supporting receipt row is included in:
-
-* `receipts_pack.csv` (`receipt_type = FIRST_SHELLEY_INGRESS`)
-
-## 5) IOG 208–230 structured unknown
-
-The bounded IOG Shelley/stake-bearing window for epochs 208–230 is included in:
+## 5) IOG Shelley-window evidence
 
 * `iog_shelley_window_208_230.csv`
-
-Supporting summary artifacts:
-
 * `iog_208_230_summary.json`
 * `iog_208_230_top20_stake_credentials.csv`
 * `iog_208_230_top20_dest_addresses.csv`
 
-Current measured result for this window:
+Window snapshot (epochs 208–230):
 
 * Rows: **8,593**
 * Unique stake credentials: **4,481**
 * Unique destination addresses: **5,372**
-* Label intersections: **0 payment / 0 stake** against the current working label set
 
-**UNKNOWN:** This is a large, highly structured migration surface that does not yet intersect the current working label set. It is therefore recorded as an **unresolved attribution gap**, not as evidence of absence, inactivity, or benignity.
+## 6) CF/Emurgo status in current bounded pass
 
-## 6) CF/Emurgo current ingress-negative status
+At this checkpoint, the current bounded forward tracing pass remains ingress-negative for CF and EMURGO:
 
-At this checkpoint, the current tracing pass remains ingress-negative for the other two founder-linked branches:
+* **CF:** no observed Shelley ingress yet in this bounded pass
+* **EMURGO:** no observed Shelley ingress yet in this bounded pass
 
-* **CF:** no observed Shelley ingress yet
-* **EMURGO:** no observed Shelley ingress yet
+This is a tracing-boundary statement only, not an inactivity claim.
 
-This is a statement about the current bounded tracing pass only. It is not a claim that no such ingress exists.
+## 7) Included files (evidence + governance controls)
 
-## 7) Limits and next steps
+* `receipts_pack.csv`
+* `confirmed_seeds_founders.csv`
+* `label_hits_external_deduped.csv`
+* `label_hits_summary_deduped.csv`
+* `external_hits_source_validation.csv`
+* `iog_shelley_window_208_230.csv`
+* `iog_208_230_summary.json`
+* `iog_208_230_top20_stake_credentials.csv`
+* `iog_208_230_top20_dest_addresses.csv`
+* `probable_byron_exchanges.csv`
+* `cf_emurgo_probable_exchange_intersections.csv`
+* `cf_emurgo_probable_exchange_intersections_summary.json`
+* `CHANGELOG.md`
+* `QUALITY_GATES.md`
+
+## 8) Limits and next steps
 
 ### Limits
 
 * Label coverage remains incomplete and may miss valid real-world entities
 * Absence of label intersections is not absence of activity
-* Additional downstream movement may exist beyond the current bounded tracing windows
-* Pool-linked stake keys and similar labels may support clustering analysis, but are not automatically proof of treasury custody or beneficial ownership
+* Additional downstream movement may exist beyond current bounded windows
+* Custodian labels do not automatically prove beneficial ownership
 
 ### Next steps
 
-1. Continue founder expansion using controlled thresholds
-2. Expand and reconcile high-confidence label intelligence
-3. Re-run payment and stake matching over newly materialized windows
-4. Promote first confirmed label intersections into the receipts pack
-5. Backfill deferred lower-value edges where necessary
+1. Continue CF/EMURGO bridge search with bounded reverse depth
+2. Expand and reconcile high-confidence external labels
+3. Re-run payment + stake joins on newly materialized windows
+4. Promote additional confirmed intersections into `receipts_pack.csv`
+5. Complete quality-gate pass, then publish v2 bundle
