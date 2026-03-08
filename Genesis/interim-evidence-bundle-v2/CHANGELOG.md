@@ -29,7 +29,7 @@
 ### CF / Emurgo bridge status
 
 - **CF:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from known CF pool stake credentials is active. CF treasury split pattern identified at epoch 55 (6+ branches). Forward trace following wrong branch after split point — corrective expansion underway.
-- **EMURGO:** Shelley ingress not yet confirmed in bounded forward pass. Very long Byron-era chain (50+ hops in epoch 7 alone) before Shelley boundary. Reverse tracing from SWIM/YOROI pool credentials active.
+- **EMURGO:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from SWIM/YOROI pool credentials is active; deep Byron-branch behavior is still under bounded verification.
 - **Important:** These are tracing boundary statements, not claims about entity inactivity.
 
 ### Infrastructure improvements
@@ -56,7 +56,7 @@ At genesis in September 2017, three founding entities received 5.185 billion ADA
 
 IOG then distributed approximately 1.27 billion ADA to over 5,000 unique addresses during the first months of the Shelley era (July–October 2020). The distribution pattern is structured and consistent with operational treasury management (salary-scale payments, no dust). The top recipients have since moved 98%+ of received ADA onward.
 
-The Cardano Foundation remains the most transparent entity, with 456 million ADA identifiable in their 6 pools plus on-chain financial reporting via Reeve.
+Prior analyses indicate substantial Cardano Foundation-identifiable holdings in CF pool infrastructure, but this v2 snapshot does not yet include a newly confirmed CF Byron→Shelley bridge receipt.
 
 **What we still don't know:**
 

@@ -2,10 +2,12 @@
 
 **Subtitle:** Best-effort, evidence-first tracing update for genesis ADA accountability research
 
-## Quality gate status (snapshot)
+## Quality gate status (recorded)
 
 - Mandatory gates (#1, #2): **PASS / PASS**
-- Overall gates: **8/8 PASS** (see `QUALITY_GATES.md`)
+- Overall gates: **8/8 PASS**
+- Recorded result file: `GATE_RESULTS.md`
+- Gate definitions/checklist: `QUALITY_GATES.md`
 
 ## 1) Scope and non-accusation statement
 
@@ -110,6 +112,9 @@ This is a tracing-boundary statement only, not an inactivity claim.
 * `cf_emurgo_probable_exchange_intersections_summary.json`
 * `CHANGELOG.md`
 * `QUALITY_GATES.md`
+* `GATE_RESULTS.md`
+* `CLAIMS_TO_RECEIPTS_MAP.md`
+* `SNAPSHOT.md`
 
 ## 8) Limits and next steps
 

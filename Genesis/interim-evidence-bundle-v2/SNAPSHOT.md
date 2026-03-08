@@ -1,7 +1,7 @@
 # Snapshot Metadata
 
 - Snapshot label: `interim-evidence-bundle-v2`
-- Source baseline commit: `fae45c7`
+- Snapshot reference tag: `v2-candidate-audit-fixes` (see repo tags)
 - Snapshot created: 2026-03-08 (America/Chicago)
 
 ## Headline findings frozen in this snapshot

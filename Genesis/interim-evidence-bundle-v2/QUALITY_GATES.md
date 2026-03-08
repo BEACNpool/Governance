@@ -9,7 +9,7 @@
 | 1 | **MANDATORY:** `receipts_pack.csv` has only evidence-graded rows (FACT / STRONG INFERENCE / UNKNOWN) with caveats where needed | ⬜ | Every row must have `evidence_class` and `notes` fields populated |
 | 2 | **MANDATORY:** All headline claims in README map to at least one concrete receipt row (tx hash + explorer link) | ⬜ | No narrative claim without a receipt |
 | 3 | Founder seed section is complete and consistent (IOG/CF/Emurgo confirmed seeds + timing) | ⬜ | `confirmed_seeds_founders.csv` validated |
-| 4 | External-hit section is split clearly into: confirmed direct matches (FACT) and behavioral/heuristic matches (STRONG INFERENCE) | ⬜ | `label_hits_external_deduped.csv` with `evidence_class` column |
+| 4 | External-hit section is split clearly into: confirmed direct matches (FACT) and behavioral/heuristic matches (STRONG INFERENCE) | ⬜ | `external_hits_source_validation.csv` is adjudication source; `label_hits_external_deduped.csv` is raw hit export |
 | 5 | CF/Emurgo status is explicit and non-overclaimed (ingress/bridge state clearly stated) | ⬜ | Must use "not observed in current bounded pass" language |
 | 6 | Label-hit exports are deduped and reproducible (`label_hits_*_deduped.csv` present) | ⬜ | `rows_to_delete = 0` verified |
 | 7 | "Unknowns" section is substantive: what is unresolved and why | ⬜ | Minimum 5 specific unknowns with explanation |
