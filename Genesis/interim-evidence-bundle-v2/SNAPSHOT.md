@@ -1,7 +1,8 @@
 # Snapshot Metadata
 
 - Snapshot label: `interim-evidence-bundle-v2`
-- Snapshot reference tag: `v2-candidate-audit-fixes` (see repo tags)
+- Snapshot reference tag: `v2-emurgo-ingress-freeze` (see repo tags)
+- Snapshot commit: `e792d39`
 - Snapshot created: 2026-03-08 (America/Chicago)
 
 ## Headline findings frozen in this snapshot

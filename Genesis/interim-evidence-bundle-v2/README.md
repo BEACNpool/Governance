@@ -121,6 +121,9 @@ This is a tracing-boundary statement only, not an inactivity claim.
 * `iog_208_230_summary.json`
 * `iog_208_230_top20_stake_credentials.csv`
 * `iog_208_230_top20_dest_addresses.csv`
+* `emurgo_hop5_summary.json`
+* `emurgo_shelley_window_208_230.csv`
+* `emurgo_label_summary.json`
 * `probable_byron_exchanges.csv`
 * `cf_emurgo_probable_exchange_intersections.csv`
 * `cf_emurgo_probable_exchange_intersections_summary.json`
