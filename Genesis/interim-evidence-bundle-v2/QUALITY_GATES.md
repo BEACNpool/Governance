@@ -2,6 +2,8 @@
 
 **Purpose:** No v2 publish until these gates clear. Enforces evidence discipline.
 
+**Current pass-state authority:** `GATE_RESULTS.md` is the authoritative record of current gate outcomes for this bundle.
+
 ## GO criteria (at least 6/8, with #1 + #2 mandatory)
 
 | # | Gate | Status | Notes |

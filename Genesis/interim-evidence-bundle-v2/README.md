@@ -5,9 +5,16 @@
 ## Quality gate status (recorded)
 
 - Mandatory gates (#1, #2): **PASS / PASS**
-- Overall gates: **8/8 PASS**
+- Overall gates: **8/8 PASS (recorded at commit `de22d95` / tag `v2-candidate-audit-fixes`)**
 - Recorded result file: `GATE_RESULTS.md`
 - Gate definitions/checklist: `QUALITY_GATES.md`
+
+## Operating control rule (claim discipline)
+
+No new README/public-facing claim may be added unless:
+1) a corresponding row exists in `receipts_pack.csv`, and
+2) a corresponding row exists in `CLAIMS_TO_RECEIPTS_MAP.md`,
+or it is explicitly classified as **UNKNOWN** with no implied proof.
 
 ## 1) Scope and non-accusation statement
 
