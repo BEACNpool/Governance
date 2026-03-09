@@ -1,6 +1,6 @@
-# Interim Evidence Bundle v2 — Founder Seed Confirmation + IOG Shelley Window
+# Interim Evidence Bundle v2 — Founder Genesis Tracing Snapshot
 
-**Subtitle:** Best-effort, evidence-first tracing update for genesis ADA accountability research
+**Subtitle:** Best-effort, evidence-first accountability update across IOG, EMURGO, and CF founder-linked branches
 
 ## Quality gate status (recorded)
 
@@ -76,8 +76,8 @@ Execution constraints in this phase:
 
 1. Purpose of IOG Binance deposits (sell/listing/vendor/custody/treasury ops not provable on-chain)
 2. Beneficial ownership after exchange ingress
-3. Full CF Byron→Shelley bridge not yet observed in current bounded pass
-4. EMURGO external attribution beyond ingress remains unresolved in the current bounded Shelley window
+3. CF main treasury-scale bridge path remains unresolved in the current bounded pass
+4. EMURGO main treasury-scale bridge path remains unresolved beyond bounded ingress confirmation
 5. Large unlabeled portions of founder-linked flows remain unresolved
 
 ## 4) Confirmed founder seed receipts
@@ -101,14 +101,13 @@ Window snapshot (epochs 208–230):
 * Unique stake credentials: **4,481**
 * Unique destination addresses: **5,372**
 
-## 6) CF/Emurgo status in current bounded pass
+## 6) Current founder status (bounded pass)
 
-At this checkpoint, the current bounded forward tracing pass remains ingress-negative for CF and EMURGO:
+- **IOG:** Shelley ingress confirmed; external FACT receipts present (IOG -> Binance, 2 txs).
+- **EMURGO:** first Shelley ingress confirmed (epoch 208); bounded Shelley window currently has 0 payment/stake label hits; external attribution remains unresolved.
+- **CF:** no Shelley ingress observed yet in current bounded pass.
 
-* **CF:** no observed Shelley ingress yet in this bounded pass
-* **EMURGO:** no observed Shelley ingress yet in this bounded pass
-
-This is a tracing-boundary statement only, not an inactivity claim.
+This is a tracing-boundary status statement only, not an inactivity claim for any entity.
 
 ## 7) Included files (evidence + governance controls)
 
