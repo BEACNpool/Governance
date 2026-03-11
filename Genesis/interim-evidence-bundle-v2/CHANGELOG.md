@@ -1,5 +1,12 @@
 # CHANGELOG: v1 → v2
 
+## Post-snapshot reconciliation note (2026-03-09)
+
+- Completed a bounded EMURGO validation pass using new metadata-mirror and label-research sources.
+- Result: **no new receipt-backed attribution lift** and **no new `receipts_pack.csv` rows**.
+- Decision: EMURGO lane set to **pause / stop-and-review** until new provenance-strong evidence appears.
+- Public bundle implication: no new evidence artifacts promoted; status clarity only.
+
 ## What changed since Interim Evidence Bundle v1
 
 ### New confirmed receipts (FACT grade)
@@ -34,7 +41,7 @@
 ### CF / Emurgo bridge status
 
 - **CF:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from known CF pool stake credentials is active. CF treasury split pattern identified at epoch 55 (6+ branches). Forward trace following wrong branch after split point — corrective expansion underway.
-- **EMURGO:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from SWIM/YOROI pool credentials is active; deep Byron-branch behavior is still under bounded verification.
+- **EMURGO:** Shelley ingress is now confirmed in bounded evidence (`48695c10...` at epoch 208), but the **main treasury-scale bridge path remains unresolved**. Reverse tracing from SWIM/YOROI pool credentials is active; deep Byron-branch behavior remains bounded and unresolved.
 - **Important:** These are tracing boundary statements, not claims about entity inactivity.
 
 ### Infrastructure improvements
