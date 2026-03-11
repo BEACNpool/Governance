@@ -14,6 +14,8 @@ When billions of dollars’ worth of founder-linked ADA may have entered, shaped
 
 ---
 
+**Latest bounded-phase status update:** see `STATUS_NOTE_2026-03-11.md`.
+
 ## Quality gate status (recorded)
 
 - Mandatory gates (#1, #2): **PASS / PASS**

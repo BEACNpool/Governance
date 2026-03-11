@@ -1,5 +1,12 @@
 # CHANGELOG: v1 → v2
 
+## Phase-status update note (2026-03-11)
+
+- Added `STATUS_NOTE_2026-03-11.md` to document the end-state of the current bounded CF reverse phase.
+- Clarified that latest bounded CF work was technically productive but produced **no new receipt-backed attribution lift**.
+- Recorded that two bounded CF branch families are now active-paused for bounded reasons.
+- Confirmed no new `receipts_pack.csv` row and no new claim-map row were added in this update.
+
 ## Post-snapshot reconciliation note (2026-03-09)
 
 - Completed a bounded EMURGO validation pass using new metadata-mirror and label-research sources.
