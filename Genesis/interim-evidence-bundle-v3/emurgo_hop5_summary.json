@@ -1,0 +1,10 @@
+{
+  "entity": "EMURGO",
+  "hop": 5,
+  "edges": 2950,
+  "nodes": 323,
+  "min_epoch": 1,
+  "max_epoch": 208,
+  "shelley_edges": 24,
+  "first_shelley_epoch": 208
+}
