@@ -16,3 +16,10 @@
 
 ## Notes
 This snapshot is intended as a stable review point for governance readers before additional tracing updates alter counts.
+
+## V3 supplement (2026-03-14)
+
+- FACT: EMURGO full genesis-to-Shelley bridge confirmed at epoch 210 (tx `425104ce88b5b4653a1f49e93a696056ee6e60531fbf95f4f81c9ca46ac048a9`)
+- FACT: Second genesis key (781M ADA) traced to epoch 0, merged into EMURGO custody
+- FACT: 150M EMURGO branch delegated to EMUR2 pool (`relays.pools.emurgo.io`) at epoch 212
+- Infrastructure: label count expanded from 356 to 8,439

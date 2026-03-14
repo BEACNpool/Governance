@@ -119,6 +119,29 @@ Bounded Shelley-window result:
 
 ---
 
+### 3. EMURGO full genesis-to-Shelley bridge confirmed at epoch 210
+
+Complete chain of custody: AVVM redemption → consolidation via single funnel address → 47+ hop Byron peeling chain → Ae2td transition → Shelley bridge at epoch 210 → delegation to EMUR2 pool at epoch 212.
+
+- Bridge tx: `425104ce88b5b4653a1f49e93a696056ee6e60531fbf95f4f81c9ca46ac048a9`
+- Shelley outputs: 486,873,323.034918 ADA + 150,000,000 ADA
+- EMUR2 pool: `pool1qs6h0y7czzt605kptmrv6cr85kxd6tajr2hs0etvxphv7tr7nqu`
+- Pool relay: `relays.pools.emurgo.io`
+- Pool metadata: `https://pools.emurgo.io/EMUR2.json`
+
+**Why this matters:** EMURGO genesis ADA is no longer an unresolved tracing lane. The chain from genesis to confirmed EMURGO pool infrastructure is fully documented with on-chain receipts.
+
+---
+
+### 4. Second genesis key (781M ADA) confirmed under EMURGO custody
+
+- Genesis TX: `5ec95a53fa3bb7dc56864bb6e75f369f00aa20e8d8cdc3b66b2fb88ec1b225ef`
+- Merged into EMURGO consolidation at epoch 4
+- Peak EMURGO consolidation: 2,855,547,137 ADA (781M above publicly attributed allocation)
+
+**Why this matters:** EMURGO controlled more genesis ADA than publicly attributed. The second key's AVVM identity is not yet known.
+
+---
 ## STRONG INFERENCE
 
 ### 1. EMURGO branch reached exchange-class Byron infrastructure
@@ -193,10 +216,13 @@ Included evidence files:
 - strongest public evidence branch in the current bundle
 
 ### EMURGO
-- first bounded Shelley ingress confirmed
-- bounded Shelley window currently shows **0 payment / 0 stake label hits**
-- external attribution remains unresolved
-- current traced branches suggest structure, but not yet safe public attribution beyond ingress and exchange-class inference
+- Shelley bridge **confirmed at epoch 210** (FACT)
+- Full chain of custody documented from AVVM redemption to EMUR2 pool delegation
+- 150M branch confirmed delegated to EMUR2 pool (`relays.pools.emurgo.io`)
+- Second genesis key (781M ADA) confirmed merged into EMURGO custody at epoch 4
+- Byron-era peeling chain structure fully mapped (47+ hops, ~2.2B distributed)
+- 487M Shelley branch distributed through 4 intermediary stakes; final pool delegation for this branch not yet confirmed
+- EMUR2 pool retired at epoch 513
 
 ### Cardano Foundation (CF)
 - no confirmed Shelley ingress observed yet in the current bounded pass

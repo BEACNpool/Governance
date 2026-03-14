@@ -1,5 +1,42 @@
 # CHANGELOG: v1 → v2
 
+## V3 findings (2026-03-14)
+
+### EMURGO full genesis-to-Shelley bridge confirmed (FACT)
+
+- Complete chain of custody documented: AVVM redemption → consolidation funnel → 47+ hop Byron peeling chain → Shelley bridge at epoch 210
+- Bridge TX `425104ce88b5b4653a1f49e93a696056ee6e60531fbf95f4f81c9ca46ac048a9` produced two Shelley outputs: 486.9M ADA and 150M ADA
+- 150M branch delegated to EMUR2 pool (pool1qs6h0y7czzt605kptmrv6cr85kxd6tajr2hs0etvxphv7tr7nqu) at epoch 212
+- EMUR2 pool confirmed as EMURGO infrastructure: relay DNS `relays.pools.emurgo.io`, metadata at `https://pools.emurgo.io/EMUR2.json`
+- Pool owner: `stake1uym7pcjwzldgwjxek8a88vm9jdvc70yayc6jm7nkan9t2wgayexh2`
+- EMUR2 retired at epoch 513, 15,081 blocks produced
+
+### Second genesis key confirmed (FACT)
+
+- 781,381,495 ADA from genesis TX `5ec95a53fa3bb7dc56864bb6e75f369f00aa20e8d8cdc3b66b2fb88ec1b225ef` merged into EMURGO consolidation funnel at epoch 4
+- EMURGO peak consolidation: 2,855,547,137 ADA (781M above publicly attributed allocation)
+- AVVM key identity for the second genesis key remains UNKNOWN
+
+### Methodology breakthrough: consolidation funnel identification
+
+- Key insight: a 100 ADA marker payment at hop 1 identified the EMURGO consolidation address
+- ALL EMURGO genesis ADA flows through this single address (`DdzFFzCqrhsu3iF6...`)
+- This bypasses the Byron HD-wallet fan-out problem entirely
+- The peeling chain structure (2 outputs per hop, structured amounts) is fully documented
+
+### Infrastructure improvements
+
+- Label enrichment: 356 → 8,439 labels (6,917 pool reward + 1,522 pool owner)
+- Phase 1A: 68 unique CF/EMURGO stake addresses identified from pool registrations
+- Phase 1B: 252 unique Shelley landing-point transactions identified
+
+### Status changes
+
+- EMURGO lane: UNKNOWN → **FACT** (full genesis-to-pool receipt chain)
+- Second genesis key: UNKNOWN → **FACT** (traced to epoch 0, EMURGO-controlled)
+- CF lane: remains UNKNOWN (active-paused, no change this session)
+- IOG lane: no change (strongest branch, already FACT for Binance deposits + Shelley ingress)
+
 ## Phase-status update note (2026-03-11)
 
 - Added `STATUS_NOTE_2026-03-11.md` to document the end-state of the current bounded CF reverse phase.
@@ -49,6 +86,7 @@
 
 - **CF:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from known CF pool stake credentials is active. CF treasury split pattern identified at epoch 55 (6+ branches). Forward trace following wrong branch after split point — corrective expansion underway.
 - **EMURGO:** Shelley ingress is now confirmed in bounded evidence (`48695c10...` at epoch 208), but the **main treasury-scale bridge path remains unresolved**. Reverse tracing from SWIM/YOROI pool credentials is active; deep Byron-branch behavior remains bounded and unresolved.
+- **2026-03-14 (V3 finding):** epoch-4 consolidation path includes `DdzFFzCqrhspiThx6...` (781,381,495 ADA) and is now backward-traced to genesis tx `5ec95a53...` (epoch 0) via spend tx `c8596b9c...` (epoch 4). New bridge-era stake outputs `stake1u9rf8...` and `stake1u9q4556...` do **not** match the historical Phase 1A 68-address SWIM/YOROI/EMURGO registration set. See `V3_EMURGO_BRIDGE_RECEIPT.md`.
 - **Important:** These are tracing boundary statements, not claims about entity inactivity.
 
 ### Infrastructure improvements
