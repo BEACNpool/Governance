@@ -1,4 +1,4 @@
-# CHANGELOG: v1 → v2
+# CHANGELOG: v1 → v2 → v3
 
 ## V3 findings (2026-03-14)
 
@@ -85,8 +85,7 @@
 ### CF / Emurgo bridge status
 
 - **CF:** Shelley ingress not yet confirmed in bounded forward pass. Reverse tracing from known CF pool stake credentials is active. CF treasury split pattern identified at epoch 55 (6+ branches). Forward trace following wrong branch after split point — corrective expansion underway.
-- **EMURGO:** Shelley ingress is now confirmed in bounded evidence (`48695c10...` at epoch 208), but the **main treasury-scale bridge path remains unresolved**. Reverse tracing from SWIM/YOROI pool credentials is active; deep Byron-branch behavior remains bounded and unresolved.
-- **2026-03-14 (V3 finding):** epoch-4 consolidation path includes `DdzFFzCqrhspiThx6...` (781,381,495 ADA) and is now backward-traced to genesis tx `5ec95a53...` (epoch 0) via spend tx `c8596b9c...` (epoch 4). New bridge-era stake outputs `stake1u9rf8...` and `stake1u9q4556...` do **not** match the historical Phase 1A 68-address SWIM/YOROI/EMURGO registration set. See `V3_EMURGO_BRIDGE_RECEIPT.md`.
+- **EMURGO:** Main treasury-scale Byron→Shelley bridge **confirmed at epoch 210** in v3 (tx `425104ce88b5b4653a1f49e93a696056ee6e60531fbf95f4f81c9ca46ac048a9`). Full chain of custody documented from AVVM genesis to EMUR2 pool delegation. See `V3_EMURGO_BRIDGE_RECEIPT.md`. The earlier bounded hop-5 Shelley ingress (`48695c10...` at epoch 208, 19,843 ADA) remains valid as a separate probe finding but is superseded by the full treasury-scale bridge. Second genesis key (781M ADA, tx `5ec95a53...`) confirmed merged into EMURGO consolidation at epoch 4.
 - **Important:** These are tracing boundary statements, not claims about entity inactivity.
 
 ### Infrastructure improvements
@@ -98,7 +97,8 @@
 
 ### What is NOT in v2
 
-- No CF or Emurgo confirmed Shelley ingress receipts (still in progress)
+- No CF confirmed Shelley ingress receipts (still in progress)
+- EMURGO Shelley bridge is now confirmed in v3 (see above)
 - No expanded external hit surface beyond Binance (label coverage remains thin vs graph scale)
 - No "final destination" claims for any entity
 - No beneficial ownership assertions for exchange deposits
@@ -115,12 +115,15 @@ IOG then distributed approximately 1.27 billion ADA to over 5,000 unique address
 
 Prior analyses indicate substantial Cardano Foundation-identifiable holdings in CF pool infrastructure, but this v2 snapshot does not yet include a newly confirmed CF Byron→Shelley bridge receipt.
 
+**EMURGO (v3 finding, 2026-03-14):** We traced EMURGO's 2.074 billion ADA genesis allocation through a complete chain of custody — from the AVVM redemption through a consolidation funnel, a 47+ hop Byron peeling chain, an Ae2td-era transition, and finally a Byron→Shelley bridge at epoch 210 (August 2020). At the bridge, 150 million ADA was sent to an address that delegated to the EMUR2 pool — confirmed as EMURGO infrastructure via relay DNS (`relays.pools.emurgo.io`) and metadata URL (`pools.emurgo.io/EMUR2.json`). We also confirmed that a second genesis key holding 781 million ADA merged into EMURGO's consolidation funnel at epoch 4, meaning EMURGO controlled at least 2.856 billion ADA at peak — 781M more than publicly attributed.
+
+
 **What we still don't know:**
 
 - Where the remaining ~2.4 billion IOG ADA ended up after leaving their transit accounts
-- The full Byron-to-Shelley path for CF and Emurgo genesis ADA (tracing is active)
+- The full Byron-to-Shelley path for CF genesis ADA (tracing is active; EMURGO is now resolved)
 - The specific purpose of the Binance deposits (selling, listing fees, vendor payments, or treasury management)
-- The identity of 9 unidentified genesis addresses holding 1.9 billion ADA combined
+- The identity of remaining unidentified genesis addresses (one 781M key is now confirmed under EMURGO control; others still unattributed)
 
 **What we're asking for:**
 

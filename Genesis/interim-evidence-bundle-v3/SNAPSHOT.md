@@ -1,6 +1,6 @@
 # Snapshot Metadata
 
-- Snapshot label: `interim-evidence-bundle-v2`
+- Snapshot label: `interim-evidence-bundle-v3`
 - Snapshot reference tag: `v2-emurgo-ingress-freeze` (see repo tags)
 - Snapshot commit: `e792d39`
 - Snapshot created: 2026-03-08 (America/Chicago)
@@ -9,7 +9,7 @@
 - FACT: IOG Shelley ingress at epoch 208.
 - FACT: IOG -> Binance confirmed CEX deposits totaling 7,921,587 ADA (2 txs, epoch 27).
 - STRONG INFERENCE: EMURGO branch intersects exchange-class Byron infrastructure.
-- UNKNOWN: CF/EMURGO bridge unresolved in current bounded forward pass; no final-destination claims.
+- UNKNOWN: CF bridge unresolved in current bounded forward pass (EMURGO resolved in v3); no final-destination claims.
 
 ## Canonical evidence register
 - `receipts_pack.csv`

@@ -1,7 +1,7 @@
 # Quality Gate Results (Recorded)
 
 Recorded: 2026-03-08
-Scope: `Genesis/interim-evidence-bundle-v2/`
+Scope: `Genesis/interim-evidence-bundle-v3/`
 
 ## Mandatory gates
 - Gate 1 (receipts evidence-graded with caveats): **PASS**
@@ -25,3 +25,10 @@ Scope: `Genesis/interim-evidence-bundle-v2/`
 - External adjudication: `external_hits_source_validation.csv`
 - Deduped exports: `label_hits_external_deduped.csv`, `label_hits_summary_deduped.csv`
 - Change log: `CHANGELOG.md`
+
+
+## V3 gate check (2026-03-14)
+- New receipts added to `receipts_pack.csv`: 4 rows (CONSOLIDATION_FUNNEL, SHELLEY_BRIDGE, CONFIRMED_POOL_DELEGATION, SECOND_GENESIS_KEY)
+- New claims added to `CLAIMS_TO_RECEIPTS_MAP.md`: 4 rows
+- All new claims have corresponding receipt rows: PASS
+- `V3_EMURGO_BRIDGE_RECEIPT.md` headline claims map to receipts: PASS

@@ -22,7 +22,7 @@ This document records newly verified v3 findings for the EMURGO tracing lane usi
 - `150,000,000.000000 ADA` → `addr1q8hajep3962enr8k48dkqma23yjx7f6jrzyfnqz3952g3wzptff5umc9e2t3558e95whkc8e0jhvwrs78c6mjrym4wwqtm0d7j` (stake `stake1u9q4556wduzu49c62ruj68tmvruhetk8pc0ruddepjd6h8qyuf8sp`)
 
 ### EMUR2 delegation confirmation (FACT)
-- Stake `stake1u9q4556wduzu49c62ruj68tmvruhetk8pc0ruddepjd6h8qyuf8sp` delegated at epoch 212 in tx `6ba9b243c7d3a0f32b4e97af266825d19fcb0968c529c190185674901793f128`
+- Stake `stake1u9q4556wduzu49c62ruj68tmvruhetk8pc0ruddepjd6h8qyuf8sp` delegation tx `6ba9b243c7d3a0f32b4e97af266825d19fcb0968c529c190185674901793f128` submitted at epoch 210; delegation active at epoch 212
 - Pool ID: `pool1qs6h0y7czzt605kptmrv6cr85kxd6tajr2hs0etvxphv7tr7nqu`
 - Pool metadata URL: `https://pools.emurgo.io/EMUR2.json`
 - Relay DNS: `relays.pools.emurgo.io`

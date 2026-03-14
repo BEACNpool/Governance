@@ -1,4 +1,4 @@
-# Interim Evidence Bundle v2 — Founder Genesis Tracing Snapshot
+# Interim Evidence Bundle v3 — Founder Genesis Tracing Snapshot
 
 **Subtitle:** Best-effort, evidence-first accountability research into founder-linked genesis ADA across IOG, EMURGO, and the Cardano Foundation
 
@@ -119,7 +119,7 @@ Bounded Shelley-window result:
 
 ---
 
-### 3. EMURGO full genesis-to-Shelley bridge confirmed at epoch 210
+### 4. EMURGO full genesis-to-Shelley bridge confirmed at epoch 210
 
 Complete chain of custody: AVVM redemption → consolidation via single funnel address → 47+ hop Byron peeling chain → Ae2td transition → Shelley bridge at epoch 210 → delegation to EMUR2 pool at epoch 212.
 
@@ -133,7 +133,7 @@ Complete chain of custody: AVVM redemption → consolidation via single funnel a
 
 ---
 
-### 4. Second genesis key (781M ADA) confirmed under EMURGO custody
+### 5. Second genesis key (781M ADA) confirmed under EMURGO custody
 
 - Genesis TX: `5ec95a53fa3bb7dc56864bb6e75f369f00aa20e8d8cdc3b66b2fb88ec1b225ef`
 - Merged into EMURGO consolidation at epoch 4
@@ -169,8 +169,9 @@ These are not omissions. They are the current documented limits of public on-cha
 3. **CF main treasury-scale bridge path remains unresolved**  
    No confirmed CF Shelley ingress has been established in the current bounded pass.
 
-4. **EMURGO main treasury-scale bridge remains unresolved beyond bounded ingress confirmation**  
-   A bounded Emurgo ingress is confirmed, but the larger treasury-scale path still has not been fully resolved.
+4. **EMURGO main treasury-scale bridge — RESOLVED in v3**  
+   The full EMURGO genesis-to-Shelley bridge was confirmed at epoch 210 (see FACT #4). This item is no longer UNKNOWN.
+   Remaining EMURGO unknowns: the 487M Shelley branch's final pool delegation(s), and the AVVM key identity of the second genesis key (781M ADA).
 
 5. **Large unlabeled portions of founder-linked flows remain unresolved**  
    This is the core accountability gap the project is trying to reduce.
@@ -183,7 +184,7 @@ The founder seed registry included in this bundle:
 
 - `confirmed_seeds_founders.csv`
 
-This file contains **3 founder roots marked `CONFIRMED`**, including candidate seed transaction hash, block, epoch, and timestamp fields derived from `db-sync` receipts.
+This file contains founder roots marked `CONFIRMED` (now including the second EMURGO-linked genesis key), with candidate seed transaction hash, block, epoch, and timestamp fields derived from `db-sync` receipts.
 
 This is the starting point for all downstream tracing in the bundle.
 
@@ -282,6 +283,9 @@ Those unanswered questions are exactly why transparency still matters.
 - `CLAIMS_TO_RECEIPTS_MAP.md`
 - `SNAPSHOT.md`
 
+### V3 evidence
+- `V3_EMURGO_BRIDGE_RECEIPT.md`
+
 ---
 
 ## 9) Limits
@@ -304,7 +308,7 @@ That last point matters. The public can push this work far, but not infinitely.
 2. Expand and reconcile high-confidence external label sources
 3. Re-run payment + stake joins on newly materialized windows
 4. Promote additional confirmed intersections into `receipts_pack.csv` only when receipt-backed
-5. Continue Emurgo source-acquisition and label-gap closure work
+5. ~~Emurgo source-acquisition~~ EMURGO main bridge resolved. Remaining: trace 487M branch to pool delegation; identify second genesis key AVVM identity.
 
 ### Governance and accountability next steps
 1. turn unresolved founder opacity itself into a documented governance finding
